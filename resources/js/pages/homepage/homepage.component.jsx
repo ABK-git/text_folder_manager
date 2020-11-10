@@ -2,6 +2,6 @@ import React from "react";
 
 import "./homepage.component.scss";
 
-const HomePage = () => <div>this is a homepage! Hello everyone</div>;
+const HomePage = () => <BasicBackground>Hello React</BasicBackground>;
 
 export default HomePage;
