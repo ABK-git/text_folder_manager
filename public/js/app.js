@@ -71489,12 +71489,10 @@ var BasicBackground = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _background_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../background.styles */ "./resources/js/pages/background.styles.jsx");
-
 
 
 var HomePage = function HomePage() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_1__["BasicBackground"], null, "Hello React");
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("dv", null, "Hello React");
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (HomePage);
@@ -71519,8 +71517,8 @@ var HomePage = function HomePage() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\SampleReact\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\SampleReact\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\sign_in_and_sign_up\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\sign_in_and_sign_up\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
