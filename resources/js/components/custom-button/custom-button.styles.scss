@@ -1,0 +1,13 @@
+.custom-button{
+    margin: 30px auto;
+    font-size: 30px;
+    font-weight: bolder;
+    width: 50vw;
+    cursor: pointer;
+    display: inline-block;
+    background-color: darkblue;
+    
+    &:hover{
+        border: 1px solid black;
+    }
+}
