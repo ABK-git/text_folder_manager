@@ -3,11 +3,14 @@ import axios from "axios";
 //component
 import FormInput from "../../components/form-input/form-input.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
+//redux
+import { signUpStart } from "../../redux/user/user.actions";
 //CSS
 import "./sign-up.styles.scss";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
-const SignUp = ({ history }) => {
+const SignUp = ({ signUpStart }) => {
     //入力値のuseState
     const [userCredentials, setUserCredentials] = useState({
         displayName: "",
@@ -37,25 +40,27 @@ const SignUp = ({ history }) => {
         event.preventDefault();
 
         //apiを呼び出してユーザー情報を登録する
-        axios
-            .post("/api/register", userCredentials)
-            .then(response => {
-                console.log(response.data);
-                history.push("/");
-            })
-            .catch(error => {
-                //エラーメッセージ取得
-                const errors = error.response.data.errors;
+        // axios
+        //     .post("/api/register", userCredentials)
+        //     .then(response => {
+        //         console.log(response.config.data);
+        //         //history.push("/");
+        //     })
+        //     .catch(error => {
+        //         //エラーメッセージ取得
+        //         const errors = error.response.data.errors;
 
-                //エラーメッセージをuseStateに格納
-                setErrorMessages({
-                    ...errorMessages,
-                    displayNameError: errors.displayName,
-                    emailError: errors.email,
-                    passwordError: errors.password,
-                    passwordConfirmationError: errors.password_confirmation
-                });
-            });
+        //         //エラーメッセージをuseStateに格納
+        //         setErrorMessages({
+        //             ...errorMessages,
+        //             displayNameError: errors.displayName,
+        //             emailError: errors.email,
+        //             passwordError: errors.password,
+        //             passwordConfirmationError: errors.password_confirmation
+        //         });
+        //     });
+
+        signUpStart({ userCredentials });
     };
     //useStateからユーザー情報を取り出す
     const {
@@ -118,4 +123,8 @@ const SignUp = ({ history }) => {
     );
 };
 
-export default withRouter(SignUp);
+const mapDispatchToProps = dispatch => ({
+    signUpStart: userCredentials => dispatch(signUpStart(userCredentials))
+});
+
+export default withRouter(connect(null, mapDispatchToProps)(SignUp));
