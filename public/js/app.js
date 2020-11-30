@@ -77973,6 +77973,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+_redux_store__WEBPACK_IMPORTED_MODULE_5__["store"].subscribe(function () {
+  return console.log(_redux_store__WEBPACK_IMPORTED_MODULE_5__["store"].getState());
+});
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_6__["Provider"], {
   store: _redux_store__WEBPACK_IMPORTED_MODULE_5__["store"]
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home__WEBPACK_IMPORTED_MODULE_3__["default"], null))), document.getElementById("root"));
@@ -78353,7 +78356,7 @@ sagaMiddleware.run(_root_saga__WEBPACK_IMPORTED_MODULE_3__["default"]);
 /*!*************************************************!*\
   !*** ./resources/js/redux/user/user.actions.js ***!
   \*************************************************/
-/*! exports provided: SignInStart, signUpStart, signUpSuccess */
+/*! exports provided: SignInStart, signUpStart, signUpSuccess, signUpFailure */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78361,6 +78364,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignInStart", function() { return SignInStart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signUpStart", function() { return signUpStart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signUpSuccess", function() { return signUpSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signUpFailure", function() { return signUpFailure; });
 /* harmony import */ var _user_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.types */ "./resources/js/redux/user/user.types.js");
  //emailとpasswordによる認証の開始
 
@@ -78384,14 +78388,21 @@ var signUpStart = function signUpStart(userCredentials) {
 }; //ユーザー登録成功
 
 var signUpSuccess = function signUpSuccess(_ref) {
-  var displayName = _ref.displayName,
-      email = _ref.email;
+  var email = _ref.email,
+      password = _ref.password;
   return {
     type: _user_types__WEBPACK_IMPORTED_MODULE_0__["default"].SIGN_UP_SUCCESS,
     payload: {
-      displayName: displayName,
-      email: email
+      email: email,
+      password: password
     }
+  };
+}; //ユーザー登録失敗
+
+var signUpFailure = function signUpFailure(error) {
+  return {
+    type: _user_types__WEBPACK_IMPORTED_MODULE_0__["default"].SIGN_UP_FAILURE,
+    payload: error
   };
 };
 
@@ -78407,17 +78418,29 @@ var signUpSuccess = function signUpSuccess(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _user_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.types */ "./resources/js/redux/user/user.types.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 var INITIAL_STATE = {
   currentUser: null,
-  errors: null
-};
+  error: null
+}; //stateの値に変化が起こった時は
+//ここでaction.payloadをstateに渡す
 
 var userReducer = function userReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : INITIAL_STATE;
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
+    case _user_types__WEBPACK_IMPORTED_MODULE_0__["default"].SIGN_UP_FAILURE:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        error: action.payload
+      });
+
     default:
       return state;
   }
@@ -78444,9 +78467,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _user_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user.types */ "./resources/js/redux/user/user.types.js");
-/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-saga/effects */ "./node_modules/redux-saga/dist/redux-saga-effects-npm-proxy.esm.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _user_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user.actions */ "./resources/js/redux/user/user.actions.js");
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux-saga/effects */ "./node_modules/redux-saga/dist/redux-saga-effects-npm-proxy.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
 
 
 var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(signUp),
@@ -78455,7 +78479,9 @@ var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0
     _marked4 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(onSignUpSuccess),
     _marked5 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(userSagas);
 
-//action.type
+//type
+ //action
+
  //redux-saga関連
 
  //axios通信
@@ -78463,32 +78489,45 @@ var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0
  //ユーザー情報を登録する
 
 function signUp(_ref) {
-  var userCredentials;
+  var userCredentials, email, password, errors;
   return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function signUp$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           userCredentials = _ref.payload.userCredentials;
-          console.log("this is signup"); //apiを呼び出してユーザー情報を登録する
+          console.log("this is signup"); //emailとpasswordをあらかじめ保存しておく
 
-          axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/register", userCredentials).then(function (response) {
-            console.log("this is success"); //登録した名前とemaiを取得する
+          email = userCredentials.email, password = userCredentials.password; //登録失敗時のエラーメッセージを入れる場所
 
-            var _response$config$data = response.config.data,
-                displayName = _response$config$data.displayName,
-                email = _response$config$data.email; //signUpSuccessのactionを呼び出す
-
-            Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])(signUpSuccess({
-              displayName: displayName,
-              email: email
-            }));
-          })["catch"](function (error) {
-            //エラーメッセージ取得
-            var errors = error.response.data.errors;
-            console.log(errors);
+          errors = null;
+          _context.next = 6;
+          return axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("/api/register", userCredentials)["catch"](function (error) {
+            errors = error.response.data.errors;
           });
 
-        case 3:
+        case 6:
+          if (!(errors === null)) {
+            _context.next = 11;
+            break;
+          }
+
+          _context.next = 9;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["put"])(Object(_user_actions__WEBPACK_IMPORTED_MODULE_2__["signUpSuccess"])({
+            email: email,
+            password: password
+          }));
+
+        case 9:
+          _context.next = 15;
+          break;
+
+        case 11:
+          console.log("失敗");
+          console.log(errors);
+          _context.next = 15;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["put"])(Object(_user_actions__WEBPACK_IMPORTED_MODULE_2__["signUpFailure"])(errors));
+
+        case 15:
         case "end":
           return _context.stop();
       }
@@ -78497,15 +78536,23 @@ function signUp(_ref) {
 } //ユーザー登録に成功した後に呼び出される
 
 function signInAfterSignUp(_ref2) {
-  var _ref2$payload, displayName, email;
+  var _ref2$payload, email, password;
 
   return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function signInAfterSignUp$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          _ref2$payload = _ref2.payload, displayName = _ref2$payload.displayName, email = _ref2$payload.email;
+          _ref2$payload = _ref2.payload, email = _ref2$payload.email, password = _ref2$payload.password;
+          //ここにaxios通信のログインを記載する
+          console.log("signInAfter");
+          console.log({
+            email: email
+          });
+          console.log({
+            password: password
+          });
 
-        case 1:
+        case 4:
         case "end":
           return _context2.stop();
       }
@@ -78524,7 +78571,7 @@ function onSignUpStart() {
         case 0:
           console.log("this is signupstart");
           _context3.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_user_types__WEBPACK_IMPORTED_MODULE_1__["default"].SIGN_UP_START, signUp);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["takeLatest"])(_user_types__WEBPACK_IMPORTED_MODULE_1__["default"].SIGN_UP_START, signUp);
 
         case 3:
         case "end":
@@ -78543,10 +78590,11 @@ function onSignUpSuccess() {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
-          _context4.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_user_types__WEBPACK_IMPORTED_MODULE_1__["default"].SIGN_UP_SUCCESS, signInAfterSignUp);
+          console.log("this is onSignUpSuccess");
+          _context4.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["takeLatest"])(_user_types__WEBPACK_IMPORTED_MODULE_1__["default"].SIGN_UP_SUCCESS, signInAfterSignUp);
 
-        case 2:
+        case 3:
         case "end":
           return _context4.stop();
       }
@@ -78560,7 +78608,7 @@ function userSagas() {
       switch (_context5.prev = _context5.next) {
         case 0:
           _context5.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(onSignUpStart), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(onSignUpSuccess)]);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["call"])(onSignUpStart), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["call"])(onSignUpSuccess)]);
 
         case 2:
         case "end":

@@ -17,7 +17,12 @@ export const signUpStart = userCredentials => ({
 });
 
 //ユーザー登録成功
-export const signUpSuccess = ({ displayName, email }) => ({
+export const signUpSuccess = ({ email, password }) => ({
     type: UserActionTypes.SIGN_UP_SUCCESS,
-    payload: { displayName, email }
+    payload: { email, password }
+});
+//ユーザー登録失敗
+export const signUpFailure = error => ({
+    type: UserActionTypes.SIGN_UP_FAILURE,
+    payload: error
 });
