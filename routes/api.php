@@ -21,3 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //ユーザー登録
 Route::post('/register',[UserController::class,'store']);
+//ユーザー取得
+Route::post('/show',[UserController::class,'show']);

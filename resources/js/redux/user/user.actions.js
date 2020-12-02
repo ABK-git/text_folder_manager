@@ -1,9 +1,9 @@
 import UserActionTypes from "./user.types";
 
 //emailとpasswordによる認証の開始
-export const SignInStart = emailAndPassword => ({
+export const signInStart = ({ userCredentials }) => ({
     type: UserActionTypes.SIGN_IN_START,
-    payload: emailAndPassword
+    payload: { userCredentials }
 });
 
 //ユーザー登録の開始
@@ -22,7 +22,18 @@ export const signUpSuccess = ({ email, password }) => ({
     payload: { email, password }
 });
 //ユーザー登録失敗
-export const signUpFailure = error => ({
+export const signUpFailure = errors => ({
     type: UserActionTypes.SIGN_UP_FAILURE,
-    payload: error
+    payload: errors
+});
+
+//ログイン成功時
+export const signInSuccess = (user) => ({
+    type: UserActionTypes.SIGN_IN_SUCCESS,
+    payload: user.data
+});
+//ログイン失敗時
+export const signInFailure = (errors) => ({
+    type: UserActionTypes.SIGN_IN_FAILURE,
+    payload: errors
 });

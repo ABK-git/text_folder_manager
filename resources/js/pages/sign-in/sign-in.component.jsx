@@ -1,23 +1,22 @@
 import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 //component
 import FormInput from "../../components/form-input/form-input.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
 //redux
-import { signUpStart } from "../../redux/user/user.actions";
+import { signInStart } from "../../redux/user/user.actions";
 //CSS
-import "./sign-up.styles.scss";
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
+import "./sign-in.styles.scss";
 import { createStructuredSelector } from "reselect";
-import { selectSignUpError } from "../../redux/user/user.selector";
+import { selectSignInError } from "../../redux/user/user.selector";
 
-const SignUp = ({ signUpStart, errors }) => {
+
+const SignIn = ({ signInStart, errors }) => {
     //入力値のuseState
     const [userCredentials, setUserCredentials] = useState({
-        displayName: "",
         email: "",
-        password: "",
-        password_confirmation: ""
+        password: ""
     });
 
     //Formに変化が生じた時
@@ -32,29 +31,15 @@ const SignUp = ({ signUpStart, errors }) => {
     const handleSubmit = async event => {
         event.preventDefault();
 
-        signUpStart({ userCredentials });
+        signInStart({ userCredentials });
     };
     //useStateからユーザー情報を取り出す
-    const {
-        displayName,
-        email,
-        password,
-        password_confirmation
-    } = userCredentials;
+    const { email, password } = userCredentials;
 
     return (
-        <div className="sign-up">
-            <h1 className="sign-up-message">ユーザー情報を登録してください!</h1>
-            <form className="sign-up-form" onSubmit={handleSubmit}>
-                <FormInput
-                    type="text"
-                    name="displayName"
-                    value={displayName}
-                    handleChange={handleChange}
-                    label="ユーザー名"
-                    errorMessage={errors.displayName}
-                    required
-                />
+        <div className="sign-in">
+            <h1 className="sign-in-message">ユーザー情報を入力してください!</h1>
+            <form className="sign-in-form" onSubmit={handleSubmit}>
                 <FormInput
                     type="email"
                     name="email"
@@ -73,26 +58,19 @@ const SignUp = ({ signUpStart, errors }) => {
                     errorMessage={errors.password}
                     required
                 />
-                <FormInput
-                    type="password"
-                    name="password_confirmation"
-                    value={password_confirmation}
-                    handleChange={handleChange}
-                    label="確認パスワード"
-                    required
-                />
-                <CustomButton type="submit">登録</CustomButton>
+
+                <CustomButton type="submit">ログイン</CustomButton>
             </form>
         </div>
     );
 };
 
 const mapStateToProps = createStructuredSelector({
-    errors: selectSignUpError
+    errors: selectSignInError
 });
 
 const mapDispatchToProps = dispatch => ({
-    signUpStart: userCredentials => dispatch(signUpStart(userCredentials))
+    signInStart: userCredentials => dispatch(signInStart(userCredentials))
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignUp));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignIn));

@@ -10168,6 +10168,25 @@ exports.push([module.i, ".group {\n  display: flex;\n  flex-direction: column;\n
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./resources/js/pages/sign-in/sign-in.styles.scss":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./resources/js/pages/sign-in/sign-in.styles.scss ***!
+  \*******************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".sign-in-message {\n  color: rgba(235, 102, 26, 0.863);\n}\n\n.sign-in {\n  display: flex;\n  flex-direction: column;\n}\n\n.sign-in-form {\n  text-align: center;\n  margin-top: 15px;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./resources/js/pages/sign-up/sign-up.styles.scss":
 /*!*******************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./resources/js/pages/sign-up/sign-up.styles.scss ***!
@@ -75349,6 +75368,142 @@ try {
 
 /***/ }),
 
+/***/ "./node_modules/reselect/es/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/reselect/es/index.js ***!
+  \*******************************************/
+/*! exports provided: defaultMemoize, createSelectorCreator, createSelector, createStructuredSelector */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultMemoize", function() { return defaultMemoize; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSelectorCreator", function() { return createSelectorCreator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSelector", function() { return createSelector; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createStructuredSelector", function() { return createStructuredSelector; });
+function defaultEqualityCheck(a, b) {
+  return a === b;
+}
+
+function areArgumentsShallowlyEqual(equalityCheck, prev, next) {
+  if (prev === null || next === null || prev.length !== next.length) {
+    return false;
+  }
+
+  // Do this in a for loop (and not a `forEach` or an `every`) so we can determine equality as fast as possible.
+  var length = prev.length;
+  for (var i = 0; i < length; i++) {
+    if (!equalityCheck(prev[i], next[i])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function defaultMemoize(func) {
+  var equalityCheck = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityCheck;
+
+  var lastArgs = null;
+  var lastResult = null;
+  // we reference arguments instead of spreading them for performance reasons
+  return function () {
+    if (!areArgumentsShallowlyEqual(equalityCheck, lastArgs, arguments)) {
+      // apply arguments instead of spreading for performance.
+      lastResult = func.apply(null, arguments);
+    }
+
+    lastArgs = arguments;
+    return lastResult;
+  };
+}
+
+function getDependencies(funcs) {
+  var dependencies = Array.isArray(funcs[0]) ? funcs[0] : funcs;
+
+  if (!dependencies.every(function (dep) {
+    return typeof dep === 'function';
+  })) {
+    var dependencyTypes = dependencies.map(function (dep) {
+      return typeof dep;
+    }).join(', ');
+    throw new Error('Selector creators expect all input-selectors to be functions, ' + ('instead received the following types: [' + dependencyTypes + ']'));
+  }
+
+  return dependencies;
+}
+
+function createSelectorCreator(memoize) {
+  for (var _len = arguments.length, memoizeOptions = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    memoizeOptions[_key - 1] = arguments[_key];
+  }
+
+  return function () {
+    for (var _len2 = arguments.length, funcs = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      funcs[_key2] = arguments[_key2];
+    }
+
+    var recomputations = 0;
+    var resultFunc = funcs.pop();
+    var dependencies = getDependencies(funcs);
+
+    var memoizedResultFunc = memoize.apply(undefined, [function () {
+      recomputations++;
+      // apply arguments instead of spreading for performance.
+      return resultFunc.apply(null, arguments);
+    }].concat(memoizeOptions));
+
+    // If a selector is called with the exact same arguments we don't need to traverse our dependencies again.
+    var selector = memoize(function () {
+      var params = [];
+      var length = dependencies.length;
+
+      for (var i = 0; i < length; i++) {
+        // apply arguments instead of spreading and mutate a local list of params for performance.
+        params.push(dependencies[i].apply(null, arguments));
+      }
+
+      // apply arguments instead of spreading for performance.
+      return memoizedResultFunc.apply(null, params);
+    });
+
+    selector.resultFunc = resultFunc;
+    selector.dependencies = dependencies;
+    selector.recomputations = function () {
+      return recomputations;
+    };
+    selector.resetRecomputations = function () {
+      return recomputations = 0;
+    };
+    return selector;
+  };
+}
+
+var createSelector = createSelectorCreator(defaultMemoize);
+
+function createStructuredSelector(selectors) {
+  var selectorCreator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : createSelector;
+
+  if (typeof selectors !== 'object') {
+    throw new Error('createStructuredSelector expects first argument to be an object ' + ('where each property is a selector, instead received a ' + typeof selectors));
+  }
+  var objectKeys = Object.keys(selectors);
+  return selectorCreator(objectKeys.map(function (key) {
+    return selectors[key];
+  }), function () {
+    for (var _len3 = arguments.length, values = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+      values[_key3] = arguments[_key3];
+    }
+
+    return values.reduce(function (composition, value, index) {
+      composition[objectKeys[index]] = value;
+      return composition;
+    }, {});
+  });
+}
+
+/***/ }),
+
 /***/ "./node_modules/resolve-pathname/esm/resolve-pathname.js":
 /*!***************************************************************!*\
   !*** ./node_modules/resolve-pathname/esm/resolve-pathname.js ***!
@@ -77923,23 +78078,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _components_header_header_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/header/header.component */ "./resources/js/components/header/header.component.jsx");
 /* harmony import */ var _pages_homepage_homepage_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/homepage/homepage.component */ "./resources/js/pages/homepage/homepage.component.jsx");
-/* harmony import */ var _js_pages_background_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../js/pages/background.styles */ "./resources/js/pages/background.styles.jsx");
-/* harmony import */ var _pages_sign_up_sign_up_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/sign-up/sign-up.component */ "./resources/js/pages/sign-up/sign-up.component.jsx");
+/* harmony import */ var _pages_sign_up_sign_up_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/sign-up/sign-up.component */ "./resources/js/pages/sign-up/sign-up.component.jsx");
+/* harmony import */ var _pages_sign_in_sign_in_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/sign-in/sign-in.component */ "./resources/js/pages/sign-in/sign-in.component.jsx");
+/* harmony import */ var _route_private_route_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./route/private-route.component */ "./resources/js/route/private-route.component.jsx");
+/* harmony import */ var _js_pages_background_styles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../js/pages/background.styles */ "./resources/js/pages/background.styles.jsx");
+
+ //Header
+
+ //Page
 
 
 
+ //Route
 
+ //background
 
 
 
 var Home = function Home() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_header_header_component__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_js_pages_background_styles__WEBPACK_IMPORTED_MODULE_4__["BasicBackground"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, "// \u30C7\u30D5\u30A9\u30EB\u30C8\u5024", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_header_header_component__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_js_pages_background_styles__WEBPACK_IMPORTED_MODULE_7__["BasicBackground"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, "// \u30C7\u30D5\u30A9\u30EB\u30C8\u5024", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/",
     component: _pages_homepage_homepage_component__WEBPACK_IMPORTED_MODULE_3__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_route_private_route_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
     path: "/signup",
-    component: _pages_sign_up_sign_up_component__WEBPACK_IMPORTED_MODULE_5__["default"]
+    component: _pages_sign_up_sign_up_component__WEBPACK_IMPORTED_MODULE_4__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_route_private_route_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    path: "/signin",
+    component: _pages_sign_in_sign_in_component__WEBPACK_IMPORTED_MODULE_5__["default"]
   }))));
 };
 
@@ -78031,9 +78197,9 @@ var HomePage = function HomePage() {
 
 /***/ }),
 
-/***/ "./resources/js/pages/sign-up/sign-up.component.jsx":
+/***/ "./resources/js/pages/sign-in/sign-in.component.jsx":
 /*!**********************************************************!*\
-  !*** ./resources/js/pages/sign-up/sign-up.component.jsx ***!
+  !*** ./resources/js/pages/sign-in/sign-in.component.jsx ***!
   \**********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -78044,15 +78210,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/form-input/form-input.component */ "./resources/js/components/form-input/form-input.component.jsx");
-/* harmony import */ var _components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
-/* harmony import */ var _redux_user_user_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../redux/user/user.actions */ "./resources/js/redux/user/user.actions.js");
-/* harmony import */ var _sign_up_styles_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./sign-up.styles.scss */ "./resources/js/pages/sign-up/sign-up.styles.scss");
-/* harmony import */ var _sign_up_styles_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_sign_up_styles_scss__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/form-input/form-input.component */ "./resources/js/components/form-input/form-input.component.jsx");
+/* harmony import */ var _components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
+/* harmony import */ var _redux_user_user_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../redux/user/user.actions */ "./resources/js/redux/user/user.actions.js");
+/* harmony import */ var _sign_in_styles_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./sign-in.styles.scss */ "./resources/js/pages/sign-in/sign-in.styles.scss");
+/* harmony import */ var _sign_in_styles_scss__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_sign_in_styles_scss__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
+/* harmony import */ var _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../redux/user/user.selector */ "./resources/js/redux/user/user.selector.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -78078,6 +78244,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
+
  //component
 
 
@@ -78089,8 +78256,193 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+var SignIn = function SignIn(_ref) {
+  var signInStart = _ref.signInStart,
+      errors = _ref.errors;
+
+  //入力値のuseState
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
+    email: "",
+    password: ""
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      userCredentials = _useState2[0],
+      setUserCredentials = _useState2[1]; //Formに変化が生じた時
+
+
+  var handleChange = function handleChange(event) {
+    //Formの名前と値を取得
+    var _event$target = event.target,
+        name = _event$target.name,
+        value = _event$target.value; //入力値をuseStateに記録
+
+    setUserCredentials(_objectSpread(_objectSpread({}, userCredentials), {}, _defineProperty({}, name, value)));
+  }; //Formを送信したとき
+
+
+  var handleSubmit = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(event) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              event.preventDefault();
+              signInStart({
+                userCredentials: userCredentials
+              });
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function handleSubmit(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }(); //useStateからユーザー情報を取り出す
+
+
+  var email = userCredentials.email,
+      password = userCredentials.password;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "sign-in"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", {
+    className: "sign-in-message"
+  }, "\u30E6\u30FC\u30B6\u30FC\u60C5\u5831\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+    className: "sign-in-form",
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    type: "email",
+    name: "email",
+    value: email,
+    handleChange: handleChange,
+    label: "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9",
+    errorMessage: errors.email,
+    required: true
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    type: "password",
+    name: "password",
+    value: password,
+    handleChange: handleChange,
+    label: "\u30D1\u30B9\u30EF\u30FC\u30C9",
+    errorMessage: errors.password,
+    required: true
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    type: "submit"
+  }, "\u30ED\u30B0\u30A4\u30F3")));
+};
+
+var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_8__["createStructuredSelector"])({
+  errors: _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_9__["selectSignInError"]
+});
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    signInStart: function signInStart(userCredentials) {
+      return dispatch(Object(_redux_user_user_actions__WEBPACK_IMPORTED_MODULE_6__["signInStart"])(userCredentials));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(SignIn)));
+
+/***/ }),
+
+/***/ "./resources/js/pages/sign-in/sign-in.styles.scss":
+/*!********************************************************!*\
+  !*** ./resources/js/pages/sign-in/sign-in.styles.scss ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader!../../../../node_modules/postcss-loader/src??ref--7-2!../../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!./sign-in.styles.scss */ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./resources/js/pages/sign-in/sign-in.styles.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./resources/js/pages/sign-up/sign-up.component.jsx":
+/*!**********************************************************!*\
+  !*** ./resources/js/pages/sign-up/sign-up.component.jsx ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/form-input/form-input.component */ "./resources/js/components/form-input/form-input.component.jsx");
+/* harmony import */ var _components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
+/* harmony import */ var _redux_user_user_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/user/user.actions */ "./resources/js/redux/user/user.actions.js");
+/* harmony import */ var _sign_up_styles_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./sign-up.styles.scss */ "./resources/js/pages/sign-up/sign-up.styles.scss");
+/* harmony import */ var _sign_up_styles_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_sign_up_styles_scss__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
+/* harmony import */ var _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../redux/user/user.selector */ "./resources/js/redux/user/user.selector.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+ //component
+
+
+ //redux
+
+ //CSS
+
+
+
+
+
+
+
 var SignUp = function SignUp(_ref) {
-  var signUpStart = _ref.signUpStart;
+  var signUpStart = _ref.signUpStart,
+      errors = _ref.errors;
 
   //入力値のuseState
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
@@ -78111,18 +78463,7 @@ var SignUp = function SignUp(_ref) {
         value = _event$target.value; //入力値をuseStateに記録
 
     setUserCredentials(_objectSpread(_objectSpread({}, userCredentials), {}, _defineProperty({}, name, value)));
-  }; //エラーメッセージのuseState
-
-
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
-    displayNameError: [],
-    emailError: [],
-    passwordError: [],
-    passwordConfirmationError: []
-  }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      errorMessages = _useState4[0],
-      setErrorMessages = _useState4[1]; //Formを送信したとき
+  }; //Formを送信したとき
 
 
   var handleSubmit = /*#__PURE__*/function () {
@@ -78131,26 +78472,7 @@ var SignUp = function SignUp(_ref) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              event.preventDefault(); //apiを呼び出してユーザー情報を登録する
-              // axios
-              //     .post("/api/register", userCredentials)
-              //     .then(response => {
-              //         console.log(response.config.data);
-              //         //history.push("/");
-              //     })
-              //     .catch(error => {
-              //         //エラーメッセージ取得
-              //         const errors = error.response.data.errors;
-              //         //エラーメッセージをuseStateに格納
-              //         setErrorMessages({
-              //             ...errorMessages,
-              //             displayNameError: errors.displayName,
-              //             emailError: errors.email,
-              //             passwordError: errors.password,
-              //             passwordConfirmationError: errors.password_confirmation
-              //         });
-              //     });
-
+              event.preventDefault();
               signUpStart({
                 userCredentials: userCredentials
               });
@@ -78172,12 +78494,7 @@ var SignUp = function SignUp(_ref) {
   var displayName = userCredentials.displayName,
       email = userCredentials.email,
       password = userCredentials.password,
-      password_confirmation = userCredentials.password_confirmation; //useStateからエラーメッセージを取り出す
-
-  var displayNameError = errorMessages.displayNameError,
-      emailError = errorMessages.emailError,
-      passwordError = errorMessages.passwordError,
-      passwordConfirmationError = errorMessages.passwordConfirmationError;
+      password_confirmation = userCredentials.password_confirmation;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "sign-up"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", {
@@ -78185,52 +78502,55 @@ var SignUp = function SignUp(_ref) {
   }, "\u30E6\u30FC\u30B6\u30FC\u60C5\u5831\u3092\u767B\u9332\u3057\u3066\u304F\u3060\u3055\u3044!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
     className: "sign-up-form",
     onSubmit: handleSubmit
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
     type: "text",
     name: "displayName",
     value: displayName,
     handleChange: handleChange,
     label: "\u30E6\u30FC\u30B6\u30FC\u540D",
-    errorMessage: displayNameError,
+    errorMessage: errors.displayName,
     required: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
     type: "email",
     name: "email",
     value: email,
     handleChange: handleChange,
     label: "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9",
-    errorMessage: emailError,
+    errorMessage: errors.email,
     required: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
     type: "password",
     name: "password",
     value: password,
     handleChange: handleChange,
     label: "\u30D1\u30B9\u30EF\u30FC\u30C9",
-    errorMessage: passwordError,
+    errorMessage: errors.password,
     required: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
     type: "password",
     name: "password_confirmation",
     value: password_confirmation,
     handleChange: handleChange,
     label: "\u78BA\u8A8D\u30D1\u30B9\u30EF\u30FC\u30C9",
-    errorMessage: passwordConfirmationError,
     required: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: "submit"
   }, "\u767B\u9332")));
 };
 
+var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_8__["createStructuredSelector"])({
+  errors: _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_9__["selectSignUpError"]
+});
+
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     signUpStart: function signUpStart(userCredentials) {
-      return dispatch(Object(_redux_user_user_actions__WEBPACK_IMPORTED_MODULE_5__["signUpStart"])(userCredentials));
+      return dispatch(Object(_redux_user_user_actions__WEBPACK_IMPORTED_MODULE_4__["signUpStart"])(userCredentials));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_8__["connect"])(null, mapDispatchToProps)(SignUp)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_7__["connect"])(mapStateToProps, mapDispatchToProps)(SignUp)));
 
 /***/ }),
 
@@ -78356,22 +78676,27 @@ sagaMiddleware.run(_root_saga__WEBPACK_IMPORTED_MODULE_3__["default"]);
 /*!*************************************************!*\
   !*** ./resources/js/redux/user/user.actions.js ***!
   \*************************************************/
-/*! exports provided: SignInStart, signUpStart, signUpSuccess, signUpFailure */
+/*! exports provided: signInStart, signUpStart, signUpSuccess, signUpFailure, signInSuccess, signInFailure */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignInStart", function() { return SignInStart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signInStart", function() { return signInStart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signUpStart", function() { return signUpStart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signUpSuccess", function() { return signUpSuccess; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signUpFailure", function() { return signUpFailure; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signInSuccess", function() { return signInSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signInFailure", function() { return signInFailure; });
 /* harmony import */ var _user_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user.types */ "./resources/js/redux/user/user.types.js");
  //emailとpasswordによる認証の開始
 
-var SignInStart = function SignInStart(emailAndPassword) {
+var signInStart = function signInStart(_ref) {
+  var userCredentials = _ref.userCredentials;
   return {
     type: _user_types__WEBPACK_IMPORTED_MODULE_0__["default"].SIGN_IN_START,
-    payload: emailAndPassword
+    payload: {
+      userCredentials: userCredentials
+    }
   };
 }; //ユーザー登録の開始
 
@@ -78387,9 +78712,9 @@ var signUpStart = function signUpStart(userCredentials) {
   };
 }; //ユーザー登録成功
 
-var signUpSuccess = function signUpSuccess(_ref) {
-  var email = _ref.email,
-      password = _ref.password;
+var signUpSuccess = function signUpSuccess(_ref2) {
+  var email = _ref2.email,
+      password = _ref2.password;
   return {
     type: _user_types__WEBPACK_IMPORTED_MODULE_0__["default"].SIGN_UP_SUCCESS,
     payload: {
@@ -78399,10 +78724,24 @@ var signUpSuccess = function signUpSuccess(_ref) {
   };
 }; //ユーザー登録失敗
 
-var signUpFailure = function signUpFailure(error) {
+var signUpFailure = function signUpFailure(errors) {
   return {
     type: _user_types__WEBPACK_IMPORTED_MODULE_0__["default"].SIGN_UP_FAILURE,
-    payload: error
+    payload: errors
+  };
+}; //ログイン成功時
+
+var signInSuccess = function signInSuccess(user) {
+  return {
+    type: _user_types__WEBPACK_IMPORTED_MODULE_0__["default"].SIGN_IN_SUCCESS,
+    payload: user.data
+  };
+}; //ログイン失敗時
+
+var signInFailure = function signInFailure(errors) {
+  return {
+    type: _user_types__WEBPACK_IMPORTED_MODULE_0__["default"].SIGN_IN_FAILURE,
+    payload: errors
   };
 };
 
@@ -78427,7 +78766,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var INITIAL_STATE = {
   currentUser: null,
-  error: null
+  signInError: [],
+  signUpError: []
 }; //stateの値に変化が起こった時は
 //ここでaction.payloadをstateに渡す
 
@@ -78436,9 +78776,25 @@ var userReducer = function userReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
+    case _user_types__WEBPACK_IMPORTED_MODULE_0__["default"].SIGN_IN_SUCCESS:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        currentUser: action.payload,
+        signInError: null,
+        signUpError: null
+      });
+
     case _user_types__WEBPACK_IMPORTED_MODULE_0__["default"].SIGN_UP_FAILURE:
       return _objectSpread(_objectSpread({}, state), {}, {
-        error: action.payload
+        currentUser: null,
+        signInError: null,
+        signUpError: action.payload
+      });
+
+    case _user_types__WEBPACK_IMPORTED_MODULE_0__["default"].SIGN_IN_FAILURE:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        currentUser: null,
+        signInError: action.payload,
+        signUpError: null
       });
 
     default:
@@ -78454,15 +78810,18 @@ var userReducer = function userReducer() {
 /*!***********************************************!*\
   !*** ./resources/js/redux/user/user.sagas.js ***!
   \***********************************************/
-/*! exports provided: signUp, signInAfterSignUp, onSignUpStart, onSignUpSuccess, userSagas */
+/*! exports provided: getUser, signUp, signInAfterSignUp, signInWithEmaiAndPassword, onSignUpStart, onSignUpSuccess, onSignInStart, userSagas */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUser", function() { return getUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signUp", function() { return signUp; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signInAfterSignUp", function() { return signInAfterSignUp; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signInWithEmaiAndPassword", function() { return signInWithEmaiAndPassword; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onSignUpStart", function() { return onSignUpStart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onSignUpSuccess", function() { return onSignUpSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onSignInStart", function() { return onSignInStart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userSagas", function() { return userSagas; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -78473,11 +78832,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
 
 
-var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(signUp),
-    _marked2 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(signInAfterSignUp),
-    _marked3 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(onSignUpStart),
-    _marked4 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(onSignUpSuccess),
-    _marked5 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(userSagas);
+var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(getUser),
+    _marked2 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(signUp),
+    _marked3 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(signInAfterSignUp),
+    _marked4 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(signInWithEmaiAndPassword),
+    _marked5 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(onSignUpStart),
+    _marked6 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(onSignUpSuccess),
+    _marked7 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(onSignInStart),
+    _marked8 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(userSagas);
 
 //type
  //action
@@ -78486,13 +78848,63 @@ var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0
 
  //axios通信
 
- //ユーザー情報を登録する
+ //ユーザー情報の取得
+
+function getUser(email, password) {
+  var errors, params, user;
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function getUser$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          console.log("this is getUser"); //ユーザー情報取得のエラーメッセージ
+
+          errors = null; //paramsを作成
+
+          params = new URLSearchParams();
+          params.append("email", email);
+          params.append("password", password); //ユーザー情報の取得
+
+          _context.next = 7;
+          return axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("/api/show", params)["catch"](function (error) {
+            errors = error.response.data.errors;
+            console.log(errors);
+          });
+
+        case 7:
+          user = _context.sent;
+          console.log("next is user"); //情報取得成功の場合
+
+          if (!(errors === null)) {
+            _context.next = 15;
+            break;
+          }
+
+          console.log("情報取得成功");
+          _context.next = 13;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["put"])(Object(_user_actions__WEBPACK_IMPORTED_MODULE_2__["signInSuccess"])(user));
+
+        case 13:
+          _context.next = 18;
+          break;
+
+        case 15:
+          console.log("failure");
+          _context.next = 18;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["put"])(Object(_user_actions__WEBPACK_IMPORTED_MODULE_2__["signInFailure"])(errors));
+
+        case 18:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, _marked);
+} //ユーザー情報を登録する
 
 function signUp(_ref) {
   var userCredentials, email, password, errors;
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function signUp$(_context) {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function signUp$(_context2) {
     while (1) {
-      switch (_context.prev = _context.next) {
+      switch (_context2.prev = _context2.next) {
         case 0:
           userCredentials = _ref.payload.userCredentials;
           console.log("this is signup"); //emailとpasswordをあらかじめ保存しておく
@@ -78500,64 +78912,80 @@ function signUp(_ref) {
           email = userCredentials.email, password = userCredentials.password; //登録失敗時のエラーメッセージを入れる場所
 
           errors = null;
-          _context.next = 6;
+          _context2.next = 6;
           return axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("/api/register", userCredentials)["catch"](function (error) {
             errors = error.response.data.errors;
           });
 
         case 6:
           if (!(errors === null)) {
-            _context.next = 11;
+            _context2.next = 11;
             break;
           }
 
-          _context.next = 9;
+          _context2.next = 9;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["put"])(Object(_user_actions__WEBPACK_IMPORTED_MODULE_2__["signUpSuccess"])({
             email: email,
             password: password
           }));
 
         case 9:
-          _context.next = 15;
+          _context2.next = 13;
           break;
 
         case 11:
-          console.log("失敗");
-          console.log(errors);
-          _context.next = 15;
+          _context2.next = 13;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["put"])(Object(_user_actions__WEBPACK_IMPORTED_MODULE_2__["signUpFailure"])(errors));
 
-        case 15:
-        case "end":
-          return _context.stop();
-      }
-    }
-  }, _marked);
-} //ユーザー登録に成功した後に呼び出される
-
-function signInAfterSignUp(_ref2) {
-  var _ref2$payload, email, password;
-
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function signInAfterSignUp$(_context2) {
-    while (1) {
-      switch (_context2.prev = _context2.next) {
-        case 0:
-          _ref2$payload = _ref2.payload, email = _ref2$payload.email, password = _ref2$payload.password;
-          //ここにaxios通信のログインを記載する
-          console.log("signInAfter");
-          console.log({
-            email: email
-          });
-          console.log({
-            password: password
-          });
-
-        case 4:
+        case 13:
         case "end":
           return _context2.stop();
       }
     }
   }, _marked2);
+} //ユーザー登録に成功した後に呼び出される
+
+function signInAfterSignUp(_ref2) {
+  var _ref2$payload, email, password;
+
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function signInAfterSignUp$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          _ref2$payload = _ref2.payload, email = _ref2$payload.email, password = _ref2$payload.password;
+          console.log(email);
+          console.log(password); //ユーザー取得
+
+          _context3.next = 5;
+          return getUser(email, password);
+
+        case 5:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  }, _marked3);
+} //ログイン時に呼び出される
+
+function signInWithEmaiAndPassword(_ref3) {
+  var userCredentials, email, password;
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function signInWithEmaiAndPassword$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          userCredentials = _ref3.payload.userCredentials;
+          console.log("signInWithEmailAndPassword");
+          email = userCredentials.email, password = userCredentials.password; //ユーザー取得
+
+          _context4.next = 5;
+          return getUser(email, password);
+
+        case 5:
+        case "end":
+          return _context4.stop();
+      }
+    }
+  }, _marked4);
 }
 /**
  * actionsでUserActionTypes.SIGN_UP_STARTが選択されたとき、
@@ -78565,58 +78993,109 @@ function signInAfterSignUp(_ref2) {
  * */
 
 function onSignUpStart() {
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function onSignUpStart$(_context3) {
-    while (1) {
-      switch (_context3.prev = _context3.next) {
-        case 0:
-          console.log("this is signupstart");
-          _context3.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["takeLatest"])(_user_types__WEBPACK_IMPORTED_MODULE_1__["default"].SIGN_UP_START, signUp);
-
-        case 3:
-        case "end":
-          return _context3.stop();
-      }
-    }
-  }, _marked3);
-}
-/**
- * actionsでUserActionTypes.SIGN_UP_SUCCESSが選択されたとき、
- * signInAfterSignUpメソッドを実行する
- */
-
-function onSignUpSuccess() {
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function onSignUpSuccess$(_context4) {
-    while (1) {
-      switch (_context4.prev = _context4.next) {
-        case 0:
-          console.log("this is onSignUpSuccess");
-          _context4.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["takeLatest"])(_user_types__WEBPACK_IMPORTED_MODULE_1__["default"].SIGN_UP_SUCCESS, signInAfterSignUp);
-
-        case 3:
-        case "end":
-          return _context4.stop();
-      }
-    }
-  }, _marked4);
-} //redux-sagaによる非同期監視のスタート
-
-function userSagas() {
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function userSagas$(_context5) {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function onSignUpStart$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
-          _context5.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["call"])(onSignUpStart), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["call"])(onSignUpSuccess)]);
+          console.log("this is signupstart");
+          _context5.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["takeLatest"])(_user_types__WEBPACK_IMPORTED_MODULE_1__["default"].SIGN_UP_START, signUp);
 
-        case 2:
+        case 3:
         case "end":
           return _context5.stop();
       }
     }
   }, _marked5);
+} //ユーザー登録成功時
+
+function onSignUpSuccess() {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function onSignUpSuccess$(_context6) {
+    while (1) {
+      switch (_context6.prev = _context6.next) {
+        case 0:
+          console.log("this is onSignUpSuccess");
+          _context6.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["takeLatest"])(_user_types__WEBPACK_IMPORTED_MODULE_1__["default"].SIGN_UP_SUCCESS, signInAfterSignUp);
+
+        case 3:
+        case "end":
+          return _context6.stop();
+      }
+    }
+  }, _marked6);
 }
+/**
+ * actionsでUserActionTypes.SIGN_IN_STARTが選択されたとき、
+ * signInWithEmaiAndPasswordメソッドを呼び出す
+ */
+
+function onSignInStart() {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function onSignInStart$(_context7) {
+    while (1) {
+      switch (_context7.prev = _context7.next) {
+        case 0:
+          console.log("signInStart");
+          _context7.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["takeLatest"])(_user_types__WEBPACK_IMPORTED_MODULE_1__["default"].SIGN_IN_START, signInWithEmaiAndPassword);
+
+        case 3:
+        case "end":
+          return _context7.stop();
+      }
+    }
+  }, _marked7);
+} //redux-sagaによる非同期監視のスタート
+
+function userSagas() {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function userSagas$(_context8) {
+    while (1) {
+      switch (_context8.prev = _context8.next) {
+        case 0:
+          _context8.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["call"])(onSignUpStart), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["call"])(onSignUpSuccess), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_3__["call"])(onSignInStart)]);
+
+        case 2:
+        case "end":
+          return _context8.stop();
+      }
+    }
+  }, _marked8);
+}
+
+/***/ }),
+
+/***/ "./resources/js/redux/user/user.selector.js":
+/*!**************************************************!*\
+  !*** ./resources/js/redux/user/user.selector.js ***!
+  \**************************************************/
+/*! exports provided: selectCurrentUser, selectSignUpError, selectSignInError */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectCurrentUser", function() { return selectCurrentUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSignUpError", function() { return selectSignUpError; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSignInError", function() { return selectSignInError; });
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
+
+
+var selectUser = function selectUser(state) {
+  return state.user;
+}; //User情報を取得する
+
+
+var selectCurrentUser = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])([selectUser], function (user) {
+  return user.currentUser;
+}); //登録時のerror情報を取得する
+
+var selectSignUpError = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])([selectUser], function (user) {
+  return user.signUpError;
+}); //ログイン時のerror情報を取得する
+
+var selectSignInError = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])([selectUser], function (user) {
+  return user.signInError;
+});
 
 /***/ }),
 
@@ -78642,6 +79121,54 @@ var UserActionTypes = {
   SIGN_UP_FAILURE: 'SIGN_UP_FAILURE'
 };
 /* harmony default export */ __webpack_exports__["default"] = (UserActionTypes);
+
+/***/ }),
+
+/***/ "./resources/js/route/private-route.component.jsx":
+/*!********************************************************!*\
+  !*** ./resources/js/route/private-route.component.jsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../redux/user/user.selector */ "./resources/js/redux/user/user.selector.js");
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
+
+
+
+ //ログイン時ホームにリダイレクトするRoute
+
+var PrivateRoute = function PrivateRoute(_ref) {
+  var Component = _ref.component,
+      user = _ref.user,
+      rest = _objectWithoutProperties(_ref, ["component", "user"]);
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], _extends({}, rest, {
+    render: function render(props) {
+      return user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
+        to: "/"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, props);
+    }
+  }));
+};
+
+var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_4__["createStructuredSelector"])({
+  user: _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_3__["selectCurrentUser"]
+});
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(PrivateRoute));
 
 /***/ }),
 

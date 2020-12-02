@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserStorePost;
+use App\Http\Requests\UserShowPost;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UserStorePost;
+
 
 class UserController extends Controller
 {
@@ -18,5 +19,14 @@ class UserController extends Controller
             //本番ではHash::make($request['password])を使う
             //'password' => Hash::make($request['password'])
         ]);
+    }
+
+    //Userデータを取得する
+    public function show(UserShowPost $request)
+    {
+        $user = User::where('email', $request->input('email'))
+        ->where('password', $request->input('password'))->first();
+
+        return $user;
     }
 }
