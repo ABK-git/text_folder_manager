@@ -39,7 +39,6 @@ export function* getUser(email, password) {
         yield put(signInFailure(errors));
     }
 }
-
 //ユーザー情報を登録する
 export function* signUp({ payload: { userCredentials } }) {
     console.log("this is signup");

@@ -5,7 +5,7 @@ import { selectCurrentUser } from "../redux/user/user.selector";
 import { createStructuredSelector } from "reselect";
 
 //ログイン時ホームにリダイレクトするRoute
-const PrivateRoute = ({ component: Component, user, ...rest}) => (
+const SignOutRoute = ({ component: Component, user, ...rest}) => (
     <Route
         {...rest}
         render={props =>
@@ -18,4 +18,4 @@ const mapStateToProps = createStructuredSelector({
     user: selectCurrentUser
 });
 
-export default connect(mapStateToProps)(PrivateRoute);
+export default connect(mapStateToProps)(SignOutRoute);

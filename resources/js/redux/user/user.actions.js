@@ -28,12 +28,18 @@ export const signUpFailure = errors => ({
 });
 
 //ログイン成功時
-export const signInSuccess = (user) => ({
+export const signInSuccess = user => ({
     type: UserActionTypes.SIGN_IN_SUCCESS,
     payload: user.data
 });
 //ログイン失敗時
-export const signInFailure = (errors) => ({
+export const signInFailure = errors => ({
     type: UserActionTypes.SIGN_IN_FAILURE,
     payload: errors
 });
+
+//ログアウト開始
+export const signOut = () => ({
+    type: UserActionTypes.SIGN_OUT
+});
+

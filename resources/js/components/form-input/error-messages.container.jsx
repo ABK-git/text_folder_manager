@@ -4,14 +4,16 @@ import "./form-input.styles.scss";
 
 const ErrorMessagesContainer = ({ errorMessage }) => (
     <div>
-        {Object.values({ errorMessage })
-            .join()
-            .split(",")
-            .map((error, index) => (
-                <p className="error-messages" key={index}>
-                    {error}
-                </p>
-            ))}
+        {errorMessage
+            ? Object.values({ errorMessage })
+                  .join()
+                  .split(",")
+                  .map((error, index) => (
+                      <p className="error-messages" key={index}>
+                          {error}
+                      </p>
+                  ))
+            : ""}
     </div>
 );
 
