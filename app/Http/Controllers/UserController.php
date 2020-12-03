@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserShowPost;
 use App\Models\User;
+use App\Http\Requests\UserShowPost;
 use App\Http\Requests\UserStorePost;
-
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -15,18 +15,26 @@ class UserController extends Controller
         User::create([
             'displayName' => $request->displayName,
             'email' => $request->email,
-            'password' => $request->password
+            //'password' => $request->password
             //本番ではHash::make($request['password])を使う
-            //'password' => Hash::make($request['password'])
+            'password' => Hash::make($request['password'])
         ]);
     }
 
     //Userデータを取得する
     public function show(UserShowPost $request)
     {
-        $user = User::where('email', $request->input('email'))
-        ->where('password', $request->input('password'))->first();
+        //ポートフォリオ用
+        //$user = User::where('email', $request->input('email'))
+        //->where('password', $request->input('password'))->first();
 
+        //実用
+        $user = User::where('email', $request->input('email'))->first();
+        
+        //passwordが間違ってる場合
+        if(!Hash::check($request->input('password'),$user->password )){
+            abort(422, "パスワードが違います");
+        }
         return $user;
     }
 }

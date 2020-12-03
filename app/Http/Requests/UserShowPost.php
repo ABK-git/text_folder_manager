@@ -25,7 +25,8 @@ class UserShowPost extends FormRequest
     {
         return [
             'email' => 'exists:users,email',
-            'password' => 'exists:users,password'
+            //実用では不要
+            //'password' => 'exists:users,password'
         ];
     }
 
@@ -34,7 +35,8 @@ class UserShowPost extends FormRequest
         //Validationのエラーメッセージを設定
         return [
             'email.exists' => 'メールアドレスが登録されていません',
-            'password.exists' => 'パスワードが違います',
+            //実用では不要
+            //'password.exists' => 'パスワードが違います',
         ];
     }
 }

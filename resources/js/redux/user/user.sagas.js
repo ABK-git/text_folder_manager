@@ -25,6 +25,16 @@ export function* getUser(email, password) {
     //ユーザー情報の取得
     const user = yield axios.post("/api/show", params).catch(error => {
         errors = error.response.data.errors;
+        
+        console.log(error.response);
+        console.log(errors);
+        /**
+         * メールアドレスに登録されている
+         * パスワードが間違っていた場合
+        **/
+        if(errors === undefined){
+            errors = {"password":[error.response.data.message]};
+        }
         console.log(errors);
     });
 

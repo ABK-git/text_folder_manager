@@ -78948,6 +78948,19 @@ function getUser(email, password) {
           _context.next = 7;
           return axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("/api/show", params)["catch"](function (error) {
             errors = error.response.data.errors;
+            console.log(error.response);
+            console.log(errors);
+            /**
+             * メールアドレスに登録されている
+             * パスワードが間違っていた場合
+            **/
+
+            if (errors === undefined) {
+              errors = {
+                "password": [error.response.data.message]
+              };
+            }
+
             console.log(errors);
           });
 
