@@ -78039,7 +78039,9 @@ __webpack_require__.r(__webpack_exports__);
 var Header = function Header(_ref) {
   var user = _ref.user,
       signOut = _ref.signOut;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_5__["HeaderContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_5__["OptionsContainer"], null, user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_5__["OptionLink"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_5__["HeaderContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_5__["LogoToHomeContainer"], {
+    to: "/"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_5__["OptionsContainer"], null, user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_5__["OptionLink"], {
     as: "div",
     onClick: signOut
   }, "SIGN OUT") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_5__["OptionDiv"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_5__["OptionLink"], {
@@ -78069,19 +78071,30 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 /*!**********************************************************!*\
   !*** ./resources/js/components/header/header.styles.jsx ***!
   \**********************************************************/
-/*! exports provided: HeaderContainer, OptionsContainer, OptionLink, OptionDiv */
+/*! exports provided: HeaderContainer, LogoToHomeContainer, OptionsContainer, OptionLink, OptionDiv */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeaderContainer", function() { return HeaderContainer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LogoToHomeContainer", function() { return LogoToHomeContainer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OptionsContainer", function() { return OptionsContainer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OptionLink", function() { return OptionLink; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OptionDiv", function() { return OptionDiv; });
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-function _templateObject4() {
+function _templateObject5() {
   var data = _taggedTemplateLiteral(["\n  padding: 10px 15px;\n"]);
+
+  _templateObject5 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\n  padding: 10px 15px;\n  font-weight: bold;\n  font-size: 20px;\n  color: red;\n  cursor: pointer;\n  white-space: nowrap\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -78091,7 +78104,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  padding: 10px 15px;\n  font-weight: bold;\n  font-size: 20px;\n  color: red;\n  cursor: pointer;\n  white-space: nowrap\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -78101,7 +78114,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n"]);
+  var data = _taggedTemplateLiteral(["\n  height: 100%;\n  width: 70px;\n  background-size: cover;\n  background-image: url(\"/images/header/toHome.png\");\n\n  :hover{\n    background-image: url(\"/images/header/toHomeHover.png\");\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -78125,9 +78138,10 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 var HeaderContainer = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject());
-var OptionsContainer = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject2());
-var OptionLink = Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])(react_router_dom__WEBPACK_IMPORTED_MODULE_0__["Link"])(_templateObject3());
-var OptionDiv = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject4());
+var LogoToHomeContainer = Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])(react_router_dom__WEBPACK_IMPORTED_MODULE_0__["Link"])(_templateObject2());
+var OptionsContainer = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject3());
+var OptionLink = Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])(react_router_dom__WEBPACK_IMPORTED_MODULE_0__["Link"])(_templateObject4());
+var OptionDiv = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject5());
 
 /***/ }),
 
@@ -78257,7 +78271,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var HomePage = function HomePage() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Hello React");
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "This is a HomePage");
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (HomePage);

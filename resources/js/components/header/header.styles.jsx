@@ -8,6 +8,17 @@ export const HeaderContainer = styled.div`
     justify-content: space-between
 `;
 
+export const LogoToHomeContainer = styled(Link)`
+  height: 100%;
+  width: 70px;
+  background-size: cover;
+  background-image: url("/images/header/toHome.png");
+
+  :hover{
+    background-image: url("/images/header/toHomeHover.png");
+  }
+`;
+
 export const OptionsContainer = styled.div`
   width: 100%;
   height: 100%;

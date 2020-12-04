@@ -8,11 +8,13 @@ import {
     HeaderContainer,
     OptionsContainer,
     OptionLink,
-    OptionDiv
+    OptionDiv,
+    LogoToHomeContainer
 } from "./header.styles";
 
 const Header = ({ user, signOut }) => (
     <HeaderContainer>
+        <LogoToHomeContainer to="/"/>
         <OptionsContainer>
             {user ? (
                 <OptionLink as="div" onClick={signOut}>SIGN OUT</OptionLink>
