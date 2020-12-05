@@ -1,15 +1,15 @@
 import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 //component
 import FormInput from "../../components/form-input/form-input.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
 //redux
 import { signUpStart } from "../../redux/user/user.actions";
-//CSS
-import "./sign-up.styles.scss";
-import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { selectSignUpError } from "../../redux/user/user.selector";
+import { selectSignUpError } from "../../redux/error/error.selector";
+//CSS
+import "./sign-up.styles.scss";
 
 const SignUp = ({ signUpStart, errors }) => {
     //入力値のuseState

@@ -7,18 +7,4 @@ export const selectCurrentUser = createSelector(
     [selectUser],
     user => user.currentUser
 );
-//登録時のerror情報を取得する
-export const selectSignUpError = createSelector(
-    [selectUser],
-    user => user.signUpError
-);
-//ログイン時のerror情報を取得する
-export const selectSignInError = createSelector(
-    [selectUser],
-    user => user.signInError
-);
-//読み込み情報を確認する
-export const selectLoading = createSelector(
-    [selectUser],
-    user => user.isLoading
-);
+

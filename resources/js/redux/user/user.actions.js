@@ -21,21 +21,11 @@ export const signUpSuccess = ({ email, password }) => ({
     type: UserActionTypes.SIGN_UP_SUCCESS,
     payload: { email, password }
 });
-//ユーザー登録失敗
-export const signUpFailure = errors => ({
-    type: UserActionTypes.SIGN_UP_FAILURE,
-    payload: errors
-});
 
 //ログイン成功時
 export const signInSuccess = user => ({
     type: UserActionTypes.SIGN_IN_SUCCESS,
     payload: user.data
-});
-//ログイン失敗時
-export const signInFailure = errors => ({
-    type: UserActionTypes.SIGN_IN_FAILURE,
-    payload: errors
 });
 
 //ログアウト開始

@@ -6,10 +6,10 @@ import FormInput from "../../components/form-input/form-input.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
 //redux
 import { signInStart } from "../../redux/user/user.actions";
+import { createStructuredSelector } from "reselect";
+import { selectSignInError } from "../../redux/error/error.selector";
 //CSS
 import "./sign-in.styles.scss";
-import { createStructuredSelector } from "reselect";
-import { selectSignInError } from "../../redux/user/user.selector";
 
 
 const SignIn = ({ signInStart, errors }) => {
