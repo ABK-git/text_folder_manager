@@ -17,3 +17,8 @@ export const selectSignInError = createSelector(
     [selectUser],
     user => user.signInError
 );
+//読み込み情報を確認する
+export const selectLoading = createSelector(
+    [selectUser],
+    user => user.isLoading
+);

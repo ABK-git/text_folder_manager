@@ -4,15 +4,20 @@ import ReactDOM from "react-dom";
 import "./Index.css";
 import Home from "./home";
 import { BrowserRouter } from "react-router-dom";
-import { store } from "./redux/store";
+//Redux
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./redux/store";
 import { Provider } from "react-redux";
 
-store.subscribe(() => console.log(store.getState()));
+//redux-loggerを使わない場合(actionの結果のみでいい場合)
+//store.subscribe(() => console.log(store.getState()));
 
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-            <Home />
+            <PersistGate persistor={persistor}>
+                <Home />
+            </PersistGate>
         </BrowserRouter>
     </Provider>,
     document.getElementById("root")
