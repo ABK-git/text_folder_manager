@@ -40,8 +40,6 @@ export function* getUser(email, password) {
 
     //情報取得成功の場合
     if (errors === null) {
-        //エラーメッセージの削除
-        yield put(errorClear());
         //ログイン成功
         yield put(signInSuccess(user));
     } else {
@@ -62,8 +60,6 @@ export function* signUp({ payload: { userCredentials } }) {
     });
     //登録に成功した場合
     if (errors === null) {
-        //エラーメッセージの削除
-        yield put(errorClear());
         //登録成功
         yield put(signUpSuccess({ email, password }));
     } else {
