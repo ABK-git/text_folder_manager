@@ -6,17 +6,28 @@ import { createStructuredSelector } from "reselect";
 import { errorClear } from "../redux/error/error.actions";
 
 //ログイン時ホームにリダイレクトするRoute
-const SignOutRoute = ({ component: Component, user, errorClear, ...rest }) => {
+const PrivateUserRoot = ({
+    component: Component,
+    location,
+    user,
+    errorClear,
+    ...rest
+}) => {
     //画面移動時にエラーを削除する
     useEffect(() => {
         errorClear();
-    })
+    });
 
     return (
         <Route
             {...rest}
             render={props =>
-                user ? <Redirect to={"/"+user.displayName} /> : <Component {...props} />
+                user !== null &&
+                user.displayName === location.pathname.slice(1) ? (
+                    <Component {...props} />
+                ) : (
+                    <Redirect to="/" />
+                )
             }
         />
     );
@@ -30,4 +41,4 @@ const mapDispatchToProps = dispatch => ({
     errorClear: () => dispatch(errorClear())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignOutRoute);
+export default connect(mapStateToProps, mapDispatchToProps)(PrivateUserRoot);

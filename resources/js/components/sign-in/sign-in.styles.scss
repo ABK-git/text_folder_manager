@@ -1,13 +1,15 @@
-.sign-up-message{
+.sign-in-message{
     color: rgba(235, 102, 26, 0.863);
+    text-align: center;
 }
 
-.sign-up{
+.sign-in{
     display: flex;
     flex-direction: column;
+    width: 40vw;
 }
 
-.sign-up-form{
+.sign-in-form{
     text-align: center;
     margin-top: 15px;
 }

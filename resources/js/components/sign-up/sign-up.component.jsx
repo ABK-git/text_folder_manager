@@ -44,7 +44,7 @@ const SignUp = ({ signUpStart, errors }) => {
 
     return (
         <div className="sign-up">
-            <h1 className="sign-up-message">ユーザー情報を登録してください!</h1>
+            <h1 className="sign-up-message">SIGN UP</h1>
             <form className="sign-up-form" onSubmit={handleSubmit}>
                 <FormInput
                     type="text"

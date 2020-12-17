@@ -3,26 +3,20 @@ import { Route, Switch } from "react-router-dom";
 //Header
 import Header from "./components/header/header.component";
 //Page
-import HomePage from "./pages/homepage/homepage.component";
-import SignUp from "./pages/sign-up/sign-up.component";
-import SignIn from "./pages/sign-in/sign-in.component";
-//Route
+import SignInAndSignUp from "./pages/sign_in_and_sign_up/sign_in_and_sign_up";
+import UserPage from "./pages/user_page/user_page.component";
+//Root
 import SignOutRoute from "./route/sign-out-root.component";
-//background
-import { BasicBackground } from "../js/pages/background.styles";
+import PrivateUserRoot from "./route/private_user_root.component";
 
 const Home = () => {
     return (
         <div>
             <Header />
-            <BasicBackground>
-                <Switch>
-                    // デフォルト値
-                    <Route exact path="/" component={HomePage} />
-                    <SignOutRoute path="/signup" component={SignUp}/>
-                    <SignOutRoute path="/signin" component={SignIn}/>
-                </Switch>
-            </BasicBackground>
+            <Switch>
+                <SignOutRoute exact path="/" component={SignInAndSignUp} />
+                <PrivateUserRoot path="/:user_name" component={UserPage}/>
+            </Switch>
         </div>
     );
 };

@@ -38,7 +38,7 @@ const SignIn = ({ signInStart, errors }) => {
 
     return (
         <div className="sign-in">
-            <h1 className="sign-in-message">ユーザー情報を入力してください!</h1>
+            <h1 className="sign-in-message">SIGN IN</h1>
             <form className="sign-in-form" onSubmit={handleSubmit}>
                 <FormInput
                     type="email"
