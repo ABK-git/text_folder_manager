@@ -1,6 +1,6 @@
 import React from "react";
-
-import "./form-input.styles.scss";
+//style
+import {ErrorMessages} from "./form-input.styles";
 
 const ErrorMessagesContainer = ({ errorMessage }) => (
     <div>
@@ -9,9 +9,9 @@ const ErrorMessagesContainer = ({ errorMessage }) => (
                   .join()
                   .split(",")
                   .map((error, index) => (
-                      <p className="error-messages" key={index}>
+                      <ErrorMessages key={index}>
                           {error}
-                      </p>
+                      </ErrorMessages>
                   ))
             : ""}
     </div>

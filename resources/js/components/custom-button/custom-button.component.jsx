@@ -1,6 +1,7 @@
 import React from "react";
 //CSS
-import './custom-button.styles.scss';
+import { CustomButtonContainer } from "./custom-button.styles";
+
 
 //childrenは受け取った子要素のこと
 /**
@@ -8,7 +9,7 @@ import './custom-button.styles.scss';
  * では、{Hello}を示す
  */
 const CustomButton = ({ children, ...otherProps }) => (
-    <button className="custom-button" {...otherProps}>{children}</button>
+    <CustomButtonContainer {...otherProps}>{children}</CustomButtonContainer>
 );
 
 export default CustomButton;

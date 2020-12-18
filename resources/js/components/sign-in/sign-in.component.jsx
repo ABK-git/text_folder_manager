@@ -9,8 +9,7 @@ import { signInStart } from "../../redux/user/user.actions";
 import { createStructuredSelector } from "reselect";
 import { selectSignInError } from "../../redux/error/error.selector";
 //CSS
-import "./sign-in.styles.scss";
-
+import { SignInContainer, SignInForm, SignInMessage } from "./sign-in.styles";
 
 const SignIn = ({ signInStart, errors }) => {
     //入力値のuseState
@@ -37,9 +36,9 @@ const SignIn = ({ signInStart, errors }) => {
     const { email, password } = userCredentials;
 
     return (
-        <div className="sign-in">
-            <h1 className="sign-in-message">SIGN IN</h1>
-            <form className="sign-in-form" onSubmit={handleSubmit}>
+        <SignInContainer>
+            <SignInMessage>SIGN IN</SignInMessage>
+            <SignInForm onSubmit={handleSubmit}>
                 <FormInput
                     type="email"
                     name="email"
@@ -60,8 +59,8 @@ const SignIn = ({ signInStart, errors }) => {
                 />
 
                 <CustomButton type="submit">ログイン</CustomButton>
-            </form>
-        </div>
+            </SignInForm>
+        </SignInContainer>
     );
 };
 

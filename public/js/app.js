@@ -10130,82 +10130,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./resources/js/components/custom-button/custom-button.styles.scss":
-/*!************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./resources/js/components/custom-button/custom-button.styles.scss ***!
-  \************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".custom-button {\n  margin: 30px auto;\n  font-size: 30px;\n  font-weight: bolder;\n  cursor: pointer;\n  width: 70%;\n  display: inline-block;\n  background-color: #3e3eac;\n}\n.custom-button:hover {\n  border: 1px solid black;\n}", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./resources/js/components/form-input/form-input.styles.scss":
-/*!******************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./resources/js/components/form-input/form-input.styles.scss ***!
-  \******************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".group {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  font-size: 20px;\n  margin-bottom: 13px;\n}\n.group .form-input {\n  width: 40vw;\n  background: none;\n  background-color: #faf5f6;\n}\n.group .form-input-label {\n  font-weight: bold;\n  color: #07fc6d;\n}\n.group .error-messages {\n  color: #f80e0e;\n  margin-bottom: 0;\n}", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./resources/js/components/sign-in/sign-in.styles.scss":
-/*!************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./resources/js/components/sign-in/sign-in.styles.scss ***!
-  \************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".sign-in-message {\n  color: rgba(235, 102, 26, 0.863);\n  text-align: center;\n}\n\n.sign-in {\n  display: flex;\n  flex-direction: column;\n  width: 40vw;\n}\n\n.sign-in-form {\n  text-align: center;\n  margin-top: 15px;\n}", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./resources/js/components/sign-up/sign-up.styles.scss":
-/*!************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./resources/js/components/sign-up/sign-up.styles.scss ***!
-  \************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".sign-up-message {\n  text-align: center;\n  color: rgba(235, 102, 26, 0.863);\n}\n\n.sign-up {\n  display: flex;\n  flex-direction: column;\n  width: 40vw;\n}\n\n.sign-up-form {\n  text-align: center;\n  margin-top: 15px;\n}", ""]);
-
-// exports
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/Index.css":
 /*!****************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./resources/js/Index.css ***!
@@ -78947,10 +78871,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _custom_button_styles_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./custom-button.styles.scss */ "./resources/js/components/custom-button/custom-button.styles.scss");
-/* harmony import */ var _custom_button_styles_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_custom_button_styles_scss__WEBPACK_IMPORTED_MODULE_1__);
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
+/* harmony import */ var _custom_button_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./custom-button.styles */ "./resources/js/components/custom-button/custom-button.styles.jsx");
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
@@ -78968,42 +78889,38 @@ var CustomButton = function CustomButton(_ref) {
   var children = _ref.children,
       otherProps = _objectWithoutProperties(_ref, ["children"]);
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", _extends({
-    className: "custom-button"
-  }, otherProps), children);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_styles__WEBPACK_IMPORTED_MODULE_1__["CustomButtonContainer"], otherProps, children);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (CustomButton);
 
 /***/ }),
 
-/***/ "./resources/js/components/custom-button/custom-button.styles.scss":
-/*!*************************************************************************!*\
-  !*** ./resources/js/components/custom-button/custom-button.styles.scss ***!
-  \*************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./resources/js/components/custom-button/custom-button.styles.jsx":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/custom-button/custom-button.styles.jsx ***!
+  \************************************************************************/
+/*! exports provided: CustomButtonContainer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomButtonContainer", function() { return CustomButtonContainer; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    margin: 30px auto;\n    font-size: 30px;\n    font-weight: bolder;\n    cursor: pointer;\n    width: 70%;\n    display: inline-block;\n    background-color: rgb(62, 62, 172);\n\n    &:hover {\n        border: 1px solid black;\n    }\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader!../../../../node_modules/postcss-loader/src??ref--7-2!../../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!./custom-button.styles.scss */ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./resources/js/components/custom-button/custom-button.styles.scss");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
+var CustomButtonContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject());
 
 /***/ }),
 
@@ -79018,8 +78935,8 @@ if(false) {}
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _form_input_styles_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./form-input.styles.scss */ "./resources/js/components/form-input/form-input.styles.scss");
-/* harmony import */ var _form_input_styles_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_form_input_styles_scss__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _form_input_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./form-input.styles */ "./resources/js/components/form-input/form-input.styles.jsx");
+ //style
 
 
 
@@ -79028,8 +78945,7 @@ var ErrorMessagesContainer = function ErrorMessagesContainer(_ref) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, errorMessage ? Object.values({
     errorMessage: errorMessage
   }).join().split(",").map(function (error, index) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "error-messages",
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form_input_styles__WEBPACK_IMPORTED_MODULE_1__["ErrorMessages"], {
       key: index
     }, error);
   }) : "");
@@ -79051,8 +78967,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _error_messages_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./error-messages.container */ "./resources/js/components/form-input/error-messages.container.jsx");
-/* harmony import */ var _form_input_styles_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./form-input.styles.scss */ "./resources/js/components/form-input/form-input.styles.scss");
-/* harmony import */ var _form_input_styles_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_form_input_styles_scss__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _form_input_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./form-input.styles */ "./resources/js/components/form-input/form-input.styles.jsx");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
@@ -79072,12 +78987,7 @@ var FormInput = function FormInput(_ref) {
       errorMessage = _ref.errorMessage,
       otherProps = _objectWithoutProperties(_ref, ["handleChange", "label", "value", "errorMessage"]);
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "group"
-  }, label ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    className: "form-input-label"
-  }, label) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", _extends({
-    className: "form-input",
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form_input_styles__WEBPACK_IMPORTED_MODULE_2__["GroupContainer"], null, label ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form_input_styles__WEBPACK_IMPORTED_MODULE_2__["FormInputLabel"], null, label) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form_input_styles__WEBPACK_IMPORTED_MODULE_2__["FormInputContainer"], _extends({
     onChange: handleChange
   }, otherProps)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_error_messages_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
     errorMessage: errorMessage
@@ -79088,33 +78998,67 @@ var FormInput = function FormInput(_ref) {
 
 /***/ }),
 
-/***/ "./resources/js/components/form-input/form-input.styles.scss":
-/*!*******************************************************************!*\
-  !*** ./resources/js/components/form-input/form-input.styles.scss ***!
-  \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./resources/js/components/form-input/form-input.styles.jsx":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/form-input/form-input.styles.jsx ***!
+  \******************************************************************/
+/*! exports provided: GroupContainer, FormInputContainer, FormInputLabel, ErrorMessages */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GroupContainer", function() { return GroupContainer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormInputContainer", function() { return FormInputContainer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormInputLabel", function() { return FormInputLabel; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ErrorMessages", function() { return ErrorMessages; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\n    color: rgb(248, 14, 14);\n    margin-bottom: 0;\n"]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n    font-weight: bold;\n    color: rgb(7, 252, 109);\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n    width: 100%;\n    font-weight: bold;\n    color: rgb(7, 252, 109);\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    font-size: 20px;\n    margin-bottom: 13px;\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader!../../../../node_modules/postcss-loader/src??ref--7-2!../../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!./form-input.styles.scss */ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./resources/js/components/form-input/form-input.styles.scss");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
+var GroupContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject());
+var FormInputContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].input(_templateObject2());
+var FormInputLabel = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].label(_templateObject3());
+var ErrorMessages = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject4());
 
 /***/ }),
 
@@ -79268,8 +79212,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _redux_user_user_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../redux/user/user.actions */ "./resources/js/redux/user/user.actions.js");
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
 /* harmony import */ var _redux_error_error_selector__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../redux/error/error.selector */ "./resources/js/redux/error/error.selector.js");
-/* harmony import */ var _sign_in_styles_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./sign-in.styles.scss */ "./resources/js/components/sign-in/sign-in.styles.scss");
-/* harmony import */ var _sign_in_styles_scss__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_sign_in_styles_scss__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _sign_in_styles__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./sign-in.styles */ "./resources/js/components/sign-in/sign-in.styles.jsx");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -79358,12 +79301,7 @@ var SignIn = function SignIn(_ref) {
 
   var email = userCredentials.email,
       password = userCredentials.password;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "sign-in"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", {
-    className: "sign-in-message"
-  }, "SIGN IN"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
-    className: "sign-in-form",
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_sign_in_styles__WEBPACK_IMPORTED_MODULE_9__["SignInContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_sign_in_styles__WEBPACK_IMPORTED_MODULE_9__["SignInMessage"], null, "SIGN IN"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_sign_in_styles__WEBPACK_IMPORTED_MODULE_9__["SignInForm"], {
     onSubmit: handleSubmit
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
     type: "email",
@@ -79402,33 +79340,55 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
-/***/ "./resources/js/components/sign-in/sign-in.styles.scss":
-/*!*************************************************************!*\
-  !*** ./resources/js/components/sign-in/sign-in.styles.scss ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./resources/js/components/sign-in/sign-in.styles.jsx":
+/*!************************************************************!*\
+  !*** ./resources/js/components/sign-in/sign-in.styles.jsx ***!
+  \************************************************************/
+/*! exports provided: SignInContainer, SignInMessage, SignInForm */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignInContainer", function() { return SignInContainer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignInMessage", function() { return SignInMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignInForm", function() { return SignInForm; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n    text-align: center;\n    margin-top: 15px;\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n    color: rgba(235, 102, 26, 0.863);\n    text-align: center;\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    margin-left: 40px;\n    width: 40vw;\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader!../../../../node_modules/postcss-loader/src??ref--7-2!../../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!./sign-in.styles.scss */ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./resources/js/components/sign-in/sign-in.styles.scss");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
+var SignInContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject());
+var SignInMessage = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].h1(_templateObject2());
+var SignInForm = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].form(_templateObject3());
 
 /***/ }),
 
@@ -79452,8 +79412,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
 /* harmony import */ var _redux_error_error_selector__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../redux/error/error.selector */ "./resources/js/redux/error/error.selector.js");
-/* harmony import */ var _sign_up_styles_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./sign-up.styles.scss */ "./resources/js/components/sign-up/sign-up.styles.scss");
-/* harmony import */ var _sign_up_styles_scss__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_sign_up_styles_scss__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _sign_up_styles__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./sign-up.styles */ "./resources/js/components/sign-up/sign-up.styles.jsx");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -79546,12 +79505,7 @@ var SignUp = function SignUp(_ref) {
       email = userCredentials.email,
       password = userCredentials.password,
       password_confirmation = userCredentials.password_confirmation;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "sign-up"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", {
-    className: "sign-up-message"
-  }, "SIGN UP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
-    className: "sign-up-form",
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_sign_up_styles__WEBPACK_IMPORTED_MODULE_9__["SignUpContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_sign_up_styles__WEBPACK_IMPORTED_MODULE_9__["SignUpMessage"], null, "SIGN UP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_sign_up_styles__WEBPACK_IMPORTED_MODULE_9__["SignUpForm"], {
     onSubmit: handleSubmit
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: "text",
@@ -79605,33 +79559,55 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
-/***/ "./resources/js/components/sign-up/sign-up.styles.scss":
-/*!*************************************************************!*\
-  !*** ./resources/js/components/sign-up/sign-up.styles.scss ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./resources/js/components/sign-up/sign-up.styles.jsx":
+/*!************************************************************!*\
+  !*** ./resources/js/components/sign-up/sign-up.styles.jsx ***!
+  \************************************************************/
+/*! exports provided: SignUpContainer, SignUpMessage, SignUpForm */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignUpContainer", function() { return SignUpContainer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignUpMessage", function() { return SignUpMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignUpForm", function() { return SignUpForm; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n    text-align: center;\n    margin-top: 15px;\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n    text-align: center;\n    color: rgba(235, 102, 26, 0.863);\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    width: 40vw;\n    margin-right: 40px;\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader!../../../../node_modules/postcss-loader/src??ref--7-2!../../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!./sign-up.styles.scss */ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./resources/js/components/sign-up/sign-up.styles.scss");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
+var SignUpContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject());
+var SignUpMessage = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].h1(_templateObject2());
+var SignUpForm = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].form(_templateObject3());
 
 /***/ }),
 

@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectSignUpError } from "../../redux/error/error.selector";
 //CSS
-import "./sign-up.styles.scss";
+import { SignUpForm, SignUpMessage, SignUpContainer } from "./sign-up.styles";
 
 const SignUp = ({ signUpStart, errors }) => {
     //入力値のuseState
@@ -43,9 +43,9 @@ const SignUp = ({ signUpStart, errors }) => {
     } = userCredentials;
 
     return (
-        <div className="sign-up">
-            <h1 className="sign-up-message">SIGN UP</h1>
-            <form className="sign-up-form" onSubmit={handleSubmit}>
+        <SignUpContainer>
+            <SignUpMessage>SIGN UP</SignUpMessage>
+            <SignUpForm onSubmit={handleSubmit}>
                 <FormInput
                     type="text"
                     name="displayName"
@@ -82,8 +82,8 @@ const SignUp = ({ signUpStart, errors }) => {
                     required
                 />
                 <CustomButton type="submit">登録</CustomButton>
-            </form>
-        </div>
+            </SignUpForm>
+        </SignUpContainer>
     );
 };
 

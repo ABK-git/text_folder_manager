@@ -1,4 +1,6 @@
-.custom-button{
+import styled from "styled-components";
+
+export const CustomButtonContainer = styled.button`
     margin: 30px auto;
     font-size: 30px;
     font-weight: bolder;
@@ -6,8 +8,8 @@
     width: 70%;
     display: inline-block;
     background-color: rgb(62, 62, 172);
-    
-    &:hover{
+
+    &:hover {
         border: 1px solid black;
     }
-}
+`;
