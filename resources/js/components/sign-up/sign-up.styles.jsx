@@ -5,6 +5,7 @@ export const SignUpContainer = styled.div`
     flex-direction: column;
     width: 40vw;
     margin-right: 40px;
+    margin-left: 20px;
 `;
 
 export const SignUpMessage = styled.h1`
