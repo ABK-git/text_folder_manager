@@ -30,10 +30,10 @@ export const OptionsContainer = styled.div`
 export const OptionLink = styled(Link)`
   padding: 10px 15px;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 24px;
   color: red;
   cursor: pointer;
-  white-space: nowrap
+  white-space: nowrap;
 `;
 
 export const OptionDiv = styled.div`

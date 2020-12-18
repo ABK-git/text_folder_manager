@@ -79141,7 +79141,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  padding: 10px 15px;\n  font-weight: bold;\n  font-size: 20px;\n  color: red;\n  cursor: pointer;\n  white-space: nowrap\n"]);
+  var data = _taggedTemplateLiteral(["\n  padding: 10px 15px;\n  font-weight: bold;\n  font-size: 24px;\n  color: red;\n  cursor: pointer;\n  white-space: nowrap;\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
