@@ -81,7 +81,7 @@ const SignUp = ({ signUpStart, errors }) => {
                     label="確認パスワード"
                     required
                 />
-                <CustomButton type="submit">登録</CustomButton>
+                <CustomButton type="submit" design="auth">登録</CustomButton>
             </SignUpForm>
         </SignUpContainer>
     );

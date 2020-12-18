@@ -1,15 +1,56 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const CustomButtonContainer = styled.button`
+const signInAndSignUpStyles = css`
     margin: 30px auto;
-    font-size: 30px;
-    font-weight: bolder;
-    cursor: pointer;
-    width: 70%;
-    display: inline-block;
     background-color: rgb(62, 62, 172);
+    width: 70%;
 
     &:hover {
-        border: 1px solid black;
+        background-color: #357ae8;
+        border: none;
     }
+`;
+
+const createText = css`
+    background-color: #d41e3d;
+    border: none;
+    margin-right: 10px;
+    height: 50px;
+`;
+
+const createFolder = css`
+    background-color: #FA7855;
+    border: none;
+    margin-right: 10px;
+    height: 50px;
+`;
+
+const getButtonStyles = props => {
+
+    switch(props.design){
+        case "auth":
+            return signInAndSignUpStyles;
+
+        case "createText":
+            return createText;
+
+        case "createFolder":
+            return createFolder;
+
+        default:
+            return "";
+    }
+};
+
+export const CustomButton = styled.button`
+    background-color: #d41e3d;
+`;
+
+export const CustomButtonContainer = styled.button`
+    font-size: 26px;
+    font-weight: bolder;
+    cursor: pointer;
+    display: inline-block;
+
+    ${getButtonStyles}
 `;

@@ -78900,15 +78900,56 @@ var CustomButton = function CustomButton(_ref) {
 /*!************************************************************************!*\
   !*** ./resources/js/components/custom-button/custom-button.styles.jsx ***!
   \************************************************************************/
-/*! exports provided: CustomButtonContainer */
+/*! exports provided: CustomButton, CustomButtonContainer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomButton", function() { return CustomButton; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomButtonContainer", function() { return CustomButtonContainer; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject5() {
+  var data = _taggedTemplateLiteral(["\n    font-size: 26px;\n    font-weight: bolder;\n    cursor: pointer;\n    display: inline-block;\n\n    ", "\n"]);
+
+  _templateObject5 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\n    background-color: #d41e3d;\n"]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n    background-color: #FA7855;\n    border: none;\n    margin-right: 10px;\n    height: 50px;\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n    background-color: #d41e3d;\n    border: none;\n    margin-right: 10px;\n    height: 50px;\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n    margin: 30px auto;\n    font-size: 30px;\n    font-weight: bolder;\n    cursor: pointer;\n    width: 70%;\n    display: inline-block;\n    background-color: rgb(62, 62, 172);\n\n    &:hover {\n        border: 1px solid black;\n    }\n"]);
+  var data = _taggedTemplateLiteral(["\n    margin: 30px auto;\n    background-color: rgb(62, 62, 172);\n    width: 70%;\n\n    &:hover {\n        background-color: #357ae8;\n        border: none;\n    }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -78920,7 +78961,28 @@ function _templateObject() {
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 
-var CustomButtonContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject());
+var signInAndSignUpStyles = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject());
+var createText = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject2());
+var createFolder = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject3());
+
+var getButtonStyles = function getButtonStyles(props) {
+  switch (props.design) {
+    case "auth":
+      return signInAndSignUpStyles;
+
+    case "createText":
+      return createText;
+
+    case "createFolder":
+      return createFolder;
+
+    default:
+      return "";
+  }
+};
+
+var CustomButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject4());
+var CustomButtonContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject5(), getButtonStyles);
 
 /***/ }),
 
@@ -79320,7 +79382,8 @@ var SignIn = function SignIn(_ref) {
     errorMessage: errors.password,
     required: true
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    type: "submit"
+    type: "submit",
+    design: "auth"
   }, "\u30ED\u30B0\u30A4\u30F3")));
 };
 
@@ -79374,7 +79437,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    margin-left: 40px;\n    width: 40vw;\n"]);
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    margin-left: 40px;\n    margin-right: 20px;\n    width: 40vw;\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -79539,7 +79602,8 @@ var SignUp = function SignUp(_ref) {
     label: "\u78BA\u8A8D\u30D1\u30B9\u30EF\u30FC\u30C9",
     required: true
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    type: "submit"
+    type: "submit",
+    design: "auth"
   }, "\u767B\u9332")));
 };
 
@@ -79593,7 +79657,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    width: 40vw;\n    margin-right: 40px;\n"]);
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    width: 40vw;\n    margin-right: 40px;\n    margin-left: 20px;\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -79697,15 +79761,26 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEB
 /*!**************************************************!*\
   !*** ./resources/js/pages/background.styles.jsx ***!
   \**************************************************/
-/*! exports provided: BasicBackground */
+/*! exports provided: SpaceBetweenBackground, BasicBackground */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SpaceBetweenBackground", function() { return SpaceBetweenBackground; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BasicBackground", function() { return BasicBackground; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    height: calc(100vh - 70px);\n    width: 100vw;\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n    display:flex;\n    justify-content: space-between;\n    height: calc(100vh - 70px);\n    width: 100vw;\n"]);
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    justify-content: space-between;\n    height: calc(100vh - 70px);\n    width: 100vw;\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -79717,7 +79792,8 @@ function _templateObject() {
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 
-var BasicBackground = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject());
+var SpaceBetweenBackground = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject());
+var BasicBackground = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2());
 
 /***/ }),
 
@@ -79761,13 +79837,53 @@ var SignInAndSignUp = function SignInAndSignUp() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
+/* harmony import */ var _background_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../background.styles */ "./resources/js/pages/background.styles.jsx");
+/* harmony import */ var _user_page_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./user_page.styles */ "./resources/js/pages/user_page/user_page.styles.jsx");
+
+ //背景
+
+
 
 
 var UserPage = function UserPage() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "This is User Page");
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_2__["BasicBackground"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_user_page_styles__WEBPACK_IMPORTED_MODULE_3__["CreateFolderAndTextContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    design: "createText"
+  }, "Text"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    design: "createFolder"
+  }, "Folder")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (UserPage);
+
+/***/ }),
+
+/***/ "./resources/js/pages/user_page/user_page.styles.jsx":
+/*!***********************************************************!*\
+  !*** ./resources/js/pages/user_page/user_page.styles.jsx ***!
+  \***********************************************************/
+/*! exports provided: CreateFolderAndTextContainer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateFolderAndTextContainer", function() { return CreateFolderAndTextContainer; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    margin-right: 10px;\n    justify-content: flex-end;\n    width: 100%;\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+ //画面右上の文章作成とフォルダ作成ボタンをまとめる
+
+var CreateFolderAndTextContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject());
 
 /***/ }),
 

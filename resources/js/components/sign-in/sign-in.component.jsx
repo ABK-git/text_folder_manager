@@ -58,7 +58,7 @@ const SignIn = ({ signInStart, errors }) => {
                     required
                 />
 
-                <CustomButton type="submit">ログイン</CustomButton>
+                <CustomButton type="submit" design="auth">ログイン</CustomButton>
             </SignInForm>
         </SignInContainer>
     );
