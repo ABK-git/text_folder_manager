@@ -15,6 +15,6 @@ export const FolderDiv = styled.div`
 `;
 
 //FormとButtonをまとめる
-export const FormAndButton = styled.div`
+export const FormAndButton = styled.form`
   display: flex;
 `;
