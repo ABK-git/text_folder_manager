@@ -21,8 +21,13 @@ const createText = css`
 const createFolder = css`
     background-color: #FA7855;
     border: none;
-    margin-right: 10px;
     height: 50px;
+`;
+
+const createFolderSubmit = css`
+  font-size: 16px;
+  background-color: #F1A1F5;
+  height: 100%;
 `;
 
 const getButtonStyles = props => {
@@ -36,6 +41,9 @@ const getButtonStyles = props => {
 
         case "createFolder":
             return createFolder;
+
+        case "createFolderSubmit":
+            return createFolderSubmit;
 
         default:
             return "";
@@ -53,4 +61,9 @@ export const CustomButtonContainer = styled.button`
     display: inline-block;
 
     ${getButtonStyles}
+`;
+
+export const FolderButtonContainer = styled.div`
+   display: flex;
+   flex-direction: column;
 `;
