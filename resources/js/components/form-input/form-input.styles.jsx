@@ -5,7 +5,7 @@ export const GroupContainer = styled.div`
     flex-direction: column;
     align-items: center;
     font-size: 20px;
-    margin-bottom: 13px;
+    //margin-bottom: 13px;
 `;
 
 export const FormInputContainer = styled.input`
@@ -17,9 +17,9 @@ export const FormInputContainer = styled.input`
 export const FormInputLabel = styled.label`
     font-weight: bold;
     color: rgb(7, 252, 109);
+    margin-top: 13px;
 `;
 
 export const ErrorMessages = styled.div`
     color: rgb(248, 14, 14);
-    margin-bottom: 0;
 `;
