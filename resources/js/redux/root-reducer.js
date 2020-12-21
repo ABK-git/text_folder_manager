@@ -1,21 +1,23 @@
 const { combineReducers } = require("redux");
 //reducer
-import userReducer from './user/user.reducer';
-import { persistReducer } from 'redux-persist';
-import errorReducer from './error/error.reducer';
+import userReducer from "./user/user.reducer";
+import { persistReducer } from "redux-persist";
+import errorReducer from "./error/error.reducer";
+import folderReducer from "./folder/folder.reducer";
 //storage
-import storage from 'redux-persist/lib/storage';
+import storage from "redux-persist/lib/storage";
+
 
 const persistConfig = {
-    key: 'root',
+    key: "root",
     storage,
-    whitelist: ['user']
-}
+    whitelist: ["user"]
+};
 
 const rootReducer = combineReducers({
     user: userReducer,
-    error: errorReducer
+    error: errorReducer,
+    folder: folderReducer
 });
 
 export default persistReducer(persistConfig, rootReducer);
-

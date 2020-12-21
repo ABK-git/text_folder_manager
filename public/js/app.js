@@ -79023,9 +79023,17 @@ var FolderButtonContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["defa
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
-/* harmony import */ var _form_input_form_input_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../form-input/form-input.component */ "./resources/js/components/form-input/form-input.component.jsx");
-/* harmony import */ var _folder_and_text_buttons_styles_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./folder-and-text-buttons.styles.jsx */ "./resources/js/components/folder-and-text-buttons/folder-and-text-buttons.styles.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_folder_folder_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../redux/folder/folder.actions */ "./resources/js/redux/folder/folder.actions.js");
+/* harmony import */ var _custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
+/* harmony import */ var _form_input_form_input_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../form-input/form-input.component */ "./resources/js/components/form-input/form-input.component.jsx");
+/* harmony import */ var _folder_and_text_buttons_styles_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./folder-and-text-buttons.styles.jsx */ "./resources/js/components/folder-and-text-buttons/folder-and-text-buttons.styles.jsx");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -79043,36 +79051,71 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var FolderAndTextButtons = function FolderAndTextButtons() {
+
+
+var FolderAndTextButtons = function FolderAndTextButtons(_ref) {
+  var createFolderStart = _ref.createFolderStart;
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
       isDisplay = _useState2[0],
       setIsDisplay = _useState2[1];
 
-  var handleChange = function handleChange() {
+  var handleClick = function handleClick() {
     setIsDisplay(!isDisplay);
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_folder_and_text_buttons_styles_jsx__WEBPACK_IMPORTED_MODULE_3__["CreateFolderAndTextContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    folder_name: ""
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      folderCredentials = _useState4[0],
+      setFolderCredentials = _useState4[1];
+
+  var handleChange = function handleChange(event) {
+    var _event$target = event.target,
+        value = _event$target.value,
+        name = _event$target.name;
+    setFolderCredentials(_objectSpread(_objectSpread({}, folderCredentials), {}, _defineProperty({}, name, value)));
+    console.log(folderCredentials.folder_name);
+  };
+
+  var handleSubmit = function handleSubmit(event) {
+    event.preventDefault();
+    console.log("handleSubmit");
+    createFolderStart(folderCredentials);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_folder_and_text_buttons_styles_jsx__WEBPACK_IMPORTED_MODULE_5__["CreateFolderAndTextContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
     design: "createText"
-  }, "Text"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_folder_and_text_buttons_styles_jsx__WEBPACK_IMPORTED_MODULE_3__["FolderDiv"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, "Text"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_folder_and_text_buttons_styles_jsx__WEBPACK_IMPORTED_MODULE_5__["FolderDiv"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
     design: "createFolder",
-    onClick: handleChange
-  }, "Folder"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_folder_and_text_buttons_styles_jsx__WEBPACK_IMPORTED_MODULE_3__["FormAndButton"], {
+    onClick: handleClick
+  }, "Folder"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_folder_and_text_buttons_styles_jsx__WEBPACK_IMPORTED_MODULE_5__["FormAndButton"], {
+    onSubmit: handleSubmit,
     style: {
       display: isDisplay ? "" : "none"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
     type: "text",
     name: "folder_name",
+    handleChange: handleChange,
     required: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: "text",
     design: "createFolderSubmit"
   }, "\u4F5C\u6210"))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (FolderAndTextButtons);
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    createFolderStart: function createFolderStart(folderCredentials) {
+      return dispatch(Object(_redux_folder_folder_actions__WEBPACK_IMPORTED_MODULE_2__["createFolderStart"])(folderCredentials));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(null, mapDispatchToProps)(FolderAndTextButtons));
 
 /***/ }),
 
@@ -79127,7 +79170,7 @@ var CreateFolderAndTextContainer = styled_components__WEBPACK_IMPORTED_MODULE_0_
 
 var FolderDiv = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2()); //FormとButtonをまとめる
 
-var FormAndButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3());
+var FormAndButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].form(_templateObject3());
 
 /***/ }),
 
@@ -80138,6 +80181,146 @@ var ErrorTypes = {
 
 /***/ }),
 
+/***/ "./resources/js/redux/folder/folder.actions.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/redux/folder/folder.actions.js ***!
+  \*****************************************************/
+/*! exports provided: createFolderStart */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFolderStart", function() { return createFolderStart; });
+/* harmony import */ var _folder_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./folder.types */ "./resources/js/redux/folder/folder.types.js");
+
+var createFolderStart = function createFolderStart(folderCredentials) {
+  return {
+    type: _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].CREATE_FOLDER,
+    payload: folderCredentials
+  };
+};
+
+/***/ }),
+
+/***/ "./resources/js/redux/folder/folder.reducer.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/redux/folder/folder.reducer.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var INITIAL_STATE = {
+  folders: []
+};
+
+var folderReducer = function folderReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : INITIAL_STATE;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (folderReducer);
+
+/***/ }),
+
+/***/ "./resources/js/redux/folder/folder.sagas.js":
+/*!***************************************************!*\
+  !*** ./resources/js/redux/folder/folder.sagas.js ***!
+  \***************************************************/
+/*! exports provided: createFolder, onCreateFolder, folderSagas */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFolder", function() { return createFolder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onCreateFolder", function() { return onCreateFolder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "folderSagas", function() { return folderSagas; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-saga/effects */ "./node_modules/redux-saga/dist/redux-saga-effects-npm-proxy.esm.js");
+/* harmony import */ var _folder_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./folder.types */ "./resources/js/redux/folder/folder.types.js");
+
+
+var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(createFolder),
+    _marked2 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(onCreateFolder),
+    _marked3 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(folderSagas);
+
+
+
+function createFolder(_ref) {
+  var folderCredentials, folder_name;
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function createFolder$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          folderCredentials = _ref.payload;
+          folder_name = folderCredentials.folder_name;
+          console.log("this is function");
+          console.log(folder_name);
+
+        case 4:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, _marked);
+}
+function onCreateFolder() {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function onCreateFolder$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          console.log("onCreate");
+          _context2.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_folder_types__WEBPACK_IMPORTED_MODULE_2__["default"].CREATE_FOLDER, createFolder);
+
+        case 3:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  }, _marked2);
+}
+function folderSagas() {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function folderSagas$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(onCreateFolder)]);
+
+        case 2:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  }, _marked3);
+}
+
+/***/ }),
+
+/***/ "./resources/js/redux/folder/folder.types.js":
+/*!***************************************************!*\
+  !*** ./resources/js/redux/folder/folder.types.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var FolderActionTypes = {
+  CREATE_FOLDER: "CREATE_FOLDER"
+};
+/* harmony default export */ __webpack_exports__["default"] = (FolderActionTypes);
+
+/***/ }),
+
 /***/ "./resources/js/redux/root-reducer.js":
 /*!********************************************!*\
   !*** ./resources/js/redux/root-reducer.js ***!
@@ -80150,10 +80333,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _user_user_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user/user.reducer */ "./resources/js/redux/user/user.reducer.js");
 /* harmony import */ var redux_persist__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-persist */ "./node_modules/redux-persist/es/index.js");
 /* harmony import */ var _error_error_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./error/error.reducer */ "./resources/js/redux/error/error.reducer.js");
-/* harmony import */ var redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux-persist/lib/storage */ "./node_modules/redux-persist/lib/storage/index.js");
-/* harmony import */ var redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _folder_folder_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./folder/folder.reducer */ "./resources/js/redux/folder/folder.reducer.js");
+/* harmony import */ var redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux-persist/lib/storage */ "./node_modules/redux-persist/lib/storage/index.js");
+/* harmony import */ var redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_4__);
 var _require = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js"),
     combineReducers = _require.combineReducers; //reducer
+
 
 
 
@@ -80162,13 +80347,14 @@ var _require = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.j
 
 
 var persistConfig = {
-  key: 'root',
-  storage: redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_3___default.a,
-  whitelist: ['user']
+  key: "root",
+  storage: redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_4___default.a,
+  whitelist: ["user"]
 };
 var rootReducer = combineReducers({
   user: _user_user_reducer__WEBPACK_IMPORTED_MODULE_0__["default"],
-  error: _error_error_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  error: _error_error_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  folder: _folder_folder_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux_persist__WEBPACK_IMPORTED_MODULE_1__["persistReducer"])(persistConfig, rootReducer));
 
@@ -80188,9 +80374,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-saga/effects */ "./node_modules/redux-saga/dist/redux-saga-effects-npm-proxy.esm.js");
 /* harmony import */ var _user_user_sagas__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user/user.sagas */ "./resources/js/redux/user/user.sagas.js");
+/* harmony import */ var _folder_folder_sagas__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./folder/folder.sagas */ "./resources/js/redux/folder/folder.sagas.js");
 
 
 var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(rootSaga);
+
 
 
 
@@ -80200,7 +80388,7 @@ function rootSaga() {
       switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(_user_user_sagas__WEBPACK_IMPORTED_MODULE_2__["userSagas"])]);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(_user_user_sagas__WEBPACK_IMPORTED_MODULE_2__["userSagas"]), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(_folder_folder_sagas__WEBPACK_IMPORTED_MODULE_3__["folderSagas"])]);
 
         case 2:
         case "end":
