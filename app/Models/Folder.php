@@ -3,13 +3,12 @@
 namespace App\Models;
 
 use Ramsey\Uuid\Uuid;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class Folder extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
 
     //プライマリーキーのカラム名
     protected $primaryKey = 'id';
@@ -29,33 +28,8 @@ class User extends Authenticatable
         $this->attributes['id'] = Uuid::uuid4()->toString();
     }
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'displayName',
-        'email',
-        'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        //'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
+        'title',
+        "user_and_folder_id"
     ];
 }
