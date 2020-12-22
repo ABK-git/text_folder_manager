@@ -16,12 +16,6 @@ export const signUpStart = userCredentials => ({
     payload: userCredentials
 });
 
-//ユーザー登録成功
-export const signUpSuccess = ({ email, password }) => ({
-    type: UserActionTypes.SIGN_UP_SUCCESS,
-    payload: { email, password }
-});
-
 //ログイン成功時
 export const signInSuccess = user => ({
     type: UserActionTypes.SIGN_IN_SUCCESS,
