@@ -80276,11 +80276,10 @@ function onCreateFolder() {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          console.log("onCreate");
-          _context2.next = 3;
+          _context2.next = 2;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_folder_types__WEBPACK_IMPORTED_MODULE_2__["default"].CREATE_FOLDER, createFolder);
 
-        case 3:
+        case 2:
         case "end":
           return _context2.stop();
       }

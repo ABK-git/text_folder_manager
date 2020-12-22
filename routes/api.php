@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\FolderController;
+use App\Http\Controllers\MainOrSubController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,3 +25,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/register',[UserController::class,'store']);
 //ユーザー取得
 Route::post('/show',[UserController::class,'show']);
+
+//MainOrSubを登録
+Route::post('/main_or_sub/create', [MainOrSubController::class, 'store']);
+
+//MainOrSubのupdate
+Route::post('/main_or_sub/update', [MainOrSubController::class, 'update']);
+
+//Folderを登録
+Route::post('/folder/create',[FolderController::class, 'store']);
