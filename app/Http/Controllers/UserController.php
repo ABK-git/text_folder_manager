@@ -12,7 +12,7 @@ class UserController extends Controller
     //Userデータを登録する
     public function store(UserStorePost $request)
     {
-        User::create([
+        return User::create([
             'displayName' => $request->displayName,
             'email' => $request->email,
             //'password' => $request->password

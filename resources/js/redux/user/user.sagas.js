@@ -1,15 +1,8 @@
 //type
 import UserActionTypes from "./user.types";
 //action
-import {
-    signUpSuccess,
-    signInSuccess
-} from "./user.actions";
-import {
-    errorClear,
-    signInFailure,
-    signUpFailure
-} from "../error/error.actions";
+import { signInSuccess } from "./user.actions";
+import { signInFailure, signUpFailure } from "../error/error.actions";
 
 //redux-saga関連
 import { all, put, takeLatest, call } from "redux-saga/effects";
@@ -25,16 +18,16 @@ export function* getUser(email, password) {
     let params = new URLSearchParams();
     params.append("email", email);
     params.append("password", password);
-    
+
     //ユーザー情報の取得
     const user = yield axios.post("/api/show", params).catch(error => {
         errors = error.response.data.errors;
         /**
          * メールアドレスに登録されている
          * パスワードが間違っていた場合
-        **/
-        if(errors === undefined){
-            errors = {"password":[error.response.data.message]};
+         **/
+        if (errors === undefined) {
+            errors = { password: [error.response.data.message] };
         }
     });
 
@@ -49,28 +42,26 @@ export function* getUser(email, password) {
 }
 //ユーザー情報を登録する
 export function* signUp({ payload: { userCredentials } }) {
-    console.log("this is signup");
-    //emailとpasswordをあらかじめ保存しておく
-    const { email, password } = userCredentials;
-    //登録失敗時のエラーメッセージを入れる場所
-    let errors = null;
 
-    yield axios.post("/api/register", userCredentials).catch(error => {
-        errors = error.response.data.errors;
-    });
+    let errors = null;
+    let user = null;
+
+    yield axios
+        .post("/api/register", userCredentials)
+        .then(res => (user = res))
+        .catch(error => {
+            errors = error.response.data.errors;
+        });
+    console.log("signUp");
+    console.log(user);
+
     //登録に成功した場合
-    if (errors === null) {
+    if (errors === null && user !== null) {
         //登録成功
-        yield put(signUpSuccess({ email, password }));
+        yield put(signInSuccess(user));
     } else {
         yield put(signUpFailure(errors));
     }
-}
-
-//ユーザー登録に成功した後に呼び出される
-export function* signInAfterSignUp({ payload: { email, password } }) {
-    //ユーザー取得
-    yield getUser(email, password);
 }
 
 //ログイン時に呼び出される
@@ -89,11 +80,6 @@ export function* onSignUpStart() {
     yield takeLatest(UserActionTypes.SIGN_UP_START, signUp);
 }
 
-//ユーザー登録成功時
-export function* onSignUpSuccess() {
-    yield takeLatest(UserActionTypes.SIGN_UP_SUCCESS, signInAfterSignUp);
-}
-
 /**
  * actionsでUserActionTypes.SIGN_IN_STARTが選択されたとき、
  * signInWithEmaiAndPasswordメソッドを呼び出す
@@ -106,7 +92,6 @@ export function* onSignInStart() {
 export function* userSagas() {
     yield all([
         call(onSignUpStart),
-        call(onSignUpSuccess),
         call(onSignInStart)
     ]);
 }
