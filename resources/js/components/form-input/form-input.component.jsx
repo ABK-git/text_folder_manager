@@ -20,7 +20,7 @@ const FormInput = ({
         ) : (
             ""
         )}
-        <FormInputContainer onChange={handleChange} {...otherProps} />
+        <FormInputContainer onChange={handleChange} value={value ? value : ""} {...otherProps} />
         <ErrorMessagesContainer errorMessage={errorMessage} />
     </GroupContainer>
 );
