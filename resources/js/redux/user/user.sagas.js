@@ -8,6 +8,7 @@ import { signInFailure, signUpFailure } from "../error/error.actions";
 import { all, put, takeLatest, call } from "redux-saga/effects";
 //axios通信
 import axios from "axios";
+import { createFolder } from "../folder/folder.actions";
 
 //ユーザー情報の取得
 export function* getUser(email, password) {
@@ -57,6 +58,15 @@ export function* signUp({ payload: { userCredentials } }) {
 
     //登録に成功した場合
     if (errors === null && user !== null) {
+        //folderデータを作成
+        let folderCredentials = {};
+
+        folderCredentials.user_id = user.data.id;
+        folderCredentials.main_or_sub = true;
+
+        //Folderを作成
+        yield put(createFolder({folderCredentials}));
+
         //登録成功
         yield put(signInSuccess(user));
     } else {
