@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 //component
 import FormInput from "../../components/form-input/form-input.component";
@@ -8,10 +8,11 @@ import { signUpStart } from "../../redux/user/user.actions";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectSignUpError } from "../../redux/error/error.selector";
+import { selectSignUpForm } from "../../redux/form/form.selector";
 //CSS
 import { SignUpForm, SignUpMessage, SignUpContainer } from "./sign-up.styles";
 
-const SignUp = ({ signUpStart, errors }) => {
+const SignUp = ({ signUpForm, signUpStart, errors }) => {
     //入力値のuseState
     const [userCredentials, setUserCredentials] = useState({
         displayName: "",
@@ -34,6 +35,13 @@ const SignUp = ({ signUpStart, errors }) => {
 
         signUpStart({ userCredentials });
     };
+
+    useEffect(() => {
+        if (signUpForm !== []) {
+            setUserCredentials(signUpForm);
+        }
+    }, []);
+
     //useStateからユーザー情報を取り出す
     const {
         displayName,
@@ -81,14 +89,17 @@ const SignUp = ({ signUpStart, errors }) => {
                     label="確認パスワード"
                     required
                 />
-                <CustomButton type="submit" design="auth">登録</CustomButton>
+                <CustomButton type="submit" design="auth">
+                    登録
+                </CustomButton>
             </SignUpForm>
         </SignUpContainer>
     );
 };
 
 const mapStateToProps = createStructuredSelector({
-    errors: selectSignUpError
+    errors: selectSignUpError,
+    signUpForm: selectSignUpForm
 });
 
 const mapDispatchToProps = dispatch => ({

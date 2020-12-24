@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 //component
@@ -8,15 +8,23 @@ import CustomButton from "../../components/custom-button/custom-button.component
 import { signInStart } from "../../redux/user/user.actions";
 import { createStructuredSelector } from "reselect";
 import { selectSignInError } from "../../redux/error/error.selector";
+import { selectSignInForm } from "../../redux/form/form.selector";
+
 //CSS
 import { SignInContainer, SignInForm, SignInMessage } from "./sign-in.styles";
 
-const SignIn = ({ signInStart, errors }) => {
+const SignIn = ({ signInForm, signInStart, errors }) => {
     //入力値のuseState
     const [userCredentials, setUserCredentials] = useState({
         email: "",
         password: ""
     });
+
+    useEffect(() => {
+        if (signInForm !== []) {
+            setUserCredentials(signInForm);
+        }
+    }, []);
 
     //Formに変化が生じた時
     const handleChange = event => {
@@ -30,9 +38,10 @@ const SignIn = ({ signInStart, errors }) => {
     const handleSubmit = async event => {
         event.preventDefault();
 
+        //ログイン処理の開始
         signInStart({ userCredentials });
     };
-    //useStateからユーザー情報を取り出す
+
     const { email, password } = userCredentials;
 
     return (
@@ -58,14 +67,17 @@ const SignIn = ({ signInStart, errors }) => {
                     required
                 />
 
-                <CustomButton type="submit" design="auth">ログイン</CustomButton>
+                <CustomButton type="submit" design="auth">
+                    ログイン
+                </CustomButton>
             </SignInForm>
         </SignInContainer>
     );
 };
 
 const mapStateToProps = createStructuredSelector({
-    errors: selectSignInError
+    errors: selectSignInError,
+    signInForm: selectSignInForm
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -3,7 +3,7 @@ import UserActionTypes from "./user.types";
 //action
 import { signInSuccess } from "./user.actions";
 import { signInFailure, signUpFailure } from "../error/error.actions";
-
+import { setSignUpForm, setSignInForm} from "../form/form.actions";
 //redux-saga関連
 import { all, put, takeLatest, call } from "redux-saga/effects";
 //axios通信
@@ -37,6 +37,13 @@ export function* getUser(email, password) {
         //ログイン成功
         yield put(signInSuccess(user));
     } else {
+        //入力情報をオブジェクトにまとめる
+        let userCredentials = {};
+        userCredentials.email = email;
+        userCredentials.password = password;
+
+        //ログインフォームの入力情報を格納
+        yield put(setSignInForm(userCredentials));
         //エラーログを返す
         yield put(signInFailure(errors));
     }
@@ -53,8 +60,6 @@ export function* signUp({ payload: { userCredentials } }) {
         .catch(error => {
             errors = error.response.data.errors;
         });
-    console.log("signUp");
-    console.log(user);
 
     //登録に成功した場合
     if (errors === null && user !== null) {
@@ -70,6 +75,9 @@ export function* signUp({ payload: { userCredentials } }) {
         //登録成功
         yield put(signInSuccess(user));
     } else {
+        //Reduxに入力情報を格納
+        yield put(setSignUpForm(userCredentials));
+        //Reduxにエラーログを格納
         yield put(signUpFailure(errors));
     }
 }

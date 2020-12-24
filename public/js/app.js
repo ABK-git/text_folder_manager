@@ -79248,7 +79248,8 @@ var FormInput = function FormInput(_ref) {
       otherProps = _objectWithoutProperties(_ref, ["handleChange", "label", "value", "errorMessage"]);
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form_input_styles__WEBPACK_IMPORTED_MODULE_2__["GroupContainer"], null, label ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form_input_styles__WEBPACK_IMPORTED_MODULE_2__["FormInputLabel"], null, label) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form_input_styles__WEBPACK_IMPORTED_MODULE_2__["FormInputContainer"], _extends({
-    onChange: handleChange
+    onChange: handleChange,
+    value: value ? value : ""
   }, otherProps)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_error_messages_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
     errorMessage: errorMessage
   }));
@@ -79472,7 +79473,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _redux_user_user_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../redux/user/user.actions */ "./resources/js/redux/user/user.actions.js");
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
 /* harmony import */ var _redux_error_error_selector__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../redux/error/error.selector */ "./resources/js/redux/error/error.selector.js");
-/* harmony import */ var _sign_in_styles__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./sign-in.styles */ "./resources/js/components/sign-in/sign-in.styles.jsx");
+/* harmony import */ var _redux_form_form_selector__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../redux/form/form.selector */ "./resources/js/redux/form/form.selector.js");
+/* harmony import */ var _sign_in_styles__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./sign-in.styles */ "./resources/js/components/sign-in/sign-in.styles.jsx");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -79506,12 +79508,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
  //CSS
 
 
 
 var SignIn = function SignIn(_ref) {
-  var signInStart = _ref.signInStart,
+  var signInForm = _ref.signInForm,
+      signInStart = _ref.signInStart,
       errors = _ref.errors;
 
   //入力値のuseState
@@ -79521,8 +79525,13 @@ var SignIn = function SignIn(_ref) {
   }),
       _useState2 = _slicedToArray(_useState, 2),
       userCredentials = _useState2[0],
-      setUserCredentials = _useState2[1]; //Formに変化が生じた時
+      setUserCredentials = _useState2[1];
 
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    if (signInForm !== []) {
+      setUserCredentials(signInForm);
+    }
+  }, []); //Formに変化が生じた時
 
   var handleChange = function handleChange(event) {
     //Formの名前と値を取得
@@ -79540,7 +79549,8 @@ var SignIn = function SignIn(_ref) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              event.preventDefault();
+              event.preventDefault(); //ログイン処理の開始
+
               signInStart({
                 userCredentials: userCredentials
               });
@@ -79556,12 +79566,11 @@ var SignIn = function SignIn(_ref) {
     return function handleSubmit(_x) {
       return _ref2.apply(this, arguments);
     };
-  }(); //useStateからユーザー情報を取り出す
-
+  }();
 
   var email = userCredentials.email,
       password = userCredentials.password;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_sign_in_styles__WEBPACK_IMPORTED_MODULE_9__["SignInContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_sign_in_styles__WEBPACK_IMPORTED_MODULE_9__["SignInMessage"], null, "SIGN IN"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_sign_in_styles__WEBPACK_IMPORTED_MODULE_9__["SignInForm"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_sign_in_styles__WEBPACK_IMPORTED_MODULE_10__["SignInContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_sign_in_styles__WEBPACK_IMPORTED_MODULE_10__["SignInMessage"], null, "SIGN IN"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_sign_in_styles__WEBPACK_IMPORTED_MODULE_10__["SignInForm"], {
     onSubmit: handleSubmit
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
     type: "email",
@@ -79586,7 +79595,8 @@ var SignIn = function SignIn(_ref) {
 };
 
 var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_7__["createStructuredSelector"])({
-  errors: _redux_error_error_selector__WEBPACK_IMPORTED_MODULE_8__["selectSignInError"]
+  errors: _redux_error_error_selector__WEBPACK_IMPORTED_MODULE_8__["selectSignInError"],
+  signInForm: _redux_form_form_selector__WEBPACK_IMPORTED_MODULE_9__["selectSignInForm"]
 });
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -79673,7 +79683,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
 /* harmony import */ var _redux_error_error_selector__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../redux/error/error.selector */ "./resources/js/redux/error/error.selector.js");
-/* harmony import */ var _sign_up_styles__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./sign-up.styles */ "./resources/js/components/sign-up/sign-up.styles.jsx");
+/* harmony import */ var _redux_form_form_selector__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../redux/form/form.selector */ "./resources/js/redux/form/form.selector.js");
+/* harmony import */ var _sign_up_styles__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./sign-up.styles */ "./resources/js/components/sign-up/sign-up.styles.jsx");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -79707,12 +79718,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
  //CSS
 
 
 
 var SignUp = function SignUp(_ref) {
-  var signUpStart = _ref.signUpStart,
+  var signUpForm = _ref.signUpForm,
+      signUpStart = _ref.signUpStart,
       errors = _ref.errors;
 
   //入力値のuseState
@@ -79759,14 +79772,19 @@ var SignUp = function SignUp(_ref) {
     return function handleSubmit(_x) {
       return _ref2.apply(this, arguments);
     };
-  }(); //useStateからユーザー情報を取り出す
+  }();
 
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    if (signUpForm !== []) {
+      setUserCredentials(signUpForm);
+    }
+  }, []); //useStateからユーザー情報を取り出す
 
   var displayName = userCredentials.displayName,
       email = userCredentials.email,
       password = userCredentials.password,
       password_confirmation = userCredentials.password_confirmation;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_sign_up_styles__WEBPACK_IMPORTED_MODULE_9__["SignUpContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_sign_up_styles__WEBPACK_IMPORTED_MODULE_9__["SignUpMessage"], null, "SIGN UP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_sign_up_styles__WEBPACK_IMPORTED_MODULE_9__["SignUpForm"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_sign_up_styles__WEBPACK_IMPORTED_MODULE_10__["SignUpContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_sign_up_styles__WEBPACK_IMPORTED_MODULE_10__["SignUpMessage"], null, "SIGN UP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_sign_up_styles__WEBPACK_IMPORTED_MODULE_10__["SignUpForm"], {
     onSubmit: handleSubmit
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: "text",
@@ -79806,7 +79824,8 @@ var SignUp = function SignUp(_ref) {
 };
 
 var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_7__["createStructuredSelector"])({
-  errors: _redux_error_error_selector__WEBPACK_IMPORTED_MODULE_8__["selectSignUpError"]
+  errors: _redux_error_error_selector__WEBPACK_IMPORTED_MODULE_8__["selectSignUpError"],
+  signUpForm: _redux_form_form_selector__WEBPACK_IMPORTED_MODULE_9__["selectSignUpForm"]
 });
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -80479,6 +80498,143 @@ var FolderActionTypes = {
 
 /***/ }),
 
+/***/ "./resources/js/redux/form/form.actions.js":
+/*!*************************************************!*\
+  !*** ./resources/js/redux/form/form.actions.js ***!
+  \*************************************************/
+/*! exports provided: setSignUpForm, setSignInForm, formClear */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSignUpForm", function() { return setSignUpForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSignInForm", function() { return setSignInForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formClear", function() { return formClear; });
+/* harmony import */ var _form_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./form.types */ "./resources/js/redux/form/form.types.js");
+ //ユーザー登録時の入力データの格納
+
+var setSignUpForm = function setSignUpForm(userCredentials) {
+  return {
+    type: _form_types__WEBPACK_IMPORTED_MODULE_0__["default"].SET_SIGN_UP_FORM,
+    payload: userCredentials
+  };
+}; //ログイン時の入力データの格納
+
+var setSignInForm = function setSignInForm(userCredentials) {
+  return {
+    type: _form_types__WEBPACK_IMPORTED_MODULE_0__["default"].SET_SIGN_IN_FORM,
+    payload: userCredentials
+  };
+}; //ログインまたは登録成功時にFormをリセット
+
+var formClear = function formClear() {
+  return {
+    type: _form_types__WEBPACK_IMPORTED_MODULE_0__["default"].FORM_CLEAR
+  };
+};
+
+/***/ }),
+
+/***/ "./resources/js/redux/form/form.reducer.js":
+/*!*************************************************!*\
+  !*** ./resources/js/redux/form/form.reducer.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _form_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./form.types */ "./resources/js/redux/form/form.types.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+var INITIAL_STATE = {
+  signInForm: [],
+  signUpForm: []
+};
+
+var formReducer = function formReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : INITIAL_STATE;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _form_types__WEBPACK_IMPORTED_MODULE_0__["default"].SET_SIGN_IN_FORM:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        signInForm: action.payload
+      });
+
+    case _form_types__WEBPACK_IMPORTED_MODULE_0__["default"].SET_SIGN_UP_FORM:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        signUpForm: action.payload
+      });
+
+    case _form_types__WEBPACK_IMPORTED_MODULE_0__["default"].FORM_CLEAR:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        signUpForm: [],
+        signInForm: []
+      });
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (formReducer);
+
+/***/ }),
+
+/***/ "./resources/js/redux/form/form.selector.js":
+/*!**************************************************!*\
+  !*** ./resources/js/redux/form/form.selector.js ***!
+  \**************************************************/
+/*! exports provided: selectSignInForm, selectSignUpForm */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSignInForm", function() { return selectSignInForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSignUpForm", function() { return selectSignUpForm; });
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
+
+
+var selectForm = function selectForm(state) {
+  return state.form;
+};
+
+var selectSignInForm = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])([selectForm], function (form) {
+  return form.signInForm;
+});
+var selectSignUpForm = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])([selectForm], function (form) {
+  return form.signUpForm;
+});
+
+/***/ }),
+
+/***/ "./resources/js/redux/form/form.types.js":
+/*!***********************************************!*\
+  !*** ./resources/js/redux/form/form.types.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var formActionTypes = {
+  //SIGN_INの入力情報を格納
+  SET_SIGN_IN_FORM: "SET_SIGN_IN_FORM",
+  //SIGN_UPの入力情報を格納
+  SET_SIGN_UP_FORM: "SET_SIGN_UP_FORM",
+  //Formのclear
+  FORM_CLEAR: "FORM_CLEAR"
+};
+/* harmony default export */ __webpack_exports__["default"] = (formActionTypes);
+
+/***/ }),
+
 /***/ "./resources/js/redux/root-reducer.js":
 /*!********************************************!*\
   !*** ./resources/js/redux/root-reducer.js ***!
@@ -80492,10 +80648,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_persist__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-persist */ "./node_modules/redux-persist/es/index.js");
 /* harmony import */ var _error_error_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./error/error.reducer */ "./resources/js/redux/error/error.reducer.js");
 /* harmony import */ var _folder_folder_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./folder/folder.reducer */ "./resources/js/redux/folder/folder.reducer.js");
-/* harmony import */ var redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux-persist/lib/storage */ "./node_modules/redux-persist/lib/storage/index.js");
-/* harmony import */ var redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _form_form_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./form/form.reducer */ "./resources/js/redux/form/form.reducer.js");
+/* harmony import */ var redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux-persist/lib/storage */ "./node_modules/redux-persist/lib/storage/index.js");
+/* harmony import */ var redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_5__);
 var _require = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js"),
     combineReducers = _require.combineReducers; //reducer
+
 
 
 
@@ -80506,13 +80664,14 @@ var _require = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.j
 
 var persistConfig = {
   key: "root",
-  storage: redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_4___default.a,
+  storage: redux_persist_lib_storage__WEBPACK_IMPORTED_MODULE_5___default.a,
   whitelist: ["user"]
 };
 var rootReducer = combineReducers({
   user: _user_user_reducer__WEBPACK_IMPORTED_MODULE_0__["default"],
   error: _error_error_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
-  folder: _folder_folder_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
+  folder: _folder_folder_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
+  form: _form_form_reducer__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux_persist__WEBPACK_IMPORTED_MODULE_1__["persistReducer"])(persistConfig, rootReducer));
 
@@ -80724,10 +80883,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _user_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user.types */ "./resources/js/redux/user/user.types.js");
 /* harmony import */ var _user_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user.actions */ "./resources/js/redux/user/user.actions.js");
 /* harmony import */ var _error_error_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../error/error.actions */ "./resources/js/redux/error/error.actions.js");
-/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux-saga/effects */ "./node_modules/redux-saga/dist/redux-saga-effects-npm-proxy.esm.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _folder_folder_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../folder/folder.actions */ "./resources/js/redux/folder/folder.actions.js");
+/* harmony import */ var _form_form_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../form/form.actions */ "./resources/js/redux/form/form.actions.js");
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux-saga/effects */ "./node_modules/redux-saga/dist/redux-saga-effects-npm-proxy.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _folder_folder_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../folder/folder.actions */ "./resources/js/redux/folder/folder.actions.js");
 
 
 var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(getUser),
@@ -80741,6 +80901,7 @@ var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0
  //action
 
 
+
  //redux-saga関連
 
  //axios通信
@@ -80749,7 +80910,7 @@ var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0
  //ユーザー情報の取得
 
 function getUser(email, password) {
-  var errors, params, user;
+  var errors, params, user, userCredentials;
   return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function getUser$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -80762,7 +80923,7 @@ function getUser(email, password) {
           params.append("password", password); //ユーザー情報の取得
 
           _context.next = 6;
-          return axios__WEBPACK_IMPORTED_MODULE_5___default.a.post("/api/show", params)["catch"](function (error) {
+          return axios__WEBPACK_IMPORTED_MODULE_6___default.a.post("/api/show", params)["catch"](function (error) {
             errors = error.response.data.errors;
             /**
              * メールアドレスに登録されている
@@ -80785,17 +80946,26 @@ function getUser(email, password) {
           }
 
           _context.next = 10;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_4__["put"])(Object(_user_actions__WEBPACK_IMPORTED_MODULE_2__["signInSuccess"])(user));
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_5__["put"])(Object(_user_actions__WEBPACK_IMPORTED_MODULE_2__["signInSuccess"])(user));
 
         case 10:
-          _context.next = 14;
+          _context.next = 19;
           break;
 
         case 12:
-          _context.next = 14;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_4__["put"])(Object(_error_error_actions__WEBPACK_IMPORTED_MODULE_3__["signInFailure"])(errors));
+          //入力情報をオブジェクトにまとめる
+          userCredentials = {};
+          userCredentials.email = email;
+          userCredentials.password = password; //ログインフォームの入力情報を格納
 
-        case 14:
+          _context.next = 17;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_5__["put"])(Object(_form_form_actions__WEBPACK_IMPORTED_MODULE_4__["setSignInForm"])(userCredentials));
+
+        case 17:
+          _context.next = 19;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_5__["put"])(Object(_error_error_actions__WEBPACK_IMPORTED_MODULE_3__["signInFailure"])(errors));
+
+        case 19:
         case "end":
           return _context.stop();
       }
@@ -80813,18 +80983,15 @@ function signUp(_ref) {
           errors = null;
           user = null;
           _context2.next = 5;
-          return axios__WEBPACK_IMPORTED_MODULE_5___default.a.post("/api/register", userCredentials).then(function (res) {
+          return axios__WEBPACK_IMPORTED_MODULE_6___default.a.post("/api/register", userCredentials).then(function (res) {
             return user = res;
           })["catch"](function (error) {
             errors = error.response.data.errors;
           });
 
         case 5:
-          console.log("signUp");
-          console.log(user); //登録に成功した場合
-
           if (!(errors === null && user !== null)) {
-            _context2.next = 17;
+            _context2.next = 15;
             break;
           }
 
@@ -80833,22 +81000,26 @@ function signUp(_ref) {
           folderCredentials.user_id = user.data.id;
           folderCredentials.main_or_sub = true; //Folderを作成
 
-          _context2.next = 13;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_4__["put"])(Object(_folder_folder_actions__WEBPACK_IMPORTED_MODULE_6__["createFolder"])({
+          _context2.next = 11;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_5__["put"])(Object(_folder_folder_actions__WEBPACK_IMPORTED_MODULE_7__["createFolder"])({
             folderCredentials: folderCredentials
           }));
 
-        case 13:
-          _context2.next = 15;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_4__["put"])(Object(_user_actions__WEBPACK_IMPORTED_MODULE_2__["signInSuccess"])(user));
+        case 11:
+          _context2.next = 13;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_5__["put"])(Object(_user_actions__WEBPACK_IMPORTED_MODULE_2__["signInSuccess"])(user));
 
-        case 15:
+        case 13:
           _context2.next = 19;
           break;
 
+        case 15:
+          _context2.next = 17;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_5__["put"])(Object(_form_form_actions__WEBPACK_IMPORTED_MODULE_4__["setSignUpForm"])(userCredentials));
+
         case 17:
           _context2.next = 19;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_4__["put"])(Object(_error_error_actions__WEBPACK_IMPORTED_MODULE_3__["signUpFailure"])(errors));
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_5__["put"])(Object(_error_error_actions__WEBPACK_IMPORTED_MODULE_3__["signUpFailure"])(errors));
 
         case 19:
         case "end":
@@ -80888,7 +81059,7 @@ function onSignUpStart() {
       switch (_context4.prev = _context4.next) {
         case 0:
           _context4.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_4__["takeLatest"])(_user_types__WEBPACK_IMPORTED_MODULE_1__["default"].SIGN_UP_START, signUp);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_5__["takeLatest"])(_user_types__WEBPACK_IMPORTED_MODULE_1__["default"].SIGN_UP_START, signUp);
 
         case 2:
         case "end":
@@ -80908,7 +81079,7 @@ function onSignInStart() {
       switch (_context5.prev = _context5.next) {
         case 0:
           _context5.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_4__["takeLatest"])(_user_types__WEBPACK_IMPORTED_MODULE_1__["default"].SIGN_IN_START, signInWithEmaiAndPassword);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_5__["takeLatest"])(_user_types__WEBPACK_IMPORTED_MODULE_1__["default"].SIGN_IN_START, signInWithEmaiAndPassword);
 
         case 2:
         case "end":
@@ -80924,7 +81095,7 @@ function userSagas() {
       switch (_context6.prev = _context6.next) {
         case 0:
           _context6.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_4__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_4__["call"])(onSignUpStart), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_4__["call"])(onSignInStart)]);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_5__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_5__["call"])(onSignUpStart), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_5__["call"])(onSignInStart)]);
 
         case 2:
         case "end":
@@ -81073,11 +81244,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../redux/user/user.selector */ "./resources/js/redux/user/user.selector.js");
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
 /* harmony import */ var _redux_error_error_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../redux/error/error.actions */ "./resources/js/redux/error/error.actions.js");
+/* harmony import */ var _redux_form_form_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../redux/form/form.actions */ "./resources/js/redux/form/form.actions.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 
 
 
@@ -81090,11 +81263,13 @@ var SignOutRoute = function SignOutRoute(_ref) {
   var Component = _ref.component,
       user = _ref.user,
       errorClear = _ref.errorClear,
-      rest = _objectWithoutProperties(_ref, ["component", "user", "errorClear"]);
+      formClear = _ref.formClear,
+      rest = _objectWithoutProperties(_ref, ["component", "user", "errorClear", "formClear"]);
 
   //画面移動時にエラーを削除する
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     errorClear();
+    formClear();
   });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], _extends({}, rest, {
     render: function render(props) {
@@ -81113,6 +81288,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     errorClear: function errorClear() {
       return dispatch(Object(_redux_error_error_actions__WEBPACK_IMPORTED_MODULE_5__["errorClear"])());
+    },
+    formClear: function formClear() {
+      return dispatch(Object(_redux_form_form_actions__WEBPACK_IMPORTED_MODULE_6__["formClear"])());
     }
   };
 };
