@@ -8,3 +8,8 @@ export const selectCurrentUser = createSelector(
     user => user.currentUser
 );
 
+//読み込み情報を取得する
+export const selectIsLoading = createSelector(
+    [selectUser],
+    user => user.isLoading
+);
