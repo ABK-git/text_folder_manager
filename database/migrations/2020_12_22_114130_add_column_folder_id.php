@@ -20,8 +20,6 @@ class AddColumnFolderId extends Migration
             ->references('id')
             ->on('folders')
             ->cascadeOnDelete('id');
-            //MainのFolderか否か
-            $table->boolean('main_or_sub');
         });
     }
 

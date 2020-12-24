@@ -23,15 +23,6 @@ class CreateMainOrSubsTable extends Migration
             ->references('id')
             ->on('users')
             ->cascadeOnDelete();
-            //どのFolderに属するものか
-            // $table
-            // ->foreignUuid('folder_id')
-            // ->references('id')
-            // ->on('folders')
-            // ->cascadeOnDelete('id')
-            // ->nullable();
-            // //MainのFolderか否か
-            // $table->boolean('main_or_sub');
 
             $table->timestamps();
         });

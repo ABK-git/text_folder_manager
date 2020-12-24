@@ -16,13 +16,24 @@ class CreateFoldersTable extends Migration
         Schema::create('folders', function (Blueprint $table) {
             //uuidを使用
             $table->uuid('id')->primary();
-            $table->string('title');
-            
+            $table->string('title')->nullable();
+
             //user_idの外部参照
             $table
-            ->string('user_and_folder_id')
-            ->on('main_or_sub')
-            ->cascadeOnDelete('id');
+            ->foreignUuid('user_id')
+            ->references('id')
+            ->on('users')
+            ->cascadeOnDelete();
+            
+            //中間テーブルの外部参照
+            $table
+            ->foreignUuid('user_and_folder_id')
+            ->references('id')
+            ->on('main_or_subs')
+            ->cascadeOnDelete();
+
+            //Mainのfolderか否か
+            $table->boolean('main_or_sub');
 
             $table->timestamps();
         });
