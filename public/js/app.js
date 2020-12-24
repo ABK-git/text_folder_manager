@@ -79054,7 +79054,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var FolderAndTextButtons = function FolderAndTextButtons(_ref) {
-  var createFolderStart = _ref.createFolderStart;
+  var createFolder = _ref.createFolder;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -79083,7 +79083,7 @@ var FolderAndTextButtons = function FolderAndTextButtons(_ref) {
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
     console.log("handleSubmit");
-    createFolderStart(folderCredentials);
+    createFolder(folderCredentials);
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_folder_and_text_buttons_styles_jsx__WEBPACK_IMPORTED_MODULE_5__["CreateFolderAndTextContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -79109,9 +79109,19 @@ var FolderAndTextButtons = function FolderAndTextButtons(_ref) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    createFolderStart: function createFolderStart(folderCredentials) {
-      return dispatch(Object(_redux_folder_folder_actions__WEBPACK_IMPORTED_MODULE_2__["createFolderStart"])(folderCredentials));
-    }
+    createFolderStart: function (_createFolderStart) {
+      function createFolderStart(_x) {
+        return _createFolderStart.apply(this, arguments);
+      }
+
+      createFolderStart.toString = function () {
+        return _createFolderStart.toString();
+      };
+
+      return createFolderStart;
+    }(function (folderCredentials) {
+      return dispatch(createFolderStart(folderCredentials));
+    })
   };
 };
 
@@ -80185,18 +80195,28 @@ var ErrorTypes = {
 /*!*****************************************************!*\
   !*** ./resources/js/redux/folder/folder.actions.js ***!
   \*****************************************************/
-/*! exports provided: createFolderStart */
+/*! exports provided: createFolder, setMainFolder */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFolderStart", function() { return createFolderStart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFolder", function() { return createFolder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setMainFolder", function() { return setMainFolder; });
 /* harmony import */ var _folder_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./folder.types */ "./resources/js/redux/folder/folder.types.js");
 
-var createFolderStart = function createFolderStart(folderCredentials) {
+var createFolder = function createFolder(_ref) {
+  var folderCredentials = _ref.folderCredentials;
   return {
     type: _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].CREATE_FOLDER,
-    payload: folderCredentials
+    payload: {
+      folderCredentials: folderCredentials
+    }
+  };
+};
+var setMainFolder = function setMainFolder(folder) {
+  return {
+    type: _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].SET_MAIN_FOLDER,
+    payload: folder
   };
 };
 
@@ -80211,6 +80231,14 @@ var createFolderStart = function createFolderStart(folderCredentials) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _folder_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./folder.types */ "./resources/js/redux/folder/folder.types.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 var INITIAL_STATE = {
   folders: []
 };
@@ -80220,6 +80248,11 @@ var folderReducer = function folderReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
+    case _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].SET_MAIN_FOLDER:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        folders: action.payload
+      });
+
     default:
       return state;
   }
@@ -80243,8 +80276,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "folderSagas", function() { return folderSagas; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-saga/effects */ "./node_modules/redux-saga/dist/redux-saga-effects-npm-proxy.esm.js");
-/* harmony import */ var _folder_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./folder.types */ "./resources/js/redux/folder/folder.types.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-saga/effects */ "./node_modules/redux-saga/dist/redux-saga-effects-npm-proxy.esm.js");
+/* harmony import */ var _folder_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./folder.actions */ "./resources/js/redux/folder/folder.actions.js");
+/* harmony import */ var _folder_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./folder.types */ "./resources/js/redux/folder/folder.types.js");
 
 
 var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(createFolder),
@@ -80253,18 +80289,32 @@ var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0
 
 
 
+
+
 function createFolder(_ref) {
-  var folderCredentials, folder_name;
+  var folderCredentials, folder;
   return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function createFolder$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          folderCredentials = _ref.payload;
-          folder_name = folderCredentials.folder_name;
-          console.log("this is function");
-          console.log(folder_name);
+          folderCredentials = _ref.payload.folderCredentials;
+          //mainのfolderを作成
+          folder = null;
+          _context.next = 4;
+          return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/folder/create", folderCredentials).then(function (response) {
+            return folder = response.data;
+          });
 
         case 4:
+          if (!(folder !== null)) {
+            _context.next = 7;
+            break;
+          }
+
+          _context.next = 7;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])(Object(_folder_actions__WEBPACK_IMPORTED_MODULE_3__["setMainFolder"])(folder));
+
+        case 7:
         case "end":
           return _context.stop();
       }
@@ -80277,7 +80327,7 @@ function onCreateFolder() {
       switch (_context2.prev = _context2.next) {
         case 0:
           _context2.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_folder_types__WEBPACK_IMPORTED_MODULE_2__["default"].CREATE_FOLDER, createFolder);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_folder_types__WEBPACK_IMPORTED_MODULE_4__["default"].CREATE_FOLDER, createFolder);
 
         case 2:
         case "end":
@@ -80292,7 +80342,7 @@ function folderSagas() {
       switch (_context3.prev = _context3.next) {
         case 0:
           _context3.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(onCreateFolder)]);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(onCreateFolder)]);
 
         case 2:
         case "end":
@@ -80314,7 +80364,8 @@ function folderSagas() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var FolderActionTypes = {
-  CREATE_FOLDER: "CREATE_FOLDER"
+  CREATE_FOLDER: "CREATE_FOLDER",
+  SET_MAIN_FOLDER: "SET_MAIN_FOLDER"
 };
 /* harmony default export */ __webpack_exports__["default"] = (FolderActionTypes);
 
@@ -80563,6 +80614,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux-saga/effects */ "./node_modules/redux-saga/dist/redux-saga-effects-npm-proxy.esm.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _folder_folder_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../folder/folder.actions */ "./resources/js/redux/folder/folder.actions.js");
 
 
 var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(getUser),
@@ -80579,6 +80631,7 @@ var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0
  //redux-saga関連
 
  //axios通信
+
 
  //ユーザー情報の取得
 
@@ -80638,7 +80691,7 @@ function getUser(email, password) {
 } //ユーザー情報を登録する
 
 function signUp(_ref) {
-  var userCredentials, errors, user;
+  var userCredentials, errors, user, folderCredentials;
   return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function signUp$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
@@ -80658,22 +80711,33 @@ function signUp(_ref) {
           console.log(user); //登録に成功した場合
 
           if (!(errors === null && user !== null)) {
-            _context2.next = 12;
+            _context2.next = 17;
             break;
           }
 
-          _context2.next = 10;
+          //folderデータを作成
+          folderCredentials = {};
+          folderCredentials.user_id = user.data.id;
+          folderCredentials.main_or_sub = true; //Folderを作成
+
+          _context2.next = 13;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_4__["put"])(Object(_folder_folder_actions__WEBPACK_IMPORTED_MODULE_6__["createFolder"])({
+            folderCredentials: folderCredentials
+          }));
+
+        case 13:
+          _context2.next = 15;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_4__["put"])(Object(_user_actions__WEBPACK_IMPORTED_MODULE_2__["signInSuccess"])(user));
 
-        case 10:
-          _context2.next = 14;
+        case 15:
+          _context2.next = 19;
           break;
 
-        case 12:
-          _context2.next = 14;
+        case 17:
+          _context2.next = 19;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_4__["put"])(Object(_error_error_actions__WEBPACK_IMPORTED_MODULE_3__["signUpFailure"])(errors));
 
-        case 14:
+        case 19:
         case "end":
           return _context2.stop();
       }

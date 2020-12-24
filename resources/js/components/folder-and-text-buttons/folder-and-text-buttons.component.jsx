@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { createFolderStart } from "../../redux/folder/folder.actions";
+import { createFolder } from "../../redux/folder/folder.actions";
 import CustomButton from "../custom-button/custom-button.component";
 import FormInput from "../form-input/form-input.component";
 
@@ -10,7 +10,7 @@ import {
     FormAndButton
 } from "./folder-and-text-buttons.styles.jsx";
 
-const FolderAndTextButtons = ({createFolderStart}) => {
+const FolderAndTextButtons = ({createFolder}) => {
     const [isDisplay, setIsDisplay] = useState(false);
 
     const handleClick = () => {
@@ -33,7 +33,7 @@ const FolderAndTextButtons = ({createFolderStart}) => {
         event.preventDefault();
         console.log("handleSubmit");
 
-        createFolderStart(folderCredentials);
+        createFolder(folderCredentials);
     };
 
     return (

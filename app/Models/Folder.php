@@ -30,6 +30,8 @@ class Folder extends Model
 
     protected $fillable = [
         'title',
+        'user_id',
+        "main_or_sub",
         "user_and_folder_id"
     ];
 }
