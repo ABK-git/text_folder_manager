@@ -3,12 +3,13 @@ import UserActionTypes from "./user.types";
 //action
 import { signInSuccess } from "./user.actions";
 import { signInFailure, signUpFailure } from "../error/error.actions";
-import { setSignUpForm, setSignInForm} from "../form/form.actions";
+import { setSignUpForm, setSignInForm } from "../form/form.actions";
 //redux-saga関連
 import { all, put, takeLatest, call } from "redux-saga/effects";
 //axios通信
 import axios from "axios";
-import { createFolder } from "../folder/folder.actions";
+
+import { createDuringFolder } from "../folder/folder.actions";
 
 //ユーザー情報の取得
 export function* getUser(email, password) {
@@ -50,7 +51,6 @@ export function* getUser(email, password) {
 }
 //ユーザー情報を登録する
 export function* signUp({ payload: { userCredentials } }) {
-
     let errors = null;
     let user = null;
 
@@ -69,9 +69,8 @@ export function* signUp({ payload: { userCredentials } }) {
         folderCredentials.user_id = user.data.id;
         folderCredentials.main_or_sub = true;
 
-        //Folderを作成
-        yield put(createFolder({folderCredentials}));
-
+        //Folder作成の開始
+        yield put(createDuringFolder({ folderCredentials }));
         //登録成功
         yield put(signInSuccess(user));
     } else {
@@ -108,8 +107,5 @@ export function* onSignInStart() {
 
 //redux-sagaによる非同期監視のスタート
 export function* userSagas() {
-    yield all([
-        call(onSignUpStart),
-        call(onSignInStart)
-    ]);
+    yield all([call(onSignUpStart), call(onSignInStart)]);
 }

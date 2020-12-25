@@ -24,6 +24,9 @@ class CreateMainOrSubsTable extends Migration
             ->on('users')
             ->cascadeOnDelete();
 
+            //Mainのfolderか否か
+            $table->boolean('main_or_sub');
+
             $table->timestamps();
         });
     }

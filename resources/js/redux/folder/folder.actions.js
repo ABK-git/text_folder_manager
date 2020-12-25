@@ -1,11 +1,16 @@
 import FolderActionTypes from "./folder.types";
 
-export const createFolder = ({folderCredentials}) => ({
-    type: FolderActionTypes.CREATE_FOLDER,
-    payload: {folderCredentials}
+// export const createFolder = ({folderCredentials}) => ({
+//     type: FolderActionTypes.CREATE_FOLDER,
+//     payload: {folderCredentials}
+// });
+
+export const setDuringFolder = (duringFolder) => ({
+    type: FolderActionTypes.SET_DURING_FOLDER,
+    payload: duringFolder
 });
 
-export const setMainFolder = (folder) => ({
-    type: FolderActionTypes.SET_MAIN_FOLDER,
-    payload: folder
+export const createDuringFolder = ({folderCredentials}) => ({
+    type: FolderActionTypes.CREATE_DURING_FOLDER,
+    payload : {folderCredentials}
 });
