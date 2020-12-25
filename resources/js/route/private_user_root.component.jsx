@@ -14,9 +14,9 @@ const PrivateUserRoot = ({
     ...rest
 }) => {
     //画面移動時にエラーを削除する
-    useEffect(() => {
-        errorClear();
-    });
+    // useEffect(() => {
+    //     errorClear();
+    // });
 
     return (
         <Route

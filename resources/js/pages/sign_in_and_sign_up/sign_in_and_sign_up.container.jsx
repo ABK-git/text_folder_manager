@@ -8,7 +8,7 @@ import WithSpinner from "../../components/with-spinner/with-spinner.component";
 import SignInAndSignUp from "./sign_in_and_sign_up";
 
 const mapStateToProps = createStructuredSelector({
-    isLoading: state => !selectIsLoading(state)
+    isLoading: (state) => !selectIsLoading(state)
 });
 
 const SignInAndSignUpContainer = compose(

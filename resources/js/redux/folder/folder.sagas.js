@@ -1,24 +1,26 @@
 import axios from "axios";
 import { all, takeLatest, call, put } from "redux-saga/effects";
-import { setMainFolder } from "./folder.actions";
+import { setDuringFolder } from "./folder.actions";
 import FolderActionTypes from "./folder.types";
 
-export function* createFolder({ payload: { folderCredentials } }) {
+export function* createDuringFolder({ payload: { folderCredentials } }) {
     //mainのfolderを作成
-    let folder = null;
+    let duringFolder = null;
+    
     yield axios
-        .post("/api/folder/create", folderCredentials)
-        .then(response => (folder = response.data));
+        .post("/api/main_or_sub/create", folderCredentials)
+        .then(response => (duringFolder = response.data));
 
-    if(folder !== null){
-        yield put(setMainFolder(folder));
+    if(duringFolder.id !== null){
+        console.log("duringFolder");
+        yield put(setDuringFolder(duringFolder));
     }
 }
 
-export function* onCreateFolder() {
-    yield takeLatest(FolderActionTypes.CREATE_FOLDER, createFolder);
+export function* onCreateDuringFolder() {
+    yield takeLatest(FolderActionTypes.CREATE_DURING_FOLDER, createDuringFolder);
 }
 
 export function* folderSagas() {
-    yield all([call(onCreateFolder)]);
+    yield all([call(onCreateDuringFolder)]);
 }

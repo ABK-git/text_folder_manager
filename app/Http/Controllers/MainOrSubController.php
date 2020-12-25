@@ -14,7 +14,7 @@ class MainOrSubController extends Controller
         //一時的に外部キー制約を無効にする
         Schema::disableForeignKeyConstraints();
 
-        return MainOrSub::create([
+        $duringTable = MainOrSub::create([
             'user_id' => $request->user_id,
             'folder_id' => $request->folder_id,
             "main_or_sub" => $request->main_or_sub
@@ -22,6 +22,8 @@ class MainOrSubController extends Controller
 
         //外部キー制約を戻す
         Schema::enableForeignKeyConstraints();
+
+        return $duringTable;
     }
 
     //中間テーブルを編集する

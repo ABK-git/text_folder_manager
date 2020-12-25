@@ -32,9 +32,6 @@ class CreateFoldersTable extends Migration
             ->on('main_or_subs')
             ->cascadeOnDelete();
 
-            //Mainのfolderか否か
-            $table->boolean('main_or_sub');
-
             $table->timestamps();
         });
     }

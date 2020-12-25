@@ -16,7 +16,7 @@ class AddColumnFolderId extends Migration
         Schema::table('main_or_subs', function (Blueprint $table) {
             //どのFolderに属するものか
             $table
-            ->foreignUuid('folder_id')
+            ->foreignUuid('folder_id')->nullable()
             ->references('id')
             ->on('folders')
             ->cascadeOnDelete('id');
