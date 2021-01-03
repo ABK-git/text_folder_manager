@@ -7,14 +7,3 @@ export const CreateFolderAndTextContainer = styled.div`
     justify-content: flex-end;
     width: 100%;
 `;
-
-//Folderボタンと入力フォームをまとめる
-export const FolderDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-//FormとButtonをまとめる
-export const FormAndButton = styled.form`
-  display: flex;
-`;
