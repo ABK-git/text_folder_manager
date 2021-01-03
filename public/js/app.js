@@ -78860,162 +78860,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/components/create-folder-form/create-folder-form.component.jsx":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/components/create-folder-form/create-folder-form.component.jsx ***!
-  \*************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
-/* harmony import */ var _redux_folder_folder_sagas__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/folder/folder.sagas */ "./resources/js/redux/folder/folder.sagas.js");
-/* harmony import */ var _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../redux/user/user.selector */ "./resources/js/redux/user/user.selector.js");
-/* harmony import */ var _custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
-/* harmony import */ var _form_input_form_input_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../form-input/form-input.component */ "./resources/js/components/form-input/form-input.component.jsx");
-/* harmony import */ var _create_folder_form_styles__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./create-folder-form.styles */ "./resources/js/components/create-folder-form/create-folder-form.styles.jsx");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-
- //redux
-
- //component
-
-
- //styles
-
-
-
-var CreateFolderForm = function CreateFolderForm(_ref) {
-  var user = _ref.user;
-
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      isDisplay = _useState2[0],
-      setIsDisplay = _useState2[1];
-
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
-      _useState4 = _slicedToArray(_useState3, 2),
-      folderCredentials = _useState4[0],
-      setFolderCredentials = _useState4[1];
-
-  var handleClick = function handleClick() {
-    setIsDisplay(!isDisplay);
-  };
-
-  var handleChange = function handleChange(event) {
-    var _event$target = event.target,
-        value = _event$target.value,
-        name = _event$target.name;
-    setFolderCredentials(_objectSpread(_objectSpread({}, folderCredentials), {}, _defineProperty({}, name, value)));
-    console.log(folderCredentials);
-  };
-
-  var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useLocation"])();
-
-  var handleSubmit = function handleSubmit(event) {
-    event.preventDefault();
-    var path = location.pathname.slice(1).split("/"); //user直下にfolderを作成する場合
-
-    if (path[1] === undefined) {
-      console.log(user.id);
-    }
-  };
-
-  var folder_name = folderCredentials.folder_name;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_folder_form_styles__WEBPACK_IMPORTED_MODULE_8__["FolderDiv"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    design: "createFolder",
-    onClick: handleClick
-  }, "Folder"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_folder_form_styles__WEBPACK_IMPORTED_MODULE_8__["FormAndButton"], {
-    onSubmit: handleSubmit,
-    style: {
-      display: isDisplay ? "" : "none"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    type: "text",
-    name: "folder_name",
-    value: folder_name,
-    handleChange: handleChange,
-    required: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    type: "text",
-    design: "createFolderSubmit"
-  }, "\u4F5C\u6210")));
-};
-
-var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_3__["createStructuredSelector"])({
-  user: _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_5__["selectCurrentUser"]
-});
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(CreateFolderForm));
-
-/***/ }),
-
-/***/ "./resources/js/components/create-folder-form/create-folder-form.styles.jsx":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/create-folder-form/create-folder-form.styles.jsx ***!
-  \**********************************************************************************/
-/*! exports provided: FolderDiv, FormAndButton */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FolderDiv", function() { return FolderDiv; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormAndButton", function() { return FormAndButton; });
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n    display: flex;\n"]);
-
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n"]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
- //Folderボタンと入力フォームをまとめる
-
-var FolderDiv = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject()); //FormとButtonをまとめる
-
-var FormAndButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].form(_templateObject2());
-
-/***/ }),
-
 /***/ "./resources/js/components/custom-button/custom-button.component.jsx":
 /*!***************************************************************************!*\
   !*** ./resources/js/components/custom-button/custom-button.component.jsx ***!
@@ -79179,22 +79023,109 @@ var FolderButtonContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["defa
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _create_folder_form_create_folder_form_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../create-folder-form/create-folder-form.component */ "./resources/js/components/create-folder-form/create-folder-form.component.jsx");
-/* harmony import */ var _custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
-/* harmony import */ var _folder_and_text_buttons_styles_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./folder-and-text-buttons.styles.jsx */ "./resources/js/components/folder-and-text-buttons/folder-and-text-buttons.styles.jsx");
- //component
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_folder_folder_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../redux/folder/folder.actions */ "./resources/js/redux/folder/folder.actions.js");
+/* harmony import */ var _custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
+/* harmony import */ var _form_input_form_input_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../form-input/form-input.component */ "./resources/js/components/form-input/form-input.component.jsx");
+/* harmony import */ var _folder_and_text_buttons_styles_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./folder-and-text-buttons.styles.jsx */ "./resources/js/components/folder-and-text-buttons/folder-and-text-buttons.styles.jsx");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
 
 
-var FolderAndTextButtons = function FolderAndTextButtons() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_folder_and_text_buttons_styles_jsx__WEBPACK_IMPORTED_MODULE_3__["CreateFolderAndTextContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
+
+
+
+var FolderAndTextButtons = function FolderAndTextButtons(_ref) {
+  var createFolder = _ref.createFolder;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isDisplay = _useState2[0],
+      setIsDisplay = _useState2[1];
+
+  var handleClick = function handleClick() {
+    setIsDisplay(!isDisplay);
+  };
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    folder_name: ""
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      folderCredentials = _useState4[0],
+      setFolderCredentials = _useState4[1];
+
+  var handleChange = function handleChange(event) {
+    var _event$target = event.target,
+        value = _event$target.value,
+        name = _event$target.name;
+    setFolderCredentials(_objectSpread(_objectSpread({}, folderCredentials), {}, _defineProperty({}, name, value)));
+    console.log(folderCredentials.folder_name);
+  };
+
+  var handleSubmit = function handleSubmit(event) {
+    event.preventDefault();
+    console.log("handleSubmit");
+    createFolder(folderCredentials);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_folder_and_text_buttons_styles_jsx__WEBPACK_IMPORTED_MODULE_5__["CreateFolderAndTextContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
     design: "createText"
-  }, "Text"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_folder_form_create_folder_form_component__WEBPACK_IMPORTED_MODULE_1__["default"], null));
+  }, "Text"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_folder_and_text_buttons_styles_jsx__WEBPACK_IMPORTED_MODULE_5__["FolderDiv"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    design: "createFolder",
+    onClick: handleClick
+  }, "Folder"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_folder_and_text_buttons_styles_jsx__WEBPACK_IMPORTED_MODULE_5__["FormAndButton"], {
+    onSubmit: handleSubmit,
+    style: {
+      display: isDisplay ? "" : "none"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    type: "text",
+    name: "folder_name",
+    handleChange: handleChange,
+    required: true
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    type: "text",
+    design: "createFolderSubmit"
+  }, "\u4F5C\u6210"))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (FolderAndTextButtons);
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    createFolderStart: function (_createFolderStart) {
+      function createFolderStart(_x) {
+        return _createFolderStart.apply(this, arguments);
+      }
+
+      createFolderStart.toString = function () {
+        return _createFolderStart.toString();
+      };
+
+      return createFolderStart;
+    }(function (folderCredentials) {
+      return dispatch(createFolderStart(folderCredentials));
+    })
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(null, mapDispatchToProps)(FolderAndTextButtons));
 
 /***/ }),
 
@@ -79202,13 +79133,35 @@ var FolderAndTextButtons = function FolderAndTextButtons() {
 /*!********************************************************************************************!*\
   !*** ./resources/js/components/folder-and-text-buttons/folder-and-text-buttons.styles.jsx ***!
   \********************************************************************************************/
-/*! exports provided: CreateFolderAndTextContainer */
+/*! exports provided: CreateFolderAndTextContainer, FolderDiv, FormAndButton */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateFolderAndTextContainer", function() { return CreateFolderAndTextContainer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FolderDiv", function() { return FolderDiv; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormAndButton", function() { return FormAndButton; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject() {
   var data = _taggedTemplateLiteral(["\n    display: flex;\n    margin-right: 10px;\n    justify-content: flex-end;\n    width: 100%;\n"]);
 
@@ -79223,7 +79176,11 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
  //画面右上の文章作成とフォルダ作成ボタンをまとめる
 
-var CreateFolderAndTextContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject());
+var CreateFolderAndTextContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject()); //Folderボタンと入力フォームをまとめる
+
+var FolderDiv = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2()); //FormとButtonをまとめる
+
+var FormAndButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].form(_templateObject3());
 
 /***/ }),
 
@@ -80205,43 +80162,18 @@ var SignInAndSignUp = function SignInAndSignUp() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
-/* harmony import */ var _components_folder_and_text_buttons_folder_and_text_buttons_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/folder-and-text-buttons/folder-and-text-buttons.component */ "./resources/js/components/folder-and-text-buttons/folder-and-text-buttons.component.jsx");
-/* harmony import */ var _redux_folder_folder_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/folder/folder.actions */ "./resources/js/redux/folder/folder.actions.js");
-/* harmony import */ var _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../redux/user/user.selector */ "./resources/js/redux/user/user.selector.js");
-/* harmony import */ var _background_styles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../background.styles */ "./resources/js/pages/background.styles.jsx");
-
-
-
-
+/* harmony import */ var _components_folder_and_text_buttons_folder_and_text_buttons_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/folder-and-text-buttons/folder-and-text-buttons.component */ "./resources/js/components/folder-and-text-buttons/folder-and-text-buttons.component.jsx");
+/* harmony import */ var _background_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../background.styles */ "./resources/js/pages/background.styles.jsx");
 
  //背景
 
 
 
-var UserPage = function UserPage(_ref) {
-  var user = _ref.user,
-      fetchFoldersStart = _ref.fetchFoldersStart;
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    fetchFoldersStart(user);
-  }, []);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_6__["BasicBackground"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_folder_and_text_buttons_folder_and_text_buttons_component__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+var UserPage = function UserPage() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_2__["BasicBackground"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_folder_and_text_buttons_folder_and_text_buttons_component__WEBPACK_IMPORTED_MODULE_1__["default"], null));
 };
 
-var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_2__["createStructuredSelector"])({
-  user: _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_5__["selectCurrentUser"]
-});
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    fetchFoldersStart: function fetchFoldersStart(user) {
-      return dispatch(Object(_redux_folder_folder_actions__WEBPACK_IMPORTED_MODULE_4__["fetchFoldersStart"])(user));
-    }
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(UserPage));
+/* harmony default export */ __webpack_exports__["default"] = (UserPage);
 
 /***/ }),
 
@@ -80390,14 +80322,13 @@ var ErrorTypes = {
 /*!*****************************************************!*\
   !*** ./resources/js/redux/folder/folder.actions.js ***!
   \*****************************************************/
-/*! exports provided: setDuringFolder, createDuringFolder, fetchFoldersStart */
+/*! exports provided: setDuringFolder, createDuringFolder */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setDuringFolder", function() { return setDuringFolder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createDuringFolder", function() { return createDuringFolder; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchFoldersStart", function() { return fetchFoldersStart; });
 /* harmony import */ var _folder_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./folder.types */ "./resources/js/redux/folder/folder.types.js");
  // export const createFolder = ({folderCredentials}) => ({
 //     type: FolderActionTypes.CREATE_FOLDER,
@@ -80416,14 +80347,6 @@ var createDuringFolder = function createDuringFolder(_ref) {
     type: _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].CREATE_DURING_FOLDER,
     payload: {
       folderCredentials: folderCredentials
-    }
-  };
-};
-var fetchFoldersStart = function fetchFoldersStart(user) {
-  return {
-    type: _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].FETCH_FOLDERS_START,
-    payload: {
-      user: user
     }
   };
 };
@@ -80449,8 +80372,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var INITIAL_STATE = {
   folders: [],
-  duringFolder: [],
-  isFetching: false
+  duringFolder: []
 };
 
 var folderReducer = function folderReducer() {
@@ -80458,11 +80380,6 @@ var folderReducer = function folderReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].FETCH_FOLDERS_START:
-      return _objectSpread(_objectSpread({}, state), {}, {
-        isFetching: true
-      });
-
     case _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].SET_DURING_FOLDER:
       return _objectSpread(_objectSpread({}, state), {}, {
         duringFolder: action.payload
@@ -80481,15 +80398,13 @@ var folderReducer = function folderReducer() {
 /*!***************************************************!*\
   !*** ./resources/js/redux/folder/folder.sagas.js ***!
   \***************************************************/
-/*! exports provided: createDuringFolder, onCreateDuringFolder, fetchFoldersAsync, fetchFoldersStart, folderSagas */
+/*! exports provided: createDuringFolder, onCreateDuringFolder, folderSagas */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createDuringFolder", function() { return createDuringFolder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onCreateDuringFolder", function() { return onCreateDuringFolder; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchFoldersAsync", function() { return fetchFoldersAsync; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchFoldersStart", function() { return fetchFoldersStart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "folderSagas", function() { return folderSagas; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -80502,9 +80417,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(createDuringFolder),
     _marked2 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(onCreateDuringFolder),
-    _marked3 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(fetchFoldersAsync),
-    _marked4 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(fetchFoldersStart),
-    _marked5 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(folderSagas);
+    _marked3 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(folderSagas);
 
 
 
@@ -80556,54 +80469,20 @@ function onCreateDuringFolder() {
     }
   }, _marked2);
 }
-function fetchFoldersAsync(_ref2) {
-  var user, id;
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function fetchFoldersAsync$(_context3) {
+function folderSagas() {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function folderSagas$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
-          user = _ref2.payload.user;
-          //個人データの読み込み開始
-          id = user.id;
-          console.log("個人データの読み込み開始");
-          console.log(user);
+          _context3.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(onCreateDuringFolder)]);
 
-        case 4:
+        case 2:
         case "end":
           return _context3.stop();
       }
     }
   }, _marked3);
-}
-function fetchFoldersStart() {
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function fetchFoldersStart$(_context4) {
-    while (1) {
-      switch (_context4.prev = _context4.next) {
-        case 0:
-          _context4.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_folder_types__WEBPACK_IMPORTED_MODULE_4__["default"].FETCH_FOLDERS_START, fetchFoldersAsync);
-
-        case 2:
-        case "end":
-          return _context4.stop();
-      }
-    }
-  }, _marked4);
-}
-function folderSagas() {
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function folderSagas$(_context5) {
-    while (1) {
-      switch (_context5.prev = _context5.next) {
-        case 0:
-          _context5.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(onCreateDuringFolder), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(fetchFoldersStart)]);
-
-        case 2:
-        case "end":
-          return _context5.stop();
-      }
-    }
-  }, _marked5);
 }
 
 /***/ }),
@@ -80620,8 +80499,7 @@ __webpack_require__.r(__webpack_exports__);
 var FolderActionTypes = {
   CREATE_FOLDER: "CREATE_FOLDER",
   SET_DURING_FOLDER: "SET_DURING_FOLDER",
-  CREATE_DURING_FOLDER: "CREATE_DURING_FOLDER",
-  FETCH_FOLDERS_START: "FETCH_FOLDERS_START"
+  CREATE_DURING_FOLDER: "CREATE_DURING_FOLDER"
 };
 /* harmony default export */ __webpack_exports__["default"] = (FolderActionTypes);
 
