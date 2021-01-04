@@ -31,6 +31,6 @@ class Folder extends Model
     protected $fillable = [
         'title',
         'user_id',
-        "user_and_folder_id"
+        "during_id"
     ];
 }
