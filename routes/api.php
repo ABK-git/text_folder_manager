@@ -28,9 +28,10 @@ Route::post('/show',[UserController::class,'show']);
 
 //MainOrSubを登録
 Route::post('/main_or_sub/create', [MainOrSubController::class, 'store']);
-
 //MainOrSubのupdate
 Route::post('/main_or_sub/update', [MainOrSubController::class, 'update']);
+//特定ユーザーのMainOrSubをすべて取得
+Route::get('/main_or_subs/get_all/{id}',[MainOrSubController::class, 'getAll']);
 
 //Folderを登録
 Route::post('/folder/create',[FolderController::class, 'store']);

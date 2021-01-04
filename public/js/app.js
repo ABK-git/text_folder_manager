@@ -78921,7 +78921,8 @@ var CreateFolderForm = function CreateFolderForm(_ref) {
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
       _useState4 = _slicedToArray(_useState3, 2),
       folderCredentials = _useState4[0],
-      setFolderCredentials = _useState4[1];
+      setFolderCredentials = _useState4[1]; //Folder作成フォームの表示・非表示
+
 
   var handleClick = function handleClick() {
     setIsDisplay(!isDisplay);
@@ -78932,7 +78933,6 @@ var CreateFolderForm = function CreateFolderForm(_ref) {
         value = _event$target.value,
         name = _event$target.name;
     setFolderCredentials(_objectSpread(_objectSpread({}, folderCredentials), {}, _defineProperty({}, name, value)));
-    console.log(folderCredentials);
   };
 
   var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useLocation"])();
@@ -80557,7 +80557,7 @@ function onCreateDuringFolder() {
   }, _marked2);
 }
 function fetchFoldersAsync(_ref2) {
-  var user, id;
+  var user, id, main_or_subs;
   return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function fetchFoldersAsync$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
@@ -80567,8 +80567,24 @@ function fetchFoldersAsync(_ref2) {
           id = user.id;
           console.log("個人データの読み込み開始");
           console.log(user);
+          main_or_subs = null; //中間テーブルを取得
 
-        case 4:
+          _context3.next = 7;
+          return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/main_or_subs/get_all/".concat(id)).then(function (response) {
+            return main_or_subs = response.data;
+          });
+
+        case 7:
+          if (!(main_or_subs !== null)) {
+            _context3.next = 11;
+            break;
+          }
+
+          console.log(main_or_subs);
+          _context3.next = 11;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])(Object(_folder_actions__WEBPACK_IMPORTED_MODULE_3__["setDuringFolder"])(main_or_subs));
+
+        case 11:
         case "end":
           return _context3.stop();
       }

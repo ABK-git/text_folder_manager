@@ -35,4 +35,10 @@ class MainOrSubController extends Controller
         $main_or_sub->save();
         return $main_or_sub;
     }
+
+    //中間テーブルをすべて取得する
+    public function getAll($id)
+    {
+        return MainOrSub::where("user_id",$id)->get();
+    }
 }
