@@ -15,7 +15,7 @@ const CreateFolderForm = ({user}) => {
     const [isDisplay, setIsDisplay] = useState(false);
 
     const [folderCredentials, setFolderCredentials] = useState([]);
-
+    //Folder作成フォームの表示・非表示
     const handleClick = () => {
         setIsDisplay(!isDisplay);
     };
@@ -24,7 +24,6 @@ const CreateFolderForm = ({user}) => {
         const { value, name } = event.target;
 
         setFolderCredentials({ ...folderCredentials, [name]: value });
-        console.log(folderCredentials);
     };
 
     const location = useLocation();
@@ -37,7 +36,6 @@ const CreateFolderForm = ({user}) => {
         if(path[1] === undefined){
             console.log(user.id);
         }
-        
     };
     const { folder_name } = folderCredentials;
 

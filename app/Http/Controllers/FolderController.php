@@ -24,4 +24,5 @@ class FolderController extends Controller
         //外部キーを有効化
         Schema::enableForeignKeyConstraints();
     }
+
 }
