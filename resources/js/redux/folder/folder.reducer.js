@@ -16,7 +16,8 @@ const folderReducer = (state = INITIAL_STATE, action) => {
         case FolderActionTypes.SET_DURING_FOLDER:
             return {
                 ...state,
-                duringFolder: action.payload
+                duringFolder: action.payload,
+                isFetching: false
             };
         default:
             return state;

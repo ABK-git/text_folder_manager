@@ -17,7 +17,7 @@ class FolderController extends Controller
         return Folder::create([
             'title' => $request->title,
             'user_id' => $request->user_id,
-            'user_and_folder_id' => $request->user_and_folder_id,
+            'during_id' => $request->user_and_folder_id,
             'main_or_sub' => $request->main_or_sub
         ]);
 

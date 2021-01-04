@@ -27,7 +27,7 @@ class CreateFoldersTable extends Migration
             
             //中間テーブルの外部参照
             $table
-            ->foreignUuid('user_and_folder_id')
+            ->foreignUuid('during_id')
             ->references('id')
             ->on('main_or_subs')
             ->cascadeOnDelete();

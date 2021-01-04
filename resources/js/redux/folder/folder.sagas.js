@@ -9,10 +9,13 @@ export function* createDuringFolder({ payload: { folderCredentials } }) {
 
     yield axios
         .post("/api/main_or_sub/create", folderCredentials)
-        .then(response => (duringFolder = response.data));
+        .then(response => {
+            duringFolder = new Array(response.data)
+        });
 
     if (duringFolder.id !== null) {
         console.log("duringFolder");
+        console.log(duringFolder);
         yield put(setDuringFolder(duringFolder));
     }
 }
