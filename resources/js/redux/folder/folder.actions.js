@@ -21,9 +21,19 @@ export const addFolder = folder => ({
     type: FolderActionTypes.ADD_FOLDER,
     payload: folder
 });
+//FolderをReduxに格納
+export const setFolder = folder => ({
+    type: FolderActionTypes.SET_FOLDER,
+    payload: folder
+});
 
 //ログイン時にユーザーのFolderデータを取得する
 export const fetchFoldersStart = user => ({
     type: FolderActionTypes.FETCH_FOLDERS_START,
     payload: { user }
+});
+
+//ログアウト時にstateを空にする
+export const folderClear = () => ({
+    type: FolderActionTypes.FOLDER_CLEAR
 });

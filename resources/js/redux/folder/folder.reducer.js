@@ -18,9 +18,15 @@ const folderReducer = (state = INITIAL_STATE, action) => {
         case FolderActionTypes.SET_DURING_FOLDER:
             return {
                 ...state,
+                //この時点でFolderの読み込みが終わっていないのでコメントアウト
+                //isFetching: false,
+                duringFolder: action.payload
+            };
+        case FolderActionTypes.SET_FOLDER:
+            return {
+                ...state,
                 isFetching: false,
-                duringFolder: action.payload,
-                
+                folders: action.payload
             };
         case FolderActionTypes.ADD_FOLDER:
             return {
@@ -28,6 +34,13 @@ const folderReducer = (state = INITIAL_STATE, action) => {
                 isFetching: false,
                 folders: addNewFolderToFolders(state.folders, action.payload)
             };
+        case FolderActionTypes.FOLDER_CLEAR:
+            return{
+                ...state,
+                isFetching: false,
+                folders: [],
+                duringFolder: []
+            }
         default:
             return state;
     }
