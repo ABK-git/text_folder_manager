@@ -1,3 +1,3 @@
-export const addNewFolderToFolders = (folders, newFolder) => {
+export const addNew = (folders, newFolder) => {
     return [...folders, newFolder];
 }
