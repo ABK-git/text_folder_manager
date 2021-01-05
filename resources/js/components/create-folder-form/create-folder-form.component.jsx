@@ -1,42 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { createStructuredSelector } from "reselect";
-import { selectDuringFolder } from "../../redux/folder/folder.selector";
 //redux
 import { selectCurrentUser } from "../../redux/user/user.selector";
+import { createStructuredSelector } from "reselect";
+import { createFolder } from "../../redux/folder/folder.actions";
+import { selectDuringFolder } from "../../redux/folder/folder.selector";
 //component
 import CustomButton from "../custom-button/custom-button.component";
 import FormInput from "../form-input/form-input.component";
 //styles
 import { FolderDiv, FormAndButton } from "./create-folder-form.styles";
 
-const CreateFolderForm = ({ user, duringFolder }) => {
+const CreateFolderForm = ({ user, duringFolder, createFolder }) => {
     //入力フォームの表示・非表示
     const [isDisplay, setIsDisplay] = useState(false);
     //Folder名の入力フォーム
     const [folderCredentials, setFolderCredentials] = useState({
-        folder_name: ""
+        title: ""
     });
-    //中間テーブル(一つだけ持つ、これを使って表示Folderを絞り込む)
-    const [during, setDuring] = useState(null);
 
     //URLを取得
     const location = useLocation();
-
-    useEffect(() => {
-        const path = location.pathname.slice(1).split("/");
-        //Userトップのページの場合
-        if (path[1] === undefined && duringFolder !== null) {
-            console.log("topページ");
-            //Mainの中間Folderを取得
-            setDuring(
-                duringFolder.filter(value => {
-                    return value.main_or_sub == true;
-                })
-            );
-        }
-    },[]);
 
     //Folder作成フォームの表示・非表示
     const handleClick = () => {
@@ -52,10 +37,28 @@ const CreateFolderForm = ({ user, duringFolder }) => {
     const handleSubmit = event => {
         event.preventDefault();
 
-        //中間テーブルのidを取得
-        console.log(during);
+        //中間テーブルを割り出す処理は、後々1階層あげてここで処理しないようにする
+        let during = null;
+        const path = location.pathname.slice(1).split("/");
+        //Userトップのページの場合
+        if (path[1] === undefined && duringFolder !== null) {
+            console.log("topページ");
+            //Mainの中間Folderを取得
+            during = duringFolder.filter(value => {
+                return value.main_or_sub == true;
+            })
+        }
+
+        //folderCredentialsに中間テーブルのidとuserのidを付け足す
+        Object.assign(folderCredentials, {
+            during_id: during[0].id,
+            user_id: user.id
+        });
+        console.log(folderCredentials);
+
+        createFolder(folderCredentials);
     };
-    const { folder_name } = folderCredentials;
+    const { title } = folderCredentials;
 
     return (
         <FolderDiv>
@@ -68,8 +71,8 @@ const CreateFolderForm = ({ user, duringFolder }) => {
             >
                 <FormInput
                     type="text"
-                    name="folder_name"
-                    value={folder_name}
+                    name="title"
+                    value={title}
                     handleChange={handleChange}
                     required
                 ></FormInput>
@@ -86,4 +89,8 @@ const mapStateToProps = createStructuredSelector({
     duringFolder: selectDuringFolder
 });
 
-export default connect(mapStateToProps)(CreateFolderForm);
+const mapDispatchToProps = dispatch => ({
+    createFolder: folderCredentials => dispatch(createFolder(folderCredentials))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateFolderForm);
