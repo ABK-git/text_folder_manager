@@ -1,6 +1,6 @@
 import axios from "axios";
 import { all, takeLatest, call, put } from "redux-saga/effects";
-import { addFolder, setDuringFolder, setFolder } from "./folder.actions";
+import { addDuringFolder, addFolder, setDuringFolder, setFolder } from "./folder.actions";
 import FolderActionTypes from "./folder.types";
 
 export function* createDuringFolder({ payload: { folderCredentials } }) {
@@ -14,8 +14,6 @@ export function* createDuringFolder({ payload: { folderCredentials } }) {
         });
 
     if (duringFolder.id !== null) {
-        console.log("duringFolder");
-        console.log(duringFolder);
         yield put(setDuringFolder(duringFolder));
     }
 }
@@ -30,8 +28,6 @@ export function* onCreateDuringFolder() {
 export function* fetchFoldersAsync({ payload: { user } }) {
     //個人データの読み込み開始
     const { id } = user;
-    console.log("個人データの読み込み開始");
-    console.log(user);
 
     let main_or_subs = null;
     //中間テーブルを取得
@@ -51,7 +47,6 @@ export function* fetchFoldersAsync({ payload: { user } }) {
         .then(response => (folders = response.data));
     //FolderをReduxにセットする
     if(folders !== null){
-        console.log(folders);
         yield put(setFolder(folders));
     }
 }
@@ -63,17 +58,21 @@ export function* fetchFoldersStart() {
 export function* createFolder({ payload: folderCredentials }) {
     //作成したFolderの入れ物
     let folder = null;
+    let duringFolder = null;
 
-    console.log(folderCredentials);
-
-    //Folderを作成
+    //FolderとFolderの中間テーブルを作成
     yield axios
         .post("api/folder/create", folderCredentials)
-        .then(response => (folder = response.data));
+        .then(response => {
+            folder = response.data[0];
+            duringFolder = response.data[1];
+        });
     //エラー時の処理も実装する予定
 
-    if (folder !== null) {
-        //Reduxに新しく作成したFolderを追加
+    if (folder !== null && duringFolder !== null) {
+        //新しく作成した中間テーブルを追加
+        yield put(addDuringFolder(duringFolder));
+        //新しく作成したFolderを追加
         yield put(addFolder(folder));
     }
 }

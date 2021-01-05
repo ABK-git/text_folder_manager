@@ -42,7 +42,6 @@ const CreateFolderForm = ({ user, duringFolder, createFolder }) => {
         const path = location.pathname.slice(1).split("/");
         //Userトップのページの場合
         if (path[1] === undefined && duringFolder !== null) {
-            console.log("topページ");
             //Mainの中間Folderを取得
             during = duringFolder.filter(value => {
                 return value.main_or_sub == true;
@@ -54,7 +53,6 @@ const CreateFolderForm = ({ user, duringFolder, createFolder }) => {
             during_id: during[0].id,
             user_id: user.id
         });
-        console.log(folderCredentials);
 
         createFolder(folderCredentials);
     };

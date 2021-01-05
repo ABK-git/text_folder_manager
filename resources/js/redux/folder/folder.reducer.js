@@ -1,5 +1,5 @@
 import FolderActionTypes from "./folder.types";
-import { addNewFolderToFolders } from "./folder.utils";
+import { addNew } from "./folder.utils";
 
 const INITIAL_STATE = {
     folders: [],
@@ -32,15 +32,20 @@ const folderReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 isFetching: false,
-                folders: addNewFolderToFolders(state.folders, action.payload)
+                folders: addNew(state.folders, action.payload)
+            };
+        case FolderActionTypes.ADD_DURING_FOLDER:
+            return {
+                ...state,
+                duringFolder: addNew(state.duringFolder, action.payload)
             };
         case FolderActionTypes.FOLDER_CLEAR:
-            return{
+            return {
                 ...state,
                 isFetching: false,
                 folders: [],
                 duringFolder: []
-            }
+            };
         default:
             return state;
     }

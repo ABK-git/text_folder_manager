@@ -78952,8 +78952,7 @@ var CreateFolderForm = function CreateFolderForm(_ref) {
     var path = location.pathname.slice(1).split("/"); //Userトップのページの場合
 
     if (path[1] === undefined && duringFolder !== null) {
-      console.log("topページ"); //Mainの中間Folderを取得
-
+      //Mainの中間Folderを取得
       during = duringFolder.filter(function (value) {
         return value.main_or_sub == true;
       });
@@ -78964,7 +78963,6 @@ var CreateFolderForm = function CreateFolderForm(_ref) {
       during_id: during[0].id,
       user_id: user.id
     });
-    console.log(folderCredentials);
     createFolder(folderCredentials);
   };
 
@@ -80466,7 +80464,7 @@ var ErrorTypes = {
 /*!*****************************************************!*\
   !*** ./resources/js/redux/folder/folder.actions.js ***!
   \*****************************************************/
-/*! exports provided: setDuringFolder, createDuringFolder, createFolder, addFolder, setFolder, fetchFoldersStart, folderClear */
+/*! exports provided: setDuringFolder, createDuringFolder, createFolder, addFolder, addDuringFolder, setFolder, fetchFoldersStart, folderClear */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -80475,6 +80473,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createDuringFolder", function() { return createDuringFolder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFolder", function() { return createFolder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addFolder", function() { return addFolder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addDuringFolder", function() { return addDuringFolder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setFolder", function() { return setFolder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchFoldersStart", function() { return fetchFoldersStart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "folderClear", function() { return folderClear; });
@@ -80506,6 +80505,13 @@ var addFolder = function addFolder(folder) {
   return {
     type: _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].ADD_FOLDER,
     payload: folder
+  };
+}; //作成した中間テーブルを追加する
+
+var addDuringFolder = function addDuringFolder(duringFolder) {
+  return {
+    type: _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].ADD_DURING_FOLDER,
+    payload: duringFolder
   };
 }; //FolderをReduxに格納
 
@@ -80585,7 +80591,12 @@ var folderReducer = function folderReducer() {
     case _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].ADD_FOLDER:
       return _objectSpread(_objectSpread({}, state), {}, {
         isFetching: false,
-        folders: Object(_folder_utils__WEBPACK_IMPORTED_MODULE_1__["addNewFolderToFolders"])(state.folders, action.payload)
+        folders: Object(_folder_utils__WEBPACK_IMPORTED_MODULE_1__["addNew"])(state.folders, action.payload)
+      });
+
+    case _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].ADD_DURING_FOLDER:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        duringFolder: Object(_folder_utils__WEBPACK_IMPORTED_MODULE_1__["addNew"])(state.duringFolder, action.payload)
       });
 
     case _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].FOLDER_CLEAR:
@@ -80657,16 +80668,14 @@ function createDuringFolder(_ref) {
 
         case 4:
           if (!(duringFolder.id !== null)) {
-            _context.next = 9;
+            _context.next = 7;
             break;
           }
 
-          console.log("duringFolder");
-          console.log(duringFolder);
-          _context.next = 9;
+          _context.next = 7;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])(Object(_folder_actions__WEBPACK_IMPORTED_MODULE_3__["setDuringFolder"])(duringFolder));
 
-        case 9:
+        case 7:
         case "end":
           return _context.stop();
       }
@@ -80697,44 +80706,41 @@ function fetchFoldersAsync(_ref2) {
           user = _ref2.payload.user;
           //個人データの読み込み開始
           id = user.id;
-          console.log("個人データの読み込み開始");
-          console.log(user);
           main_or_subs = null; //中間テーブルを取得
 
-          _context3.next = 7;
+          _context3.next = 5;
           return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/main_or_subs/get_all/".concat(id)).then(function (response) {
             return main_or_subs = response.data;
           });
 
-        case 7:
+        case 5:
           if (!(main_or_subs !== null)) {
-            _context3.next = 11;
+            _context3.next = 9;
             break;
           }
 
           console.log(main_or_subs);
-          _context3.next = 11;
+          _context3.next = 9;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])(Object(_folder_actions__WEBPACK_IMPORTED_MODULE_3__["setDuringFolder"])(main_or_subs));
 
-        case 11:
+        case 9:
           folders = null; //Folderを取得
 
-          _context3.next = 14;
+          _context3.next = 12;
           return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/folder/get_all/".concat(id)).then(function (response) {
             return folders = response.data;
           });
 
-        case 14:
+        case 12:
           if (!(folders !== null)) {
-            _context3.next = 18;
+            _context3.next = 15;
             break;
           }
 
-          console.log(folders);
-          _context3.next = 18;
+          _context3.next = 15;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])(Object(_folder_actions__WEBPACK_IMPORTED_MODULE_3__["setFolder"])(folders));
 
-        case 18:
+        case 15:
         case "end":
           return _context3.stop();
       }
@@ -80757,7 +80763,7 @@ function fetchFoldersStart() {
   }, _marked4);
 }
 function createFolder(_ref3) {
-  var folderCredentials, folder;
+  var folderCredentials, folder, duringFolder;
   return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function createFolder$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
@@ -80765,23 +80771,28 @@ function createFolder(_ref3) {
           folderCredentials = _ref3.payload;
           //作成したFolderの入れ物
           folder = null;
-          console.log(folderCredentials); //Folderを作成
+          duringFolder = null; //FolderとFolderの中間テーブルを作成
 
           _context5.next = 5;
           return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/folder/create", folderCredentials).then(function (response) {
-            return folder = response.data;
+            folder = response.data[0];
+            duringFolder = response.data[1];
           });
 
         case 5:
-          if (!(folder !== null)) {
-            _context5.next = 8;
+          if (!(folder !== null && duringFolder !== null)) {
+            _context5.next = 10;
             break;
           }
 
           _context5.next = 8;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])(Object(_folder_actions__WEBPACK_IMPORTED_MODULE_3__["addFolder"])(folder));
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])(Object(_folder_actions__WEBPACK_IMPORTED_MODULE_3__["addDuringFolder"])(duringFolder));
 
         case 8:
+          _context5.next = 10;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])(Object(_folder_actions__WEBPACK_IMPORTED_MODULE_3__["addFolder"])(folder));
+
+        case 10:
         case "end":
           return _context5.stop();
       }
@@ -80862,6 +80873,7 @@ __webpack_require__.r(__webpack_exports__);
 var FolderActionTypes = {
   CREATE_FOLDER: "CREATE_FOLDER",
   ADD_FOLDER: "ADD_FOLDER",
+  ADD_DURING_FOLDER: "ADD_DURING_FOLDER",
   SET_FOLDER: "SET_FOLDER",
   SET_DURING_FOLDER: "SET_DURING_FOLDER",
   CREATE_DURING_FOLDER: "CREATE_DURING_FOLDER",
@@ -80876,12 +80888,12 @@ var FolderActionTypes = {
 /*!***************************************************!*\
   !*** ./resources/js/redux/folder/folder.utils.js ***!
   \***************************************************/
-/*! exports provided: addNewFolderToFolders */
+/*! exports provided: addNew */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewFolderToFolders", function() { return addNewFolderToFolders; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNew", function() { return addNew; });
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -80894,7 +80906,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-var addNewFolderToFolders = function addNewFolderToFolders(folders, newFolder) {
+var addNew = function addNew(folders, newFolder) {
   return [].concat(_toConsumableArray(folders), [newFolder]);
 };
 
