@@ -1,4 +1,5 @@
 import FolderActionTypes from "./folder.types";
+import { addNewFolderToFolders } from "./folder.utils";
 
 const INITIAL_STATE = {
     folders: [],
@@ -9,6 +10,7 @@ const INITIAL_STATE = {
 const folderReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case FolderActionTypes.FETCH_FOLDERS_START:
+        case FolderActionTypes.CREATE_FOLDER:
             return {
                 ...state,
                 isFetching: true
@@ -16,8 +18,15 @@ const folderReducer = (state = INITIAL_STATE, action) => {
         case FolderActionTypes.SET_DURING_FOLDER:
             return {
                 ...state,
+                isFetching: false,
                 duringFolder: action.payload,
-                isFetching: false
+                
+            };
+        case FolderActionTypes.ADD_FOLDER:
+            return {
+                ...state,
+                isFetching: false,
+                folders: addNewFolderToFolders(state.folders, action.payload)
             };
         default:
             return state;

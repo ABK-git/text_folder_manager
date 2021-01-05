@@ -1,21 +1,29 @@
 import FolderActionTypes from "./folder.types";
 
-// export const createFolder = ({folderCredentials}) => ({
-//     type: FolderActionTypes.CREATE_FOLDER,
-//     payload: {folderCredentials}
-// });
 //中間テーブルをReduxに格納
-export const setDuringFolder = (duringFolder) => ({
+export const setDuringFolder = duringFolder => ({
     type: FolderActionTypes.SET_DURING_FOLDER,
     payload: duringFolder
 });
 //中間テーブルの作成
-export const createDuringFolder = (folderCredentials) => ({
+export const createDuringFolder = folderCredentials => ({
     type: FolderActionTypes.CREATE_DURING_FOLDER,
-    payload : folderCredentials
+    payload: folderCredentials
 });
+
+//Folderを作成する
+export const createFolder = folderCredentials => ({
+    type: FolderActionTypes.CREATE_FOLDER,
+    payload: folderCredentials
+});
+//作成したFolderを追加する
+export const addFolder = folder => ({
+    type: FolderActionTypes.ADD_FOLDER,
+    payload: folder
+});
+
 //ログイン時にユーザーのFolderデータを取得する
-export const fetchFoldersStart = (user) => ({
+export const fetchFoldersStart = user => ({
     type: FolderActionTypes.FETCH_FOLDERS_START,
-    payload: {user}
+    payload: { user }
 });
