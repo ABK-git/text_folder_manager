@@ -17,4 +17,10 @@ class FolderController extends Controller
         ]);
     }
 
+    //Folderをすべて取得する
+    public function getAll($id)
+    {
+        return Folder::where("user_id",$id)->get();
+    }
+
 }

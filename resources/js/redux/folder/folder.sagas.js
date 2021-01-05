@@ -1,6 +1,6 @@
 import axios from "axios";
 import { all, takeLatest, call, put } from "redux-saga/effects";
-import { addFolder, setDuringFolder } from "./folder.actions";
+import { addFolder, setDuringFolder, setFolder } from "./folder.actions";
 import FolderActionTypes from "./folder.types";
 
 export function* createDuringFolder({ payload: { folderCredentials } }) {
@@ -43,6 +43,17 @@ export function* fetchFoldersAsync({ payload: { user } }) {
         console.log(main_or_subs);
         yield put(setDuringFolder(main_or_subs));
     }
+
+    let folders = null;
+    //Folderを取得
+    yield axios
+        .get(`/api/folder/get_all/${id}`)
+        .then(response => (folders = response.data));
+    //FolderをReduxにセットする
+    if(folders !== null){
+        console.log(folders);
+        yield put(setFolder(folders));
+    }
 }
 
 export function* fetchFoldersStart() {
@@ -61,7 +72,7 @@ export function* createFolder({ payload: folderCredentials }) {
         .then(response => (folder = response.data));
     //エラー時の処理も実装する予定
 
-    if(folder !== null){
+    if (folder !== null) {
         //Reduxに新しく作成したFolderを追加
         yield put(addFolder(folder));
     }

@@ -79443,10 +79443,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
-/* harmony import */ var _redux_user_user_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../redux/user/user.actions */ "./resources/js/redux/user/user.actions.js");
-/* harmony import */ var _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/user/user.selector */ "./resources/js/redux/user/user.selector.js");
-/* harmony import */ var _header_styles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./header.styles */ "./resources/js/components/header/header.styles.jsx");
+/* harmony import */ var _redux_folder_folder_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../redux/folder/folder.actions */ "./resources/js/redux/folder/folder.actions.js");
+/* harmony import */ var _redux_user_user_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/user/user.actions */ "./resources/js/redux/user/user.actions.js");
+/* harmony import */ var _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../redux/user/user.selector */ "./resources/js/redux/user/user.selector.js");
+/* harmony import */ var _header_styles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./header.styles */ "./resources/js/components/header/header.styles.jsx");
  //redux
+
 
 
 
@@ -79457,23 +79459,33 @@ __webpack_require__.r(__webpack_exports__);
 
 var Header = function Header(_ref) {
   var user = _ref.user,
-      signOut = _ref.signOut;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_5__["HeaderContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_5__["LogoToHomeContainer"], {
+      signOut = _ref.signOut,
+      folderClear = _ref.folderClear;
+
+  var handleClick = function handleClick() {
+    signOut();
+    folderClear();
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["HeaderContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["LogoToHomeContainer"], {
     to: "/"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_5__["OptionsContainer"], null, user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_5__["OptionLink"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["OptionsContainer"], null, user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["OptionLink"], {
     to: "/",
-    onClick: signOut
+    onClick: handleClick
   }, "SIGN OUT") : ""));
 };
 
 var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_2__["createStructuredSelector"])({
-  user: _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_4__["selectCurrentUser"]
+  user: _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_5__["selectCurrentUser"]
 });
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     signOut: function signOut() {
-      return dispatch(Object(_redux_user_user_actions__WEBPACK_IMPORTED_MODULE_3__["signOut"])());
+      return dispatch(Object(_redux_user_user_actions__WEBPACK_IMPORTED_MODULE_4__["signOut"])());
+    },
+    folderClear: function folderClear() {
+      return dispatch(Object(_redux_folder_folder_actions__WEBPACK_IMPORTED_MODULE_3__["folderClear"])());
     }
   };
 };
@@ -80454,7 +80466,7 @@ var ErrorTypes = {
 /*!*****************************************************!*\
   !*** ./resources/js/redux/folder/folder.actions.js ***!
   \*****************************************************/
-/*! exports provided: setDuringFolder, createDuringFolder, createFolder, addFolder, fetchFoldersStart */
+/*! exports provided: setDuringFolder, createDuringFolder, createFolder, addFolder, setFolder, fetchFoldersStart, folderClear */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -80463,7 +80475,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createDuringFolder", function() { return createDuringFolder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFolder", function() { return createFolder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addFolder", function() { return addFolder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setFolder", function() { return setFolder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchFoldersStart", function() { return fetchFoldersStart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "folderClear", function() { return folderClear; });
 /* harmony import */ var _folder_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./folder.types */ "./resources/js/redux/folder/folder.types.js");
  //中間テーブルをReduxに格納
 
@@ -80493,6 +80507,13 @@ var addFolder = function addFolder(folder) {
     type: _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].ADD_FOLDER,
     payload: folder
   };
+}; //FolderをReduxに格納
+
+var setFolder = function setFolder(folder) {
+  return {
+    type: _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].SET_FOLDER,
+    payload: folder
+  };
 }; //ログイン時にユーザーのFolderデータを取得する
 
 var fetchFoldersStart = function fetchFoldersStart(user) {
@@ -80501,6 +80522,12 @@ var fetchFoldersStart = function fetchFoldersStart(user) {
     payload: {
       user: user
     }
+  };
+}; //ログアウト時にstateを空にする
+
+var folderClear = function folderClear() {
+  return {
+    type: _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].FOLDER_CLEAR
   };
 };
 
@@ -80544,14 +80571,28 @@ var folderReducer = function folderReducer() {
 
     case _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].SET_DURING_FOLDER:
       return _objectSpread(_objectSpread({}, state), {}, {
-        isFetching: false,
+        //この時点でFolderの読み込みが終わっていないのでコメントアウト
+        //isFetching: false,
         duringFolder: action.payload
+      });
+
+    case _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].SET_FOLDER:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        isFetching: false,
+        folders: action.payload
       });
 
     case _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].ADD_FOLDER:
       return _objectSpread(_objectSpread({}, state), {}, {
         isFetching: false,
         folders: Object(_folder_utils__WEBPACK_IMPORTED_MODULE_1__["addNewFolderToFolders"])(state.folders, action.payload)
+      });
+
+    case _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].FOLDER_CLEAR:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        isFetching: false,
+        folders: [],
+        duringFolder: []
       });
 
     default:
@@ -80648,7 +80689,7 @@ function onCreateDuringFolder() {
   }, _marked2);
 }
 function fetchFoldersAsync(_ref2) {
-  var user, id, main_or_subs;
+  var user, id, main_or_subs, folders;
   return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function fetchFoldersAsync$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
@@ -80676,6 +80717,24 @@ function fetchFoldersAsync(_ref2) {
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])(Object(_folder_actions__WEBPACK_IMPORTED_MODULE_3__["setDuringFolder"])(main_or_subs));
 
         case 11:
+          folders = null; //Folderを取得
+
+          _context3.next = 14;
+          return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/folder/get_all/".concat(id)).then(function (response) {
+            return folders = response.data;
+          });
+
+        case 14:
+          if (!(folders !== null)) {
+            _context3.next = 18;
+            break;
+          }
+
+          console.log(folders);
+          _context3.next = 18;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])(Object(_folder_actions__WEBPACK_IMPORTED_MODULE_3__["setFolder"])(folders));
+
+        case 18:
         case "end":
           return _context3.stop();
       }
@@ -80803,9 +80862,11 @@ __webpack_require__.r(__webpack_exports__);
 var FolderActionTypes = {
   CREATE_FOLDER: "CREATE_FOLDER",
   ADD_FOLDER: "ADD_FOLDER",
+  SET_FOLDER: "SET_FOLDER",
   SET_DURING_FOLDER: "SET_DURING_FOLDER",
   CREATE_DURING_FOLDER: "CREATE_DURING_FOLDER",
-  FETCH_FOLDERS_START: "FETCH_FOLDERS_START"
+  FETCH_FOLDERS_START: "FETCH_FOLDERS_START",
+  FOLDER_CLEAR: "FOLDER_CLEAR"
 };
 /* harmony default export */ __webpack_exports__["default"] = (FolderActionTypes);
 
