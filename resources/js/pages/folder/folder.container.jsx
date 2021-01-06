@@ -1,18 +1,19 @@
+//Redux
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { createStructuredSelector } from "reselect";
-
 import { selectIsDuringFolderFetching } from "../../redux/folder/folder.selector";
-import WithSpinner from "../with-spinner/with-spinner.component";
-import createFolderForm from "./create-folder-form.component";
+//component
+import Folder from "./folder.component";
+import WithSpinner from "../../components/with-spinner/with-spinner.component";
 
 const mapStateToProps = createStructuredSelector({
     isLoading: state => selectIsDuringFolderFetching(state)
 });
 //Folderデータの読み込みが終わるまで待つ
-const CreateFolderFormContainer = compose(
+const FolderContainer = compose(
     connect(mapStateToProps),
     WithSpinner
-)(createFolderForm);
+)(Folder);
 
-export default CreateFolderFormContainer;
+export default FolderContainer;

@@ -8,6 +8,12 @@ export const selectDuringFolder = createSelector(
     folder => folder.duringFolder
 );
 
+//Folderを取得する
+export const selectFolders = createSelector(
+    [selectFolder],
+    folder => folder.folders
+);
+
 //読み込み中か否かを取得
 export const selectIsDuringFolderFetching = createSelector(
     [selectFolder],

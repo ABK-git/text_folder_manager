@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 //component
-import CreateFolderFormContainer from "../create-folder-form/create-folder-form.container";
+import CreateFolderForm from "../create-folder-form/create-folder-form.component";
 import CustomButton from "../custom-button/custom-button.component";
 
 import { CreateFolderAndTextContainer } from "./folder-and-text-buttons.styles.jsx";
 
-const FolderAndTextButtons = () => (
-
+const FolderAndTextButtons = ({duringFolder, folders}) => (
     <CreateFolderAndTextContainer>
         <CustomButton design="createText">Text</CustomButton>
-        <CreateFolderFormContainer/>
+        <CreateFolderForm duringFolder={duringFolder}/>
     </CreateFolderAndTextContainer>
 );
 
