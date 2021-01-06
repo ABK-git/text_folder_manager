@@ -1,22 +1,26 @@
 import React, { useEffect } from "react";
+import { Route } from "react-router-dom";
+//redux
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-
-import FolderAndTextButtons from "../../components/folder-and-text-buttons/folder-and-text-buttons.component";
 import { fetchFoldersStart } from "../../redux/folder/folder.actions";
-
 import { selectCurrentUser } from "../../redux/user/user.selector";
-//背景
-import { BasicBackground } from "../background.styles";
+//component
+import FolderContainer from "../folder/folder.container";
 
-const UserPage = ({ user, fetchFoldersStart }) => {
+const UserPage = ({ user, fetchFoldersStart, match }) => {
     useEffect(() => {
         fetchFoldersStart(user);
-    }, []);
+    }, [fetchFoldersStart]);
+
     return (
-        <BasicBackground>
-            <FolderAndTextButtons />
-        </BasicBackground>
+        <div>
+            <Route
+              exact
+              path={`${match.path}`}
+              component={FolderContainer}
+            />
+        </div>
     );
 };
 
