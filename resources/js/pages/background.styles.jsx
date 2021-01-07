@@ -12,3 +12,8 @@ export const BasicBackground = styled.div`
     height: calc(100vh - 70px);
     width: 100vw;
 `;
+
+export const Background = styled.div`
+    height: calc(100vh - 70px);
+    width: 100vw;
+`;
