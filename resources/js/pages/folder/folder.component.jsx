@@ -8,8 +8,10 @@ import {
     selectFolders
 } from "../../redux/folder/folder.selector";
 //背景
-import { BasicBackground } from "../background.styles";
+import { Background } from "../background.styles";
+//components
 import FolderAndTextButtons from "../../components/folder-and-text-buttons/folder-and-text-buttons.component";
+import DisplayDocument from "../../components/display-document/display-document.component";
 
 const Folder = ({ duringFolder, folders }) => {
     //Locationを取得する
@@ -19,23 +21,22 @@ const Folder = ({ duringFolder, folders }) => {
 
     //中間テーブルとFolderの入れ物
     let during = null;
-    let folder = null;
+    let folder = new Array();
 
     //Userページ直下の場合
     if (path[1] === undefined) {
         //直下のFolderと中間テーブルを取得
-        during = duringFolder.filter(value => {
-            return value.main_or_sub == true;
-        });
+        during = duringFolder.find(value => value.main_or_sub == true);
         folder = folders.filter(value => {
-            return value.during_id === during[0].id;
+            return value.during_id === during.id;
         });
     }
 
     return (
-        <BasicBackground>
-            <FolderAndTextButtons duringFolder={during[0]} folders={folder}/>
-        </BasicBackground>
+        <Background>
+            <FolderAndTextButtons duringFolder={during}/>
+            <DisplayDocument folders={folder}/>
+        </Background>
     );
 };
 

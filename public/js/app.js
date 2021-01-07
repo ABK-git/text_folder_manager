@@ -79491,6 +79491,162 @@ var FolderButtonContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["defa
 
 /***/ }),
 
+/***/ "./resources/js/components/display-document/display-document.component.jsx":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/display-document/display-document.component.jsx ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _display_folder_display_folder_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../display-folder/display-folder.component */ "./resources/js/components/display-folder/display-folder.component.jsx");
+/* harmony import */ var _display_document_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./display-document.styles */ "./resources/js/components/display-document/display-document.styles.jsx");
+ //components
+
+ //css
+
+
+
+var DisplayDocument = function DisplayDocument(_ref) {
+  var folders = _ref.folders;
+  return (
+    /*#__PURE__*/
+    //textを実装したらここでFolderとtextを合成して
+    //updateで並び替えとidでmapを使う
+    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_document_styles__WEBPACK_IMPORTED_MODULE_2__["DisplayContainer"], null, folders.map(function (folder) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_display_folder_component__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        key: folder.id,
+        folder: folder
+      });
+    }))
+  );
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (DisplayDocument);
+
+/***/ }),
+
+/***/ "./resources/js/components/display-document/display-document.styles.jsx":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/display-document/display-document.styles.jsx ***!
+  \******************************************************************************/
+/*! exports provided: DisplayContainer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DisplayContainer", function() { return DisplayContainer; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    text-align: center;\n    display: grid;\n    grid-template-columns: 1fr 1fr 1fr 1fr;\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+
+var DisplayContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject());
+
+/***/ }),
+
+/***/ "./resources/js/components/display-folder/display-folder.component.jsx":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/display-folder/display-folder.component.jsx ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _display_folder_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./display-folder.styles */ "./resources/js/components/display-folder/display-folder.styles.jsx");
+
+
+
+var DisplayFolder = function DisplayFolder(_ref) {
+  var folder = _ref.folder;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_1__["DisplayFolderContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_1__["BackgroundImage"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_1__["FolderFooter"], null, folder.title));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (DisplayFolder);
+
+/***/ }),
+
+/***/ "./resources/js/components/display-folder/display-folder.styles.jsx":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/display-folder/display-folder.styles.jsx ***!
+  \**************************************************************************/
+/*! exports provided: DisplayFolderContainer, BackgroundImage, FolderFooter */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DisplayFolderContainer", function() { return DisplayFolderContainer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BackgroundImage", function() { return BackgroundImage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FolderFooter", function() { return FolderFooter; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 10%;\n  text-align: center;\n  font-size: 16px;\n  font-weight: bold;\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n    width: 100%;\n    height: 90%;\n    background-size: cover;\n    background-position: center;\n    margin-bottom: 5px;\n    background-image: url(\"/images/display-document/display-folder/folder.jpg\");\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    position: relative;\n    width: 22vw;\n    height: 30vh;\n    margin-top: 20px;\n    margin-left: 20px;\n    cursor: pointer;\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+ // export const DisplayFolderContainer = styled.div`
+//     margin-top: 20px;
+//     display: inline-block;
+//     width: 20vw;
+//     height: 10%;
+//     text-align: center;
+// `;
+// export const BackgroundImage = styled.div`
+//     width: 80%;
+//     height: 20%;
+//     background-size: cover;
+//     background-position: center;
+//     background-image: url("/images/display-document/display-folder/folder.jpg");
+// `;
+
+var DisplayFolderContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject());
+var BackgroundImage = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2());
+var FolderFooter = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3());
+
+/***/ }),
+
 /***/ "./resources/js/components/folder-and-text-buttons/folder-and-text-buttons.component.jsx":
 /*!***********************************************************************************************!*\
   !*** ./resources/js/components/folder-and-text-buttons/folder-and-text-buttons.component.jsx ***!
@@ -79512,8 +79668,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var FolderAndTextButtons = function FolderAndTextButtons(_ref) {
-  var duringFolder = _ref.duringFolder,
-      folders = _ref.folders;
+  var duringFolder = _ref.duringFolder;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_folder_and_text_buttons_styles_jsx__WEBPACK_IMPORTED_MODULE_3__["CreateFolderAndTextContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
     design: "createText"
   }, "Text"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_folder_form_create_folder_form_component__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -79537,7 +79692,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateFolderAndTextContainer", function() { return CreateFolderAndTextContainer; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n    display: flex;\n    margin-right: 10px;\n    justify-content: flex-end;\n    width: 100%;\n"]);
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    padding-right: 40px;\n    justify-content: flex-end;\n    width: 100%;\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -80436,14 +80591,25 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEB
 /*!**************************************************!*\
   !*** ./resources/js/pages/background.styles.jsx ***!
   \**************************************************/
-/*! exports provided: SpaceBetweenBackground, BasicBackground */
+/*! exports provided: SpaceBetweenBackground, BasicBackground, Background */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SpaceBetweenBackground", function() { return SpaceBetweenBackground; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BasicBackground", function() { return BasicBackground; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Background", function() { return Background; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n    height: calc(100vh - 70px);\n    width: 100vw;\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject2() {
   var data = _taggedTemplateLiteral(["\n    display: flex;\n    height: calc(100vh - 70px);\n    width: 100vw;\n"]);
 
@@ -80469,6 +80635,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 var SpaceBetweenBackground = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject());
 var BasicBackground = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2());
+var Background = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3());
 
 /***/ }),
 
@@ -80489,12 +80656,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _redux_folder_folder_selector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/folder/folder.selector */ "./resources/js/redux/folder/folder.selector.js");
 /* harmony import */ var _background_styles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../background.styles */ "./resources/js/pages/background.styles.jsx");
 /* harmony import */ var _components_folder_and_text_buttons_folder_and_text_buttons_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/folder-and-text-buttons/folder-and-text-buttons.component */ "./resources/js/components/folder-and-text-buttons/folder-and-text-buttons.component.jsx");
+/* harmony import */ var _components_display_document_display_document_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/display-document/display-document.component */ "./resources/js/components/display-document/display-document.component.jsx");
 
  //redux
 
 
 
  //背景
+
+ //components
 
 
 
@@ -80508,20 +80678,21 @@ var Folder = function Folder(_ref) {
   var path = location.pathname.slice(1).split("/"); //中間テーブルとFolderの入れ物
 
   var during = null;
-  var folder = null; //Userページ直下の場合
+  var folder = new Array(); //Userページ直下の場合
 
   if (path[1] === undefined) {
     //直下のFolderと中間テーブルを取得
-    during = duringFolder.filter(function (value) {
+    during = duringFolder.find(function (value) {
       return value.main_or_sub == true;
     });
     folder = folders.filter(function (value) {
-      return value.during_id === during[0].id;
+      return value.during_id === during.id;
     });
   }
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_5__["BasicBackground"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_folder_and_text_buttons_folder_and_text_buttons_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    duringFolder: during[0],
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_5__["Background"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_folder_and_text_buttons_folder_and_text_buttons_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    duringFolder: during
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_display_document_display_document_component__WEBPACK_IMPORTED_MODULE_7__["default"], {
     folders: folder
   }));
 };
