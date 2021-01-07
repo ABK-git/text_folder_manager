@@ -1,30 +1,27 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import { Spinner } from "@styled-icons/evil/Spinner";
 
 export const SpinnerOverlay = styled.div`
-  height: 60vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
 `;
-//Spinner本体
-export const SpinnerContainer = styled.div`
-  display: inline-block;
-  width: 80%;
-  height: 50%;
-  border: 3px solid rgba(195, 195, 195, 0.6);
-  border-radius: 50%;
-  border-top-color: #636767;
-  animation: spin 1s ease-in-out infinite;
-  -webkit-animation: spin 1s ease-in-out infinite;
-  @keyframes spin {
-    to {
-      -webkit-transform: rotate(360deg);
+
+export const SpinnerAnimation = styled(Spinner)`
+    width: 33%;
+    margin-bottom: 100px;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+    @keyframes spin {
+        to {
+            -webkit-transform: rotate(360deg);
+        }
     }
-  }
-  @-webkit-keyframes spin {
-    to {
-      -webkit-transform: rotate(360deg);
+    @-webkit-keyframes spin {
+        to {
+            -webkit-transform: rotate(360deg);
+        }
     }
-  }
 `;
