@@ -49,7 +49,6 @@ const Folder = ({ duringFolder, folders }) => {
     // }
     if(path[1] != undefined){
         const index = path.length;
-        console.log(index);
 
         const selectFolder = folders.find(value => path[index-1] === value.title);
         console.log(selectFolder);
@@ -57,11 +56,6 @@ const Folder = ({ duringFolder, folders }) => {
         folder = folders.filter(value => {
             return value.during_id === during.id;
         });
-        console.log("during");
-        console.log(during);
-        console.log("folder");
-        console.log(folder);
-        
     }
 
     return (

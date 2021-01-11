@@ -10,7 +10,12 @@ import FormInput from "../form-input/form-input.component";
 //styles
 import { FolderDiv, FormAndButton } from "./create-folder-form.styles";
 
-const CreateFolderForm = ({ user, duringFolder, createFolder, haveFolders }) => {
+const CreateFolderForm = ({
+    user,
+    duringFolder,
+    createFolder,
+    haveFolders
+}) => {
     //入力フォームの表示・非表示
     const [isDisplay, setIsDisplay] = useState(false);
     //Folder名の入力フォーム
@@ -32,14 +37,24 @@ const CreateFolderForm = ({ user, duringFolder, createFolder, haveFolders }) => 
     const handleSubmit = event => {
         event.preventDefault();
 
-        //folderCredentialsに中間テーブルのidとuserのidを付け足す
-        Object.assign(folderCredentials, {
-            during_id: duringFolder.id,
-            user_id: user.id
-        });
-        console.log(folderCredentials);
-        createFolder(folderCredentials);
+        //同じ階層に同名フォルダが存在しているかを調べる
+        const existsFolderName = haveFolders.find(
+            value => value.title === folderCredentials.title
+        );
+        
+        if (existsFolderName === undefined) {
+            //folderCredentialsに中間テーブルのidとuserのidを付け足す
+            Object.assign(folderCredentials, {
+                during_id: duringFolder.id,
+                user_id: user.id
+            });
+
+            createFolder(folderCredentials);
+        }else{
+            console.log("同名フォルダが存在しています");
+        }
     };
+
     const { title } = folderCredentials;
 
     return (
@@ -67,7 +82,7 @@ const CreateFolderForm = ({ user, duringFolder, createFolder, haveFolders }) => 
 };
 
 const mapStateToProps = createStructuredSelector({
-    user: selectCurrentUser,
+    user: selectCurrentUser
 });
 
 const mapDispatchToProps = dispatch => ({
