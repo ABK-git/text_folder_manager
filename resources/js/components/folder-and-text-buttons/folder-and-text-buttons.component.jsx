@@ -5,10 +5,10 @@ import CustomButton from "../custom-button/custom-button.component";
 
 import { CreateFolderAndTextContainer } from "./folder-and-text-buttons.styles.jsx";
 
-const FolderAndTextButtons = ({duringFolder}) => (
+const FolderAndTextButtons = ({duringFolder, haveFolders}) => (
     <CreateFolderAndTextContainer>
         <CustomButton design="createText">Text</CustomButton>
-        <CreateFolderForm duringFolder={duringFolder}/>
+        <CreateFolderForm duringFolder={duringFolder} haveFolders={haveFolders}/>
     </CreateFolderAndTextContainer>
 );
 

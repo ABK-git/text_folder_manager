@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import {useHistory} from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../redux/user/user.selector";
 
@@ -12,9 +12,20 @@ import {
 
 const DisplayFolder = ({ folder, user }) => {
     const history = useHistory();
+    const location = useLocation();
+
     return (
         <DisplayFolderContainer
-            onClick={() => history.push(`/${user.displayName}/folder/${folder.title}`)}
+            onClick={() => {
+                const path = location.pathname.slice(1).split("/");
+                
+                if (path.length === 1) {
+                    history.push(`${user.displayName}/_folder/${folder.title}`);
+                } else {
+                    history.push(`${location.pathname}/${folder.title}`);
+                }
+            }}
+            //onClick={() => history.push(`${user.displayName}/folder/${folder.title}`)}
         >
             <BackgroundImage />
             <FolderFooter>{folder.title}</FolderFooter>
