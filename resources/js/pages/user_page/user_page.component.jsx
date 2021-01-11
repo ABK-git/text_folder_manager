@@ -7,6 +7,7 @@ import { fetchFoldersStart } from "../../redux/folder/folder.actions";
 import { selectCurrentUser } from "../../redux/user/user.selector";
 //component
 import FolderContainer from "../folder/folder.container";
+import PrivateUserRoute from "../../route/private_user_root.component";
 
 const UserPage = ({ user, fetchFoldersStart, match }) => {
     useEffect(() => {
@@ -15,9 +16,13 @@ const UserPage = ({ user, fetchFoldersStart, match }) => {
 
     return (
         <div>
-            <Route
+            <PrivateUserRoute
               exact
               path={`${match.path}`}
+              component={FolderContainer}
+            />
+            <Route
+              path={`${match.path}/folder/`+":folder_name"}
               component={FolderContainer}
             />
         </div>

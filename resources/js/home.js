@@ -7,7 +7,6 @@ import UserPage from "./pages/user_page/user_page.component";
 import SignInAndSignUpContainer from "./pages/sign_in_and_sign_up/sign_in_and_sign_up.container";
 //Root
 import SignOutRoute from "./route/sign-out-root.component";
-import PrivateUserRoot from "./route/private_user_root.component";
 
 const Home = () => {
     return (
@@ -15,7 +14,7 @@ const Home = () => {
             <Header />
             <Switch>
                 <SignOutRoute exact path="/" component={SignInAndSignUpContainer} />
-                <PrivateUserRoot path="/:user_name" component={UserPage}/>
+                <Route path="/:user_name" component={UserPage}/>
             </Switch>
         </div>
     );

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Redirect, Route } from "react-router-dom";
+import { Redirect, Route, useLocation } from "react-router-dom";
 import { selectCurrentUser } from "../redux/user/user.selector";
 import { createStructuredSelector } from "reselect";
 import { errorClear } from "../redux/error/error.actions";
@@ -8,16 +8,12 @@ import { errorClear } from "../redux/error/error.actions";
 //ログイン時ホームにリダイレクトするRoute
 const PrivateUserRoot = ({
     component: Component,
-    location,
     user,
     errorClear,
     ...rest
 }) => {
-    //画面移動時にエラーを削除する
-    // useEffect(() => {
-    //     errorClear();
-    // });
-
+    const location = useLocation();
+    
     return (
         <Route
             {...rest}

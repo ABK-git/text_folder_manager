@@ -25,17 +25,31 @@ const Folder = ({ duringFolder, folders }) => {
 
     //Userページ直下の場合
     if (path[1] === undefined) {
+        console.log("直下");
         //直下のFolderと中間テーブルを取得
         during = duringFolder.find(value => value.main_or_sub == true);
         folder = folders.filter(value => {
             return value.during_id === during.id;
         });
     }
+    //Folderページ
+    if(path[2] != undefined){
+        const selectFolder = folders.find(value => path[2] === value.title);
+        console.log(selectFolder);
+        during = duringFolder.find(value => value.folder_id === selectFolder.id);
+        folder = folders.filter(value => {
+            return value.during_id === during.id;
+        });
+        console.log("during");
+        console.log(during);
+        console.log("folder");
+        console.log(folder);
+    }
 
     return (
         <Background>
-            <FolderAndTextButtons duringFolder={during}/>
-            <DisplayDocument folders={folder}/>
+            <FolderAndTextButtons duringFolder={during} />
+            <DisplayDocument folders={folder} />
         </Background>
     );
 };

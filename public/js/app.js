@@ -79257,6 +79257,7 @@ var CreateFolderForm = function CreateFolderForm(_ref) {
       during_id: duringFolder.id,
       user_id: user.id
     });
+    console.log(folderCredentials);
     createFolder(folderCredentials);
   };
 
@@ -79568,16 +79569,33 @@ var DisplayContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"]
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _display_folder_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./display-folder.styles */ "./resources/js/components/display-folder/display-folder.styles.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
+/* harmony import */ var _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/user/user.selector */ "./resources/js/redux/user/user.selector.js");
+/* harmony import */ var _display_folder_styles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./display-folder.styles */ "./resources/js/components/display-folder/display-folder.styles.jsx");
+
+
+
+
 
 
 
 var DisplayFolder = function DisplayFolder(_ref) {
-  var folder = _ref.folder;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_1__["DisplayFolderContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_1__["BackgroundImage"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_1__["FolderFooter"], null, folder.title));
+  var folder = _ref.folder,
+      user = _ref.user;
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useHistory"])();
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_5__["DisplayFolderContainer"], {
+    onClick: function onClick() {
+      return history.push("/".concat(user.displayName, "/folder/").concat(folder.title));
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_5__["BackgroundImage"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_5__["FolderFooter"], null, folder.title));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (DisplayFolder);
+var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_3__["createStructuredSelector"])({
+  user: _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_4__["selectCurrentUser"]
+});
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(DisplayFolder));
 
 /***/ }),
 
@@ -80521,7 +80539,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_user_page_user_page_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/user_page/user_page.component */ "./resources/js/pages/user_page/user_page.component.jsx");
 /* harmony import */ var _pages_sign_in_and_sign_up_sign_in_and_sign_up_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/sign_in_and_sign_up/sign_in_and_sign_up.container */ "./resources/js/pages/sign_in_and_sign_up/sign_in_and_sign_up.container.jsx");
 /* harmony import */ var _route_sign_out_root_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./route/sign-out-root.component */ "./resources/js/route/sign-out-root.component.jsx");
-/* harmony import */ var _route_private_user_root_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./route/private_user_root.component */ "./resources/js/route/private_user_root.component.jsx");
 
  //Header
 
@@ -80532,13 +80549,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var Home = function Home() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_header_header_component__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_route_sign_out_root_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
     exact: true,
     path: "/",
     component: _pages_sign_in_and_sign_up_sign_in_and_sign_up_container__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_route_private_user_root_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/:user_name",
     component: _pages_user_page_user_page_component__WEBPACK_IMPORTED_MODULE_3__["default"]
   })));
@@ -80681,13 +80697,32 @@ var Folder = function Folder(_ref) {
   var folder = new Array(); //Userページ直下の場合
 
   if (path[1] === undefined) {
-    //直下のFolderと中間テーブルを取得
+    console.log("直下"); //直下のFolderと中間テーブルを取得
+
     during = duringFolder.find(function (value) {
       return value.main_or_sub == true;
     });
     folder = folders.filter(function (value) {
       return value.during_id === during.id;
     });
+  } //Folderページ
+
+
+  if (path[2] != undefined) {
+    var selectFolder = folders.find(function (value) {
+      return path[2] === value.title;
+    });
+    console.log(selectFolder);
+    during = duringFolder.find(function (value) {
+      return value.folder_id === selectFolder.id;
+    });
+    folder = folders.filter(function (value) {
+      return value.during_id === during.id;
+    });
+    console.log("during");
+    console.log(during);
+    console.log("folder");
+    console.log(folder);
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_5__["Background"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_folder_and_text_buttons_folder_and_text_buttons_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -80818,6 +80853,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _redux_folder_folder_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/folder/folder.actions */ "./resources/js/redux/folder/folder.actions.js");
 /* harmony import */ var _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../redux/user/user.selector */ "./resources/js/redux/user/user.selector.js");
 /* harmony import */ var _folder_folder_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../folder/folder.container */ "./resources/js/pages/folder/folder.container.jsx");
+/* harmony import */ var _route_private_user_root_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../route/private_user_root.component */ "./resources/js/route/private_user_root.component.jsx");
 
  //redux
 
@@ -80828,6 +80864,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var UserPage = function UserPage(_ref) {
   var user = _ref.user,
       fetchFoldersStart = _ref.fetchFoldersStart,
@@ -80835,9 +80872,12 @@ var UserPage = function UserPage(_ref) {
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     fetchFoldersStart(user);
   }, [fetchFoldersStart]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_route_private_user_root_component__WEBPACK_IMPORTED_MODULE_7__["default"], {
     exact: true,
     path: "".concat(match.path),
+    component: _folder_folder_container__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "".concat(match.path, "/folder/") + ":folder_name",
     component: _folder_folder_container__WEBPACK_IMPORTED_MODULE_6__["default"]
   }));
 };
@@ -81310,28 +81350,29 @@ function createFolder(_ref3) {
           folderCredentials = _ref3.payload;
           //作成したFolderの入れ物
           folder = null;
-          duringFolder = null; //FolderとFolderの中間テーブルを作成
+          duringFolder = null;
+          console.log(folderCredentials); //FolderとFolderの中間テーブルを作成
 
-          _context5.next = 5;
-          return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/folder/create", folderCredentials).then(function (response) {
+          _context5.next = 6;
+          return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/folder/create", folderCredentials).then(function (response) {
             folder = response.data[0];
             duringFolder = response.data[1];
           });
 
-        case 5:
+        case 6:
           if (!(folder !== null && duringFolder !== null)) {
-            _context5.next = 10;
+            _context5.next = 11;
             break;
           }
 
-          _context5.next = 8;
+          _context5.next = 9;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])(Object(_folder_actions__WEBPACK_IMPORTED_MODULE_3__["addDuringFolder"])(duringFolder));
 
-        case 8:
-          _context5.next = 10;
+        case 9:
+          _context5.next = 11;
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])(Object(_folder_actions__WEBPACK_IMPORTED_MODULE_3__["addFolder"])(folder));
 
-        case 10:
+        case 11:
         case "end":
           return _context5.stop();
       }
@@ -82152,15 +82193,11 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 var PrivateUserRoot = function PrivateUserRoot(_ref) {
   var Component = _ref.component,
-      location = _ref.location,
       user = _ref.user,
       errorClear = _ref.errorClear,
-      rest = _objectWithoutProperties(_ref, ["component", "location", "user", "errorClear"]);
+      rest = _objectWithoutProperties(_ref, ["component", "user", "errorClear"]);
 
-  //画面移動時にエラーを削除する
-  // useEffect(() => {
-  //     errorClear();
-  // });
+  var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useLocation"])();
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], _extends({}, rest, {
     render: function render(props) {
       return user !== null && user.displayName === location.pathname.slice(1) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, props) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {

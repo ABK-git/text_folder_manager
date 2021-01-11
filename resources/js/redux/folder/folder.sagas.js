@@ -60,15 +60,16 @@ export function* createFolder({ payload: folderCredentials }) {
     let folder = null;
     let duringFolder = null;
 
+    console.log(folderCredentials);
+
     //FolderとFolderの中間テーブルを作成
     yield axios
-        .post("api/folder/create", folderCredentials)
+        .post("/api/folder/create", folderCredentials)
         .then(response => {
             folder = response.data[0];
             duringFolder = response.data[1];
         });
     //エラー時の処理も実装する予定
-
     if (folder !== null && duringFolder !== null) {
         //新しく作成した中間テーブルを追加
         yield put(addDuringFolder(duringFolder));
