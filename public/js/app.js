@@ -79252,14 +79252,22 @@ var CreateFolderForm = function CreateFolderForm(_ref) {
   };
 
   var handleSubmit = function handleSubmit(event) {
-    event.preventDefault(); //folderCredentialsに中間テーブルのidとuserのidを付け足す
+    event.preventDefault(); //同じ階層に同名フォルダが存在しているかを調べる
 
-    Object.assign(folderCredentials, {
-      during_id: duringFolder.id,
-      user_id: user.id
+    var existsFolderName = haveFolders.find(function (value) {
+      return value.title === folderCredentials.title;
     });
-    console.log(folderCredentials);
-    createFolder(folderCredentials);
+
+    if (existsFolderName === undefined) {
+      //folderCredentialsに中間テーブルのidとuserのidを付け足す
+      Object.assign(folderCredentials, {
+        during_id: duringFolder.id,
+        user_id: user.id
+      });
+      createFolder(folderCredentials);
+    } else {
+      console.log("同名フォルダが存在しています");
+    }
   };
 
   var title = folderCredentials.title;
@@ -80734,7 +80742,6 @@ var Folder = function Folder(_ref) {
 
   if (path[1] != undefined) {
     var index = path.length;
-    console.log(index);
     var selectFolder = folders.find(function (value) {
       return path[index - 1] === value.title;
     });
@@ -80745,10 +80752,6 @@ var Folder = function Folder(_ref) {
     folder = folders.filter(function (value) {
       return value.during_id === during.id;
     });
-    console.log("during");
-    console.log(during);
-    console.log("folder");
-    console.log(folder);
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_5__["Background"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_folder_and_text_buttons_folder_and_text_buttons_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
