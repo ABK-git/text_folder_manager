@@ -1,34 +1,96 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../redux/user/user.selector";
+import { updateFolder } from "../../redux/folder/folder.actions.js";
 
 import {
     DisplayFolderContainer,
     BackgroundImage,
-    FolderFooter
+    FolderFooter,
+    FooterForm
 } from "./display-folder.styles";
 
-const DisplayFolder = ({ folder, user }) => {
+import CustomButton from "../../components/custom-button/custom-button.component";
+import FormInput from "../../components/form-input/form-input.component";
+
+const DisplayFolder = ({ folder, user, updateFolder }) => {
     const history = useHistory();
     const location = useLocation();
 
+    //名前編集フォームの表示・非表示
+    const [isDisplay, setIsDisplay] = useState(false);
+
+    //名前入力
+    const [newName, setNewName] = useState({ name: folder.title });
+
+    const handleChange = event => {
+        const { name, value } = event.target;
+
+        setNewName({ ...newName, [name]: value });
+    };
+
+    const handleSubmit = () => {
+        const folderCredentials = {
+            id: folder.id,
+            title: newName.name
+        };
+        console.log(folderCredentials);
+
+        updateFolder(folderCredentials);
+    };
+
+    const mouseEnter = () => {
+        console.log("enter");
+        setIsDisplay(!isDisplay);
+    };
+
+    const mouseLeave = () => {
+        console.log("leave");
+        setIsDisplay(!isDisplay);
+    };
+
     return (
         <DisplayFolderContainer
-            onClick={() => {
-                const path = location.pathname.slice(1).split("/");
-                
-                if (path.length === 1) {
-                    history.push(`${user.displayName}/_folder/${folder.title}`);
-                } else {
-                    history.push(`${location.pathname}/${folder.title}`);
-                }
-            }}
-            //onClick={() => history.push(`${user.displayName}/folder/${folder.title}`)}
+        //onClick={() => history.push(`${user.displayName}/folder/${folder.title}`)}
         >
-            <BackgroundImage />
-            <FolderFooter>{folder.title}</FolderFooter>
+            <BackgroundImage
+                onClick={() => {
+                    console.log("background");
+                    const path = location.pathname.slice(1).split("/");
+
+                    if (path.length === 1) {
+                        history.push(
+                            `${user.displayName}/_folder/${folder.title}`
+                        );
+                    } else {
+                        history.push(`${location.pathname}/${folder.title}`);
+                    }
+                }}
+            />
+            <FolderFooter onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
+                {folder.title}
+                <form
+                    style={{ display: isDisplay ? "" : "none" }}
+                    onSubmit={handleSubmit}
+                    autoComplete="off"
+                >
+                    <FooterForm
+                        value={newName.name}
+                        handleChange={handleChange}
+                        type="text"
+                        name="name"
+                    />
+                    {folder.title !== newName.name ? (
+                        <CustomButton type="submit" design="updateFolderName">
+                            変更
+                        </CustomButton>
+                    ) : (
+                        ""
+                    )}
+                </form>
+            </FolderFooter>
         </DisplayFolderContainer>
     );
 };
@@ -37,4 +99,8 @@ const mapStateToProps = createStructuredSelector({
     user: selectCurrentUser
 });
 
-export default connect(mapStateToProps)(DisplayFolder);
+const mapDispatchToProps = dispatch => ({
+    updateFolder: folderCredentials => dispatch(updateFolder(folderCredentials))
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(DisplayFolder);

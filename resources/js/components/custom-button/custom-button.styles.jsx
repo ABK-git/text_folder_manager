@@ -19,20 +19,31 @@ const createText = css`
 `;
 
 const createFolder = css`
-    background-color: #FA7855;
+    background-color: #fa7855;
     border: none;
     height: 50px;
 `;
 
 const createFolderSubmit = css`
-  font-size: 16px;
-  background-color: #F1A1F5;
-  height: 100%;
+    font-size: 16px;
+    background-color: #f1a1f5;
+    height: 100%;
+`;
+
+const updateFolderName = css`
+    font-size: 16px;
+    background-color: #eb1d7b;
+    height: 100%;
+    width: 80%;
+    border-radius: 10px;
+
+    &:hover {
+        opacity: 0.5;
+    }
 `;
 
 const getButtonStyles = props => {
-
-    switch(props.design){
+    switch (props.design) {
         case "auth":
             return signInAndSignUpStyles;
 
@@ -44,6 +55,9 @@ const getButtonStyles = props => {
 
         case "createFolderSubmit":
             return createFolderSubmit;
+
+        case "updateFolderName":
+            return updateFolderName;
 
         default:
             return "";
@@ -64,6 +78,6 @@ export const CustomButtonContainer = styled.button`
 `;
 
 export const FolderButtonContainer = styled.div`
-   display: flex;
-   flex-direction: column;
+    display: flex;
+    flex-direction: column;
 `;

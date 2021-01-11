@@ -79398,8 +79398,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomButtonContainer", function() { return CustomButtonContainer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FolderButtonContainer", function() { return FolderButtonContainer; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject8() {
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n"]);
+
+  _templateObject8 = function _templateObject8() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n   display: flex;\n   flex-direction: column;\n"]);
+  var data = _taggedTemplateLiteral(["\n    font-size: 26px;\n    font-weight: bolder;\n    cursor: pointer;\n    display: inline-block;\n\n    ", "\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -79409,7 +79419,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n    font-size: 26px;\n    font-weight: bolder;\n    cursor: pointer;\n    display: inline-block;\n\n    ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n    background-color: #d41e3d;\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -79419,7 +79429,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n    background-color: #d41e3d;\n"]);
+  var data = _taggedTemplateLiteral(["\n    font-size: 16px;\n    background-color: #eb1d7b;\n    height: 100%;\n    width: 80%;\n    border-radius: 10px;\n\n    &:hover {\n        opacity: 0.5;\n    }\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -79429,7 +79439,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  font-size: 16px;\n  background-color: #F1A1F5;\n  height: 100%;\n"]);
+  var data = _taggedTemplateLiteral(["\n    font-size: 16px;\n    background-color: #f1a1f5;\n    height: 100%;\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -79439,7 +79449,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n    background-color: #FA7855;\n    border: none;\n    height: 50px;\n"]);
+  var data = _taggedTemplateLiteral(["\n    background-color: #fa7855;\n    border: none;\n    height: 50px;\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -79475,6 +79485,7 @@ var signInAndSignUpStyles = Object(styled_components__WEBPACK_IMPORTED_MODULE_0_
 var createText = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject2());
 var createFolder = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject3());
 var createFolderSubmit = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject4());
+var updateFolderName = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject5());
 
 var getButtonStyles = function getButtonStyles(props) {
   switch (props.design) {
@@ -79490,14 +79501,17 @@ var getButtonStyles = function getButtonStyles(props) {
     case "createFolderSubmit":
       return createFolderSubmit;
 
+    case "updateFolderName":
+      return updateFolderName;
+
     default:
       return "";
   }
 };
 
-var CustomButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject5());
-var CustomButtonContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject6(), getButtonStyles);
-var FolderButtonContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject7());
+var CustomButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject6());
+var CustomButtonContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject7(), getButtonStyles);
+var FolderButtonContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject8());
 
 /***/ }),
 
@@ -79582,7 +79596,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
 /* harmony import */ var _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/user/user.selector */ "./resources/js/redux/user/user.selector.js");
-/* harmony import */ var _display_folder_styles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./display-folder.styles */ "./resources/js/components/display-folder/display-folder.styles.jsx");
+/* harmony import */ var _redux_folder_folder_actions_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../redux/folder/folder.actions.js */ "./resources/js/redux/folder/folder.actions.js");
+/* harmony import */ var _display_folder_styles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./display-folder.styles */ "./resources/js/components/display-folder/display-folder.styles.jsx");
+/* harmony import */ var _components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
+/* harmony import */ var _components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/form-input/form-input.component */ "./resources/js/components/form-input/form-input.component.jsx");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
 
 
 
@@ -79592,11 +79630,54 @@ __webpack_require__.r(__webpack_exports__);
 
 var DisplayFolder = function DisplayFolder(_ref) {
   var folder = _ref.folder,
-      user = _ref.user;
+      user = _ref.user,
+      updateFolder = _ref.updateFolder;
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useHistory"])();
-  var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useLocation"])();
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_5__["DisplayFolderContainer"], {
+  var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useLocation"])(); //名前編集フォームの表示・非表示
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isDisplay = _useState2[0],
+      setIsDisplay = _useState2[1]; //名前入力
+
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    name: folder.title
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      newName = _useState4[0],
+      setNewName = _useState4[1];
+
+  var handleChange = function handleChange(event) {
+    var _event$target = event.target,
+        name = _event$target.name,
+        value = _event$target.value;
+    setNewName(_objectSpread(_objectSpread({}, newName), {}, _defineProperty({}, name, value)));
+  };
+
+  var handleSubmit = function handleSubmit() {
+    var folderCredentials = {
+      id: folder.id,
+      title: newName.name
+    };
+    console.log(folderCredentials);
+    updateFolder(folderCredentials);
+  };
+
+  var mouseEnter = function mouseEnter() {
+    console.log("enter");
+    setIsDisplay(!isDisplay);
+  };
+
+  var mouseLeave = function mouseLeave() {
+    console.log("leave");
+    setIsDisplay(!isDisplay);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_6__["DisplayFolderContainer"] //onClick={() => history.push(`${user.displayName}/folder/${folder.title}`)}
+  , null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_6__["BackgroundImage"], {
     onClick: function onClick() {
+      console.log("background");
       var path = location.pathname.slice(1).split("/");
 
       if (path.length === 1) {
@@ -79604,15 +79685,40 @@ var DisplayFolder = function DisplayFolder(_ref) {
       } else {
         history.push("".concat(location.pathname, "/").concat(folder.title));
       }
-    } //onClick={() => history.push(`${user.displayName}/folder/${folder.title}`)}
-
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_5__["BackgroundImage"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_5__["FolderFooter"], null, folder.title));
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_6__["FolderFooter"], {
+    onMouseEnter: mouseEnter,
+    onMouseLeave: mouseLeave
+  }, folder.title, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    style: {
+      display: isDisplay ? "" : "none"
+    },
+    onSubmit: handleSubmit,
+    autoComplete: "off"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_6__["FooterForm"], {
+    value: newName.name,
+    handleChange: handleChange,
+    type: "text",
+    name: "name"
+  }), folder.title !== newName.name ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    type: "submit",
+    design: "updateFolderName"
+  }, "\u5909\u66F4") : "")));
 };
 
 var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_3__["createStructuredSelector"])({
   user: _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_4__["selectCurrentUser"]
 });
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(DisplayFolder));
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    updateFolder: function updateFolder(folderCredentials) {
+      return dispatch(Object(_redux_folder_folder_actions_js__WEBPACK_IMPORTED_MODULE_5__["updateFolder"])(folderCredentials));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(DisplayFolder));
 
 /***/ }),
 
@@ -79620,7 +79726,7 @@ var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_3__["createStruct
 /*!**************************************************************************!*\
   !*** ./resources/js/components/display-folder/display-folder.styles.jsx ***!
   \**************************************************************************/
-/*! exports provided: DisplayFolderContainer, BackgroundImage, FolderFooter */
+/*! exports provided: DisplayFolderContainer, BackgroundImage, FolderFooter, FooterForm, UpdateNameButton */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79628,9 +79734,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DisplayFolderContainer", function() { return DisplayFolderContainer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BackgroundImage", function() { return BackgroundImage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FolderFooter", function() { return FolderFooter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FooterForm", function() { return FooterForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UpdateNameButton", function() { return UpdateNameButton; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var _components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/form-input/form-input.component */ "./resources/js/components/form-input/form-input.component.jsx");
+/* harmony import */ var _components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
+function _templateObject5() {
+  var data = _taggedTemplateLiteral(["\n  height: 100px;\n  width: 200px;\n"]);
+
+  _templateObject5 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\n  border: 0px;\n  height: 100%;\n  text-align: center;\n"]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 10%;\n  text-align: center;\n  font-size: 16px;\n  font-weight: bold;\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 10%;\n  \n  font-size: 16px;\n  font-weight: bold;\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -79661,6 +79791,8 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
+
+
  // export const DisplayFolderContainer = styled.div`
 //     margin-top: 20px;
 //     display: inline-block;
@@ -79679,6 +79811,8 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 var DisplayFolderContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject());
 var BackgroundImage = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2());
 var FolderFooter = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3());
+var FooterForm = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject4());
+var UpdateNameButton = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_2__["default"])(_templateObject5());
 
 /***/ }),
 
@@ -81074,7 +81208,7 @@ var ErrorTypes = {
 /*!*****************************************************!*\
   !*** ./resources/js/redux/folder/folder.actions.js ***!
   \*****************************************************/
-/*! exports provided: setDuringFolder, createDuringFolder, createFolder, addFolder, addDuringFolder, setFolder, fetchFoldersStart, folderClear */
+/*! exports provided: setDuringFolder, createDuringFolder, createFolder, addFolder, updateFolder, setUpdateFolder, addDuringFolder, setFolder, fetchFoldersStart, folderClear */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -81083,6 +81217,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createDuringFolder", function() { return createDuringFolder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFolder", function() { return createFolder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addFolder", function() { return addFolder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateFolder", function() { return updateFolder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setUpdateFolder", function() { return setUpdateFolder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addDuringFolder", function() { return addDuringFolder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setFolder", function() { return setFolder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchFoldersStart", function() { return fetchFoldersStart; });
@@ -81114,6 +81250,20 @@ var createFolder = function createFolder(folderCredentials) {
 var addFolder = function addFolder(folder) {
   return {
     type: _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].ADD_FOLDER,
+    payload: folder
+  };
+}; //Folderの名前を変更
+
+var updateFolder = function updateFolder(folderCredentials) {
+  return {
+    type: _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].UPDATE_FOLDER,
+    payload: folderCredentials
+  };
+}; //Folderの変更をReduxに反映させる
+
+var setUpdateFolder = function setUpdateFolder(folder) {
+  return {
+    type: _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].SET_UPDATE_FOLDER,
     payload: folder
   };
 }; //作成した中間テーブルを追加する
@@ -81181,6 +81331,7 @@ var folderReducer = function folderReducer() {
   switch (action.type) {
     case _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].FETCH_FOLDERS_START:
     case _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].CREATE_FOLDER:
+    case _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].UPDATE_FOLDER:
       return _objectSpread(_objectSpread({}, state), {}, {
         isFetching: true
       });
@@ -81202,6 +81353,12 @@ var folderReducer = function folderReducer() {
       return _objectSpread(_objectSpread({}, state), {}, {
         isFetching: false,
         folders: Object(_folder_utils__WEBPACK_IMPORTED_MODULE_1__["addNew"])(state.folders, action.payload)
+      });
+
+    case _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].SET_UPDATE_FOLDER:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        isFetching: false,
+        folders: Object(_folder_utils__WEBPACK_IMPORTED_MODULE_1__["updateFolder"])(state.folders, action.payload)
       });
 
     case _folder_types__WEBPACK_IMPORTED_MODULE_0__["default"].ADD_DURING_FOLDER:
@@ -81229,7 +81386,7 @@ var folderReducer = function folderReducer() {
 /*!***************************************************!*\
   !*** ./resources/js/redux/folder/folder.sagas.js ***!
   \***************************************************/
-/*! exports provided: createDuringFolder, onCreateDuringFolder, fetchFoldersAsync, fetchFoldersStart, createFolder, onCreateFolder, folderSagas */
+/*! exports provided: createDuringFolder, onCreateDuringFolder, fetchFoldersAsync, fetchFoldersStart, createFolder, onCreateFolder, updateFolder, onUpdateFolder, folderSagas */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -81240,6 +81397,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchFoldersStart", function() { return fetchFoldersStart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFolder", function() { return createFolder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onCreateFolder", function() { return onCreateFolder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateFolder", function() { return updateFolder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onUpdateFolder", function() { return onUpdateFolder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "folderSagas", function() { return folderSagas; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -81256,7 +81415,9 @@ var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0
     _marked4 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(fetchFoldersStart),
     _marked5 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(createFolder),
     _marked6 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(onCreateFolder),
-    _marked7 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(folderSagas);
+    _marked7 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(updateFolder),
+    _marked8 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(onUpdateFolder),
+    _marked9 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(folderSagas);
 
 
 
@@ -81425,20 +81586,61 @@ function onCreateFolder() {
     }
   }, _marked6);
 }
-function folderSagas() {
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function folderSagas$(_context7) {
+function updateFolder(_ref4) {
+  var folderCredentials, folder;
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function updateFolder$(_context7) {
     while (1) {
       switch (_context7.prev = _context7.next) {
         case 0:
-          _context7.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(onCreateFolder), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(onCreateDuringFolder), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(fetchFoldersStart)]);
+          folderCredentials = _ref4.payload;
+          folder = null;
+          console.log("this is update");
+          _context7.next = 5;
+          return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/folder/update", folderCredentials).then(function (response) {
+            folder = response.data;
+          });
 
-        case 2:
+        case 5:
+          console.log(folder);
+          _context7.next = 8;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])(Object(_folder_actions__WEBPACK_IMPORTED_MODULE_3__["setUpdateFolder"])(folder));
+
+        case 8:
         case "end":
           return _context7.stop();
       }
     }
   }, _marked7);
+}
+function onUpdateFolder() {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function onUpdateFolder$(_context8) {
+    while (1) {
+      switch (_context8.prev = _context8.next) {
+        case 0:
+          _context8.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_folder_types__WEBPACK_IMPORTED_MODULE_4__["default"].UPDATE_FOLDER, updateFolder);
+
+        case 2:
+        case "end":
+          return _context8.stop();
+      }
+    }
+  }, _marked8);
+}
+function folderSagas() {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function folderSagas$(_context9) {
+    while (1) {
+      switch (_context9.prev = _context9.next) {
+        case 0:
+          _context9.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(onCreateFolder), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(onCreateDuringFolder), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(fetchFoldersStart), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(onUpdateFolder)]);
+
+        case 2:
+        case "end":
+          return _context9.stop();
+      }
+    }
+  }, _marked9);
 }
 
 /***/ }),
@@ -81488,6 +81690,8 @@ var selectIsDuringFolderFetching = Object(reselect__WEBPACK_IMPORTED_MODULE_0__[
 __webpack_require__.r(__webpack_exports__);
 var FolderActionTypes = {
   CREATE_FOLDER: "CREATE_FOLDER",
+  UPDATE_FOLDER: "UPDATE_FOLDER",
+  SET_UPDATE_FOLDER: "SET_UPDATE_FOLDER",
   ADD_FOLDER: "ADD_FOLDER",
   ADD_DURING_FOLDER: "ADD_DURING_FOLDER",
   SET_FOLDER: "SET_FOLDER",
@@ -81504,12 +81708,13 @@ var FolderActionTypes = {
 /*!***************************************************!*\
   !*** ./resources/js/redux/folder/folder.utils.js ***!
   \***************************************************/
-/*! exports provided: addNew */
+/*! exports provided: addNew, updateFolder */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNew", function() { return addNew; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateFolder", function() { return updateFolder; });
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -81524,6 +81729,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 var addNew = function addNew(folders, newFolder) {
   return [].concat(_toConsumableArray(folders), [newFolder]);
+};
+var updateFolder = function updateFolder(folders, newFolder) {
+  var newArray = folders.map(function (folder) {
+    if (folder.id === newFolder.id) {
+      return newFolder;
+    }
+
+    return folder;
+  });
+  return newArray;
 };
 
 /***/ }),
