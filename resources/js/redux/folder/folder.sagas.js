@@ -1,6 +1,6 @@
 import axios from "axios";
 import { all, takeLatest, call, put } from "redux-saga/effects";
-import { addDuringFolder, addFolder, setDuringFolder, setFolder } from "./folder.actions";
+import { addDuringFolder, addFolder, setDuringFolder, setFolder, setUpdateFolder } from "./folder.actions";
 import FolderActionTypes from "./folder.types";
 
 export function* createDuringFolder({ payload: { folderCredentials } }) {
@@ -82,10 +82,26 @@ export function* onCreateFolder() {
     yield takeLatest(FolderActionTypes.CREATE_FOLDER, createFolder);
 }
 
+export function* updateFolder({ payload: folderCredentials }){
+    let folder = null;
+    console.log("this is update");
+    yield axios.post("/api/folder/update", folderCredentials)
+    .then(response => {
+        folder = response.data;
+    })
+    console.log(folder);
+    yield put(setUpdateFolder(folder));
+}
+
+export function* onUpdateFolder(){
+    yield takeLatest(FolderActionTypes.UPDATE_FOLDER, updateFolder);
+}
+
 export function* folderSagas() {
     yield all([
         call(onCreateFolder),
         call(onCreateDuringFolder),
-        call(fetchFoldersStart)
+        call(fetchFoldersStart),
+        call(onUpdateFolder)
     ]);
 }

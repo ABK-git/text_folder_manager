@@ -35,5 +35,7 @@ Route::get('/main_or_subs/get_all/{id}',[MainOrSubController::class, 'getAll']);
 
 //Folderを登録
 Route::post('/folder/create',[FolderController::class, 'store']);
+//Folderを編集
+Route::post('/folder/update', [FolderController::class, 'updateTitle']);
 //特定ユーザーのFolderをすべて取得
 Route::get('/folder/get_all/{id}',[FolderController::class, 'getAll']);

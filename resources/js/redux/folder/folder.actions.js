@@ -21,11 +21,22 @@ export const addFolder = folder => ({
     type: FolderActionTypes.ADD_FOLDER,
     payload: folder
 });
+//Folderの名前を変更
+export const updateFolder = folderCredentials => ({
+    type: FolderActionTypes.UPDATE_FOLDER,
+    payload: folderCredentials
+});
+//Folderの変更をReduxに反映させる
+export const setUpdateFolder = folder => ({
+    type: FolderActionTypes.SET_UPDATE_FOLDER,
+    payload: folder
+});
+
 //作成した中間テーブルを追加する
 export const addDuringFolder = duringFolder => ({
     type: FolderActionTypes.ADD_DURING_FOLDER,
     payload: duringFolder
-})
+});
 //FolderをReduxに格納
 export const setFolder = folder => ({
     type: FolderActionTypes.SET_FOLDER,
