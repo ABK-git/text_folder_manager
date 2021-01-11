@@ -10,7 +10,7 @@ import FormInput from "../form-input/form-input.component";
 //styles
 import { FolderDiv, FormAndButton } from "./create-folder-form.styles";
 
-const CreateFolderForm = ({ user, duringFolder, createFolder }) => {
+const CreateFolderForm = ({ user, duringFolder, createFolder, haveFolders }) => {
     //入力フォームの表示・非表示
     const [isDisplay, setIsDisplay] = useState(false);
     //Folder名の入力フォーム

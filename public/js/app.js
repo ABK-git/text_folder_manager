@@ -79222,7 +79222,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CreateFolderForm = function CreateFolderForm(_ref) {
   var user = _ref.user,
       duringFolder = _ref.duringFolder,
-      createFolder = _ref.createFolder;
+      createFolder = _ref.createFolder,
+      haveFolders = _ref.haveFolders;
 
   //入力フォームの表示・非表示
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
@@ -79585,10 +79586,18 @@ var DisplayFolder = function DisplayFolder(_ref) {
   var folder = _ref.folder,
       user = _ref.user;
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useHistory"])();
+  var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useLocation"])();
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_5__["DisplayFolderContainer"], {
     onClick: function onClick() {
-      return history.push("/".concat(user.displayName, "/folder/").concat(folder.title));
-    }
+      var path = location.pathname.slice(1).split("/");
+
+      if (path.length === 1) {
+        history.push("".concat(user.displayName, "/_folder/").concat(folder.title));
+      } else {
+        history.push("".concat(location.pathname, "/").concat(folder.title));
+      }
+    } //onClick={() => history.push(`${user.displayName}/folder/${folder.title}`)}
+
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_5__["BackgroundImage"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_5__["FolderFooter"], null, folder.title));
 };
 
@@ -79686,11 +79695,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var FolderAndTextButtons = function FolderAndTextButtons(_ref) {
-  var duringFolder = _ref.duringFolder;
+  var duringFolder = _ref.duringFolder,
+      haveFolders = _ref.haveFolders;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_folder_and_text_buttons_styles_jsx__WEBPACK_IMPORTED_MODULE_3__["CreateFolderAndTextContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
     design: "createText"
   }, "Text"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_folder_form_create_folder_form_component__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    duringFolder: duringFolder
+    duringFolder: duringFolder,
+    haveFolders: haveFolders
   }));
 };
 
@@ -80694,7 +80705,8 @@ var Folder = function Folder(_ref) {
   var path = location.pathname.slice(1).split("/"); //中間テーブルとFolderの入れ物
 
   var during = null;
-  var folder = new Array(); //Userページ直下の場合
+  var folder = new Array();
+  console.log(path); //Userページ直下の場合
 
   if (path[1] === undefined) {
     console.log("直下"); //直下のFolderと中間テーブルを取得
@@ -80706,11 +80718,25 @@ var Folder = function Folder(_ref) {
       return value.during_id === during.id;
     });
   } //Folderページ
+  // if(path[2] != undefined){
+  //     const selectFolder = folders.find(value => path[2] === value.title);
+  //     console.log(selectFolder);
+  //     during = duringFolder.find(value => value.folder_id === selectFolder.id);
+  //     folder = folders.filter(value => {
+  //         return value.during_id === during.id;
+  //     });
+  //     console.log("during");
+  //     console.log(during);
+  //     console.log("folder");
+  //     console.log(folder);
+  // }
 
 
-  if (path[2] != undefined) {
+  if (path[1] != undefined) {
+    var index = path.length;
+    console.log(index);
     var selectFolder = folders.find(function (value) {
-      return path[2] === value.title;
+      return path[index - 1] === value.title;
     });
     console.log(selectFolder);
     during = duringFolder.find(function (value) {
@@ -80726,7 +80752,8 @@ var Folder = function Folder(_ref) {
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_5__["Background"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_folder_and_text_buttons_folder_and_text_buttons_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    duringFolder: during
+    duringFolder: during,
+    haveFolders: folder
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_display_document_display_document_component__WEBPACK_IMPORTED_MODULE_7__["default"], {
     folders: folder
   }));
@@ -80877,7 +80904,8 @@ var UserPage = function UserPage(_ref) {
     path: "".concat(match.path),
     component: _folder_folder_container__WEBPACK_IMPORTED_MODULE_6__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: "".concat(match.path, "/folder/") + ":folder_name",
+    path: "".concat(match.path, "/_folder/") + ":folder_name" //path={`${match.path}/`+":folder_name"}
+    ,
     component: _folder_folder_container__WEBPACK_IMPORTED_MODULE_6__["default"]
   }));
 };

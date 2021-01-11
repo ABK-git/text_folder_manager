@@ -23,6 +23,8 @@ const Folder = ({ duringFolder, folders }) => {
     let during = null;
     let folder = new Array();
 
+    console.log(path);
+
     //Userページ直下の場合
     if (path[1] === undefined) {
         console.log("直下");
@@ -33,8 +35,23 @@ const Folder = ({ duringFolder, folders }) => {
         });
     }
     //Folderページ
-    if(path[2] != undefined){
-        const selectFolder = folders.find(value => path[2] === value.title);
+    // if(path[2] != undefined){
+    //     const selectFolder = folders.find(value => path[2] === value.title);
+    //     console.log(selectFolder);
+    //     during = duringFolder.find(value => value.folder_id === selectFolder.id);
+    //     folder = folders.filter(value => {
+    //         return value.during_id === during.id;
+    //     });
+    //     console.log("during");
+    //     console.log(during);
+    //     console.log("folder");
+    //     console.log(folder);
+    // }
+    if(path[1] != undefined){
+        const index = path.length;
+        console.log(index);
+
+        const selectFolder = folders.find(value => path[index-1] === value.title);
         console.log(selectFolder);
         during = duringFolder.find(value => value.folder_id === selectFolder.id);
         folder = folders.filter(value => {
@@ -44,11 +61,12 @@ const Folder = ({ duringFolder, folders }) => {
         console.log(during);
         console.log("folder");
         console.log(folder);
+        
     }
 
     return (
         <Background>
-            <FolderAndTextButtons duringFolder={during} />
+            <FolderAndTextButtons duringFolder={during} haveFolders={folder}/>
             <DisplayDocument folders={folder} />
         </Background>
     );

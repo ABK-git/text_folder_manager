@@ -22,7 +22,8 @@ const UserPage = ({ user, fetchFoldersStart, match }) => {
               component={FolderContainer}
             />
             <Route
-              path={`${match.path}/folder/`+":folder_name"}
+              path={`${match.path}/_folder/`+":folder_name"}
+              //path={`${match.path}/`+":folder_name"}
               component={FolderContainer}
             />
         </div>
