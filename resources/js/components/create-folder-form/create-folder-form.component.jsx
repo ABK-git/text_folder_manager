@@ -37,7 +37,7 @@ const CreateFolderForm = ({ user, duringFolder, createFolder }) => {
             during_id: duringFolder.id,
             user_id: user.id
         });
-
+        console.log(folderCredentials);
         createFolder(folderCredentials);
     };
     const { title } = folderCredentials;
