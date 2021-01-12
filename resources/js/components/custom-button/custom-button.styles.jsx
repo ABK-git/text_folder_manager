@@ -14,20 +14,16 @@ const signInAndSignUpStyles = css`
 const createText = css`
     background-color: #d41e3d;
     border: none;
-    margin-right: 10px;
-    height: 50px;
 `;
 
 const createFolder = css`
     background-color: #fa7855;
     border: none;
-    height: 50px;
 `;
 
 const createFolderSubmit = css`
     font-size: 16px;
     background-color: #f1a1f5;
-    height: 100%;
 `;
 
 const updateFolderName = css`
