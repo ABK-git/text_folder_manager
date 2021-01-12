@@ -79630,7 +79630,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var DisplayFolder = function DisplayFolder(_ref) {
   var folder = _ref.folder,
-      user = _ref.user,
       updateFolder = _ref.updateFolder;
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useHistory"])();
   var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useLocation"])(); //名前編集フォームの表示・非表示
@@ -79664,31 +79663,24 @@ var DisplayFolder = function DisplayFolder(_ref) {
     updateFolder(folderCredentials);
   };
 
-  var mouseEnter = function mouseEnter() {
-    console.log("enter");
+  var mouseEnterOrLeave = function mouseEnterOrLeave() {
     setIsDisplay(!isDisplay);
   };
 
-  var mouseLeave = function mouseLeave() {
-    console.log("leave");
-    setIsDisplay(!isDisplay);
-  };
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_6__["DisplayFolderContainer"] //onClick={() => history.push(`${user.displayName}/folder/${folder.title}`)}
-  , null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_6__["BackgroundImage"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_6__["DisplayFolderContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_6__["BackgroundImage"], {
     onClick: function onClick() {
       console.log("background");
       var path = location.pathname.slice(1).split("/");
 
       if (path.length === 1) {
-        history.push("".concat(user.displayName, "/_folder/").concat(folder.title));
+        history.push("".concat(location.pathname, "/_folder/").concat(folder.title));
       } else {
         history.push("".concat(location.pathname, "/").concat(folder.title));
       }
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_styles__WEBPACK_IMPORTED_MODULE_6__["FolderFooter"], {
-    onMouseEnter: mouseEnter,
-    onMouseLeave: mouseLeave
+    onMouseEnter: mouseEnterOrLeave,
+    onMouseLeave: mouseEnterOrLeave
   }, folder.title, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     style: {
       display: isDisplay ? "" : "none"
@@ -79706,10 +79698,6 @@ var DisplayFolder = function DisplayFolder(_ref) {
   }, "\u5909\u66F4") : "")));
 };
 
-var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_3__["createStructuredSelector"])({
-  user: _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_4__["selectCurrentUser"]
-});
-
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     updateFolder: function updateFolder(folderCredentials) {
@@ -79718,7 +79706,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(DisplayFolder));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(null, mapDispatchToProps)(DisplayFolder));
 
 /***/ }),
 
@@ -80056,9 +80044,9 @@ var Header = function Header(_ref) {
     folderClear();
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["HeaderContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["LogoToHomeContainer"], {
-    to: "/"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["OptionsContainer"], null, user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["OptionLink"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["HeaderContainer"], null, user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["LogoToHomeContainer"], {
+    to: "/".concat(user.displayName)
+  }) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["OptionsContainer"], null, user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["OptionLink"], {
     to: "/",
     onClick: handleClick
   }, "SIGN OUT") : ""));

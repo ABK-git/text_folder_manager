@@ -15,7 +15,7 @@ import {
 import CustomButton from "../../components/custom-button/custom-button.component";
 import FormInput from "../../components/form-input/form-input.component";
 
-const DisplayFolder = ({ folder, user, updateFolder }) => {
+const DisplayFolder = ({ folder, updateFolder }) => {
     const history = useHistory();
     const location = useLocation();
 
@@ -41,20 +41,12 @@ const DisplayFolder = ({ folder, user, updateFolder }) => {
         updateFolder(folderCredentials);
     };
 
-    const mouseEnter = () => {
-        console.log("enter");
-        setIsDisplay(!isDisplay);
-    };
-
-    const mouseLeave = () => {
-        console.log("leave");
+    const mouseEnterOrLeave = () => {
         setIsDisplay(!isDisplay);
     };
 
     return (
-        <DisplayFolderContainer
-        //onClick={() => history.push(`${user.displayName}/folder/${folder.title}`)}
-        >
+        <DisplayFolderContainer>
             <BackgroundImage
                 onClick={() => {
                     console.log("background");
@@ -62,14 +54,17 @@ const DisplayFolder = ({ folder, user, updateFolder }) => {
 
                     if (path.length === 1) {
                         history.push(
-                            `${user.displayName}/_folder/${folder.title}`
+                            `${location.pathname}/_folder/${folder.title}`
                         );
                     } else {
                         history.push(`${location.pathname}/${folder.title}`);
                     }
                 }}
             />
-            <FolderFooter onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
+            <FolderFooter
+                onMouseEnter={mouseEnterOrLeave}
+                onMouseLeave={mouseEnterOrLeave}
+            >
                 {folder.title}
                 <form
                     style={{ display: isDisplay ? "" : "none" }}
@@ -95,12 +90,8 @@ const DisplayFolder = ({ folder, user, updateFolder }) => {
     );
 };
 
-const mapStateToProps = createStructuredSelector({
-    user: selectCurrentUser
-});
-
 const mapDispatchToProps = dispatch => ({
     updateFolder: folderCredentials => dispatch(updateFolder(folderCredentials))
-})
+});
 
-export default connect(mapStateToProps,mapDispatchToProps)(DisplayFolder);
+export default connect(null, mapDispatchToProps)(DisplayFolder);
