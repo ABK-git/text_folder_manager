@@ -21,7 +21,7 @@ const Header = ({ user, signOut, folderClear }) => {
 
     return (
         <HeaderContainer>
-            <LogoToHomeContainer to="/" />
+            {user ? <LogoToHomeContainer to={`/${user.displayName}`} /> : ""}
             <OptionsContainer>
                 {user ? (
                     <OptionLink to="/" onClick={handleClick}>
