@@ -73,7 +73,7 @@ const CreateFolderForm = ({
                     handleChange={handleChange}
                     required
                 ></FormInput>
-                <CustomButton type="text" design="createFolderSubmit">
+                <CustomButton type="submit" design="createFolderSubmit">
                     作成
                 </CustomButton>
             </FormAndButton>
