@@ -43,8 +43,6 @@ const CreateTextForm = ({user}) => {
             //フォルダー下の場合
             history.push(`/${user.displayName}/${path[path.length-1]}/creating/${values.text_name}`);
         }
-        //画面遷移
-        
     };
 
     const validate = values => {

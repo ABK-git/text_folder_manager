@@ -86220,18 +86220,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../redux/user/user.selector */ "./resources/js/redux/user/user.selector.js");
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
-/* harmony import */ var _redux_folder_folder_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/folder/folder.actions */ "./resources/js/redux/folder/folder.actions.js");
-/* harmony import */ var _custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
-/* harmony import */ var _form_input_form_input_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../form-input/form-input.component */ "./resources/js/components/form-input/form-input.component.jsx");
-/* harmony import */ var _create_folder_form_styles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./create-folder-form.styles */ "./resources/js/components/create-folder-form/create-folder-form.styles.jsx");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
+/* harmony import */ var _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../redux/user/user.selector */ "./resources/js/redux/user/user.selector.js");
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
+/* harmony import */ var _redux_folder_folder_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../redux/folder/folder.actions */ "./resources/js/redux/folder/folder.actions.js");
+/* harmony import */ var _custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
+/* harmony import */ var _form_input_form_input_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../form-input/form-input.component */ "./resources/js/components/form-input/form-input.component.jsx");
+/* harmony import */ var _form_input_error_messages_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../form-input/error-messages.container */ "./resources/js/components/form-input/error-messages.container.jsx");
+/* harmony import */ var _create_folder_form_styles__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./create-folder-form.styles */ "./resources/js/components/create-folder-form/create-folder-form.styles.jsx");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -86245,11 +86241,13 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
+
  //redux
 
 
 
  //component
+
 
 
  //styles
@@ -86266,79 +86264,90 @@ var CreateFolderForm = function CreateFolderForm(_ref) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
       isDisplay = _useState2[0],
-      setIsDisplay = _useState2[1]; //Folder名の入力フォーム
-
-
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
-    title: ""
-  }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      folderCredentials = _useState4[0],
-      setFolderCredentials = _useState4[1]; //Folder作成フォームの表示・非表示
+      setIsDisplay = _useState2[1]; //Folder作成フォームの表示・非表示
 
 
   var onMouseEnterOrLeave = function onMouseEnterOrLeave() {
     setIsDisplay(!isDisplay);
+  }; //初期値
+
+
+  var initialValues = {
+    folder_name: ""
+  }; //submit処理
+
+  var onSubmit = function onSubmit(values) {
+    //folderCredentialsに中間テーブルのidとuserのidを付け足す
+    Object.assign(values, {
+      during_id: duringFolder.id,
+      user_id: user.id
+    }); //Folder作成
+
+    createFolder(values);
   };
 
-  var handleChange = function handleChange(event) {
-    var _event$target = event.target,
-        value = _event$target.value,
-        name = _event$target.name;
-    setFolderCredentials(_objectSpread(_objectSpread({}, folderCredentials), {}, _defineProperty({}, name, value)));
-  };
+  var validate = function validate(values) {
+    var errors = {};
 
-  var handleSubmit = function handleSubmit(event) {
-    event.preventDefault(); //同じ階層に同名フォルダが存在しているかを調べる
-
-    var existsFolderName = haveFolders.find(function (value) {
-      return value.title === folderCredentials.title;
-    });
-
-    if (existsFolderName === undefined) {
-      //folderCredentialsに中間テーブルのidとuserのidを付け足す
-      Object.assign(folderCredentials, {
-        during_id: duringFolder.id,
-        user_id: user.id
-      });
-      createFolder(folderCredentials);
+    if (!values.folder_name) {
+      //folder_nameが入力されていない場合
+      errors.folder_name = "作成するfolderの名前を入力してください";
     } else {
-      console.log("同名フォルダが存在しています");
+      if (values.folder_name.includes("/")) {
+        errors.folder_name = "/はtext名に使用できません";
+      } //同じ階層に同名フォルダが存在していた場合
+
+
+      var existsFolderName = haveFolders.find(function (haveFolder) {
+        return haveFolder.title === values.folder_name;
+      });
+
+      if (existsFolderName !== undefined) {
+        errors.folder_name = "同名フォルダが存在しています";
+      }
     }
+
+    return errors;
   };
 
-  var title = folderCredentials.title;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_folder_form_styles__WEBPACK_IMPORTED_MODULE_7__["FolderDiv"], {
+  var formik = Object(formik__WEBPACK_IMPORTED_MODULE_2__["useFormik"])({
+    initialValues: initialValues,
+    onSubmit: onSubmit,
+    validate: validate
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_folder_form_styles__WEBPACK_IMPORTED_MODULE_9__["FolderDiv"], {
     onMouseEnter: onMouseEnterOrLeave,
     onMouseLeave: onMouseEnterOrLeave
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
     design: "createFolder"
-  }, "Folder"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_folder_form_styles__WEBPACK_IMPORTED_MODULE_7__["FormAndButton"], {
-    onSubmit: handleSubmit,
+  }, "Folder"), isDisplay ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_folder_form_styles__WEBPACK_IMPORTED_MODULE_9__["InFormikContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_folder_form_styles__WEBPACK_IMPORTED_MODULE_9__["FormAndButton"], {
+    onSubmit: formik.handleSubmit,
     style: {
       display: isDisplay ? "" : "none"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_7__["default"], {
     type: "text",
-    name: "title",
-    value: title,
+    name: "folder_name",
+    value: formik.values.folder_name,
     autoComplete: "off",
-    handleChange: handleChange,
+    handleChange: formik.handleChange,
     required: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
     type: "submit",
     design: "createFolderSubmit"
-  }, "\u4F5C\u6210")));
+  }, "\u4F5C\u6210")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form_input_error_messages_container__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    errorMessage: formik.errors.folder_name
+  })) : "");
 };
 
-var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_3__["createStructuredSelector"])({
-  user: _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_2__["selectCurrentUser"]
+var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_4__["createStructuredSelector"])({
+  user: _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_3__["selectCurrentUser"]
 });
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     createFolder: function createFolder(folderCredentials) {
-      return dispatch(Object(_redux_folder_folder_actions__WEBPACK_IMPORTED_MODULE_4__["createFolder"])(folderCredentials));
+      return dispatch(Object(_redux_folder_folder_actions__WEBPACK_IMPORTED_MODULE_5__["createFolder"])(folderCredentials));
     }
   };
 };
@@ -86351,14 +86360,25 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 /*!**********************************************************************************!*\
   !*** ./resources/js/components/create-folder-form/create-folder-form.styles.jsx ***!
   \**********************************************************************************/
-/*! exports provided: FolderDiv, FormAndButton */
+/*! exports provided: FolderDiv, FormAndButton, InFormikContainer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FolderDiv", function() { return FolderDiv; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormAndButton", function() { return FormAndButton; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InFormikContainer", function() { return InFormikContainer; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n    text-align: center;\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject2() {
   var data = _taggedTemplateLiteral(["\n    display: flex;\n"]);
 
@@ -86386,6 +86406,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 var FolderDiv = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject()); //FormとButtonをまとめる
 
 var FormAndButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].form(_templateObject2());
+var InFormikContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3());
 
 /***/ }),
 
@@ -86466,8 +86487,7 @@ var CreateTextForm = function CreateTextForm(_ref) {
     } else {
       //フォルダー下の場合
       history.push("/".concat(user.displayName, "/").concat(path[path.length - 1], "/creating/").concat(values.text_name));
-    } //画面遷移
-
+    }
   };
 
   var validate = function validate(values) {
