@@ -22,7 +22,7 @@ class FolderController extends Controller
         try{
             //Folderを作成
             $folder = Folder::create([
-            'title' => $request->title,
+            'title' => $request->folder_name,
             'user_id' => $request->user_id,
             'during_id' => $request->during_id,
             ]);

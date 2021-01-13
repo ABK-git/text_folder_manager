@@ -10,3 +10,7 @@ export const FolderDiv = styled.div`
 export const FormAndButton = styled.form`
     display: flex;
 `;
+
+export const InFormikContainer = styled.div`
+    text-align: center;
+`;
