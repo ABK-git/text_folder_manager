@@ -1,82 +1,97 @@
 import React, { useState } from "react";
-import { Formik } from "formik";
+import { useHistory, useLocation } from "react-router-dom";
+import { useFormik } from "formik";
 //styles
-import { TextDiv, FormAndButton, InFormikContainer } from "./create-text-form.styles";
+import {
+    TextDiv,
+    FormAndButton,
+    InFormikContainer
+} from "./create-text-form.styles";
 //components
 import FormInput from "../../components/form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 import ErrorMessagesContainer from "../form-input/error-messages.container";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../redux/user/user.selector";
+import { connect } from "react-redux";
 
-const CreateTextForm = ({ duringFolder }) => {
+const CreateTextForm = ({user}) => {
     //入力フォームの表示・非表示
     const [isDisplay, setIsDisplay] = useState(false);
     //フォームの表示・非表示
-    const handleClick = () => {
+    const onMouseEnterOrLeave = () => {
         setIsDisplay(!isDisplay);
     };
+    //初期値
+    const initialValues = {
+        text_name: ""
+    };
+
+    //historyの取得
+    const history = useHistory();
+    //locationの取得
+    const location = useLocation();
+
+    //submit処理
+    const onSubmit = values => {
+        const path = location.pathname.slice(1).split("/");
+
+        if (path.length === 1) {
+            //ユーザー直下の場合
+            history.push(`${user.displayName}/creating/${values.text_name}`);
+        } else {
+            //フォルダー下の場合
+            history.push(`/${user.displayName}/${path[path.length-1]}/creating/${values.text_name}`);
+        }
+        //画面遷移
+        
+    };
+
+    const validate = values => {
+        const errors = {};
+
+        if (!values.text_name) {
+            errors.text_name = "作成するtextの名前を入力してください";
+        } else {
+            if (values.text_name.includes("/")) {
+                errors.text_name = "/はtext名に使用できません";
+            }
+        }
+        return errors;
+    };
+
+    const formik = useFormik({
+        initialValues,
+        onSubmit,
+        validate
+    });
 
     return (
-        <TextDiv>
-            <CustomButton design="createText" onClick={handleClick}>
-                Text
-            </CustomButton>
+        <TextDiv
+            onMouseEnter={onMouseEnterOrLeave}
+            onMouseLeave={onMouseEnterOrLeave}
+        >
+            <CustomButton design="createText">Text</CustomButton>
             {isDisplay ? (
-                <Formik
-                    initialValues={{ text_name: "" }}
-                    validate={values => {
-                        const errors = {};
-                        errors.text_name = new Array();
-                        if (!values.text_name) {
-                            errors.text_name.push(
-                                "作成するtextの名前を入力してください"
-                            );
-                        } else {
-                            if (values.text_name.includes("/")) {
-                                errors.text_name.push(
-                                    "/はtext名に使用できません"
-                                );
-                            }
-                        }
-                        return errors;
-                    }}
-                    onSubmit={(values, { setSubmitting }) => {
-                        values = new Array();
-                        setSubmitting(false);
-                    }}
-                >
-                    {({
-                        values,
-                        errors,
-                        handleChange,
-                        handleSubmit,
-                        handleBlur,
-                        isSubmitting
-                    }) => (
-                        <InFormikContainer>
-                            <FormAndButton onSubmit={handleSubmit}>
-                                <FormInput
-                                    type="text"
-                                    name="text_name"
-                                    value={values.text_name}
-                                    onBlur={handleBlur}
-                                    handleChange={handleChange}
-                                    required
-                                />
-                                <CustomButton
-                                    type="submit"
-                                    disabled={isSubmitting}
-                                    design="createFolderSubmit"
-                                >
-                                    作成
-                                </CustomButton>
-                            </FormAndButton>
+                <InFormikContainer>
+                    <FormAndButton onSubmit={formik.handleSubmit}>
+                        <FormInput
+                            type="text"
+                            name="text_name"
+                            autoComplete="off"
+                            value={formik.values.text_name}
+                            handleChange={formik.handleChange}
+                            required
+                        />
+                        <CustomButton type="submit" design="createFolderSubmit">
+                            作成
+                        </CustomButton>
+                    </FormAndButton>
 
-                            <ErrorMessagesContainer
-                                errorMessage={errors.text_name}
-                            />
-                        </InFormikContainer>
-                    )}
-                </Formik>
+                    <ErrorMessagesContainer
+                        errorMessage={formik.errors.text_name}
+                    />
+                </InFormikContainer>
             ) : (
                 ""
             )}
@@ -84,4 +99,8 @@ const CreateTextForm = ({ duringFolder }) => {
     );
 };
 
-export default CreateTextForm;
+const mapStateToProps = createStructuredSelector({
+    user: selectCurrentUser
+});
+
+export default connect(mapStateToProps)(CreateTextForm);

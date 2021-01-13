@@ -24,7 +24,7 @@ const CreateFolderForm = ({
     });
 
     //Folder作成フォームの表示・非表示
-    const handleClick = () => {
+    const onMouseEnterOrLeave = () => {
         setIsDisplay(!isDisplay);
     };
 
@@ -41,7 +41,7 @@ const CreateFolderForm = ({
         const existsFolderName = haveFolders.find(
             value => value.title === folderCredentials.title
         );
-        
+
         if (existsFolderName === undefined) {
             //folderCredentialsに中間テーブルのidとuserのidを付け足す
             Object.assign(folderCredentials, {
@@ -50,7 +50,7 @@ const CreateFolderForm = ({
             });
 
             createFolder(folderCredentials);
-        }else{
+        } else {
             console.log("同名フォルダが存在しています");
         }
     };
@@ -58,8 +58,11 @@ const CreateFolderForm = ({
     const { title } = folderCredentials;
 
     return (
-        <FolderDiv>
-            <CustomButton design="createFolder" onClick={handleClick}>
+        <FolderDiv
+            onMouseEnter={onMouseEnterOrLeave}
+            onMouseLeave={onMouseEnterOrLeave}
+        >
+            <CustomButton design="createFolder">
                 Folder
             </CustomButton>
             <FormAndButton
@@ -70,6 +73,7 @@ const CreateFolderForm = ({
                     type="text"
                     name="title"
                     value={title}
+                    autoComplete="off"
                     handleChange={handleChange}
                     required
                 ></FormInput>
