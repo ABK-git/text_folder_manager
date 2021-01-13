@@ -6,8 +6,10 @@ import { createStructuredSelector } from "reselect";
 import { fetchFoldersStart } from "../../redux/folder/folder.actions";
 import { selectCurrentUser } from "../../redux/user/user.selector";
 //component
-import FolderContainer from "../folder/folder.container";
 import PrivateUserRoute from "../../route/private_user_root.component";
+import CreatingText from "../creating_text/creating-text.component";
+//import FolderPage from "../folder/folder.component";
+import FolderContainer from "../folder/folder.container";
 
 const UserPage = ({ user, fetchFoldersStart, match }) => {
     useEffect(() => {
@@ -17,14 +19,23 @@ const UserPage = ({ user, fetchFoldersStart, match }) => {
     return (
         <div>
             <PrivateUserRoute
-              exact
-              path={`${match.path}`}
-              component={FolderContainer}
+                exact
+                path={`${match.path}`}
+                component={FolderContainer}
             />
             <Route
-              path={`${match.path}/_folder/`+":folder_name"}
-              //path={`${match.path}/`+":folder_name"}
-              component={FolderContainer}
+              exact 
+              path={`${match.path}/creating/:text_name`}
+              component={CreatingText}
+            />
+            <Route
+              exact 
+              path={`${match.path}/:folder_title/creating/:text_name`}
+              component={CreatingText}
+            />
+            <Route
+                path={`${match.path}/_folder/:folder_name`}
+                component={FolderContainer}
             />
         </div>
     );
@@ -35,7 +46,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchFoldersStart: (user) => dispatch(fetchFoldersStart(user))
+    fetchFoldersStart: user => dispatch(fetchFoldersStart(user))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPage);

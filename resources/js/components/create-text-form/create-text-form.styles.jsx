@@ -10,7 +10,6 @@ export const TextDiv = styled.div`
 //FormとButtonをまとめる
 export const FormAndButton = styled.form`
     display: flex;
-    //height: 100%;
 `;
 
 export const InFormikContainer = styled.div`

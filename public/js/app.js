@@ -86277,7 +86277,7 @@ var CreateFolderForm = function CreateFolderForm(_ref) {
       setFolderCredentials = _useState4[1]; //Folder作成フォームの表示・非表示
 
 
-  var handleClick = function handleClick() {
+  var onMouseEnterOrLeave = function onMouseEnterOrLeave() {
     setIsDisplay(!isDisplay);
   };
 
@@ -86308,9 +86308,11 @@ var CreateFolderForm = function CreateFolderForm(_ref) {
   };
 
   var title = folderCredentials.title;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_folder_form_styles__WEBPACK_IMPORTED_MODULE_7__["FolderDiv"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    design: "createFolder",
-    onClick: handleClick
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_folder_form_styles__WEBPACK_IMPORTED_MODULE_7__["FolderDiv"], {
+    onMouseEnter: onMouseEnterOrLeave,
+    onMouseLeave: onMouseEnterOrLeave
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    design: "createFolder"
   }, "Folder"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_folder_form_styles__WEBPACK_IMPORTED_MODULE_7__["FormAndButton"], {
     onSubmit: handleSubmit,
     style: {
@@ -86320,6 +86322,7 @@ var CreateFolderForm = function CreateFolderForm(_ref) {
     type: "text",
     name: "title",
     value: title,
+    autoComplete: "off",
     handleChange: handleChange,
     required: true
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -86397,11 +86400,15 @@ var FormAndButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].fo
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
-/* harmony import */ var _create_text_form_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create-text-form.styles */ "./resources/js/components/create-text-form/create-text-form.styles.jsx");
-/* harmony import */ var _components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/form-input/form-input.component */ "./resources/js/components/form-input/form-input.component.jsx");
-/* harmony import */ var _custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
-/* harmony import */ var _form_input_error_messages_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../form-input/error-messages.container */ "./resources/js/components/form-input/error-messages.container.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
+/* harmony import */ var _create_text_form_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./create-text-form.styles */ "./resources/js/components/create-text-form/create-text-form.styles.jsx");
+/* harmony import */ var _components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/form-input/form-input.component */ "./resources/js/components/form-input/form-input.component.jsx");
+/* harmony import */ var _custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
+/* harmony import */ var _form_input_error_messages_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../form-input/error-messages.container */ "./resources/js/components/form-input/error-messages.container.jsx");
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
+/* harmony import */ var _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../redux/user/user.selector */ "./resources/js/redux/user/user.selector.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -86415,6 +86422,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
+
  //styles
 
  //components
@@ -86423,8 +86431,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
+
 var CreateTextForm = function CreateTextForm(_ref) {
-  var duringFolder = _ref.duringFolder;
+  var user = _ref.user;
 
   //入力フォームの表示・非表示
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
@@ -86433,63 +86444,77 @@ var CreateTextForm = function CreateTextForm(_ref) {
       setIsDisplay = _useState2[1]; //フォームの表示・非表示
 
 
-  var handleClick = function handleClick() {
+  var onMouseEnterOrLeave = function onMouseEnterOrLeave() {
     setIsDisplay(!isDisplay);
+  }; //初期値
+
+
+  var initialValues = {
+    text_name: ""
+  }; //historyの取得
+
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); //locationの取得
+
+  var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useLocation"])(); //submit処理
+
+  var onSubmit = function onSubmit(values) {
+    var path = location.pathname.slice(1).split("/");
+
+    if (path.length === 1) {
+      //ユーザー直下の場合
+      history.push("".concat(user.displayName, "/creating/").concat(values.text_name));
+    } else {
+      //フォルダー下の場合
+      history.push("/".concat(user.displayName, "/").concat(path[path.length - 1], "/creating/").concat(values.text_name));
+    } //画面遷移
+
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_text_form_styles__WEBPACK_IMPORTED_MODULE_2__["TextDiv"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    design: "createText",
-    onClick: handleClick
-  }, "Text"), isDisplay ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Formik"], {
-    initialValues: {
-      text_name: ""
-    },
-    validate: function validate(values) {
-      var errors = {};
-      errors.text_name = new Array();
+  var validate = function validate(values) {
+    var errors = {};
 
-      if (!values.text_name) {
-        errors.text_name.push("作成するtextの名前を入力してください");
-      } else {
-        if (values.text_name.includes("/")) {
-          errors.text_name.push("/はtext名に使用できません");
-        }
+    if (!values.text_name) {
+      errors.text_name = "作成するtextの名前を入力してください";
+    } else {
+      if (values.text_name.includes("/")) {
+        errors.text_name = "/はtext名に使用できません";
       }
-
-      return errors;
-    },
-    onSubmit: function onSubmit(values, _ref2) {
-      var setSubmitting = _ref2.setSubmitting;
-      values = new Array();
-      setSubmitting(false);
     }
-  }, function (_ref3) {
-    var values = _ref3.values,
-        errors = _ref3.errors,
-        handleChange = _ref3.handleChange,
-        handleSubmit = _ref3.handleSubmit,
-        handleBlur = _ref3.handleBlur,
-        isSubmitting = _ref3.isSubmitting;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_text_form_styles__WEBPACK_IMPORTED_MODULE_2__["InFormikContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_text_form_styles__WEBPACK_IMPORTED_MODULE_2__["FormAndButton"], {
-      onSubmit: handleSubmit
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      type: "text",
-      name: "text_name",
-      value: values.text_name,
-      onBlur: handleBlur,
-      handleChange: handleChange,
-      required: true
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      type: "submit",
-      disabled: isSubmitting,
-      design: "createFolderSubmit"
-    }, "\u4F5C\u6210")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form_input_error_messages_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      errorMessage: errors.text_name
-    }));
-  }) : "");
+
+    return errors;
+  };
+
+  var formik = Object(formik__WEBPACK_IMPORTED_MODULE_2__["useFormik"])({
+    initialValues: initialValues,
+    onSubmit: onSubmit,
+    validate: validate
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_text_form_styles__WEBPACK_IMPORTED_MODULE_3__["TextDiv"], {
+    onMouseEnter: onMouseEnterOrLeave,
+    onMouseLeave: onMouseEnterOrLeave
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    design: "createText"
+  }, "Text"), isDisplay ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_text_form_styles__WEBPACK_IMPORTED_MODULE_3__["InFormikContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_text_form_styles__WEBPACK_IMPORTED_MODULE_3__["FormAndButton"], {
+    onSubmit: formik.handleSubmit
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    type: "text",
+    name: "text_name",
+    autoComplete: "off",
+    value: formik.values.text_name,
+    handleChange: formik.handleChange,
+    required: true
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    type: "submit",
+    design: "createFolderSubmit"
+  }, "\u4F5C\u6210")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_form_input_error_messages_container__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    errorMessage: formik.errors.text_name
+  })) : "");
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (CreateTextForm);
+var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_7__["createStructuredSelector"])({
+  user: _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_8__["selectCurrentUser"]
+});
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_9__["connect"])(mapStateToProps)(CreateTextForm));
 
 /***/ }),
 
@@ -86517,7 +86542,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n    display: flex;\n    //height: 100%;\n"]);
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -87994,6 +88019,27 @@ var Background = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_
 
 /***/ }),
 
+/***/ "./resources/js/pages/creating_text/creating-text.component.jsx":
+/*!**********************************************************************!*\
+  !*** ./resources/js/pages/creating_text/creating-text.component.jsx ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var CreatingText = function CreatingText() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Hello World");
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (CreatingText);
+
+/***/ }),
+
 /***/ "./resources/js/pages/folder/folder.component.jsx":
 /*!********************************************************!*\
   !*** ./resources/js/pages/folder/folder.component.jsx ***!
@@ -88027,51 +88073,41 @@ __webpack_require__.r(__webpack_exports__);
 var Folder = function Folder(_ref) {
   var duringFolder = _ref.duringFolder,
       folders = _ref.folders;
-  //Locationを取得する
-  var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useLocation"])(); //LocationからURLを取得する
+  var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useLocation"])();
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); //LocationからURLを取得する
 
   var path = location.pathname.slice(1).split("/"); //中間テーブルとFolderの入れ物
 
   var during = null;
   var folder = new Array();
-  console.log(path); //Userページ直下の場合
 
-  if (path[1] === undefined) {
-    console.log("直下"); //直下のFolderと中間テーブルを取得
+  try {
+    //Userページ直下の場合
+    if (path[1] === undefined) {
+      console.log("直下"); //直下のFolderと中間テーブルを取得
 
-    during = duringFolder.find(function (value) {
-      return value.main_or_sub == true;
-    });
-    folder = folders.filter(function (value) {
-      return value.during_id === during.id;
-    });
-  } //Folderページ
-  // if(path[2] != undefined){
-  //     const selectFolder = folders.find(value => path[2] === value.title);
-  //     console.log(selectFolder);
-  //     during = duringFolder.find(value => value.folder_id === selectFolder.id);
-  //     folder = folders.filter(value => {
-  //         return value.during_id === during.id;
-  //     });
-  //     console.log("during");
-  //     console.log(during);
-  //     console.log("folder");
-  //     console.log(folder);
-  // }
-
-
-  if (path[1] != undefined) {
-    var index = path.length;
-    var selectFolder = folders.find(function (value) {
-      return path[index - 1] === value.title;
-    });
-    console.log(selectFolder);
-    during = duringFolder.find(function (value) {
-      return value.folder_id === selectFolder.id;
-    });
-    folder = folders.filter(function (value) {
-      return value.during_id === during.id;
-    });
+      during = duringFolder.find(function (value) {
+        return value.main_or_sub == true;
+      });
+      folder = folders.filter(function (value) {
+        return value.during_id === during.id;
+      });
+    } else {
+      var index = path.length;
+      var selectFolder = folders.find(function (value) {
+        return path[index - 1] === value.title;
+      });
+      console.log(selectFolder);
+      during = duringFolder.find(function (value) {
+        return value.folder_id === selectFolder.id;
+      });
+      folder = folders.filter(function (value) {
+        return value.during_id === during.id;
+      });
+    }
+  } catch (e) {
+    //後でエラーページを作って移動させる(エラーページにはホーム直下{"/"}につなげるボタンを作る)
+    history.push("/".concat(path[0]));
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_5__["Background"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_folder_and_text_buttons_folder_and_text_buttons_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -88202,8 +88238,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
 /* harmony import */ var _redux_folder_folder_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/folder/folder.actions */ "./resources/js/redux/folder/folder.actions.js");
 /* harmony import */ var _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../redux/user/user.selector */ "./resources/js/redux/user/user.selector.js");
-/* harmony import */ var _folder_folder_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../folder/folder.container */ "./resources/js/pages/folder/folder.container.jsx");
-/* harmony import */ var _route_private_user_root_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../route/private_user_root.component */ "./resources/js/route/private_user_root.component.jsx");
+/* harmony import */ var _route_private_user_root_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../route/private_user_root.component */ "./resources/js/route/private_user_root.component.jsx");
+/* harmony import */ var _creating_text_creating_text_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../creating_text/creating-text.component */ "./resources/js/pages/creating_text/creating-text.component.jsx");
+/* harmony import */ var _folder_folder_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../folder/folder.container */ "./resources/js/pages/folder/folder.container.jsx");
 
  //redux
 
@@ -88212,6 +88249,8 @@ __webpack_require__.r(__webpack_exports__);
 
  //component
 
+
+ //import FolderPage from "../folder/folder.component";
 
 
 
@@ -88222,14 +88261,21 @@ var UserPage = function UserPage(_ref) {
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     fetchFoldersStart(user);
   }, [fetchFoldersStart]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_route_private_user_root_component__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_route_private_user_root_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
     exact: true,
     path: "".concat(match.path),
-    component: _folder_folder_container__WEBPACK_IMPORTED_MODULE_6__["default"]
+    component: _folder_folder_container__WEBPACK_IMPORTED_MODULE_8__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: "".concat(match.path, "/_folder/") + ":folder_name" //path={`${match.path}/`+":folder_name"}
-    ,
-    component: _folder_folder_container__WEBPACK_IMPORTED_MODULE_6__["default"]
+    exact: true,
+    path: "".concat(match.path, "/creating/:text_name"),
+    component: _creating_text_creating_text_component__WEBPACK_IMPORTED_MODULE_7__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
+    path: "".concat(match.path, "/:folder_title/creating/:text_name"),
+    component: _creating_text_creating_text_component__WEBPACK_IMPORTED_MODULE_7__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "".concat(match.path, "/_folder/:folder_name"),
+    component: _folder_folder_container__WEBPACK_IMPORTED_MODULE_8__["default"]
   }));
 };
 
