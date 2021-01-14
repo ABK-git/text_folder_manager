@@ -87301,12 +87301,12 @@ var Header = function Header(_ref) {
     folderClear();
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["HeaderContainer"], null, user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["LogoToHomeContainer"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["HeaderContainer"], null, user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["HeaderContents"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["LogoToHomeContainer"], {
     to: "/".concat(user.displayName)
-  }) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["OptionsContainer"], null, user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["OptionLink"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["OptionsContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["OptionLink"], {
     to: "/",
     onClick: handleClick
-  }, "SIGN OUT") : ""));
+  }, "SIGN OUT"))) : "");
 };
 
 var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_2__["createStructuredSelector"])({
@@ -87332,7 +87332,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 /*!**********************************************************!*\
   !*** ./resources/js/components/header/header.styles.jsx ***!
   \**********************************************************/
-/*! exports provided: HeaderContainer, LogoToHomeContainer, OptionsContainer, OptionLink, OptionDiv */
+/*! exports provided: HeaderContainer, LogoToHomeContainer, OptionsContainer, OptionLink, OptionDiv, HeaderContents */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -87342,10 +87342,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OptionsContainer", function() { return OptionsContainer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OptionLink", function() { return OptionLink; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OptionDiv", function() { return OptionDiv; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeaderContents", function() { return HeaderContents; });
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject6() {
+  var data = _taggedTemplateLiteral(["\n    height: 100%;\n    width: 100%;\n    display: flex;\n"]);
+
+  _templateObject6 = function _templateObject6() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  padding: 10px 15px;\n"]);
+  var data = _taggedTemplateLiteral(["\n    padding: 10px 15px;\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -87355,7 +87366,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  padding: 10px 15px;\n  font-weight: bold;\n  font-size: 24px;\n  color: red;\n  cursor: pointer;\n  white-space: nowrap;\n"]);
+  var data = _taggedTemplateLiteral(["\n    padding: 10px 15px;\n    font-weight: bold;\n    font-size: 24px;\n    color: red;\n    cursor: pointer;\n    white-space: nowrap;\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -87365,7 +87376,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n"]);
+  var data = _taggedTemplateLiteral(["\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: flex-end;\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -87375,7 +87386,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  height: 70px;\n  width: 70px;\n  background-size: cover;\n  background-image: url(\"/images/header/toHome.png\");\n\n  :hover{\n    background-image: url(\"/images/header/toHomeHover.png\");\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n    height: 70px;\n    width: 70px;\n    background-size: cover;\n    background-image: url(\"/images/header/toHome.png\");\n\n    :hover {\n        background-image: url(\"/images/header/toHomeHover.png\");\n    }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -87385,7 +87396,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n    height: 70px;\n    width: 100%;\n    display: flex;\n    justify-content: space-between\n"]);
+  var data = _taggedTemplateLiteral(["\n    height: 70px;\n    width: 100%;\n    display: flex;\n    justify-content: space-between;\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -87403,6 +87414,7 @@ var LogoToHomeContainer = Object(styled_components__WEBPACK_IMPORTED_MODULE_1__[
 var OptionsContainer = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject3());
 var OptionLink = Object(styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])(react_router_dom__WEBPACK_IMPORTED_MODULE_0__["Link"])(_templateObject4());
 var OptionDiv = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject5());
+var HeaderContents = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject6());
 
 /***/ }),
 

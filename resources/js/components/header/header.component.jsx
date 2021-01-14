@@ -10,7 +10,8 @@ import {
     HeaderContainer,
     OptionsContainer,
     OptionLink,
-    LogoToHomeContainer
+    LogoToHomeContainer,
+    HeaderContents
 } from "./header.styles";
 
 const Header = ({ user, signOut, folderClear }) => {
@@ -21,16 +22,18 @@ const Header = ({ user, signOut, folderClear }) => {
 
     return (
         <HeaderContainer>
-            {user ? <LogoToHomeContainer to={`/${user.displayName}`} /> : ""}
-            <OptionsContainer>
-                {user ? (
-                    <OptionLink to="/" onClick={handleClick}>
-                        SIGN OUT
-                    </OptionLink>
-                ) : (
-                    ""
-                )}
-            </OptionsContainer>
+            {user ? (
+                <HeaderContents>
+                    <LogoToHomeContainer to={`/${user.displayName}`} />
+                    <OptionsContainer>
+                        <OptionLink to="/" onClick={handleClick}>
+                            SIGN OUT
+                        </OptionLink>
+                    </OptionsContainer>
+                </HeaderContents>
+            ) : (
+                ""
+            )}
         </HeaderContainer>
     );
 };
