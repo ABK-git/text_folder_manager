@@ -38,6 +38,10 @@ const updateFolderName = css`
     }
 `;
 
+const creatingPageButton = css`
+  margin-bottom: 5px;
+`;
+
 const getButtonStyles = props => {
     switch (props.design) {
         case "auth":
@@ -54,6 +58,9 @@ const getButtonStyles = props => {
 
         case "updateFolderName":
             return updateFolderName;
+
+        case "creatingPageButton":
+            return creatingPageButton;
 
         default:
             return "";

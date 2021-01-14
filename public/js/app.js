@@ -86641,8 +86641,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomButtonContainer", function() { return CustomButtonContainer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FolderButtonContainer", function() { return FolderButtonContainer; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-function _templateObject8() {
+function _templateObject9() {
   var data = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n"]);
+
+  _templateObject9 = function _templateObject9() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject8() {
+  var data = _taggedTemplateLiteral(["\n    font-size: 26px;\n    font-weight: bolder;\n    cursor: pointer;\n    display: inline-block;\n\n    ", "\n"]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -86652,7 +86662,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n    font-size: 26px;\n    font-weight: bolder;\n    cursor: pointer;\n    display: inline-block;\n\n    ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n    background-color: #d41e3d;\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -86662,7 +86672,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n    background-color: #d41e3d;\n"]);
+  var data = _taggedTemplateLiteral(["\n  margin-bottom: 5px;\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -86729,6 +86739,7 @@ var createText = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_
 var createFolder = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject3());
 var createFolderSubmit = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject4());
 var updateFolderName = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject5());
+var creatingPageButton = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["css"])(_templateObject6());
 
 var getButtonStyles = function getButtonStyles(props) {
   switch (props.design) {
@@ -86747,14 +86758,17 @@ var getButtonStyles = function getButtonStyles(props) {
     case "updateFolderName":
       return updateFolderName;
 
+    case "creatingPageButton":
+      return creatingPageButton;
+
     default:
       return "";
   }
 };
 
-var CustomButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject6());
-var CustomButtonContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject7(), getButtonStyles);
-var FolderButtonContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject8());
+var CustomButton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject7());
+var CustomButtonContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].button(_templateObject8(), getButtonStyles);
+var FolderButtonContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject9());
 
 /***/ }),
 
@@ -87991,7 +88005,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEB
 /*!**************************************************!*\
   !*** ./resources/js/pages/background.styles.jsx ***!
   \**************************************************/
-/*! exports provided: SpaceBetweenBackground, BasicBackground, Background */
+/*! exports provided: SpaceBetweenBackground, BasicBackground, Background, BackgroundCenter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -87999,7 +88013,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SpaceBetweenBackground", function() { return SpaceBetweenBackground; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BasicBackground", function() { return BasicBackground; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Background", function() { return Background; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BackgroundCenter", function() { return BackgroundCenter; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\n    height: calc(100vh - 70px);\n    width: 100vw;\n    text-align: center;\n"]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject3() {
   var data = _taggedTemplateLiteral(["\n    height: calc(100vh - 70px);\n    width: 100vw;\n"]);
 
@@ -88036,6 +88061,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 var SpaceBetweenBackground = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject());
 var BasicBackground = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2());
 var Background = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3());
+var BackgroundCenter = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject4());
 
 /***/ }),
 
@@ -88050,13 +88076,126 @@ var Background = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
+/* harmony import */ var _creating_text_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./creating-text.styles */ "./resources/js/pages/creating_text/creating-text.styles.jsx");
+/* harmony import */ var _background_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../background.styles */ "./resources/js/pages/background.styles.jsx");
+/* harmony import */ var _components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+ //styles
+
+ //背景
+
+ //component
+
 
 
 var CreatingText = function CreatingText() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Hello World");
+  //入力フォームの表示・非表示
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isDisplay = _useState2[0],
+      setIsDisplay = _useState2[1]; //フォームの表示・非表示
+
+
+  var onMouseEnterOrLeave = function onMouseEnterOrLeave() {
+    setIsDisplay(!isDisplay);
+  }; //初期値
+
+
+  var initialValues = {
+    creating_text: ""
+  }; //送信処理
+
+  var onSubmit = function onSubmit(values) {
+    console.log(values);
+  }; //formikの作成
+
+
+  var formik = Object(formik__WEBPACK_IMPORTED_MODULE_1__["useFormik"])({
+    initialValues: initialValues,
+    onSubmit: onSubmit
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_3__["BackgroundCenter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_creating_text_styles__WEBPACK_IMPORTED_MODULE_2__["CreateTextFormContainer"], {
+    onSubmit: formik.handleSubmit
+  }, isDisplay ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    type: "submit",
+    onMouseLeave: onMouseEnterOrLeave,
+    design: "creatingPageButton"
+  }, "\u6587\u7AE0\u5B8C\u6210!") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_creating_text_styles__WEBPACK_IMPORTED_MODULE_2__["TitleMessage"], {
+    onMouseEnter: onMouseEnterOrLeave
+  }, "\u6587\u7AE0\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_creating_text_styles__WEBPACK_IMPORTED_MODULE_2__["CreateTextForm"], {
+    name: "creating_text",
+    value: formik.values.creating_text,
+    onChange: formik.handleChange,
+    placeholder: "\u6587\u7AE0\u5165\u529B\u6B04"
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (CreatingText);
+
+/***/ }),
+
+/***/ "./resources/js/pages/creating_text/creating-text.styles.jsx":
+/*!*******************************************************************!*\
+  !*** ./resources/js/pages/creating_text/creating-text.styles.jsx ***!
+  \*******************************************************************/
+/*! exports provided: TitleMessage, CreateTextForm, CreateTextFormContainer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TitleMessage", function() { return TitleMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateTextForm", function() { return CreateTextForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateTextFormContainer", function() { return CreateTextFormContainer; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n    height: 100%;\n    width: 100%;\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n    width: 90%;\n    height: 92%;\n    margin: 0;\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    height: 6%;\n    color: #a579f0;\n    margin: 0;\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+
+var TitleMessage = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].h2(_templateObject());
+var CreateTextForm = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].textarea(_templateObject2());
+var CreateTextFormContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].form(_templateObject3());
 
 /***/ }),
 
