@@ -10,7 +10,8 @@ import {
     HeaderContainer,
     OptionsContainer,
     OptionLink,
-    LogoToHomeContainer
+    LogoToHomeContainer,
+    HeaderContents
 } from "./header.styles";
 
 const Header = ({ user, signOut, folderClear }) => {
@@ -22,14 +23,14 @@ const Header = ({ user, signOut, folderClear }) => {
     return (
         <HeaderContainer>
             {user ? (
-                <div>
+                <HeaderContents>
                     <LogoToHomeContainer to={`/${user.displayName}`} />
                     <OptionsContainer>
                         <OptionLink to="/" onClick={handleClick}>
                             SIGN OUT
                         </OptionLink>
                     </OptionsContainer>
-                </div>
+                </HeaderContents>
             ) : (
                 ""
             )}
