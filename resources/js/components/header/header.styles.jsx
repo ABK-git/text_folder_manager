@@ -9,7 +9,7 @@ export const HeaderContainer = styled.div`
 `;
 
 export const LogoToHomeContainer = styled(Link)`
-  height: 100%;
+  height: 70px;
   width: 70px;
   background-size: cover;
   background-image: url("/images/header/toHome.png");

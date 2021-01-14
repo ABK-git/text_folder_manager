@@ -87301,12 +87301,12 @@ var Header = function Header(_ref) {
     folderClear();
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["HeaderContainer"], null, user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["LogoToHomeContainer"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["HeaderContainer"], null, user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["LogoToHomeContainer"], {
     to: "/".concat(user.displayName)
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["OptionsContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["OptionLink"], {
+  }) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["OptionsContainer"], null, user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["OptionLink"], {
     to: "/",
     onClick: handleClick
-  }, "SIGN OUT"))) : "");
+  }, "SIGN OUT") : ""));
 };
 
 var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_2__["createStructuredSelector"])({
@@ -87375,7 +87375,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  height: 100%;\n  width: 70px;\n  background-size: cover;\n  background-image: url(\"/images/header/toHome.png\");\n\n  :hover{\n    background-image: url(\"/images/header/toHomeHover.png\");\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  height: 70px;\n  width: 70px;\n  background-size: cover;\n  background-image: url(\"/images/header/toHome.png\");\n\n  :hover{\n    background-image: url(\"/images/header/toHomeHover.png\");\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;

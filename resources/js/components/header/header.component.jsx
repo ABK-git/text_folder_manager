@@ -21,18 +21,16 @@ const Header = ({ user, signOut, folderClear }) => {
 
     return (
         <HeaderContainer>
-            {user ? (
-                <div>
-                    <LogoToHomeContainer to={`/${user.displayName}`} />
-                    <OptionsContainer>
-                        <OptionLink to="/" onClick={handleClick}>
-                            SIGN OUT
-                        </OptionLink>
-                    </OptionsContainer>
-                </div>
-            ) : (
-                ""
-            )}
+            {user ? <LogoToHomeContainer to={`/${user.displayName}`} /> : ""}
+            <OptionsContainer>
+                {user ? (
+                    <OptionLink to="/" onClick={handleClick}>
+                        SIGN OUT
+                    </OptionLink>
+                ) : (
+                    ""
+                )}
+            </OptionsContainer>
         </HeaderContainer>
     );
 };
