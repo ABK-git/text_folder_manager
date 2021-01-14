@@ -87287,12 +87287,12 @@ var Header = function Header(_ref) {
     folderClear();
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["HeaderContainer"], null, user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["LogoToHomeContainer"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["HeaderContainer"], null, user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["LogoToHomeContainer"], {
     to: "/".concat(user.displayName)
-  }) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["OptionsContainer"], null, user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["OptionLink"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["OptionsContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_styles__WEBPACK_IMPORTED_MODULE_6__["OptionLink"], {
     to: "/",
     onClick: handleClick
-  }, "SIGN OUT") : ""));
+  }, "SIGN OUT"))) : "");
 };
 
 var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_2__["createStructuredSelector"])({
@@ -87879,7 +87879,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 /* harmony import */ var _styled_icons_evil_Spinner__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @styled-icons/evil/Spinner */ "./node_modules/@styled-icons/evil/Spinner/Spinner.esm.js");
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n    width: 33%;\n    margin-bottom: 100px;\n    animation: spin 1s ease-in-out infinite;\n    -webkit-animation: spin 1s ease-in-out infinite;\n    @keyframes spin {\n        to {\n            -webkit-transform: rotate(360deg);\n        }\n    }\n    @-webkit-keyframes spin {\n        to {\n            -webkit-transform: rotate(360deg);\n        }\n    }\n"]);
+  var data = _taggedTemplateLiteral(["\n    width: 33%;\n    margin-bottom: 100px;\n    animation: spin 0.8s ease-in-out infinite;\n    -webkit-animation: spin 0.8s ease-in-out infinite;\n    @keyframes spin {\n        to {\n            -webkit-transform: rotate(360deg);\n        }\n    }\n    @-webkit-keyframes spin {\n        to {\n            -webkit-transform: rotate(360deg);\n        }\n    }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
