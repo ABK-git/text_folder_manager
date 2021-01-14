@@ -12,8 +12,8 @@ export const SpinnerOverlay = styled.div`
 export const SpinnerAnimation = styled(Spinner)`
     width: 33%;
     margin-bottom: 100px;
-    animation: spin 1s ease-in-out infinite;
-    -webkit-animation: spin 1s ease-in-out infinite;
+    animation: spin 0.8s ease-in-out infinite;
+    -webkit-animation: spin 0.8s ease-in-out infinite;
     @keyframes spin {
         to {
             -webkit-transform: rotate(360deg);
