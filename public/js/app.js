@@ -88088,10 +88088,11 @@ var BackgroundCenter = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"]
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
-/* harmony import */ var _creating_text_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./creating-text.styles */ "./resources/js/pages/creating_text/creating-text.styles.jsx");
-/* harmony import */ var _background_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../background.styles */ "./resources/js/pages/background.styles.jsx");
-/* harmony import */ var _components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
+/* harmony import */ var _creating_text_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./creating-text.styles */ "./resources/js/pages/creating_text/creating-text.styles.jsx");
+/* harmony import */ var _background_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../background.styles */ "./resources/js/pages/background.styles.jsx");
+/* harmony import */ var _components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -88103,6 +88104,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
  //styles
@@ -88123,8 +88125,12 @@ var CreatingText = function CreatingText() {
 
   var onMouseEnterOrLeave = function onMouseEnterOrLeave() {
     setIsDisplay(!isDisplay);
-  }; //初期値
+  }; //historyを取得
 
+
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); //locationを取得
+
+  var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useLocation"])(); //初期値
 
   var initialValues = {
     creating_text: ""
@@ -88132,22 +88138,26 @@ var CreatingText = function CreatingText() {
 
   var onSubmit = function onSubmit(values) {
     console.log(values);
+    history.push({
+      pathname: "".concat(location.pathname, "/test"),
+      state: values
+    });
   }; //formikの作成
 
 
-  var formik = Object(formik__WEBPACK_IMPORTED_MODULE_1__["useFormik"])({
+  var formik = Object(formik__WEBPACK_IMPORTED_MODULE_2__["useFormik"])({
     initialValues: initialValues,
     onSubmit: onSubmit
   });
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_3__["BackgroundCenter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_creating_text_styles__WEBPACK_IMPORTED_MODULE_2__["CreateTextFormContainer"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_4__["BackgroundCenter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_creating_text_styles__WEBPACK_IMPORTED_MODULE_3__["CreateTextFormContainer"], {
     onSubmit: formik.handleSubmit
-  }, isDisplay ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, isDisplay ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
     type: "submit",
     onMouseLeave: onMouseEnterOrLeave,
     design: "creatingPageButton"
-  }, "\u6587\u7AE0\u5B8C\u6210!") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_creating_text_styles__WEBPACK_IMPORTED_MODULE_2__["TitleMessage"], {
+  }, "\u6587\u7AE0\u5B8C\u6210!") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_creating_text_styles__WEBPACK_IMPORTED_MODULE_3__["TitleMessage"], {
     onMouseEnter: onMouseEnterOrLeave
-  }, "\u6587\u7AE0\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_creating_text_styles__WEBPACK_IMPORTED_MODULE_2__["CreateTextForm"], {
+  }, "\u6587\u7AE0\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_creating_text_styles__WEBPACK_IMPORTED_MODULE_3__["CreateTextForm"], {
     name: "creating_text",
     value: formik.values.creating_text,
     onChange: formik.handleChange,
@@ -88393,6 +88403,46 @@ var SignInAndSignUp = function SignInAndSignUp() {
 
 /***/ }),
 
+/***/ "./resources/js/pages/test/test_component.jsx":
+/*!****************************************************!*\
+  !*** ./resources/js/pages/test/test_component.jsx ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+var TestPage = function TestPage() {
+  //locationを取得
+  var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useLocation"])(); //行ごとに分割する
+
+  var splitLine = location.state.creating_text.split("\n");
+  console.log(splitLine);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, splitLine.map(function (line, index) {
+    //文字がない行の場合
+    if (line === "") {
+      //改行だけする
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
+        key: index
+      });
+    }
+
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      key: index
+    }, line);
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (TestPage);
+
+/***/ }),
+
 /***/ "./resources/js/pages/user_page/user_page.component.jsx":
 /*!**************************************************************!*\
   !*** ./resources/js/pages/user_page/user_page.component.jsx ***!
@@ -88412,6 +88462,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _route_private_user_root_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../route/private_user_root.component */ "./resources/js/route/private_user_root.component.jsx");
 /* harmony import */ var _creating_text_creating_text_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../creating_text/creating-text.component */ "./resources/js/pages/creating_text/creating-text.component.jsx");
 /* harmony import */ var _folder_folder_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../folder/folder.container */ "./resources/js/pages/folder/folder.container.jsx");
+/* harmony import */ var _test_test_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../test/test_component */ "./resources/js/pages/test/test_component.jsx");
 
  //redux
 
@@ -88421,7 +88472,7 @@ __webpack_require__.r(__webpack_exports__);
  //component
 
 
- //import FolderPage from "../folder/folder.component";
+
 
 
 
@@ -88438,15 +88489,15 @@ var UserPage = function UserPage(_ref) {
     component: _folder_folder_container__WEBPACK_IMPORTED_MODULE_8__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
-    path: "".concat(match.path, "/creating/:text_name"),
-    component: _creating_text_creating_text_component__WEBPACK_IMPORTED_MODULE_7__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    exact: true,
-    path: "".concat(match.path, "/:folder_title/creating/:text_name"),
+    path: ["".concat(match.path, "/creating/:text_name"), "".concat(match.path, "/:folder_title/creating/:text_name")],
     component: _creating_text_creating_text_component__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "".concat(match.path, "/_folder/:folder_name"),
     component: _folder_folder_container__WEBPACK_IMPORTED_MODULE_8__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
+    path: "".concat(match.path, "/:folder_title/creating/:text_name/test"),
+    component: _test_test_component__WEBPACK_IMPORTED_MODULE_9__["default"]
   }));
 };
 

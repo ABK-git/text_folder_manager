@@ -8,8 +8,8 @@ import { selectCurrentUser } from "../../redux/user/user.selector";
 //component
 import PrivateUserRoute from "../../route/private_user_root.component";
 import CreatingText from "../creating_text/creating-text.component";
-//import FolderPage from "../folder/folder.component";
 import FolderContainer from "../folder/folder.container";
+import TestPage from "../test/test_component";
 
 const UserPage = ({ user, fetchFoldersStart, match }) => {
     useEffect(() => {
@@ -24,18 +24,22 @@ const UserPage = ({ user, fetchFoldersStart, match }) => {
                 component={FolderContainer}
             />
             <Route
-              exact 
-              path={`${match.path}/creating/:text_name`}
-              component={CreatingText}
+                exact
+                path={[
+                    `${match.path}/creating/:text_name`,
+                    `${match.path}/:folder_title/creating/:text_name`
+                ]}
+                component={CreatingText}
             />
-            <Route
-              exact 
-              path={`${match.path}/:folder_title/creating/:text_name`}
-              component={CreatingText}
-            />
+
             <Route
                 path={`${match.path}/_folder/:folder_name`}
                 component={FolderContainer}
+            />
+            <Route
+                exact
+                path={`${match.path}/:folder_title/creating/:text_name/test`}
+                component={TestPage}
             />
         </div>
     );
