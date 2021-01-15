@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {useHistory, useLocation} from "react-router-dom";
 import { useFormik } from "formik";
 //styles
 import {
@@ -19,6 +20,11 @@ const CreatingText = () => {
         setIsDisplay(!isDisplay);
     };
 
+    //historyを取得
+    const history = useHistory();
+    //locationを取得
+    const location = useLocation();
+
     //初期値
     const initialValues = {
         creating_text: ""
@@ -26,6 +32,7 @@ const CreatingText = () => {
     //送信処理
     const onSubmit = values => {
         console.log(values);
+        history.push({pathname: `${location.pathname}/test`,state: values})
     };
 
     //formikの作成
