@@ -88462,7 +88462,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _route_private_user_root_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../route/private_user_root.component */ "./resources/js/route/private_user_root.component.jsx");
 /* harmony import */ var _creating_text_creating_text_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../creating_text/creating-text.component */ "./resources/js/pages/creating_text/creating-text.component.jsx");
 /* harmony import */ var _folder_folder_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../folder/folder.container */ "./resources/js/pages/folder/folder.container.jsx");
-/* harmony import */ var _test_test_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../test/test_component */ "./resources/js/pages/test/test_component.jsx");
+/* harmony import */ var _user_top_user_top_container__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../user_top/user_top.container */ "./resources/js/pages/user_top/user_top.container.jsx");
+/* harmony import */ var _test_test_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../test/test_component */ "./resources/js/pages/test/test_component.jsx");
 
  //redux
 
@@ -88470,6 +88471,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
  //component
+
 
 
 
@@ -88486,7 +88488,7 @@ var UserPage = function UserPage(_ref) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_route_private_user_root_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
     exact: true,
     path: "".concat(match.path),
-    component: _folder_folder_container__WEBPACK_IMPORTED_MODULE_8__["default"]
+    component: _user_top_user_top_container__WEBPACK_IMPORTED_MODULE_9__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: ["".concat(match.path, "/creating/:text_name"), "".concat(match.path, "/:folder_title/creating/:text_name")],
@@ -88496,8 +88498,8 @@ var UserPage = function UserPage(_ref) {
     component: _folder_folder_container__WEBPACK_IMPORTED_MODULE_8__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
-    path: "".concat(match.path, "/:folder_title/creating/:text_name/test"),
-    component: _test_test_component__WEBPACK_IMPORTED_MODULE_9__["default"]
+    path: ["".concat(match.path, "/creating/:text_name/test"), "".concat(match.path, "/:folder_title/creating/:text_name/test")],
+    component: _test_test_component__WEBPACK_IMPORTED_MODULE_10__["default"]
   }));
 };
 
@@ -88514,6 +88516,110 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(UserPage));
+
+/***/ }),
+
+/***/ "./resources/js/pages/user_top/user_top.component.jsx":
+/*!************************************************************!*\
+  !*** ./resources/js/pages/user_top/user_top.component.jsx ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
+/* harmony import */ var _redux_folder_folder_selector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/folder/folder.selector */ "./resources/js/redux/folder/folder.selector.js");
+/* harmony import */ var _background_styles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../background.styles */ "./resources/js/pages/background.styles.jsx");
+/* harmony import */ var _components_folder_and_text_buttons_folder_and_text_buttons_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/folder-and-text-buttons/folder-and-text-buttons.component */ "./resources/js/components/folder-and-text-buttons/folder-and-text-buttons.component.jsx");
+/* harmony import */ var _components_display_document_display_document_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/display-document/display-document.component */ "./resources/js/components/display-document/display-document.component.jsx");
+
+ //redux
+
+
+
+ //背景
+
+ //components
+
+
+
+
+var UserTopPage = function UserTopPage(_ref) {
+  var duringFolder = _ref.duringFolder,
+      folders = _ref.folders;
+  var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useLocation"])();
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); //LocationからURLを取得する
+
+  var path = location.pathname.slice(1).split("/"); //中間テーブルとFolderの入れ物
+
+  var during = null;
+  var folder = new Array();
+
+  try {
+    //直下のFolderと中間テーブルを取得
+    during = duringFolder.find(function (value) {
+      return value.main_or_sub == true;
+    });
+    folder = folders.filter(function (value) {
+      return value.during_id === during.id;
+    });
+  } catch (e) {
+    //後でエラーページを作って移動させる(エラーページにはホーム直下{"/"}につなげるボタンを作る)
+    history.push("/".concat(path[0]));
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_5__["Background"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_folder_and_text_buttons_folder_and_text_buttons_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    duringFolder: during,
+    haveFolders: folder
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_display_document_display_document_component__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    folders: folder
+  }));
+};
+
+var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_3__["createStructuredSelector"])({
+  duringFolder: _redux_folder_folder_selector__WEBPACK_IMPORTED_MODULE_4__["selectDuringFolder"],
+  folders: _redux_folder_folder_selector__WEBPACK_IMPORTED_MODULE_4__["selectFolders"]
+});
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps)(UserTopPage));
+
+/***/ }),
+
+/***/ "./resources/js/pages/user_top/user_top.container.jsx":
+/*!************************************************************!*\
+  !*** ./resources/js/pages/user_top/user_top.container.jsx ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
+/* harmony import */ var _redux_folder_folder_selector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../redux/folder/folder.selector */ "./resources/js/redux/folder/folder.selector.js");
+/* harmony import */ var _user_top_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./user_top.component */ "./resources/js/pages/user_top/user_top.component.jsx");
+/* harmony import */ var _components_with_spinner_with_spinner_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/with-spinner/with-spinner.component */ "./resources/js/components/with-spinner/with-spinner.component.jsx");
+//Redux
+
+
+
+ //component
+
+
+
+var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_2__["createStructuredSelector"])({
+  isLoading: function isLoading(state) {
+    return Object(_redux_folder_folder_selector__WEBPACK_IMPORTED_MODULE_3__["selectIsDuringFolderFetching"])(state);
+  }
+}); //Folderデータの読み込みが終わるまで待つ
+
+var UserTopContainer = Object(redux__WEBPACK_IMPORTED_MODULE_1__["compose"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps), _components_with_spinner_with_spinner_component__WEBPACK_IMPORTED_MODULE_5__["default"])(_user_top_component__WEBPACK_IMPORTED_MODULE_4__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (UserTopContainer);
 
 /***/ }),
 

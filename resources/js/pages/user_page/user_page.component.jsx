@@ -9,6 +9,7 @@ import { selectCurrentUser } from "../../redux/user/user.selector";
 import PrivateUserRoute from "../../route/private_user_root.component";
 import CreatingText from "../creating_text/creating-text.component";
 import FolderContainer from "../folder/folder.container";
+import UserTopContainer from "../user_top/user_top.container";
 import TestPage from "../test/test_component";
 
 const UserPage = ({ user, fetchFoldersStart, match }) => {
@@ -21,7 +22,7 @@ const UserPage = ({ user, fetchFoldersStart, match }) => {
             <PrivateUserRoute
                 exact
                 path={`${match.path}`}
-                component={FolderContainer}
+                component={UserTopContainer}
             />
             <Route
                 exact
@@ -38,7 +39,7 @@ const UserPage = ({ user, fetchFoldersStart, match }) => {
             />
             <Route
                 exact
-                path={`${match.path}/:folder_title/creating/:text_name/test`}
+                path={[`${match.path}/creating/:text_name/test`,`${match.path}/:folder_title/creating/:text_name/test`]}
                 component={TestPage}
             />
         </div>
