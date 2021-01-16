@@ -89350,9 +89350,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_string_replace__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_string_replace__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _test_component_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./test_component.styles */ "./resources/js/pages/test/test_component.styles.jsx");
+/* harmony import */ var _background_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../background.styles */ "./resources/js/pages/background.styles.jsx");
+/* harmony import */ var _components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/form-input/form-input.component */ "./resources/js/components/form-input/form-input.component.jsx");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
  //styles
+
+
+ //component
 
 
 
@@ -89362,8 +89385,25 @@ var TestPage = function TestPage() {
 
   var splitLine = location.state.creating_text.split("\n"); //{}で囲まれた文字列を取り出す正規表現
 
-  var regExp = /{(.*?)}/g;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, splitLine.map(function (line, index) {
+  var regExp = /{(.*?)}/g; //{}で囲まれた部分に表示する値を保管
+  //const changeValue = {};
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
+      _useState2 = _slicedToArray(_useState, 2),
+      changeValue = _useState2[0],
+      setChangeValue = _useState2[1]; //Formに変化が生じた時
+
+
+  var handleChange = function handleChange(event) {
+    //Formの名前と値を取得
+    var _event$target = event.target,
+        name = _event$target.name,
+        value = _event$target.value; //入力値をuseStateに記録
+
+    setChangeValue(_objectSpread(_objectSpread({}, changeValue), {}, _defineProperty({}, name, value)));
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_4__["BasicBackground"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["DisplayText"], null, splitLine.map(function (line, index) {
     //文字がない行の場合
     if (line === "") {
       //改行だけする
@@ -89375,12 +89415,29 @@ var TestPage = function TestPage() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       key: index
     }, react_string_replace__WEBPACK_IMPORTED_MODULE_1___default()(line, regExp, function (match, i) {
+      //同名の入力欄が定義されていなかった場合
+      if (changeValue[match] === undefined) {
+        //入力欄を定義
+        changeValue[match] = match;
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["ChangeString"], {
         key: i,
         name: match
-      }, match);
+      }, changeValue[match]);
     }));
-  }));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["DisplayForm"], null, Object.keys(changeValue).map(function (value, index) {
+    console.log(value);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      key: index,
+      name: value,
+      autoComplete: "off",
+      handleChange: handleChange,
+      value: changeValue[value],
+      label: value,
+      required: true
+    });
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (TestPage);
@@ -89391,14 +89448,36 @@ var TestPage = function TestPage() {
 /*!***********************************************************!*\
   !*** ./resources/js/pages/test/test_component.styles.jsx ***!
   \***********************************************************/
-/*! exports provided: ChangeString, LineDiv */
+/*! exports provided: ChangeString, LineDiv, DisplayText, DisplayForm */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChangeString", function() { return ChangeString; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LineDiv", function() { return LineDiv; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DisplayText", function() { return DisplayText; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DisplayForm", function() { return DisplayForm; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\n    height: 100%;\n    width: 30%;\n    text-align: center;\n"]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n    height: 100%;\n    width: 70%;\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject2() {
   var data = _taggedTemplateLiteral(["\n    height: 20px;\n    font-size: 16px;\n"]);
 
@@ -89410,7 +89489,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n    font-size: 24px;\n    color: #FA2917;\n"]);
+  var data = _taggedTemplateLiteral(["\n    font-size: 20px;\n    color: #fa2917;\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -89423,7 +89502,11 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 var ChangeString = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].span(_templateObject());
-var LineDiv = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2());
+var LineDiv = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2()); //文章表示
+
+var DisplayText = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3()); //入力欄表示
+
+var DisplayForm = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject4());
 
 /***/ }),
 
