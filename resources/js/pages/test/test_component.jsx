@@ -1,13 +1,17 @@
 import React from "react";
+import reactStringReplace from "react-string-replace";
 import { useLocation } from "react-router-dom";
-//component
-import Line from "../../components/line/line.component";
+//styles
+import {ChangeString} from "./test_component.styles";
 
 const TestPage = () => {
     //locationを取得
     const location = useLocation();
     //行ごとに分割する
     const splitLine = location.state.creating_text.split("\n");
+
+    //{}で囲まれた文字列を取り出す正規表現
+    const regExp = /{(.*?)}/g;
 
     return (
         <div>
@@ -18,7 +22,13 @@ const TestPage = () => {
                     return <br key={index} />;
                 }
 
-                return <Line key={index}>{line}</Line>
+                return (
+                    <p key={index}>
+                        {reactStringReplace(line, regExp, (match, i) => (
+                            <ChangeString key={i} name={match}>{match}</ChangeString>
+                        ))}
+                    </p>
+                );
             })}
         </div>
     );
