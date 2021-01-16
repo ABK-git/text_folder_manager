@@ -88350,85 +88350,6 @@ var HeaderContents = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].d
 
 /***/ }),
 
-/***/ "./resources/js/components/line/line.component.jsx":
-/*!*********************************************************!*\
-  !*** ./resources/js/components/line/line.component.jsx ***!
-  \*********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_string_replace__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-string-replace */ "./node_modules/react-string-replace/index.js");
-/* harmony import */ var react_string_replace__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_string_replace__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _line_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./line.styles */ "./resources/js/components/line/line.styles.jsx");
-
-
-
-
-var Line = function Line(_ref) {
-  var children = _ref.children;
-  //{}で囲まれた文字列
-  var regExp = /{(.*?)}/g; //childrenの文字数を取得
-
-  var length = children.length;
-  var newChildren = children; //{}で囲まれた部分を切り出す
-
-  var reg = newChildren.match(regExp);
-  console.log(reg);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react_string_replace__WEBPACK_IMPORTED_MODULE_1___default()(children, regExp, function (match, i) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_line_styles__WEBPACK_IMPORTED_MODULE_2__["ChangeString"], {
-      key: i
-    }, match);
-  }));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Line);
-
-/***/ }),
-
-/***/ "./resources/js/components/line/line.styles.jsx":
-/*!******************************************************!*\
-  !*** ./resources/js/components/line/line.styles.jsx ***!
-  \******************************************************/
-/*! exports provided: ChangeString, LineDiv */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChangeString", function() { return ChangeString; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LineDiv", function() { return LineDiv; });
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n    height: 20px;\n    font-size: 16px;\n"]);
-
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n    font-size: 24px;\n    color: #FA2917;\n"]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-
-var ChangeString = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].span(_templateObject());
-var LineDiv = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2());
-
-/***/ }),
-
 /***/ "./resources/js/components/sign-in/sign-in.component.jsx":
 /*!***************************************************************!*\
   !*** ./resources/js/components/sign-in/sign-in.component.jsx ***!
@@ -89425,18 +89346,23 @@ var SignInAndSignUp = function SignInAndSignUp() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _components_line_line_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/line/line.component */ "./resources/js/components/line/line.component.jsx");
+/* harmony import */ var react_string_replace__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-string-replace */ "./node_modules/react-string-replace/index.js");
+/* harmony import */ var react_string_replace__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_string_replace__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _test_component_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./test_component.styles */ "./resources/js/pages/test/test_component.styles.jsx");
 
- //component
+
+ //styles
 
 
 
 var TestPage = function TestPage() {
   //locationを取得
-  var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useLocation"])(); //行ごとに分割する
+  var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useLocation"])(); //行ごとに分割する
 
-  var splitLine = location.state.creating_text.split("\n");
+  var splitLine = location.state.creating_text.split("\n"); //{}で囲まれた文字列を取り出す正規表現
+
+  var regExp = /{(.*?)}/g;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, splitLine.map(function (line, index) {
     //文字がない行の場合
     if (line === "") {
@@ -89446,13 +89372,58 @@ var TestPage = function TestPage() {
       });
     }
 
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_line_line_component__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       key: index
-    }, line);
+    }, react_string_replace__WEBPACK_IMPORTED_MODULE_1___default()(line, regExp, function (match, i) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["ChangeString"], {
+        key: i,
+        name: match
+      }, match);
+    }));
   }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (TestPage);
+
+/***/ }),
+
+/***/ "./resources/js/pages/test/test_component.styles.jsx":
+/*!***********************************************************!*\
+  !*** ./resources/js/pages/test/test_component.styles.jsx ***!
+  \***********************************************************/
+/*! exports provided: ChangeString, LineDiv */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChangeString", function() { return ChangeString; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LineDiv", function() { return LineDiv; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n    height: 20px;\n    font-size: 16px;\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    font-size: 24px;\n    color: #FA2917;\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+
+var ChangeString = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].span(_templateObject());
+var LineDiv = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2());
 
 /***/ }),
 

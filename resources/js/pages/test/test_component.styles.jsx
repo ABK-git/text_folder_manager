@@ -1,6 +1,6 @@
 import styled, {css} from "styled-components";
 
-export const ChangeString = css`
+export const ChangeString = styled.span`
     font-size: 24px;
     color: #FA2917;
 `;
