@@ -4,18 +4,21 @@ import { useLocation } from "react-router-dom";
 //styles
 import {
     ChangeString,
+    NoMarginDiv,
     DisplayForm,
     DisplayText,
     IncludeTextAndForm,
     IncludeButtons,
     ConfirmButtonContainer,
     DisplayFormContainer,
-    NoMarginP
+    NoMarginSpan,
+    BetweenTextareaToForm
 } from "./test_component.styles";
 import { BasicBackgroundPaddingTop } from "../background.styles";
 //component
 import FormInput from "../../components/form-input/form-input.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
+import TextareaInput from "../../components/textarea-input/textarea-input.component";
 
 const TestPage = () => {
     //locationを取得
@@ -24,12 +27,15 @@ const TestPage = () => {
     const splitLine = location.state.creating_text.split("\n");
 
     //{}で囲まれた文字列を取り出す正規表現
-    //const regExp = /{(.*?)}/g;
     const regExp = /(?<!\\){(.*?)(?<!\\)}/g;
 
+    //textareaを判別する正規表現
+    const regExpTextarea = /(\[textarea\]\{.*?\})/gm;
+
     //{}で囲まれた部分に表示する値を保管
-    //const changeValue = {};
     const [changeValue, setChangeValue] = useState({});
+    //textareaの表示する値を保管
+    const [changeTextarea, setChangeTextare] = useState({});
 
     //Formに変化が生じた時
     const handleChange = event => {
@@ -37,6 +43,12 @@ const TestPage = () => {
         const { name, value } = event.target;
         //入力値をuseStateに記録
         setChangeValue({ ...changeValue, [name]: value });
+    };
+    //textareaに変化が生じた時
+    const handleChangeTextarea = event => {
+        const { name, value } = event.target;
+        //入力値を格納
+        setChangeTextare({ ...changeTextarea, [name]: value });
     };
 
     //入力フォームの表示・非表示
@@ -67,7 +79,7 @@ const TestPage = () => {
             </IncludeButtons>
 
             <IncludeTextAndForm>
-                <DisplayText style={{ width: isDisplay ? "70%" : "100%" }}>
+                <DisplayText style={{ width: isDisplay ? "60%" : "100%" }}>
                     {splitLine.map((line, index) => {
                         //文字がない行の場合
                         if (line === "") {
@@ -75,10 +87,57 @@ const TestPage = () => {
                             return <br key={index} />;
                         }
 
+                        let newLine = line;
+                        console.log(newLine.match(regExpTextarea));
+                        //textareaが含まれているかを確認。
+                        const haveTextarea = newLine.match(regExpTextarea);
+
+                        if (Array.isArray(haveTextarea)) {
+                            newLine = reactStringReplace(
+                                newLine,
+                                regExpTextarea,
+                                match => {
+                                    //{}内の名前を取得
+                                    const name = haveTextarea[0].match(
+                                        regExp
+                                    )[0];
+                                    //{}を切り落とす
+                                    const sliceName = name.slice(
+                                        1,
+                                        name.length - 1
+                                    );
+                                    console.log(sliceName);
+
+                                    //同名の入力欄が定義されていなかった場合
+                                    if (
+                                        changeTextarea[sliceName] === undefined
+                                    ) {
+                                        //入力欄を定義
+                                        changeTextarea[sliceName] = sliceName;
+                                    }
+
+                                    return (
+                                        <ChangeString
+                                            key={match}
+                                            name={sliceName}
+                                        >
+                                            {changeTextarea[sliceName]
+                                                .split("\n")
+                                                .map((value, index) => (
+                                                    <NoMarginSpan key={index}>
+                                                        {value}
+                                                    </NoMarginSpan>
+                                                ))}
+                                        </ChangeString>
+                                    );
+                                }
+                            );
+                        }
+
                         return (
-                            <NoMarginP key={index}>
+                            <NoMarginDiv key={index}>
                                 {reactStringReplace(
-                                    line,
+                                    newLine,
                                     regExp,
                                     (match, i) => {
                                         //エスケープシーケンスを削除
@@ -97,25 +156,38 @@ const TestPage = () => {
                                         );
                                     }
                                 )}
-                            </NoMarginP>
+                            </NoMarginDiv>
                         );
                     })}
                 </DisplayText>
                 {isDisplay ? (
                     <DisplayForm>
-                        {Object.keys(changeValue).map((value, index) => {
-                            return (
-                                <FormInput
-                                    key={index}
-                                    name={value}
-                                    autoComplete="off"
-                                    handleChange={handleChange}
-                                    value={changeValue[value]}
-                                    label={value}
-                                    required
-                                />
-                            );
-                        })}
+                        {Object.keys(changeValue).map((value, index) => (
+                            <FormInput
+                                key={index}
+                                name={value}
+                                autoComplete="off"
+                                handleChange={handleChange}
+                                value={changeValue[value]}
+                                label={value}
+                                required
+                            />
+                        ))}
+                        {Object.keys(changeTextarea).length ? (
+                            <BetweenTextareaToForm>---以下textarea---</BetweenTextareaToForm>
+                        ) : (
+                            ""
+                        )}
+                        {Object.keys(changeTextarea).map((value, index) => (
+                            <TextareaInput
+                                key={value + index}
+                                name={value}
+                                value={changeTextarea[value]}
+                                autoComplete="off"
+                                handleChange={handleChangeTextarea}
+                                label={value}
+                            />
+                        ))}
                     </DisplayForm>
                 ) : (
                     ""

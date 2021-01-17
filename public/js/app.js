@@ -88789,6 +88789,95 @@ var SignUpForm = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].form(
 
 /***/ }),
 
+/***/ "./resources/js/components/textarea-input/textarea-input.component.jsx":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/textarea-input/textarea-input.component.jsx ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _textarea_input_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./textarea-input.styles */ "./resources/js/components/textarea-input/textarea-input.styles.jsx");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
+
+
+var TextareaInput = function TextareaInput(_ref) {
+  var handleChange = _ref.handleChange,
+      label = _ref.label,
+      value = _ref.value,
+      otherProps = _objectWithoutProperties(_ref, ["handleChange", "label", "value"]);
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_textarea_input_styles__WEBPACK_IMPORTED_MODULE_1__["GroupContainer"], null, label ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_textarea_input_styles__WEBPACK_IMPORTED_MODULE_1__["TextareaInputLabel"], null, label) : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_textarea_input_styles__WEBPACK_IMPORTED_MODULE_1__["TextareaInputContainer"], _extends({
+    onChange: handleChange,
+    value: value
+  }, otherProps)));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (TextareaInput);
+
+/***/ }),
+
+/***/ "./resources/js/components/textarea-input/textarea-input.styles.jsx":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/textarea-input/textarea-input.styles.jsx ***!
+  \**************************************************************************/
+/*! exports provided: GroupContainer, TextareaInputContainer, TextareaInputLabel */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GroupContainer", function() { return GroupContainer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TextareaInputContainer", function() { return TextareaInputContainer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TextareaInputLabel", function() { return TextareaInputLabel; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n    font-weight: bold;\n    color: rgb(7, 252, 109);\n    margin: 0px;\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n    width: 100%;\n    font-weight: bold;\n    color: rgb(7, 252, 109);\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    font-size: 20px;\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+
+var GroupContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject());
+var TextareaInputContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].textarea(_templateObject2());
+var TextareaInputLabel = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].label(_templateObject3());
+
+/***/ }),
+
 /***/ "./resources/js/components/with-spinner/with-spinner.component.jsx":
 /*!*************************************************************************!*\
   !*** ./resources/js/components/with-spinner/with-spinner.component.jsx ***!
@@ -89365,6 +89454,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _background_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../background.styles */ "./resources/js/pages/background.styles.jsx");
 /* harmony import */ var _components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/form-input/form-input.component */ "./resources/js/components/form-input/form-input.component.jsx");
 /* harmony import */ var _components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
+/* harmony import */ var _components_textarea_input_textarea_input_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/textarea-input/textarea-input.component */ "./resources/js/components/textarea-input/textarea-input.component.jsx");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -89393,20 +89483,27 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var TestPage = function TestPage() {
   //locationを取得
   var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useLocation"])(); //行ごとに分割する
 
   var splitLine = location.state.creating_text.split("\n"); //{}で囲まれた文字列を取り出す正規表現
-  //const regExp = /{(.*?)}/g;
 
-  var regExp = /(?<!\\){(.*?)(?<!\\)}/g; //{}で囲まれた部分に表示する値を保管
-  //const changeValue = {};
+  var regExp = /(?<!\\){(.*?)(?<!\\)}/g; //textareaを判別する正規表現
+
+  var regExpTextarea = /(\[textarea\]\{.*?\})/gm; //{}で囲まれた部分に表示する値を保管
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
       _useState2 = _slicedToArray(_useState, 2),
       changeValue = _useState2[0],
-      setChangeValue = _useState2[1]; //Formに変化が生じた時
+      setChangeValue = _useState2[1]; //textareaの表示する値を保管
+
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
+      _useState4 = _slicedToArray(_useState3, 2),
+      changeTextarea = _useState4[0],
+      setChangeTextare = _useState4[1]; //Formに変化が生じた時
 
 
   var handleChange = function handleChange(event) {
@@ -89416,13 +89513,22 @@ var TestPage = function TestPage() {
         value = _event$target.value; //入力値をuseStateに記録
 
     setChangeValue(_objectSpread(_objectSpread({}, changeValue), {}, _defineProperty({}, name, value)));
+  }; //textareaに変化が生じた時
+
+
+  var handleChangeTextarea = function handleChangeTextarea(event) {
+    var _event$target2 = event.target,
+        name = _event$target2.name,
+        value = _event$target2.value; //入力値を格納
+
+    setChangeTextare(_objectSpread(_objectSpread({}, changeTextarea), {}, _defineProperty({}, name, value)));
   }; //入力フォームの表示・非表示
 
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
-      _useState4 = _slicedToArray(_useState3, 2),
-      isDisplay = _useState4[0],
-      setIsDisplay = _useState4[1]; //Folder作成フォームの表示・非表示
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isDisplay = _useState6[0],
+      setIsDisplay = _useState6[1]; //Folder作成フォームの表示・非表示
 
 
   var handleClickDisplay = function handleClickDisplay() {
@@ -89435,7 +89541,7 @@ var TestPage = function TestPage() {
     onClick: handleClickDisplay
   }, "\u8868\u793A"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["IncludeTextAndForm"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["DisplayText"], {
     style: {
-      width: isDisplay ? "70%" : "100%"
+      width: isDisplay ? "60%" : "100%"
     }
   }, splitLine.map(function (line, index) {
     //文字がない行の場合
@@ -89446,9 +89552,38 @@ var TestPage = function TestPage() {
       });
     }
 
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["NoMarginP"], {
+    var newLine = line;
+    console.log(newLine.match(regExpTextarea)); //textareaが含まれているかを確認。
+
+    var haveTextarea = newLine.match(regExpTextarea);
+
+    if (Array.isArray(haveTextarea)) {
+      newLine = react_string_replace__WEBPACK_IMPORTED_MODULE_1___default()(newLine, regExpTextarea, function (match) {
+        //{}内の名前を取得
+        var name = haveTextarea[0].match(regExp)[0]; //{}を切り落とす
+
+        var sliceName = name.slice(1, name.length - 1);
+        console.log(sliceName); //同名の入力欄が定義されていなかった場合
+
+        if (changeTextarea[sliceName] === undefined) {
+          //入力欄を定義
+          changeTextarea[sliceName] = sliceName;
+        }
+
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["ChangeString"], {
+          key: match,
+          name: sliceName
+        }, changeTextarea[sliceName].split("\n").map(function (value, index) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["NoMarginSpan"], {
+            key: index
+          }, value);
+        }));
+      });
+    }
+
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["NoMarginDiv"], {
       key: index
-    }, react_string_replace__WEBPACK_IMPORTED_MODULE_1___default()(line, regExp, function (match, i) {
+    }, react_string_replace__WEBPACK_IMPORTED_MODULE_1___default()(newLine, regExp, function (match, i) {
       //エスケープシーケンスを削除
       match = match.replace(/\\/g, ""); //同名の入力欄が定義されていなかった場合
 
@@ -89472,6 +89607,15 @@ var TestPage = function TestPage() {
       label: value,
       required: true
     });
+  }), Object.keys(changeTextarea).length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["BetweenTextareaToForm"], null, "---\u4EE5\u4E0Btextarea---") : "", Object.keys(changeTextarea).map(function (value, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_textarea_input_textarea_input_component__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      key: value + index,
+      name: value,
+      value: changeTextarea[value],
+      autoComplete: "off",
+      handleChange: handleChangeTextarea,
+      label: value
+    });
   })) : ""));
 };
 
@@ -89483,23 +89627,45 @@ var TestPage = function TestPage() {
 /*!***********************************************************!*\
   !*** ./resources/js/pages/test/test_component.styles.jsx ***!
   \***********************************************************/
-/*! exports provided: ChangeString, LineDiv, NoMarginP, DisplayText, DisplayForm, IncludeTextAndForm, IncludeButtons, ConfirmButtonContainer, DisplayFormContainer */
+/*! exports provided: ChangeString, LineDiv, NoMarginDiv, NoMarginSpan, DisplayText, DisplayForm, IncludeTextAndForm, IncludeButtons, ConfirmButtonContainer, DisplayFormContainer, BetweenTextareaToForm */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChangeString", function() { return ChangeString; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LineDiv", function() { return LineDiv; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NoMarginP", function() { return NoMarginP; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NoMarginDiv", function() { return NoMarginDiv; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NoMarginSpan", function() { return NoMarginSpan; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DisplayText", function() { return DisplayText; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DisplayForm", function() { return DisplayForm; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IncludeTextAndForm", function() { return IncludeTextAndForm; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IncludeButtons", function() { return IncludeButtons; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConfirmButtonContainer", function() { return ConfirmButtonContainer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DisplayFormContainer", function() { return DisplayFormContainer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BetweenTextareaToForm", function() { return BetweenTextareaToForm; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject11() {
+  var data = _taggedTemplateLiteral(["\n    margin-top: 20px;\n    margin-bottom: 0px;\n"]);
+
+  _templateObject11 = function _templateObject11() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject10() {
+  var data = _taggedTemplateLiteral(["\n    text-align: center;\n    height: 100%;\n    width: 40%;\n"]);
+
+  _templateObject10 = function _templateObject10() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject9() {
-  var data = _taggedTemplateLiteral(["\n    text-align: center;\n    height: 100%;\n    width: 30%;\n"]);
+  var data = _taggedTemplateLiteral(["\n    text-align: center;\n    height: 100%;\n    width: 60%;\n"]);
 
   _templateObject9 = function _templateObject9() {
     return data;
@@ -89509,7 +89675,7 @@ function _templateObject9() {
 }
 
 function _templateObject8() {
-  var data = _taggedTemplateLiteral(["\n    text-align: center;\n    height: 100%;\n    width: 70%;\n"]);
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    height: 7%;\n    width: 100%;\n"]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -89519,7 +89685,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n    display: flex;\n    height: 7%;\n    width: 100%;\n"]);
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    height: 90%;\n    width: 100%;\n    padding-top: 10px;\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -89529,7 +89695,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n    display: flex;\n    height: 90%;\n    width: 100%;\n    padding-top: 10px;\n"]);
+  var data = _taggedTemplateLiteral(["\n    height: 100%;\n    width: 40%;\n    text-align: center;\n    padding-right: 20px;\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -89539,7 +89705,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n    height: 100%;\n    width: 30%;\n    text-align: center;\n    padding-right: 20px;\n"]);
+  var data = _taggedTemplateLiteral(["\n    height: 100%;\n    width: 60%;\n    padding-left: 20px;\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -89549,7 +89715,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n    height: 100%;\n    width: 70%;\n    padding-left: 20px;\n"]);
+  var data = _taggedTemplateLiteral(["\n    margin-bottom: 0px;\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -89593,19 +89759,22 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 var ChangeString = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].span(_templateObject());
 var LineDiv = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2());
-var NoMarginP = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].p(_templateObject3()); //文章表示
+var NoMarginDiv = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3());
+var NoMarginSpan = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject4()); //文章表示
 
-var DisplayText = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject4()); //入力欄表示
+var DisplayText = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject5()); //入力欄表示
 
-var DisplayForm = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject5()); //文章と入力欄をまとめる
+var DisplayForm = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject6()); //文章と入力欄をまとめる
 
-var IncludeTextAndForm = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject6()); //ボタンをまとめる
+var IncludeTextAndForm = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject7()); //ボタンをまとめる
 
-var IncludeButtons = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject7()); //確定ボタンのcontainer
+var IncludeButtons = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject8()); //確定ボタンのcontainer
 
-var ConfirmButtonContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject8()); //入力欄表示のcontainer
+var ConfirmButtonContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject9()); //入力欄表示のcontainer
 
-var DisplayFormContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject9());
+var DisplayFormContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject10()); //textareaを示す境界線
+
+var BetweenTextareaToForm = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].h2(_templateObject11());
 
 /***/ }),
 
