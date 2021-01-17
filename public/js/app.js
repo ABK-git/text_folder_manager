@@ -89425,15 +89425,14 @@ var TestPage = function TestPage() {
       });
     }
 
-    var newLine = line;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       key: index
-    }, react_string_replace__WEBPACK_IMPORTED_MODULE_1___default()(newLine, regExp, function (match, i) {
-      //同名の入力欄が定義されていなかった場合
-      if (changeValue[match] === undefined) {
-        //エスケープシーケンスを削除
-        match = match.replace(/\\/g, ""); //入力欄を定義
+    }, react_string_replace__WEBPACK_IMPORTED_MODULE_1___default()(line, regExp, function (match, i) {
+      //エスケープシーケンスを削除
+      match = match.replace(/\\/g, ""); //同名の入力欄が定義されていなかった場合
 
+      if (changeValue[match] === undefined) {
+        //入力欄を定義
         changeValue[match] = match;
       }
 
@@ -89443,7 +89442,6 @@ var TestPage = function TestPage() {
       }, changeValue[match]);
     }));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["DisplayForm"], null, Object.keys(changeValue).map(function (value, index) {
-    console.log(value);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
       key: index,
       name: value,

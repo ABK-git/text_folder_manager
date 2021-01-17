@@ -39,15 +39,14 @@ const TestPage = () => {
                         return <br key={index} />;
                     }
 
-                    let newLine = line;
-
                     return (
                         <p key={index}>
-                            {reactStringReplace(newLine, regExp, (match, i) => {
+                            {reactStringReplace(line, regExp, (match, i) => {
+                                //エスケープシーケンスを削除
+                                match = match.replace(/\\/g,"");
+                                
                                 //同名の入力欄が定義されていなかった場合
                                 if (changeValue[match] === undefined) {
-                                    //エスケープシーケンスを削除
-                                    match = match.replace(/\\/g,"");
                                     //入力欄を定義
                                     changeValue[match] = match;
                                 }
@@ -64,7 +63,6 @@ const TestPage = () => {
             </DisplayText>
             <DisplayForm>
                 {Object.keys(changeValue).map((value, index) => {
-                    console.log(value);
 
                     return (
                         <FormInput
