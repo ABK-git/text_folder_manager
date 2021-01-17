@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const ChangeString = styled.span`
     font-size: 20px;
@@ -10,20 +10,23 @@ export const LineDiv = styled.div`
     font-size: 16px;
 `;
 
-export const NoMarginP = styled.p`
+export const NoMarginDiv = styled.div`
+    margin-bottom: 0px;
+`;
+export const NoMarginSpan = styled.div`
     margin-bottom: 0px;
 `;
 
 //文章表示
 export const DisplayText = styled.div`
     height: 100%;
-    width: 70%;
+    width: 60%;
     padding-left: 20px;
 `;
 //入力欄表示
 export const DisplayForm = styled.div`
     height: 100%;
-    width: 30%;
+    width: 40%;
     text-align: center;
     padding-right: 20px;
 `;
@@ -45,12 +48,18 @@ export const IncludeButtons = styled.div`
 export const ConfirmButtonContainer = styled.div`
     text-align: center;
     height: 100%;
-    width: 70%;
+    width: 60%;
 `;
 
 //入力欄表示のcontainer
 export const DisplayFormContainer = styled.div`
     text-align: center;
     height: 100%;
-    width: 30%;
+    width: 40%;
+`;
+
+//textareaを示す境界線
+export const BetweenTextareaToForm = styled.h2`
+    margin-top: 20px;
+    margin-bottom: 0px;
 `;
