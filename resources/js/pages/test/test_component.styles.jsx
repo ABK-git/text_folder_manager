@@ -10,6 +10,10 @@ export const LineDiv = styled.div`
     font-size: 16px;
 `;
 
+export const NoMarginP = styled.p`
+    margin-bottom: 0px;
+`;
+
 //文章表示
 export const DisplayText = styled.div`
     height: 100%;
@@ -22,4 +26,31 @@ export const DisplayForm = styled.div`
     width: 30%;
     text-align: center;
     padding-right: 20px;
+`;
+//文章と入力欄をまとめる
+export const IncludeTextAndForm = styled.div`
+    display: flex;
+    height: 90%;
+    width: 100%;
+    padding-top: 10px;
+`;
+//ボタンをまとめる
+export const IncludeButtons = styled.div`
+    display: flex;
+    height: 7%;
+    width: 100%;
+`;
+
+//確定ボタンのcontainer
+export const ConfirmButtonContainer = styled.div`
+    text-align: center;
+    height: 100%;
+    width: 70%;
+`;
+
+//入力欄表示のcontainer
+export const DisplayFormContainer = styled.div`
+    text-align: center;
+    height: 100%;
+    width: 30%;
 `;

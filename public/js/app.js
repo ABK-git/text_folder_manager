@@ -88981,7 +88981,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n    display: flex;\n    height: calc(100vh - 70px);\n    width: 100vw;\n    padding-top: 20px;\n"]);
+  var data = _taggedTemplateLiteral(["\n    height: calc(100vh - 70px);\n    width: 100vw;\n    position: relative;\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -89364,6 +89364,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _test_component_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./test_component.styles */ "./resources/js/pages/test/test_component.styles.jsx");
 /* harmony import */ var _background_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../background.styles */ "./resources/js/pages/background.styles.jsx");
 /* harmony import */ var _components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/form-input/form-input.component */ "./resources/js/components/form-input/form-input.component.jsx");
+/* harmony import */ var _components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -89391,6 +89392,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var TestPage = function TestPage() {
   //locationを取得
   var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useLocation"])(); //行ごとに分割する
@@ -89414,9 +89416,28 @@ var TestPage = function TestPage() {
         value = _event$target.value; //入力値をuseStateに記録
 
     setChangeValue(_objectSpread(_objectSpread({}, changeValue), {}, _defineProperty({}, name, value)));
+  }; //入力フォームの表示・非表示
+
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isDisplay = _useState4[0],
+      setIsDisplay = _useState4[1]; //Folder作成フォームの表示・非表示
+
+
+  var handleClickDisplay = function handleClickDisplay() {
+    setIsDisplay(!isDisplay);
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_4__["BasicBackground"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["DisplayText"], null, splitLine.map(function (line, index) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_4__["BasicBackgroundPaddingTop"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["IncludeButtons"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["ConfirmButtonContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_6__["default"], null, "\u78BA\u5B9A")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["DisplayFormContainer"], null, isDisplay ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    onClick: handleClickDisplay
+  }, "\u975E\u8868\u793A") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    onClick: handleClickDisplay
+  }, "\u8868\u793A"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["IncludeTextAndForm"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["DisplayText"], {
+    style: {
+      width: isDisplay ? "70%" : "100%"
+    }
+  }, splitLine.map(function (line, index) {
     //文字がない行の場合
     if (line === "") {
       //改行だけする
@@ -89425,7 +89446,7 @@ var TestPage = function TestPage() {
       });
     }
 
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["NoMarginP"], {
       key: index
     }, react_string_replace__WEBPACK_IMPORTED_MODULE_1___default()(line, regExp, function (match, i) {
       //エスケープシーケンスを削除
@@ -89441,7 +89462,7 @@ var TestPage = function TestPage() {
         name: match
       }, changeValue[match]);
     }));
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["DisplayForm"], null, Object.keys(changeValue).map(function (value, index) {
+  })), isDisplay ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["DisplayForm"], null, Object.keys(changeValue).map(function (value, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
       key: index,
       name: value,
@@ -89451,7 +89472,7 @@ var TestPage = function TestPage() {
       label: value,
       required: true
     });
-  })));
+  })) : ""));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (TestPage);
@@ -89462,18 +89483,73 @@ var TestPage = function TestPage() {
 /*!***********************************************************!*\
   !*** ./resources/js/pages/test/test_component.styles.jsx ***!
   \***********************************************************/
-/*! exports provided: ChangeString, LineDiv, DisplayText, DisplayForm */
+/*! exports provided: ChangeString, LineDiv, NoMarginP, DisplayText, DisplayForm, IncludeTextAndForm, IncludeButtons, ConfirmButtonContainer, DisplayFormContainer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChangeString", function() { return ChangeString; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LineDiv", function() { return LineDiv; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NoMarginP", function() { return NoMarginP; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DisplayText", function() { return DisplayText; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DisplayForm", function() { return DisplayForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IncludeTextAndForm", function() { return IncludeTextAndForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IncludeButtons", function() { return IncludeButtons; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConfirmButtonContainer", function() { return ConfirmButtonContainer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DisplayFormContainer", function() { return DisplayFormContainer; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-function _templateObject4() {
+function _templateObject9() {
+  var data = _taggedTemplateLiteral(["\n    text-align: center;\n    height: 100%;\n    width: 30%;\n"]);
+
+  _templateObject9 = function _templateObject9() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject8() {
+  var data = _taggedTemplateLiteral(["\n    text-align: center;\n    height: 100%;\n    width: 70%;\n"]);
+
+  _templateObject8 = function _templateObject8() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject7() {
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    height: 7%;\n    width: 100%;\n"]);
+
+  _templateObject7 = function _templateObject7() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject6() {
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    height: 90%;\n    width: 100%;\n    padding-top: 10px;\n"]);
+
+  _templateObject6 = function _templateObject6() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject5() {
   var data = _taggedTemplateLiteral(["\n    height: 100%;\n    width: 30%;\n    text-align: center;\n    padding-right: 20px;\n"]);
+
+  _templateObject5 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\n    height: 100%;\n    width: 70%;\n    padding-left: 20px;\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -89483,7 +89559,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n    height: 100%;\n    width: 70%;\n    padding-left: 20px;\n"]);
+  var data = _taggedTemplateLiteral(["\n    margin-bottom: 0px;\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -89516,11 +89592,20 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 var ChangeString = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].span(_templateObject());
-var LineDiv = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2()); //文章表示
+var LineDiv = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2());
+var NoMarginP = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].p(_templateObject3()); //文章表示
 
-var DisplayText = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3()); //入力欄表示
+var DisplayText = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject4()); //入力欄表示
 
-var DisplayForm = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject4());
+var DisplayForm = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject5()); //文章と入力欄をまとめる
+
+var IncludeTextAndForm = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject6()); //ボタンをまとめる
+
+var IncludeButtons = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject7()); //確定ボタンのcontainer
+
+var ConfirmButtonContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject8()); //入力欄表示のcontainer
+
+var DisplayFormContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject9());
 
 /***/ }),
 

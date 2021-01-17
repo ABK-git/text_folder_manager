@@ -14,10 +14,9 @@ export const BasicBackground = styled.div`
 `;
 
 export const BasicBackgroundPaddingTop = styled.div`
-    display: flex;
     height: calc(100vh - 70px);
     width: 100vw;
-    padding-top: 20px;
+    position: relative;
 `;
 
 export const Background = styled.div`
