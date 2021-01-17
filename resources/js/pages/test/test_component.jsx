@@ -14,7 +14,8 @@ const TestPage = () => {
     const splitLine = location.state.creating_text.split("\n");
 
     //{}で囲まれた文字列を取り出す正規表現
-    const regExp = /{(.*?)}/g;
+    //const regExp = /{(.*?)}/g;
+    const regExp = /(?<!\\){(.*?)(?<!\\)}/g;
 
     //{}で囲まれた部分に表示する値を保管
     //const changeValue = {};
@@ -38,11 +39,15 @@ const TestPage = () => {
                         return <br key={index} />;
                     }
 
+                    let newLine = line;
+
                     return (
                         <p key={index}>
-                            {reactStringReplace(line, regExp, (match, i) => {
+                            {reactStringReplace(newLine, regExp, (match, i) => {
                                 //同名の入力欄が定義されていなかった場合
                                 if (changeValue[match] === undefined) {
+                                    //エスケープシーケンスを削除
+                                    match = match.replace(/\\/g,"");
                                     //入力欄を定義
                                     changeValue[match] = match;
                                 }
