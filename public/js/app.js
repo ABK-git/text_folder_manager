@@ -88949,18 +88949,29 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEB
 /*!**************************************************!*\
   !*** ./resources/js/pages/background.styles.jsx ***!
   \**************************************************/
-/*! exports provided: SpaceBetweenBackground, BasicBackground, Background, BackgroundCenter */
+/*! exports provided: SpaceBetweenBackground, BasicBackground, BasicBackgroundPaddingTop, Background, BackgroundCenter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SpaceBetweenBackground", function() { return SpaceBetweenBackground; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BasicBackground", function() { return BasicBackground; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BasicBackgroundPaddingTop", function() { return BasicBackgroundPaddingTop; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Background", function() { return Background; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BackgroundCenter", function() { return BackgroundCenter; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-function _templateObject4() {
+function _templateObject5() {
   var data = _taggedTemplateLiteral(["\n    height: calc(100vh - 70px);\n    width: 100vw;\n    text-align: center;\n"]);
+
+  _templateObject5 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\n    height: calc(100vh - 70px);\n    width: 100vw;\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -88970,7 +88981,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n    height: calc(100vh - 70px);\n    width: 100vw;\n"]);
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    height: calc(100vh - 70px);\n    width: 100vw;\n    padding-top: 20px;\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -89004,8 +89015,9 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 var SpaceBetweenBackground = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject());
 var BasicBackground = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2());
-var Background = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3());
-var BackgroundCenter = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject4());
+var BasicBackgroundPaddingTop = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3());
+var Background = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject4());
+var BackgroundCenter = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject5());
 
 /***/ }),
 
@@ -89384,8 +89396,9 @@ var TestPage = function TestPage() {
   var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useLocation"])(); //行ごとに分割する
 
   var splitLine = location.state.creating_text.split("\n"); //{}で囲まれた文字列を取り出す正規表現
+  //const regExp = /{(.*?)}/g;
 
-  var regExp = /{(.*?)}/g; //{}で囲まれた部分に表示する値を保管
+  var regExp = /(?<!\\){(.*?)(?<!\\)}/g; //{}で囲まれた部分に表示する値を保管
   //const changeValue = {};
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
@@ -89412,12 +89425,15 @@ var TestPage = function TestPage() {
       });
     }
 
+    var newLine = line;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       key: index
-    }, react_string_replace__WEBPACK_IMPORTED_MODULE_1___default()(line, regExp, function (match, i) {
+    }, react_string_replace__WEBPACK_IMPORTED_MODULE_1___default()(newLine, regExp, function (match, i) {
       //同名の入力欄が定義されていなかった場合
       if (changeValue[match] === undefined) {
-        //入力欄を定義
+        //エスケープシーケンスを削除
+        match = match.replace(/\\/g, ""); //入力欄を定義
+
         changeValue[match] = match;
       }
 
@@ -89459,7 +89475,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DisplayForm", function() { return DisplayForm; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n    height: 100%;\n    width: 30%;\n    text-align: center;\n"]);
+  var data = _taggedTemplateLiteral(["\n    height: 100%;\n    width: 30%;\n    text-align: center;\n    padding-right: 20px;\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -89469,7 +89485,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n    height: 100%;\n    width: 70%;\n"]);
+  var data = _taggedTemplateLiteral(["\n    height: 100%;\n    width: 70%;\n    padding-left: 20px;\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
