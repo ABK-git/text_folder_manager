@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import reactStringReplace from "react-string-replace";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+//redux
+import { createStructuredSelector } from "reselect";
+import { connect } from "react-redux";
+import { selectMainDuringFolder } from "../../redux/folder/folder.selector";
 //styles
 import {
     ChangeString,
@@ -20,9 +24,10 @@ import FormInput from "../../components/form-input/form-input.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
 import TextareaInput from "../../components/textarea-input/textarea-input.component";
 
-const TestPage = () => {
+const TestPage = ({ main_folder }) => {
     //locationを取得
     const location = useLocation();
+
     //行ごとに分割する
     const splitLine = location.state.creating_text.split("\n");
 
@@ -59,11 +64,31 @@ const TestPage = () => {
         setIsDisplay(!isDisplay);
     };
 
+    //textの内容を確定する
+    const params = useParams();
+    const handleConfirmText = () => {
+        const { duringFolder_id, text_name } = params;
+
+        //text用のオブジェクト作成
+        const textCredentials = {
+            duringFolder_id,
+            text_name,
+            text_contents: location.state.creating_text
+        };
+        //直下のtextだった場合
+        if (duringFolder_id === undefined) {
+            textCredentials.duringFolder_id = main_folder.id;
+        }
+        console.log(textCredentials);
+    };
+
     return (
         <BasicBackgroundPaddingTop>
             <IncludeButtons>
                 <ConfirmButtonContainer>
-                    <CustomButton>確定</CustomButton>
+                    <CustomButton onClick={handleConfirmText}>
+                        確定
+                    </CustomButton>
                 </ConfirmButtonContainer>
                 <DisplayFormContainer>
                     {isDisplay ? (
@@ -174,7 +199,9 @@ const TestPage = () => {
                             />
                         ))}
                         {Object.keys(changeTextarea).length ? (
-                            <BetweenTextareaToForm>---以下textarea---</BetweenTextareaToForm>
+                            <BetweenTextareaToForm>
+                                ---以下textarea---
+                            </BetweenTextareaToForm>
                         ) : (
                             ""
                         )}
@@ -197,4 +224,8 @@ const TestPage = () => {
     );
 };
 
-export default TestPage;
+const mapStateToProps = createStructuredSelector({
+    main_folder: selectMainDuringFolder
+});
+
+export default connect(mapStateToProps)(TestPage);

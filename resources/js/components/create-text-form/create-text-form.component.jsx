@@ -15,7 +15,7 @@ import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../redux/user/user.selector";
 import { connect } from "react-redux";
 
-const CreateTextForm = ({user}) => {
+const CreateTextForm = ({user, duringFolder}) => {
     //入力フォームの表示・非表示
     const [isDisplay, setIsDisplay] = useState(false);
     //フォームの表示・非表示
@@ -41,7 +41,7 @@ const CreateTextForm = ({user}) => {
             history.push(`${user.displayName}/creating/${values.text_name}`);
         } else {
             //フォルダー下の場合
-            history.push(`/${user.displayName}/${path[path.length-1]}/creating/${values.text_name}`);
+            history.push(`/${user.displayName}/${duringFolder.id}/creating/${values.text_name}`);
         }
     };
 
