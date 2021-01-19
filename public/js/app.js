@@ -87388,7 +87388,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var CreateTextForm = function CreateTextForm(_ref) {
-  var user = _ref.user;
+  var user = _ref.user,
+      duringFolder = _ref.duringFolder;
 
   //入力フォームの表示・非表示
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
@@ -87418,7 +87419,7 @@ var CreateTextForm = function CreateTextForm(_ref) {
       history.push("".concat(user.displayName, "/creating/").concat(values.text_name));
     } else {
       //フォルダー下の場合
-      history.push("/".concat(user.displayName, "/").concat(path[path.length - 1], "/creating/").concat(values.text_name));
+      history.push("/".concat(user.displayName, "/").concat(duringFolder.id, "/creating/").concat(values.text_name));
     }
   };
 
@@ -89450,11 +89451,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_string_replace__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-string-replace */ "./node_modules/react-string-replace/index.js");
 /* harmony import */ var react_string_replace__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_string_replace__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _test_component_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./test_component.styles */ "./resources/js/pages/test/test_component.styles.jsx");
-/* harmony import */ var _background_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../background.styles */ "./resources/js/pages/background.styles.jsx");
-/* harmony import */ var _components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/form-input/form-input.component */ "./resources/js/components/form-input/form-input.component.jsx");
-/* harmony import */ var _components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
-/* harmony import */ var _components_textarea_input_textarea_input_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/textarea-input/textarea-input.component */ "./resources/js/components/textarea-input/textarea-input.component.jsx");
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_folder_folder_selector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../redux/folder/folder.selector */ "./resources/js/redux/folder/folder.selector.js");
+/* harmony import */ var _test_component_styles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./test_component.styles */ "./resources/js/pages/test/test_component.styles.jsx");
+/* harmony import */ var _background_styles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../background.styles */ "./resources/js/pages/background.styles.jsx");
+/* harmony import */ var _components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/form-input/form-input.component */ "./resources/js/components/form-input/form-input.component.jsx");
+/* harmony import */ var _components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
+/* harmony import */ var _components_textarea_input_textarea_input_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/textarea-input/textarea-input.component */ "./resources/js/components/textarea-input/textarea-input.component.jsx");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -89475,6 +89479,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+ //redux
+
+
+
  //styles
 
 
@@ -89484,7 +89492,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var TestPage = function TestPage() {
+var TestPage = function TestPage(_ref) {
+  var main_folder = _ref.main_folder;
   //locationを取得
   var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useLocation"])(); //行ごとに分割する
 
@@ -89533,13 +89542,35 @@ var TestPage = function TestPage() {
 
   var handleClickDisplay = function handleClickDisplay() {
     setIsDisplay(!isDisplay);
+  }; //textの内容を確定する
+
+
+  var params = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useParams"])();
+
+  var handleConfirmText = function handleConfirmText() {
+    var duringFolder_id = params.duringFolder_id,
+        text_name = params.text_name; //text用のオブジェクト作成
+
+    var textCredentials = {
+      duringFolder_id: duringFolder_id,
+      text_name: text_name,
+      text_contents: location.state.creating_text
+    }; //直下のtextだった場合
+
+    if (duringFolder_id === undefined) {
+      textCredentials.duringFolder_id = main_folder.id;
+    }
+
+    console.log(textCredentials);
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_4__["BasicBackgroundPaddingTop"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["IncludeButtons"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["ConfirmButtonContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_6__["default"], null, "\u78BA\u5B9A")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["DisplayFormContainer"], null, isDisplay ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_7__["BasicBackgroundPaddingTop"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_6__["IncludeButtons"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_6__["ConfirmButtonContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    onClick: handleConfirmText
+  }, "\u78BA\u5B9A")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_6__["DisplayFormContainer"], null, isDisplay ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_9__["default"], {
     onClick: handleClickDisplay
-  }, "\u975E\u8868\u793A") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, "\u975E\u8868\u793A") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_9__["default"], {
     onClick: handleClickDisplay
-  }, "\u8868\u793A"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["IncludeTextAndForm"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["DisplayText"], {
+  }, "\u8868\u793A"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_6__["IncludeTextAndForm"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_6__["DisplayText"], {
     style: {
       width: isDisplay ? "60%" : "100%"
     }
@@ -89570,18 +89601,18 @@ var TestPage = function TestPage() {
           changeTextarea[sliceName] = sliceName;
         }
 
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["ChangeString"], {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_6__["ChangeString"], {
           key: match,
           name: sliceName
         }, changeTextarea[sliceName].split("\n").map(function (value, index) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["NoMarginSpan"], {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_6__["NoMarginSpan"], {
             key: index
           }, value);
         }));
       });
     }
 
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["NoMarginDiv"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_6__["NoMarginDiv"], {
       key: index
     }, react_string_replace__WEBPACK_IMPORTED_MODULE_1___default()(newLine, regExp, function (match, i) {
       //エスケープシーケンスを削除
@@ -89592,13 +89623,13 @@ var TestPage = function TestPage() {
         changeValue[match] = match;
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["ChangeString"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_6__["ChangeString"], {
         key: i,
         name: match
       }, changeValue[match]);
     }));
-  })), isDisplay ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["DisplayForm"], null, Object.keys(changeValue).map(function (value, index) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  })), isDisplay ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_6__["DisplayForm"], null, Object.keys(changeValue).map(function (value, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_8__["default"], {
       key: index,
       name: value,
       autoComplete: "off",
@@ -89607,8 +89638,8 @@ var TestPage = function TestPage() {
       label: value,
       required: true
     });
-  }), Object.keys(changeTextarea).length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_3__["BetweenTextareaToForm"], null, "---\u4EE5\u4E0Btextarea---") : "", Object.keys(changeTextarea).map(function (value, index) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_textarea_input_textarea_input_component__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }), Object.keys(changeTextarea).length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_6__["BetweenTextareaToForm"], null, "---\u4EE5\u4E0Btextarea---") : "", Object.keys(changeTextarea).map(function (value, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_textarea_input_textarea_input_component__WEBPACK_IMPORTED_MODULE_10__["default"], {
       key: value + index,
       name: value,
       value: changeTextarea[value],
@@ -89619,7 +89650,10 @@ var TestPage = function TestPage() {
   })) : ""));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (TestPage);
+var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_3__["createStructuredSelector"])({
+  main_folder: _redux_folder_folder_selector__WEBPACK_IMPORTED_MODULE_5__["selectMainDuringFolder"]
+});
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(mapStateToProps)(TestPage));
 
 /***/ }),
 
@@ -89833,7 +89867,7 @@ var UserPage = function UserPage(_ref) {
     component: _folder_folder_container__WEBPACK_IMPORTED_MODULE_8__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
-    path: ["".concat(match.path, "/creating/:text_name/test"), "".concat(match.path, "/:folder_title/creating/:text_name/test")],
+    path: ["".concat(match.path, "/creating/:text_name/test"), "".concat(match.path, "/:duringFolder_id/creating/:text_name/test")],
     component: _test_test_component__WEBPACK_IMPORTED_MODULE_10__["default"]
   }));
 };
@@ -90544,12 +90578,13 @@ function folderSagas() {
 /*!******************************************************!*\
   !*** ./resources/js/redux/folder/folder.selector.js ***!
   \******************************************************/
-/*! exports provided: selectDuringFolder, selectFolders, selectIsDuringFolderFetching */
+/*! exports provided: selectDuringFolder, selectMainDuringFolder, selectFolders, selectIsDuringFolderFetching */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectDuringFolder", function() { return selectDuringFolder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectMainDuringFolder", function() { return selectMainDuringFolder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFolders", function() { return selectFolders; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectIsDuringFolderFetching", function() { return selectIsDuringFolderFetching; });
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
@@ -90562,6 +90597,12 @@ var selectFolder = function selectFolder(state) {
 
 var selectDuringFolder = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])([selectFolder], function (folder) {
   return folder.duringFolder;
+}); //メインの中間テーブルを作成する
+
+var selectMainDuringFolder = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])([selectFolder], function (folder) {
+  return folder.duringFolder.find(function (folder) {
+    return folder.main_or_sub == true;
+  });
 }); //Folderを取得する
 
 var selectFolders = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])([selectFolder], function (folder) {

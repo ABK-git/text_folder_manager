@@ -39,7 +39,10 @@ const UserPage = ({ user, fetchFoldersStart, match }) => {
             />
             <Route
                 exact
-                path={[`${match.path}/creating/:text_name/test`,`${match.path}/:folder_title/creating/:text_name/test`]}
+                path={[
+                    `${match.path}/creating/:text_name/test`,
+                    `${match.path}/:duringFolder_id/creating/:text_name/test`
+                ]}
                 component={TestPage}
             />
         </div>

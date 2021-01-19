@@ -7,6 +7,10 @@ export const selectDuringFolder = createSelector(
     [selectFolder],
     folder => folder.duringFolder
 );
+//メインの中間テーブルを作成する
+export const selectMainDuringFolder = createSelector([selectFolder], folder =>
+    folder.duringFolder.find(folder => folder.main_or_sub == true)
+);
 
 //Folderを取得する
 export const selectFolders = createSelector(
