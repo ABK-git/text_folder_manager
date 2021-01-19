@@ -6,6 +6,7 @@ import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import { selectMainDuringFolder } from "../../redux/folder/folder.selector";
 import { createText } from "../../redux/text/text.actions";
+import { selectCurrentUser } from "../../redux/user/user.selector";
 //styles
 import {
     ChangeString,
@@ -25,7 +26,7 @@ import FormInput from "../../components/form-input/form-input.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
 import TextareaInput from "../../components/textarea-input/textarea-input.component";
 
-const TestPage = ({ main_folder, createText }) => {
+const TestPage = ({ main_folder, createText, user }) => {
     //locationを取得
     const location = useLocation();
 
@@ -72,9 +73,10 @@ const TestPage = ({ main_folder, createText }) => {
 
         //text用のオブジェクト作成
         const textCredentials = {
-            duringFolder_id,
-            text_name,
-            text_contents: location.state.creating_text
+            title: text_name,
+            contents: location.state.creating_text,
+            user_id: user.id,
+            during_id: duringFolder_id
         };
         //直下のtextだった場合
         if (duringFolder_id === undefined) {
@@ -226,7 +228,8 @@ const TestPage = ({ main_folder, createText }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-    main_folder: selectMainDuringFolder
+    main_folder: selectMainDuringFolder,
+    user: selectCurrentUser
 });
 
 const mapDispatchToProps = dispatch => ({
