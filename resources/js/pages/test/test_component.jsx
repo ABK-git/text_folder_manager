@@ -5,6 +5,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import { selectMainDuringFolder } from "../../redux/folder/folder.selector";
+import { createText } from "../../redux/text/text.actions";
 //styles
 import {
     ChangeString,
@@ -24,7 +25,7 @@ import FormInput from "../../components/form-input/form-input.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
 import TextareaInput from "../../components/textarea-input/textarea-input.component";
 
-const TestPage = ({ main_folder }) => {
+const TestPage = ({ main_folder, createText }) => {
     //locationを取得
     const location = useLocation();
 
@@ -79,7 +80,7 @@ const TestPage = ({ main_folder }) => {
         if (duringFolder_id === undefined) {
             textCredentials.duringFolder_id = main_folder.id;
         }
-        console.log(textCredentials);
+        createText(textCredentials);
     };
 
     return (
@@ -228,4 +229,8 @@ const mapStateToProps = createStructuredSelector({
     main_folder: selectMainDuringFolder
 });
 
-export default connect(mapStateToProps)(TestPage);
+const mapDispatchToProps = dispatch => ({
+    createText: textCredentials => dispatch(createText(textCredentials))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TestPage);
