@@ -89559,13 +89559,13 @@ var TestPage = function TestPage(_ref) {
 
     var textCredentials = {
       title: text_name,
-      contents: location.state.creating_text,
+      content: location.state.creating_text,
       user_id: user.id,
       during_id: duringFolder_id
     }; //直下のtextだった場合
 
     if (duringFolder_id === undefined) {
-      textCredentials.duringFolder_id = main_folder.id;
+      textCredentials.during_id = main_folder.id;
     }
 
     createText(textCredentials);
@@ -90960,19 +90960,27 @@ sagaMiddleware.run(_root_saga__WEBPACK_IMPORTED_MODULE_3__["default"]);
 /*!*************************************************!*\
   !*** ./resources/js/redux/text/text.actions.js ***!
   \*************************************************/
-/*! exports provided: createText */
+/*! exports provided: createText, addText */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createText", function() { return createText; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addText", function() { return addText; });
 /* harmony import */ var _text_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./text.types */ "./resources/js/redux/text/text.types.js");
- //中間テーブルの作成
+ //Textの作成
 
 var createText = function createText(textCredentials) {
   return {
     type: _text_types__WEBPACK_IMPORTED_MODULE_0__["default"].CREATE_TEXT,
     payload: textCredentials
+  };
+}; //作成したTextをReduxに追加
+
+var addText = function addText(text) {
+  return {
+    type: _text_types__WEBPACK_IMPORTED_MODULE_0__["default"].ADD_TEXT,
+    payload: text
   };
 };
 
@@ -90987,7 +90995,8 @@ var createText = function createText(textCredentials) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _text_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./text.types */ "./resources/js/redux/text/text.types.js");
+/* harmony import */ var _folder_folder_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../folder/folder.utils */ "./resources/js/redux/folder/folder.utils.js");
+/* harmony import */ var _text_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./text.types */ "./resources/js/redux/text/text.types.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -90995,17 +91004,27 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+
 var INITIAL_STATE = {
-  texts: []
+  texts: [],
+  isFetching: true
 };
 
 var textReducer = function textReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : INITIAL_STATE;
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
-  switch (action.types) {
-    case _text_types__WEBPACK_IMPORTED_MODULE_0__["default"].CREATE_TEXT:
-      return _objectSpread({}, state);
+  switch (action.type) {
+    case _text_types__WEBPACK_IMPORTED_MODULE_1__["default"].ADD_TEXT:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        isFetching: true,
+        texts: Object(_folder_folder_utils__WEBPACK_IMPORTED_MODULE_0__["addNew"])(state.texts, action.payload)
+      });
+
+    case _text_types__WEBPACK_IMPORTED_MODULE_1__["default"].CREATE_TEXT:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        isFetching: false
+      });
 
     default:
       return state;
@@ -91033,12 +91052,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-saga/effects */ "./node_modules/redux-saga/dist/redux-saga-effects-npm-proxy.esm.js");
-/* harmony import */ var _text_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./text.types */ "./resources/js/redux/text/text.types.js");
+/* harmony import */ var _text_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./text.actions */ "./resources/js/redux/text/text.actions.js");
+/* harmony import */ var _text_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./text.types */ "./resources/js/redux/text/text.types.js");
 
 
 var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(createText),
     _marked2 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(onCreateText),
     _marked3 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(textSagas);
+
 
 
 
@@ -91051,10 +91072,26 @@ function createText(_ref) {
         case 0:
           textCredentials = _ref.payload;
           text = null;
-          console.log("this is text_sagas createText");
+          console.log("createTEext");
           console.log(textCredentials);
+          _context.next = 6;
+          return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/text/create", textCredentials).then(function (response) {
+            text = response.data;
+          });
 
-        case 4:
+        case 6:
+          console.log(text); //作成したtextをreduxに追加する
+
+          if (!(text !== null)) {
+            _context.next = 11;
+            break;
+          }
+
+          console.log("this is addText");
+          _context.next = 11;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])(Object(_text_actions__WEBPACK_IMPORTED_MODULE_3__["addText"])(text));
+
+        case 11:
         case "end":
           return _context.stop();
       }
@@ -91067,7 +91104,7 @@ function onCreateText() {
       switch (_context2.prev = _context2.next) {
         case 0:
           _context2.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_text_types__WEBPACK_IMPORTED_MODULE_3__["default"].CREATE_TEXT, createText);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_text_types__WEBPACK_IMPORTED_MODULE_4__["default"].CREATE_TEXT, createText);
 
         case 2:
         case "end":
@@ -91103,11 +91140,12 @@ function textSagas() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var TextTypes = {
+var TextActionTypes = {
   //text作成
-  CREATE_TEXT: "CREATE_TEXT"
+  CREATE_TEXT: "CREATE_TEXT",
+  ADD_TEXT: "ADD_TEXT"
 };
-/* harmony default export */ __webpack_exports__["default"] = (TextTypes);
+/* harmony default export */ __webpack_exports__["default"] = (TextActionTypes);
 
 /***/ }),
 
