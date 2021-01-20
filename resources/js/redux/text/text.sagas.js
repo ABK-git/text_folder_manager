@@ -1,16 +1,26 @@
 import axios from "axios";
 import { all, takeLatest, call, put } from "redux-saga/effects";
+import { addText } from "./text.actions";
 
-import TextTypes from "./text.types";
+import TextActionTypes from "./text.types";
 
-export function* createText({ payload: textCredentials}){
+export function* createText({ payload: textCredentials }) {
     let text = null;
-    console.log("this is text_sagas createText");
+    console.log("createTEext");
     console.log(textCredentials);
+    yield axios.post("/api/text/create", textCredentials).then(response => {
+        text = response.data;
+    });
+    console.log(text);
+    //作成したtextをreduxに追加する
+    if (text !== null) {
+        console.log("this is addText");
+        yield put(addText(text));
+    }
 }
 
 export function* onCreateText() {
-    yield takeLatest(TextTypes.CREATE_TEXT, createText);
+    yield takeLatest(TextActionTypes.CREATE_TEXT, createText);
 }
 
 export function* textSagas() {

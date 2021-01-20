@@ -74,13 +74,13 @@ const TestPage = ({ main_folder, createText, user }) => {
         //text用のオブジェクト作成
         const textCredentials = {
             title: text_name,
-            contents: location.state.creating_text,
+            content: location.state.creating_text,
             user_id: user.id,
             during_id: duringFolder_id
         };
         //直下のtextだった場合
         if (duringFolder_id === undefined) {
-            textCredentials.duringFolder_id = main_folder.id;
+            textCredentials.during_id = main_folder.id;
         }
         createText(textCredentials);
     };
