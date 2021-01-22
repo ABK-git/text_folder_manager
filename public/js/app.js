@@ -89844,14 +89844,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
 /* harmony import */ var _redux_folder_folder_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/folder/folder.actions */ "./resources/js/redux/folder/folder.actions.js");
-/* harmony import */ var _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../redux/user/user.selector */ "./resources/js/redux/user/user.selector.js");
-/* harmony import */ var _route_private_user_root_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../route/private_user_root.component */ "./resources/js/route/private_user_root.component.jsx");
-/* harmony import */ var _creating_text_creating_text_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../creating_text/creating-text.component */ "./resources/js/pages/creating_text/creating-text.component.jsx");
-/* harmony import */ var _folder_folder_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../folder/folder.container */ "./resources/js/pages/folder/folder.container.jsx");
-/* harmony import */ var _user_top_user_top_container__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../user_top/user_top.container */ "./resources/js/pages/user_top/user_top.container.jsx");
-/* harmony import */ var _test_test_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../test/test_component */ "./resources/js/pages/test/test_component.jsx");
+/* harmony import */ var _redux_text_text_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../redux/text/text.actions */ "./resources/js/redux/text/text.actions.js");
+/* harmony import */ var _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../redux/user/user.selector */ "./resources/js/redux/user/user.selector.js");
+/* harmony import */ var _route_private_user_root_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../route/private_user_root.component */ "./resources/js/route/private_user_root.component.jsx");
+/* harmony import */ var _creating_text_creating_text_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../creating_text/creating-text.component */ "./resources/js/pages/creating_text/creating-text.component.jsx");
+/* harmony import */ var _folder_folder_container__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../folder/folder.container */ "./resources/js/pages/folder/folder.container.jsx");
+/* harmony import */ var _user_top_user_top_container__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../user_top/user_top.container */ "./resources/js/pages/user_top/user_top.container.jsx");
+/* harmony import */ var _test_test_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../test/test_component */ "./resources/js/pages/test/test_component.jsx");
 
  //redux
+
 
 
 
@@ -89867,36 +89869,41 @@ __webpack_require__.r(__webpack_exports__);
 var UserPage = function UserPage(_ref) {
   var user = _ref.user,
       fetchFoldersStart = _ref.fetchFoldersStart,
+      fetchTextsStart = _ref.fetchTextsStart,
       match = _ref.match;
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     fetchFoldersStart(user);
+    fetchTextsStart(user);
   }, [fetchFoldersStart]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_route_private_user_root_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_route_private_user_root_component__WEBPACK_IMPORTED_MODULE_7__["default"], {
     exact: true,
     path: "".concat(match.path),
-    component: _user_top_user_top_container__WEBPACK_IMPORTED_MODULE_9__["default"]
+    component: _user_top_user_top_container__WEBPACK_IMPORTED_MODULE_10__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: ["".concat(match.path, "/creating/:text_name"), "".concat(match.path, "/:folder_title/creating/:text_name")],
-    component: _creating_text_creating_text_component__WEBPACK_IMPORTED_MODULE_7__["default"]
+    component: _creating_text_creating_text_component__WEBPACK_IMPORTED_MODULE_8__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "".concat(match.path, "/_folder/:folder_name"),
-    component: _folder_folder_container__WEBPACK_IMPORTED_MODULE_8__["default"]
+    component: _folder_folder_container__WEBPACK_IMPORTED_MODULE_9__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: ["".concat(match.path, "/creating/:text_name/test"), "".concat(match.path, "/:duringFolder_id/creating/:text_name/test")],
-    component: _test_test_component__WEBPACK_IMPORTED_MODULE_10__["default"]
+    component: _test_test_component__WEBPACK_IMPORTED_MODULE_11__["default"]
   }));
 };
 
 var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_3__["createStructuredSelector"])({
-  user: _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_5__["selectCurrentUser"]
+  user: _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_6__["selectCurrentUser"]
 });
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchFoldersStart: function fetchFoldersStart(user) {
       return dispatch(Object(_redux_folder_folder_actions__WEBPACK_IMPORTED_MODULE_4__["fetchFoldersStart"])(user));
+    },
+    fetchTextsStart: function fetchTextsStart(user) {
+      return dispatch(Object(_redux_text_text_actions__WEBPACK_IMPORTED_MODULE_5__["fetchTextsStart"])(user));
     }
   };
 };
@@ -90960,13 +90967,16 @@ sagaMiddleware.run(_root_saga__WEBPACK_IMPORTED_MODULE_3__["default"]);
 /*!*************************************************!*\
   !*** ./resources/js/redux/text/text.actions.js ***!
   \*************************************************/
-/*! exports provided: createText, addText */
+/*! exports provided: createText, addText, setTexts, textFailure, fetchTextsStart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createText", function() { return createText; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addText", function() { return addText; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setTexts", function() { return setTexts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "textFailure", function() { return textFailure; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTextsStart", function() { return fetchTextsStart; });
 /* harmony import */ var _text_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./text.types */ "./resources/js/redux/text/text.types.js");
  //Textの作成
 
@@ -90981,6 +90991,27 @@ var addText = function addText(text) {
   return {
     type: _text_types__WEBPACK_IMPORTED_MODULE_0__["default"].ADD_TEXT,
     payload: text
+  };
+}; //作成したTextをReduxにセット
+
+var setTexts = function setTexts(texts) {
+  return {
+    type: _text_types__WEBPACK_IMPORTED_MODULE_0__["default"].SET_TEXTS,
+    payload: texts
+  };
+};
+var textFailure = function textFailure() {
+  return {
+    type: _text_types__WEBPACK_IMPORTED_MODULE_0__["default"].TEXT_FAILURE
+  };
+}; //ログイン時にユーザーのTextデータを取得する
+
+var fetchTextsStart = function fetchTextsStart(user) {
+  return {
+    type: _text_types__WEBPACK_IMPORTED_MODULE_0__["default"].FETCH_TEXTS_START,
+    payload: {
+      user: user
+    }
   };
 };
 
@@ -91007,7 +91038,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var INITIAL_STATE = {
   texts: [],
-  isFetching: true
+  isFetching: false
 };
 
 var textReducer = function textReducer() {
@@ -91015,15 +91046,27 @@ var textReducer = function textReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
+    case _text_types__WEBPACK_IMPORTED_MODULE_1__["default"].FETCH_TEXTS_START:
+    case _text_types__WEBPACK_IMPORTED_MODULE_1__["default"].CREATE_TEXT:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        isFetching: true
+      });
+
     case _text_types__WEBPACK_IMPORTED_MODULE_1__["default"].ADD_TEXT:
       return _objectSpread(_objectSpread({}, state), {}, {
-        isFetching: true,
+        isFetching: false,
         texts: Object(_folder_folder_utils__WEBPACK_IMPORTED_MODULE_0__["addNew"])(state.texts, action.payload)
       });
 
-    case _text_types__WEBPACK_IMPORTED_MODULE_1__["default"].CREATE_TEXT:
+    case _text_types__WEBPACK_IMPORTED_MODULE_1__["default"].SET_TEXTS:
       return _objectSpread(_objectSpread({}, state), {}, {
-        isFetching: false
+        isFetching: false,
+        texts: action.payload
+      });
+
+    case _text_types__WEBPACK_IMPORTED_MODULE_1__["default"].TEXT_FAILURE:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        isFetching: true
       });
 
     default:
@@ -91039,13 +91082,15 @@ var textReducer = function textReducer() {
 /*!***********************************************!*\
   !*** ./resources/js/redux/text/text.sagas.js ***!
   \***********************************************/
-/*! exports provided: createText, onCreateText, textSagas */
+/*! exports provided: createText, onCreateText, fetchTextsAsync, onFetchTextsStart, textSagas */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createText", function() { return createText; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onCreateText", function() { return onCreateText; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTextsAsync", function() { return fetchTextsAsync; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onFetchTextsStart", function() { return onFetchTextsStart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "textSagas", function() { return textSagas; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -91058,7 +91103,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(createText),
     _marked2 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(onCreateText),
-    _marked3 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(textSagas);
+    _marked3 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(fetchTextsAsync),
+    _marked4 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(onFetchTextsStart),
+    _marked5 = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(textSagas);
 
 
 
@@ -91113,20 +91160,74 @@ function onCreateText() {
     }
   }, _marked2);
 }
-function textSagas() {
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function textSagas$(_context3) {
+function fetchTextsAsync(_ref2) {
+  var user, id, texts;
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function fetchTextsAsync$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
-          _context3.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(onCreateText)]);
+          user = _ref2.payload.user;
+          //個人データの読み込み開始
+          id = user.id;
+          texts = null;
+          _context3.next = 5;
+          return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/text/get_all/".concat(id)).then(function (response) {
+            return texts = response.data;
+          });
 
-        case 2:
+        case 5:
+          if (!(texts != null)) {
+            _context3.next = 10;
+            break;
+          }
+
+          _context3.next = 8;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])(Object(_text_actions__WEBPACK_IMPORTED_MODULE_3__["setTexts"])(texts));
+
+        case 8:
+          _context3.next = 12;
+          break;
+
+        case 10:
+          _context3.next = 12;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])(Object(_text_actions__WEBPACK_IMPORTED_MODULE_3__["textFailure"])());
+
+        case 12:
         case "end":
           return _context3.stop();
       }
     }
   }, _marked3);
+}
+function onFetchTextsStart() {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function onFetchTextsStart$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["takeLatest"])(_text_types__WEBPACK_IMPORTED_MODULE_4__["default"].FETCH_TEXTS_START, fetchTextsAsync);
+
+        case 2:
+        case "end":
+          return _context4.stop();
+      }
+    }
+  }, _marked4);
+}
+function textSagas() {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function textSagas$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(onCreateText), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["call"])(onFetchTextsStart)]);
+
+        case 2:
+        case "end":
+          return _context5.stop();
+      }
+    }
+  }, _marked5);
 }
 
 /***/ }),
@@ -91143,7 +91244,10 @@ __webpack_require__.r(__webpack_exports__);
 var TextActionTypes = {
   //text作成
   CREATE_TEXT: "CREATE_TEXT",
-  ADD_TEXT: "ADD_TEXT"
+  ADD_TEXT: "ADD_TEXT",
+  SET_TEXTS: "SET_TEXTS",
+  FETCH_TEXTS_START: "FETCH_TEXTS_START",
+  TEXT_FAILURE: "TEXT_FAILURE"
 };
 /* harmony default export */ __webpack_exports__["default"] = (TextActionTypes);
 

@@ -16,4 +16,10 @@ class TextController extends Controller
             'during_id' => $request->during_id
         ]);
     }
+
+    //Textをすべて取得する
+    public function getAll($id)
+    {
+        return Text::where("user_id",$id)->get();
+    }
 }

@@ -4,6 +4,7 @@ import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { fetchFoldersStart } from "../../redux/folder/folder.actions";
+import { fetchTextsStart } from "../../redux/text/text.actions";
 import { selectCurrentUser } from "../../redux/user/user.selector";
 //component
 import PrivateUserRoute from "../../route/private_user_root.component";
@@ -12,9 +13,10 @@ import FolderContainer from "../folder/folder.container";
 import UserTopContainer from "../user_top/user_top.container";
 import TestPage from "../test/test_component";
 
-const UserPage = ({ user, fetchFoldersStart, match }) => {
+const UserPage = ({ user, fetchFoldersStart, fetchTextsStart, match }) => {
     useEffect(() => {
         fetchFoldersStart(user);
+        fetchTextsStart(user);
     }, [fetchFoldersStart]);
 
     return (
@@ -54,7 +56,8 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchFoldersStart: user => dispatch(fetchFoldersStart(user))
+    fetchFoldersStart: user => dispatch(fetchFoldersStart(user)),
+    fetchTextsStart: user => dispatch(fetchTextsStart(user))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPage);
