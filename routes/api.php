@@ -43,3 +43,5 @@ Route::get('/folder/get_all/{id}', [FolderController::class, 'getAll']);
 
 //Textを登録
 Route::post("/text/create", [TextController::class, 'store']);
+//特定ユーザーのFolderをすべて取得
+Route::get('/text/get_all/{id}', [TextController::class, 'getAll']);
