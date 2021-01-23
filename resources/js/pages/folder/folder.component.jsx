@@ -29,18 +29,13 @@ const Folder = ({ duringFolder, folders, texts }) => {
     let documents = new Array();
     try {
         const index = path.length;
-        console.log("path");
-        console.log(path);
         const selectFolder = folders.find(
             value => path[index - 1] === value.id
         );
-        console.log("selectFolder");
-        console.log(selectFolder);
 
         during = duringFolder.find(
             value => value.folder_id === selectFolder.id
         );
-        console.log(during);
 
         folder = folders.filter(value => {
             return value.during_id === during.id;

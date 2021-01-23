@@ -15,7 +15,13 @@ export const selectMainDuringFolder = createSelector([selectFolder], folder =>
 //Folderを取得する
 export const selectFolders = createSelector(
     [selectFolder],
-    folder => folder.folders
+    folder => folder.folders.sort((a, b) => {
+        if(a.updated_at < b.updated_at){
+            return 1;
+        }else{
+            return -1;
+        }
+    })
 );
 
 //読み込み中か否かを取得

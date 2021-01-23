@@ -89510,17 +89510,12 @@ var Folder = function Folder(_ref) {
 
   try {
     var index = path.length;
-    console.log("path");
-    console.log(path);
     var selectFolder = folders.find(function (value) {
       return path[index - 1] === value.id;
     });
-    console.log("selectFolder");
-    console.log(selectFolder);
     during = duringFolder.find(function (value) {
       return value.folder_id === selectFolder.id;
     });
-    console.log(during);
     folder = folders.filter(function (value) {
       return value.during_id === during.id;
     });
@@ -90862,7 +90857,13 @@ var selectMainDuringFolder = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["creat
 }); //Folderを取得する
 
 var selectFolders = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])([selectFolder], function (folder) {
-  return folder.folders;
+  return folder.folders.sort(function (a, b) {
+    if (a.updated_at < b.updated_at) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
 }); //読み込み中か否かを取得
 
 var selectIsDuringFolderFetching = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])([selectFolder], function (folder) {
@@ -91482,7 +91483,13 @@ var selectText = function selectText(state) {
 };
 
 var selectTexts = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])([selectText], function (text) {
-  return text.texts;
+  return text.texts.sort(function (a, b) {
+    if (a.updated_at < b.updated_at) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
 });
 
 /***/ }),
