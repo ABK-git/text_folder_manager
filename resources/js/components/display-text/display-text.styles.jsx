@@ -2,23 +2,8 @@ import styled from "styled-components";
 
 import FormInput from "../../components/form-input/form-input.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
-// export const DisplayFolderContainer = styled.div`
-//     margin-top: 20px;
-//     display: inline-block;
-//     width: 20vw;
-//     height: 10%;
-//     text-align: center;
-// `;
 
-// export const BackgroundImage = styled.div`
-//     width: 80%;
-//     height: 20%;
-//     background-size: cover;
-//     background-position: center;
-//     background-image: url("/images/display-document/display-folder/folder.jpg");
-// `;
-
-export const DisplayFolderContainer = styled.div`
+export const DisplayTextContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,10 +21,10 @@ export const BackgroundImage = styled.div`
     background-size: cover;
     background-position: center;
     margin-bottom: 5px;
-    background-image: url("/images/display-document/display-folder/folder.jpg");
+    background-image: url("/images/display-document/display-text/text.jpg");
 `;
 
-export const FolderFooter = styled.div`
+export const TextFooter = styled.div`
   width: 100%;
   height: 10%;
   

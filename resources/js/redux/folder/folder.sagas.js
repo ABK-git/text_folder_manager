@@ -49,9 +49,6 @@ export function* fetchFoldersAsync({ payload: { user } }) {
     if(folders !== null){
         yield put(setFolder(folders));
     }
-
-    //Textを取得
-    
 }
 
 export function* fetchFoldersStart() {
