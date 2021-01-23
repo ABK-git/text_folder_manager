@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BackgroundCenter } from "../../pages/background.styles";
 import { useFormik } from "formik";
 //components
@@ -18,13 +18,45 @@ const DisplayDocument = ({ documents }) => {
         search_title: ""
     };
 
+    //Folderのみ表示
+    const [onlyFolder, setOnlyFolder] = useState(false);
+    //Textのみ表示
+    const [onlyText, setOnlyText] = useState(false);
+    //両方表示
+    const [both, setBoth] = useState(true);
+
+    //Only Folderボタン
+    const displayOnlyFolder = () => {
+        setOnlyFolder(true);
+        setOnlyText(false);
+        setBoth(false);
+    };
+    //Only Textボタン
+    const displayOnlyText = () => {
+        setOnlyText(true);
+        setOnlyFolder(false);
+        setBoth(false);
+    };
+    //Bothボタン
+    const displayBoth = () => {
+        setOnlyText(false);
+        setOnlyFolder(false);
+        setBoth(true);
+    };
+
     const formik = useFormik({ initialValues });
     return (
         <BackgroundCenter>
             <DisplaySwitchButtons>
-                <CustomButton>only Folder</CustomButton>
-                <CustomButton>Both</CustomButton>
-                <CustomButton>only Text</CustomButton>
+                <CustomButton onClick={displayOnlyFolder} disabled={onlyFolder}>
+                    only Folder
+                </CustomButton>
+                <CustomButton onClick={displayBoth} disabled={both}>
+                    Both
+                </CustomButton>
+                <CustomButton onClick={displayOnlyText} disabled={onlyText}>
+                    only Text
+                </CustomButton>
             </DisplaySwitchButtons>
             <DisplaySearchTitle
                 type="search"
@@ -39,7 +71,7 @@ const DisplayDocument = ({ documents }) => {
                     .filter(document =>
                         document.title
                             .toLowerCase()
-                            .includes(formik.values.search_title)
+                            .includes(formik.values.search_title.toLowerCase())
                     )
                     .map(document => {
                         //textの場合

@@ -87722,6 +87722,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _display_text_display_text_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../display-text/display-text.component */ "./resources/js/components/display-text/display-text.component.jsx");
 /* harmony import */ var _custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
 /* harmony import */ var _display_document_styles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./display-document.styles */ "./resources/js/components/display-document/display-document.styles.jsx");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
  //components
@@ -87736,11 +87748,59 @@ var DisplayDocument = function DisplayDocument(_ref) {
   var documents = _ref.documents;
   var initialValues = {
     search_title: ""
+  }; //Folderのみ表示
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      onlyFolder = _useState2[0],
+      setOnlyFolder = _useState2[1]; //Textのみ表示
+
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      onlyText = _useState4[0],
+      setOnlyText = _useState4[1]; //両方表示
+
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
+      _useState6 = _slicedToArray(_useState5, 2),
+      both = _useState6[0],
+      setBoth = _useState6[1]; //Only Folderボタン
+
+
+  var displayOnlyFolder = function displayOnlyFolder() {
+    setOnlyFolder(true);
+    setOnlyText(false);
+    setBoth(false);
+  }; //Only Textボタン
+
+
+  var displayOnlyText = function displayOnlyText() {
+    setOnlyText(true);
+    setOnlyFolder(false);
+    setBoth(false);
+  }; //Bothボタン
+
+
+  var displayBoth = function displayBoth() {
+    setOnlyText(false);
+    setOnlyFolder(false);
+    setBoth(true);
   };
+
   var formik = Object(formik__WEBPACK_IMPORTED_MODULE_2__["useFormik"])({
     initialValues: initialValues
   });
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_background_styles__WEBPACK_IMPORTED_MODULE_1__["BackgroundCenter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_document_styles__WEBPACK_IMPORTED_MODULE_6__["DisplaySwitchButtons"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], null, "only Folder"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], null, "Both"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], null, "only Text")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_document_styles__WEBPACK_IMPORTED_MODULE_6__["DisplaySearchTitle"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_background_styles__WEBPACK_IMPORTED_MODULE_1__["BackgroundCenter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_document_styles__WEBPACK_IMPORTED_MODULE_6__["DisplaySwitchButtons"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    onClick: displayOnlyFolder,
+    disabled: onlyFolder
+  }, "only Folder"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    onClick: displayBoth,
+    disabled: both
+  }, "Both"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    onClick: displayOnlyText,
+    disabled: onlyText
+  }, "only Text")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_document_styles__WEBPACK_IMPORTED_MODULE_6__["DisplaySearchTitle"], {
     type: "search",
     name: "search_title",
     placeholder: "search",
@@ -87748,7 +87808,7 @@ var DisplayDocument = function DisplayDocument(_ref) {
     value: formik.values.search_title,
     onChange: formik.handleChange
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_document_styles__WEBPACK_IMPORTED_MODULE_6__["DisplayContainer"], null, documents.filter(function (document) {
-    return document.title.toLowerCase().includes(formik.values.search_title);
+    return document.title.toLowerCase().includes(formik.values.search_title.toLowerCase());
   }).map(function (document) {
     //textの場合
     if (document.content != undefined) {
