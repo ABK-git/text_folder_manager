@@ -10,8 +10,11 @@ import {
 
 //component
 import CustomButton from "../../components/custom-button/custom-button.component";
+import { selectCurrentUser } from "../../redux/user/user.selector";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
-const DisplayText = ({ text }) => {
+const DisplayText = ({ text , user}) => {
     const history = useHistory();
     const location = useLocation();
 
@@ -34,9 +37,9 @@ const DisplayText = ({ text }) => {
     const handleClick = () => {
         const path = location.pathname.slice(1).split("/");
         console.log("handleClick");
-        console.log(path);
+        
         history.push({
-            pathname: `${location.pathname}/_text/${text.id}`,
+            pathname: `/${user.displayName}/_text/${text.id}`,
             state: text.content
         });
         console.log("終了");
@@ -54,7 +57,9 @@ const DisplayText = ({ text }) => {
 
     return (
         <DisplayTextContainer>
-            <BackgroundImage onClick={handleClick} />
+            <BackgroundImage
+                onClick={handleClick}
+            />
             <TextFooter
                 onMouseEnter={mouseEnterOrLeave}
                 onMouseLeave={mouseEnterOrLeave}
@@ -84,4 +89,8 @@ const DisplayText = ({ text }) => {
     );
 };
 
-export default DisplayText;
+const mapStateToProps = createStructuredSelector({
+    user: selectCurrentUser
+});
+
+export default connect(mapStateToProps)(DisplayText);
