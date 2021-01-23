@@ -38,8 +38,7 @@ const UserTopPage = ({ duringFolder, folders, texts }) => {
         });
         //folderとtextをまとめる
         documents = folder.concat(text);
-        console.log("this is duc");
-        console.log(documents);
+        
     } catch (e) {
         //後でエラーページを作って移動させる(エラーページにはホーム直下{"/"}につなげるボタンを作る)
         history.push(`/${path[0]}`);
@@ -50,7 +49,7 @@ const UserTopPage = ({ duringFolder, folders, texts }) => {
             <FolderAndTextButtons
                 duringFolder={during}
                 haveFolders={folder}
-                
+                haveTexts={text}
             />
             <DisplayDocument documents={documents} />
         </Background>

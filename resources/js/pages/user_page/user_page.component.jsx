@@ -45,7 +45,6 @@ const UserPage = ({ user, fetchFoldersStart, fetchTextsStart, match }) => {
                     `${match.path}/creating/:text_name/test`,
                     `${match.path}/:duringFolder_id/creating/:text_name/test`,
                     `${match.path}/_text/:text_name`,
-                    `${match.path}/_folder/:folder_name/_text/:text_name`
                 ]}
                 component={TestPage}
             />

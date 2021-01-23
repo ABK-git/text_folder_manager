@@ -88014,6 +88014,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _display_text_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./display-text.styles */ "./resources/js/components/display-text/display-text.styles.jsx");
 /* harmony import */ var _components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
+/* harmony import */ var _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/user/user.selector */ "./resources/js/redux/user/user.selector.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -88038,8 +88041,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
+
 var DisplayText = function DisplayText(_ref) {
-  var text = _ref.text;
+  var text = _ref.text,
+      user = _ref.user;
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])();
   var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useLocation"])(); //名前編集フォームの表示・非表示
 
@@ -88070,9 +88077,8 @@ var DisplayText = function DisplayText(_ref) {
   var handleClick = function handleClick() {
     var path = location.pathname.slice(1).split("/");
     console.log("handleClick");
-    console.log(path);
     history.push({
-      pathname: "".concat(location.pathname, "/_text/").concat(text.id),
+      pathname: "/".concat(user.displayName, "/_text/").concat(text.id),
       state: text.content
     });
     console.log("終了");
@@ -88108,7 +88114,10 @@ var DisplayText = function DisplayText(_ref) {
   }, "\u5909\u66F4") : "")));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (DisplayText);
+var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_6__["createStructuredSelector"])({
+  user: _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_4__["selectCurrentUser"]
+});
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["connect"])(mapStateToProps)(DisplayText));
 
 /***/ }),
 
@@ -89501,6 +89510,8 @@ var Folder = function Folder(_ref) {
 
   try {
     var index = path.length;
+    console.log("path");
+    console.log(path);
     var selectFolder = folders.find(function (value) {
       return path[index - 1] === value.id;
     });
@@ -89520,7 +89531,8 @@ var Folder = function Folder(_ref) {
     console.log("document");
     console.log(documents);
   } catch (e) {
-    //後でエラーページを作って移動させる(エラーページにはホーム直下{"/"}につなげるボタンを作る)
+    console.log(e); //後でエラーページを作って移動させる(エラーページにはホーム直下{"/"}につなげるボタンを作る)
+
     history.push("/".concat(path[0]));
   }
 
@@ -90096,7 +90108,7 @@ var UserPage = function UserPage(_ref) {
     component: _folder_folder_container__WEBPACK_IMPORTED_MODULE_9__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
-    path: ["".concat(match.path, "/creating/:text_name/test"), "".concat(match.path, "/:duringFolder_id/creating/:text_name/test"), "".concat(match.path, "/_text/:text_name"), "".concat(match.path, "/_folder/:folder_name/_text/:text_name")],
+    path: ["".concat(match.path, "/creating/:text_name/test"), "".concat(match.path, "/:duringFolder_id/creating/:text_name/test"), "".concat(match.path, "/_text/:text_name")],
     component: _test_test_component__WEBPACK_IMPORTED_MODULE_11__["default"]
   }));
 };
@@ -90179,8 +90191,6 @@ var UserTopPage = function UserTopPage(_ref) {
     }); //folderとtextをまとめる
 
     documents = folder.concat(text);
-    console.log("this is duc");
-    console.log(documents);
   } catch (e) {
     //後でエラーページを作って移動させる(エラーページにはホーム直下{"/"}につなげるボタンを作る)
     history.push("/".concat(path[0]));
@@ -90188,7 +90198,8 @@ var UserTopPage = function UserTopPage(_ref) {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_6__["Background"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_folder_and_text_buttons_folder_and_text_buttons_component__WEBPACK_IMPORTED_MODULE_7__["default"], {
     duringFolder: during,
-    haveFolders: folder
+    haveFolders: folder,
+    haveTexts: text
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_display_document_display_document_component__WEBPACK_IMPORTED_MODULE_8__["default"], {
     documents: documents
   }));
