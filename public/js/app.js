@@ -89522,7 +89522,13 @@ var Folder = function Folder(_ref) {
     text = texts.filter(function (value) {
       return value.during_id === during.id;
     });
-    documents = folder.concat(text);
+    documents = folder.concat(text).sort(function (a, b) {
+      if (a.updated_at < b.updated_at) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
     console.log("document");
     console.log(documents);
   } catch (e) {
@@ -90185,7 +90191,13 @@ var UserTopPage = function UserTopPage(_ref) {
       return value.during_id === during.id;
     }); //folderとtextをまとめる
 
-    documents = folder.concat(text);
+    documents = folder.concat(text).sort(function (a, b) {
+      if (a.updated_at < b.updated_at) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
   } catch (e) {
     //後でエラーページを作って移動させる(エラーページにはホーム直下{"/"}につなげるボタンを作る)
     history.push("/".concat(path[0]));

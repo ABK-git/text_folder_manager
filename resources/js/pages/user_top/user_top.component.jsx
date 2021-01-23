@@ -37,7 +37,13 @@ const UserTopPage = ({ duringFolder, folders, texts }) => {
             return value.during_id === during.id;
         });
         //folderとtextをまとめる
-        documents = folder.concat(text);
+        documents = folder.concat(text).sort((a,b) => {
+            if(a.updated_at < b.updated_at){
+                return 1;
+            }else{
+                return -1;
+            }
+        });
         
     } catch (e) {
         //後でエラーページを作って移動させる(エラーページにはホーム直下{"/"}につなげるボタンを作る)

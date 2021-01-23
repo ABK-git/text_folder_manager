@@ -44,7 +44,13 @@ const Folder = ({ duringFolder, folders, texts }) => {
             return value.during_id === during.id;
         });
 
-        documents = folder.concat(text);
+        documents = folder.concat(text).sort((a,b) => {
+            if(a.updated_at < b.updated_at){
+                return 1;
+            }else{
+                return -1;
+            }
+        });
         console.log("document");
         console.log(documents);
     } catch (e) {
