@@ -54,10 +54,10 @@ const DisplayFolder = ({ folder, updateFolder }) => {
 
                     if (path.length === 1) {
                         history.push(
-                            `${location.pathname}/_folder/${folder.title}`
+                            `${location.pathname}/_folder/${folder.id}`
                         );
                     } else {
-                        history.push(`${location.pathname}/${folder.title}`);
+                        history.push(`${location.pathname}/${folder.id}`);
                     }
                 }}
             />

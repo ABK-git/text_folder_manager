@@ -31,7 +31,13 @@ const TestPage = ({ main_folder, createText, user }) => {
     const location = useLocation();
 
     //行ごとに分割する
-    const splitLine = location.state.creating_text.split("\n");
+    let splitLine = [];
+
+    try{
+        splitLine = location.state.creating_text.split("\n")
+    }catch{
+        splitLine = location.state.split("\n");
+    }
 
     //{}で囲まれた文字列を取り出す正規表現
     const regExp = /(?<!\\){(.*?)(?<!\\)}/g;
