@@ -1,14 +1,14 @@
 import axios from "axios";
 import { all, takeLatest, call, put } from "redux-saga/effects";
-import { addText,setTexts, textFailure } from "./text.actions";
+import { addText, setTexts, textFailure } from "./text.actions";
 
 import TextActionTypes from "./text.types";
 
-export function* createText({ payload: textCredentials}) {
+export function* createText({ payload: textCredentials }) {
     let text = null;
     console.log("createTEext");
     console.log(textCredentials);
-    
+
     yield axios.post("/api/text/create", textCredentials).then(response => {
         text = response.data;
     });
@@ -18,6 +18,9 @@ export function* createText({ payload: textCredentials}) {
         console.log("this is addText");
         yield put(addText(text));
     }
+    //画面遷移
+    const { callback, redirectPath } = textCredentials;
+    yield callback(redirectPath);
 }
 
 export function* onCreateText() {
@@ -34,9 +37,9 @@ export function* fetchTextsAsync({ payload: { user } }) {
         .get(`/api/text/get_all/${id}`)
         .then(response => (texts = response.data));
 
-    if(texts != null){
+    if (texts != null) {
         yield put(setTexts(texts));
-    }else{
+    } else {
         yield put(textFailure());
     }
 }

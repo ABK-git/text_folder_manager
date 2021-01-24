@@ -89889,13 +89889,35 @@ var TestPage = function TestPage(_ref) {
       content: location.state.creating_text,
       user_id: user.id,
       during_id: duringFolder_id
-    }; //直下のtextだった場合
+    }; //遷移パスを生成
+
+    var redirectPath = "";
+    redirectPath = "/".concat(user.displayName); //直下のtextだった場合
 
     if (duringFolder_id === undefined) {
       textCredentials.during_id = main_folder.id;
-    }
+    } else {
+      var during_folder = during_folders.find(function (during_folder) {
+        return during_folder.id === duringFolder_id;
+      }); //属するfolderのidを取得する
+
+      redirectPath = "/".concat(user.displayName, "/_folder/").concat(during_folder.folder_id);
+    } //画面遷移用の構成を入れる
+
+
+    textCredentials.callback = callback;
+    textCredentials.redirectPath = redirectPath; // const redirectCredentials = {
+    //     callback,
+    //     redirectPath
+    // };
+    // console.log(redirectCredentials);
 
     createText(textCredentials);
+  }; //redirectファンクション生成
+
+
+  var callback = function callback(redirectPath) {
+    history.push(redirectPath);
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_9__["BasicBackgroundPaddingTop"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_8__["IncludeButtons"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_8__["ConfirmButtonContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_11__["default"], {
@@ -91498,7 +91520,7 @@ var _marked = /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0
 
 
 function createText(_ref) {
-  var textCredentials, text;
+  var textCredentials, text, callback, redirectPath;
   return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function createText$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -91525,6 +91547,12 @@ function createText(_ref) {
           return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_2__["put"])(Object(_text_actions__WEBPACK_IMPORTED_MODULE_3__["addText"])(text));
 
         case 11:
+          //画面遷移
+          callback = textCredentials.callback, redirectPath = textCredentials.redirectPath;
+          _context.next = 14;
+          return callback(redirectPath);
+
+        case 14:
         case "end":
           return _context.stop();
       }
