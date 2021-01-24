@@ -28,4 +28,5 @@ export const BackgroundCenter = styled.div`
     height: calc(100vh - 70px);
     width: 100vw;
     text-align: center;
+    margin: 0px;
 `;

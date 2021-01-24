@@ -21,6 +21,8 @@ const Folder = ({ duringFolder, folders, texts }) => {
     //LocationからURLを取得する
     const path = location.pathname.slice(1).split("/");
 
+    let selectFolder = null;
+
     //中間テーブルとFolderの入れ物
     let during = null;
     let folder = new Array();
@@ -29,7 +31,7 @@ const Folder = ({ duringFolder, folders, texts }) => {
     let documents = new Array();
     try {
         const index = path.length;
-        const selectFolder = folders.find(
+        selectFolder = folders.find(
             value => path[index - 1] === value.id
         );
 
@@ -66,7 +68,7 @@ const Folder = ({ duringFolder, folders, texts }) => {
                 haveFolders={folder}
                 haveTexts={text}
             />
-            <DisplayDocument documents={documents} />
+            <DisplayDocument documents={documents} selectFolder={selectFolder}/>
         </Background>
     );
 };
