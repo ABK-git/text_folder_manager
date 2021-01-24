@@ -11,3 +11,8 @@ export const selectTexts = createSelector([selectText], text =>
         }
     })
 );
+
+export const selectIsTextLoading = createSelector(
+    [selectText],
+    text => text.isFetching
+);

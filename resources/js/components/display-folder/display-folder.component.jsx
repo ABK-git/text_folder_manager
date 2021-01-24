@@ -13,11 +13,9 @@ import {
 } from "./display-folder.styles";
 
 import CustomButton from "../../components/custom-button/custom-button.component";
-import FormInput from "../../components/form-input/form-input.component";
 
-const DisplayFolder = ({ folder, updateFolder }) => {
+const DisplayFolder = ({ folder, updateFolder, user }) => {
     const history = useHistory();
-    const location = useLocation();
 
     //名前編集フォームの表示・非表示
     const [isDisplay, setIsDisplay] = useState(false);
@@ -50,15 +48,8 @@ const DisplayFolder = ({ folder, updateFolder }) => {
             <BackgroundImage
                 onClick={() => {
                     console.log("background");
-                    const path = location.pathname.slice(1).split("/");
 
-                    if (path.length === 1) {
-                        history.push(
-                            `${location.pathname}/_folder/${folder.id}`
-                        );
-                    } else {
-                        history.push(`${location.pathname}/${folder.id}`);
-                    }
+                    history.push(`/${user.displayName}/_folder/${folder.id}`);
                 }}
             />
             <FolderFooter
@@ -90,8 +81,12 @@ const DisplayFolder = ({ folder, updateFolder }) => {
     );
 };
 
+const mapStateToProps = createStructuredSelector({
+    user: selectCurrentUser
+});
+
 const mapDispatchToProps = dispatch => ({
     updateFolder: folderCredentials => dispatch(updateFolder(folderCredentials))
 });
 
-export default connect(null, mapDispatchToProps)(DisplayFolder);
+export default connect(mapStateToProps, mapDispatchToProps)(DisplayFolder);

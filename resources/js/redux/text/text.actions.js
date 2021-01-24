@@ -1,7 +1,7 @@
 import TextActionTypes from "./text.types";
 
 //Textの作成
-export const createText = textCredentials => ({
+export const createText = (textCredentials) => ({
     type: TextActionTypes.CREATE_TEXT,
     payload: textCredentials
 });

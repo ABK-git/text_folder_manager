@@ -4,10 +4,11 @@ import { addText,setTexts, textFailure } from "./text.actions";
 
 import TextActionTypes from "./text.types";
 
-export function* createText({ payload: textCredentials }) {
+export function* createText({ payload: textCredentials}) {
     let text = null;
     console.log("createTEext");
     console.log(textCredentials);
+    
     yield axios.post("/api/text/create", textCredentials).then(response => {
         text = response.data;
     });
