@@ -87721,7 +87721,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _display_folder_display_folder_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../display-folder/display-folder.component */ "./resources/js/components/display-folder/display-folder.component.jsx");
 /* harmony import */ var _display_text_display_text_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../display-text/display-text.component */ "./resources/js/components/display-text/display-text.component.jsx");
 /* harmony import */ var _custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
-/* harmony import */ var _display_document_styles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./display-document.styles */ "./resources/js/components/display-document/display-document.styles.jsx");
+/* harmony import */ var _display_root_pass_display_root_pass_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../display-root-pass/display-root-pass.component */ "./resources/js/components/display-root-pass/display-root-pass.component.jsx");
+/* harmony import */ var _display_document_styles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./display-document.styles */ "./resources/js/components/display-document/display-document.styles.jsx");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -87740,12 +87741,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
  //css
 
 
 
 var DisplayDocument = function DisplayDocument(_ref) {
-  var documents = _ref.documents;
+  var documents = _ref.documents,
+      selectFolder = _ref.selectFolder;
 
   //Folderのみ表示
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
@@ -87792,7 +87795,7 @@ var DisplayDocument = function DisplayDocument(_ref) {
   var formik = Object(formik__WEBPACK_IMPORTED_MODULE_2__["useFormik"])({
     initialValues: initialValues
   });
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_background_styles__WEBPACK_IMPORTED_MODULE_1__["BackgroundCenter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_document_styles__WEBPACK_IMPORTED_MODULE_6__["DisplaySwitchButtons"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_background_styles__WEBPACK_IMPORTED_MODULE_1__["BackgroundCenter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_document_styles__WEBPACK_IMPORTED_MODULE_7__["DisplaySwitchButtons"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
     onClick: displayOnlyFolder,
     disabled: disableText
   }, "only Folder"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -87801,14 +87804,16 @@ var DisplayDocument = function DisplayDocument(_ref) {
   }, "Both"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
     onClick: displayOnlyText,
     disabled: disableFolder
-  }, "only Text")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_document_styles__WEBPACK_IMPORTED_MODULE_6__["DisplaySearchTitle"], {
+  }, "only Text")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_document_styles__WEBPACK_IMPORTED_MODULE_7__["DisplaySearchTitle"], {
     type: "search",
     name: "search_title",
     placeholder: "search",
     autoComplete: "off",
     value: formik.values.search_title,
     onChange: formik.handleChange
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_document_styles__WEBPACK_IMPORTED_MODULE_6__["DisplayContainer"], null, documents.filter(function (document) {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_root_pass_display_root_pass_component__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    selectFolder: selectFolder
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_document_styles__WEBPACK_IMPORTED_MODULE_7__["DisplayContainer"], null, documents.filter(function (document) {
     return document.title.toLowerCase().includes(formik.values.search_title.toLowerCase());
   }).map(function (document) {
     //textの場合
@@ -88101,6 +88106,133 @@ var BackgroundImage = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].
 var FolderFooter = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3());
 var FooterForm = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_form_input_form_input_component__WEBPACK_IMPORTED_MODULE_1__["default"])(_templateObject4());
 var UpdateNameButton = Object(styled_components__WEBPACK_IMPORTED_MODULE_0__["default"])(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_2__["default"])(_templateObject5());
+
+/***/ }),
+
+/***/ "./resources/js/components/display-root-pass/display-root-pass.component.jsx":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/display-root-pass/display-root-pass.component.jsx ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
+/* harmony import */ var _redux_folder_folder_selector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/folder/folder.selector */ "./resources/js/redux/folder/folder.selector.js");
+/* harmony import */ var _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../redux/user/user.selector */ "./resources/js/redux/user/user.selector.js");
+/* harmony import */ var _display_root_pass_styles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./display-root-pass.styles */ "./resources/js/components/display-root-pass/display-root-pass.styles.jsx");
+
+
+
+
+
+
+
+
+var DisplayRootPass = function DisplayRootPass(_ref) {
+  var selectFolder = _ref.selectFolder,
+      duringFolder = _ref.duringFolder,
+      folders = _ref.folders,
+      user = _ref.user;
+  //folderの格納場所
+  var rootFolders = new Array();
+  var newRootFolders = new Array();
+
+  if (selectFolder != undefined) {
+    (function () {
+      rootFolders.push(selectFolder); //現在確認中の中間テーブル
+
+      var nowDuring = duringFolder.find(function (during) {
+        return selectFolder.during_id === during.id;
+      });
+      console.log("nowDuring");
+      console.log(nowDuring);
+
+      var _loop = function _loop() {
+        //mainフォルダーまで確認できたら終了
+        if (nowDuring.main_or_sub == true) {
+          return "break";
+        } //現在の中間テーブルが属するfolderを取得
+
+
+        var nowFolder = folders.find(function (folder) {
+          return folder.id === nowDuring.folder_id;
+        });
+        console.log("nowFolder");
+        console.log(nowFolder); //現在のfolderを格納
+
+        rootFolders.push(nowFolder); //次の中間テーブルへ移動
+
+        nowDuring = duringFolder.find(function (during) {
+          return nowFolder.during_id === during.id;
+        });
+      };
+
+      while (true) {
+        var _ret = _loop();
+
+        if (_ret === "break") break;
+      }
+
+      console.log("rootFolders");
+      console.log(rootFolders); //配列を並び替える
+
+      for (var num = 0; num < rootFolders.length - 1; num++) {
+        newRootFolders.push(rootFolders[rootFolders.length - num - 1]);
+      }
+
+      console.log(newRootFolders);
+    })();
+  }
+
+  return selectFolder ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_root_pass_styles__WEBPACK_IMPORTED_MODULE_6__["RootPassContainer"], null, newRootFolders.map(function (newRootFolder, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      key: index
+    }, "/", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+      to: "/".concat(user.displayName, "/_folder/").concat(newRootFolder.id)
+    }, newRootFolder.title));
+  }), selectFolder ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "/", selectFolder.title) : "") : "";
+};
+
+var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_3__["createStructuredSelector"])({
+  duringFolder: _redux_folder_folder_selector__WEBPACK_IMPORTED_MODULE_4__["selectDuringFolder"],
+  folders: _redux_folder_folder_selector__WEBPACK_IMPORTED_MODULE_4__["selectFolders"],
+  user: _redux_user_user_selector__WEBPACK_IMPORTED_MODULE_5__["selectCurrentUser"]
+});
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(DisplayRootPass));
+
+/***/ }),
+
+/***/ "./resources/js/components/display-root-pass/display-root-pass.styles.jsx":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/display-root-pass/display-root-pass.styles.jsx ***!
+  \********************************************************************************/
+/*! exports provided: RootPassContainer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RootPassContainer", function() { return RootPassContainer; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    display: flex;\n    width: 100%;\n    justify-content: center;\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+
+var RootPassContainer = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject());
 
 /***/ }),
 
@@ -89362,7 +89494,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BackgroundCenter", function() { return BackgroundCenter; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n    height: calc(100vh - 70px);\n    width: 100vw;\n    text-align: center;\n"]);
+  var data = _taggedTemplateLiteral(["\n    height: calc(100vh - 70px);\n    width: 100vw;\n    text-align: center;\n    margin: 0px;\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -89634,7 +89766,8 @@ var Folder = function Folder(_ref) {
   var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useLocation"])();
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])(); //LocationからURLを取得する
 
-  var path = location.pathname.slice(1).split("/"); //中間テーブルとFolderの入れ物
+  var path = location.pathname.slice(1).split("/");
+  var selectFolder = null; //中間テーブルとFolderの入れ物
 
   var during = null;
   var folder = new Array();
@@ -89643,7 +89776,7 @@ var Folder = function Folder(_ref) {
 
   try {
     var index = path.length;
-    var selectFolder = folders.find(function (value) {
+    selectFolder = folders.find(function (value) {
       return path[index - 1] === value.id;
     });
     during = duringFolder.find(function (value) {
@@ -89675,7 +89808,8 @@ var Folder = function Folder(_ref) {
     haveFolders: folder,
     haveTexts: text
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_display_document_display_document_component__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    documents: documents
+    documents: documents,
+    selectFolder: selectFolder
   }));
 };
 

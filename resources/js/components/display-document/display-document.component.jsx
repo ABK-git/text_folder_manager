@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import DisplayFolder from "../display-folder/display-folder.component";
 import DisplayText from "../display-text/display-text.component";
 import CustomButton from "../custom-button/custom-button.component";
+import DisplayRootPass from "../display-root-pass/display-root-pass.component";
 //css
 import {
     DisplayContainer,
@@ -12,8 +13,7 @@ import {
     DisplaySearchTitle
 } from "./display-document.styles";
 
-const DisplayDocument = ({ documents }) => {
-    
+const DisplayDocument = ({ documents, selectFolder }) => {
     //Folderのみ表示
     const [disableFolder, setDisableFolder] = useState(false);
     //Textのみ表示
@@ -66,6 +66,7 @@ const DisplayDocument = ({ documents }) => {
                 value={formik.values.search_title}
                 onChange={formik.handleChange}
             />
+            <DisplayRootPass selectFolder={selectFolder}/>
             <DisplayContainer>
                 {documents
                     .filter(document =>
