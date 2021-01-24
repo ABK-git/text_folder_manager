@@ -5,7 +5,6 @@ import { useFormik } from "formik";
 import DisplayFolder from "../display-folder/display-folder.component";
 import DisplayText from "../display-text/display-text.component";
 import CustomButton from "../custom-button/custom-button.component";
-
 //css
 import {
     DisplayContainer,
@@ -14,10 +13,7 @@ import {
 } from "./display-document.styles";
 
 const DisplayDocument = ({ documents }) => {
-    const initialValues = {
-        search_title: ""
-    };
-
+    
     //Folderのみ表示
     const [disableFolder, setDisableFolder] = useState(false);
     //Textのみ表示
@@ -44,7 +40,11 @@ const DisplayDocument = ({ documents }) => {
         setBoth(true);
     };
 
+    const initialValues = {
+        search_title: ""
+    };
     const formik = useFormik({ initialValues });
+
     return (
         <BackgroundCenter>
             <DisplaySwitchButtons>

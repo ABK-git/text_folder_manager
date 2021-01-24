@@ -11,7 +11,7 @@ import PrivateUserRoute from "../../route/private_user_root.component";
 import CreatingText from "../creating_text/creating-text.component";
 import FolderContainer from "../folder/folder.container";
 import UserTopContainer from "../user_top/user_top.container";
-import TestPage from "../test/test_component";
+import TestContainer from "../test/test.container";
 
 const UserPage = ({ user, fetchFoldersStart, fetchTextsStart, match }) => {
     useEffect(() => {
@@ -36,6 +36,7 @@ const UserPage = ({ user, fetchFoldersStart, fetchTextsStart, match }) => {
             />
 
             <Route
+                exact
                 path={`${match.path}/_folder/:folder_name`}
                 component={FolderContainer}
             />
@@ -46,7 +47,7 @@ const UserPage = ({ user, fetchFoldersStart, fetchTextsStart, match }) => {
                     `${match.path}/:duringFolder_id/creating/:text_name/test`,
                     `${match.path}/_text/:text_name`,
                 ]}
-                component={TestPage}
+                component={TestContainer}
             />
         </div>
     );
