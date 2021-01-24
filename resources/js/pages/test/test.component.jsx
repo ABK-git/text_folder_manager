@@ -105,11 +105,7 @@ const TestPage = ({ main_folder, createText, user, during_folders }) => {
         //画面遷移用の構成を入れる
         textCredentials.callback = callback;
         textCredentials.redirectPath = redirectPath;
-        // const redirectCredentials = {
-        //     callback,
-        //     redirectPath
-        // };
-        // console.log(redirectCredentials);
+
         createText(textCredentials);
     };
     //redirectファンクション生成
@@ -120,7 +116,13 @@ const TestPage = ({ main_folder, createText, user, during_folders }) => {
     return (
         <BasicBackgroundPaddingTop>
             <IncludeButtons>
-                <ConfirmButtonContainer>
+                <ConfirmButtonContainer
+                    style={{
+                        visibility: location.state.creating_text
+                            ? "visible"
+                            : "hidden"
+                    }}
+                >
                     <CustomButton onClick={handleConfirmText}>
                         確定
                     </CustomButton>

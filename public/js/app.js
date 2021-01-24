@@ -89906,12 +89906,7 @@ var TestPage = function TestPage(_ref) {
 
 
     textCredentials.callback = callback;
-    textCredentials.redirectPath = redirectPath; // const redirectCredentials = {
-    //     callback,
-    //     redirectPath
-    // };
-    // console.log(redirectCredentials);
-
+    textCredentials.redirectPath = redirectPath;
     createText(textCredentials);
   }; //redirectファンクション生成
 
@@ -89920,7 +89915,11 @@ var TestPage = function TestPage(_ref) {
     history.push(redirectPath);
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_9__["BasicBackgroundPaddingTop"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_8__["IncludeButtons"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_8__["ConfirmButtonContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_11__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_background_styles__WEBPACK_IMPORTED_MODULE_9__["BasicBackgroundPaddingTop"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_8__["IncludeButtons"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_8__["ConfirmButtonContainer"], {
+    style: {
+      visibility: location.state.creating_text ? "visible" : "hidden"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_11__["default"], {
     onClick: handleConfirmText
   }, "\u78BA\u5B9A")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_test_component_styles__WEBPACK_IMPORTED_MODULE_8__["DisplayFormContainer"], null, isDisplay ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_11__["default"], {
     onClick: handleClickDisplay
