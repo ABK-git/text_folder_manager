@@ -87752,14 +87752,14 @@ var DisplayDocument = function DisplayDocument(_ref) {
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
-      onlyFolder = _useState2[0],
-      setOnlyFolder = _useState2[1]; //Textのみ表示
+      disableFolder = _useState2[0],
+      setDisableFolder = _useState2[1]; //Textのみ表示
 
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      onlyText = _useState4[0],
-      setOnlyText = _useState4[1]; //両方表示
+      disableText = _useState4[0],
+      setDisableText = _useState4[1]; //両方表示
 
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
@@ -87769,22 +87769,22 @@ var DisplayDocument = function DisplayDocument(_ref) {
 
 
   var displayOnlyFolder = function displayOnlyFolder() {
-    setOnlyFolder(true);
-    setOnlyText(false);
+    setDisableFolder(false);
+    setDisableText(true);
     setBoth(false);
   }; //Only Textボタン
 
 
   var displayOnlyText = function displayOnlyText() {
-    setOnlyText(true);
-    setOnlyFolder(false);
+    setDisableText(false);
+    setDisableFolder(true);
     setBoth(false);
   }; //Bothボタン
 
 
   var displayBoth = function displayBoth() {
-    setOnlyText(false);
-    setOnlyFolder(false);
+    setDisableText(false);
+    setDisableFolder(false);
     setBoth(true);
   };
 
@@ -87793,13 +87793,13 @@ var DisplayDocument = function DisplayDocument(_ref) {
   });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_background_styles__WEBPACK_IMPORTED_MODULE_1__["BackgroundCenter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_document_styles__WEBPACK_IMPORTED_MODULE_6__["DisplaySwitchButtons"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
     onClick: displayOnlyFolder,
-    disabled: onlyFolder
+    disabled: disableText
   }, "only Folder"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
     onClick: displayBoth,
     disabled: both
   }, "Both"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__["default"], {
     onClick: displayOnlyText,
-    disabled: onlyText
+    disabled: disableFolder
   }, "only Text")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_document_styles__WEBPACK_IMPORTED_MODULE_6__["DisplaySearchTitle"], {
     type: "search",
     name: "search_title",
@@ -87812,13 +87812,13 @@ var DisplayDocument = function DisplayDocument(_ref) {
   }).map(function (document) {
     //textの場合
     if (document.content != undefined) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_text_display_text_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      return disableText ? "" : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_text_display_text_component__WEBPACK_IMPORTED_MODULE_4__["default"], {
         key: document.id,
         text: document
       });
     } //folderの場合
     else {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_display_folder_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        return disableFolder ? "" : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_folder_display_folder_component__WEBPACK_IMPORTED_MODULE_3__["default"], {
           key: document.id,
           folder: document
         });

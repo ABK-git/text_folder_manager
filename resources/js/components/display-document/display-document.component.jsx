@@ -19,28 +19,28 @@ const DisplayDocument = ({ documents }) => {
     };
 
     //Folderのみ表示
-    const [onlyFolder, setOnlyFolder] = useState(false);
+    const [disableFolder, setDisableFolder] = useState(false);
     //Textのみ表示
-    const [onlyText, setOnlyText] = useState(false);
+    const [disableText, setDisableText] = useState(false);
     //両方表示
     const [both, setBoth] = useState(true);
 
     //Only Folderボタン
     const displayOnlyFolder = () => {
-        setOnlyFolder(true);
-        setOnlyText(false);
+        setDisableFolder(false);
+        setDisableText(true);
         setBoth(false);
     };
     //Only Textボタン
     const displayOnlyText = () => {
-        setOnlyText(true);
-        setOnlyFolder(false);
+        setDisableText(false);
+        setDisableFolder(true);
         setBoth(false);
     };
     //Bothボタン
     const displayBoth = () => {
-        setOnlyText(false);
-        setOnlyFolder(false);
+        setDisableText(false);
+        setDisableFolder(false);
         setBoth(true);
     };
 
@@ -48,13 +48,13 @@ const DisplayDocument = ({ documents }) => {
     return (
         <BackgroundCenter>
             <DisplaySwitchButtons>
-                <CustomButton onClick={displayOnlyFolder} disabled={onlyFolder}>
+                <CustomButton onClick={displayOnlyFolder} disabled={disableText}>
                     only Folder
                 </CustomButton>
                 <CustomButton onClick={displayBoth} disabled={both}>
                     Both
                 </CustomButton>
-                <CustomButton onClick={displayOnlyText} disabled={onlyText}>
+                <CustomButton onClick={displayOnlyText} disabled={disableFolder}>
                     only Text
                 </CustomButton>
             </DisplaySwitchButtons>
@@ -76,7 +76,9 @@ const DisplayDocument = ({ documents }) => {
                     .map(document => {
                         //textの場合
                         if (document.content != undefined) {
-                            return (
+                            return disableText ? (
+                                ""
+                            ) : (
                                 <DisplayText
                                     key={document.id}
                                     text={document}
@@ -84,7 +86,9 @@ const DisplayDocument = ({ documents }) => {
                             );
                         } //folderの場合
                         else {
-                            return (
+                            return disableFolder ? (
+                                ""
+                            ) : (
                                 <DisplayFolder
                                     key={document.id}
                                     folder={document}
