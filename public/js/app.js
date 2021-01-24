@@ -89438,6 +89438,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _creating_text_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./creating-text.styles */ "./resources/js/pages/creating_text/creating-text.styles.jsx");
 /* harmony import */ var _background_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../background.styles */ "./resources/js/pages/background.styles.jsx");
 /* harmony import */ var _components_custom_button_custom_button_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/custom-button/custom-button.component */ "./resources/js/components/custom-button/custom-button.component.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_text_text_selector__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../redux/text/text.selector */ "./resources/js/redux/text/text.selector.js");
+/* harmony import */ var _redux_text_text_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../redux/text/text.actions */ "./resources/js/redux/text/text.actions.js");
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -89459,8 +89463,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
  //component
 
 
+ //redux
 
-var CreatingText = function CreatingText() {
+
+
+
+
+var CreatingText = function CreatingText(_ref) {
+  var creatingText = _ref.creatingText,
+      creating = _ref.creating;
+
   //入力フォームの表示・非表示
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -89478,11 +89490,16 @@ var CreatingText = function CreatingText() {
   var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useLocation"])(); //初期値
 
   var initialValues = {
-    creating_text: ""
+    creating_text: creating
   }; //送信処理
 
   var onSubmit = function onSubmit(values) {
-    console.log(values);
+    //作成途中の文章を保存
+    var creating_text = values.creating_text;
+    creatingText({
+      creating_text: creating_text
+    }); //testページへ遷移
+
     history.push({
       pathname: "".concat(location.pathname, "/test"),
       state: values
@@ -89510,7 +89527,19 @@ var CreatingText = function CreatingText() {
   })));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (CreatingText);
+var mapStateToProps = Object(reselect__WEBPACK_IMPORTED_MODULE_9__["createStructuredSelector"])({
+  creating: _redux_text_text_selector__WEBPACK_IMPORTED_MODULE_7__["selectCreatingText"]
+});
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    creatingText: function creatingText(textCredentials) {
+      return dispatch(Object(_redux_text_text_actions__WEBPACK_IMPORTED_MODULE_8__["creatingText"])(textCredentials));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(mapStateToProps, mapDispatchToProps)(CreatingText));
 
 /***/ }),
 
@@ -89818,7 +89847,8 @@ var TestPage = function TestPage(_ref) {
   var main_folder = _ref.main_folder,
       createText = _ref.createText,
       user = _ref.user,
-      during_folders = _ref.during_folders;
+      during_folders = _ref.during_folders,
+      clearCreatingText = _ref.clearCreatingText;
   //locationを取得
   var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useLocation"])();
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useHistory"])(); //行ごとに分割する
@@ -89906,7 +89936,10 @@ var TestPage = function TestPage(_ref) {
 
 
     textCredentials.callback = callback;
-    textCredentials.redirectPath = redirectPath;
+    textCredentials.redirectPath = redirectPath; //作成途中の文章をリセット
+
+    clearCreatingText(); //text作成
+
     createText(textCredentials);
   }; //redirectファンクション生成
 
@@ -90015,6 +90048,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     createText: function createText(textCredentials) {
       return dispatch(Object(_redux_text_text_actions__WEBPACK_IMPORTED_MODULE_6__["createText"])(textCredentials));
+    },
+    clearCreatingText: function clearCreatingText() {
+      return dispatch(Object(_redux_text_text_actions__WEBPACK_IMPORTED_MODULE_6__["clearCreatingText"])());
     }
   };
 };
@@ -91374,7 +91410,7 @@ sagaMiddleware.run(_root_saga__WEBPACK_IMPORTED_MODULE_3__["default"]);
 /*!*************************************************!*\
   !*** ./resources/js/redux/text/text.actions.js ***!
   \*************************************************/
-/*! exports provided: createText, addText, setTexts, textFailure, fetchTextsStart */
+/*! exports provided: createText, addText, setTexts, textFailure, creatingText, fetchTextsStart, clearCreatingText */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -91383,7 +91419,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addText", function() { return addText; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setTexts", function() { return setTexts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "textFailure", function() { return textFailure; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "creatingText", function() { return creatingText; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTextsStart", function() { return fetchTextsStart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearCreatingText", function() { return clearCreatingText; });
 /* harmony import */ var _text_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./text.types */ "./resources/js/redux/text/text.types.js");
  //Textの作成
 
@@ -91406,10 +91444,18 @@ var setTexts = function setTexts(texts) {
     type: _text_types__WEBPACK_IMPORTED_MODULE_0__["default"].SET_TEXTS,
     payload: texts
   };
-};
+}; //Text失敗
+
 var textFailure = function textFailure() {
   return {
     type: _text_types__WEBPACK_IMPORTED_MODULE_0__["default"].TEXT_FAILURE
+  };
+}; //Text作成時に入力した文章データを一時保存
+
+var creatingText = function creatingText(textCredentials) {
+  return {
+    type: _text_types__WEBPACK_IMPORTED_MODULE_0__["default"].CREATING_TEXT,
+    payload: textCredentials
   };
 }; //ログイン時にユーザーのTextデータを取得する
 
@@ -91419,6 +91465,12 @@ var fetchTextsStart = function fetchTextsStart(user) {
     payload: {
       user: user
     }
+  };
+}; //作成途中の文章を削除
+
+var clearCreatingText = function clearCreatingText() {
+  return {
+    type: _text_types__WEBPACK_IMPORTED_MODULE_0__["default"].CLEAR_CREATING_TEXT
   };
 };
 
@@ -91445,7 +91497,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var INITIAL_STATE = {
   texts: [],
-  isFetching: false
+  isFetching: false,
+  creating_text: ""
 };
 
 var textReducer = function textReducer() {
@@ -91474,6 +91527,16 @@ var textReducer = function textReducer() {
     case _text_types__WEBPACK_IMPORTED_MODULE_1__["default"].TEXT_FAILURE:
       return _objectSpread(_objectSpread({}, state), {}, {
         isFetching: true
+      });
+
+    case _text_types__WEBPACK_IMPORTED_MODULE_1__["default"].CREATING_TEXT:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        creating_text: action.payload.creating_text
+      });
+
+    case _text_types__WEBPACK_IMPORTED_MODULE_1__["default"].CLEAR_CREATING_TEXT:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        creating_text: ""
       });
 
     default:
@@ -91649,13 +91712,14 @@ function textSagas() {
 /*!**************************************************!*\
   !*** ./resources/js/redux/text/text.selector.js ***!
   \**************************************************/
-/*! exports provided: selectTexts, selectIsTextLoading */
+/*! exports provided: selectTexts, selectIsTextLoading, selectCreatingText */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectTexts", function() { return selectTexts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectIsTextLoading", function() { return selectIsTextLoading; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectCreatingText", function() { return selectCreatingText; });
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
 
 
@@ -91674,6 +91738,10 @@ var selectTexts = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"]
 });
 var selectIsTextLoading = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])([selectText], function (text) {
   return text.isFetching;
+}); //作りかけの文章を取り出す
+
+var selectCreatingText = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])([selectText], function (text) {
+  return text.creating_text;
 });
 
 /***/ }),
@@ -91693,7 +91761,9 @@ var TextActionTypes = {
   ADD_TEXT: "ADD_TEXT",
   SET_TEXTS: "SET_TEXTS",
   FETCH_TEXTS_START: "FETCH_TEXTS_START",
-  TEXT_FAILURE: "TEXT_FAILURE"
+  TEXT_FAILURE: "TEXT_FAILURE",
+  CREATING_TEXT: "CREATING_TEXT",
+  CLEAR_CREATING_TEXT: "CLEAR_CREATING_TEXT"
 };
 /* harmony default export */ __webpack_exports__["default"] = (TextActionTypes);
 
