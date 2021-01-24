@@ -88154,12 +88154,7 @@ var DisplayRootPass = function DisplayRootPass(_ref) {
       console.log(nowDuring);
 
       var _loop = function _loop() {
-        //mainフォルダーまで確認できたら終了
-        if (nowDuring.main_or_sub == true) {
-          return "break";
-        } //現在の中間テーブルが属するfolderを取得
-
-
+        //現在の中間テーブルが属するfolderを取得
         var nowFolder = folders.find(function (folder) {
           return folder.id === nowDuring.folder_id;
         });
@@ -88173,10 +88168,8 @@ var DisplayRootPass = function DisplayRootPass(_ref) {
         });
       };
 
-      while (true) {
-        var _ret = _loop();
-
-        if (_ret === "break") break;
+      while (nowDuring.main_or_sub == false) {
+        _loop();
       }
 
       console.log("rootFolders");

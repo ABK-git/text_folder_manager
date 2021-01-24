@@ -23,11 +23,7 @@ const DisplayRootPass = ({ selectFolder, duringFolder, folders, user }) => {
         );
         console.log("nowDuring");
         console.log(nowDuring);
-        while (true) {
-            //mainフォルダーまで確認できたら終了
-            if (nowDuring.main_or_sub == true) {
-                break;
-            }
+        while (nowDuring.main_or_sub == false) {
             //現在の中間テーブルが属するfolderを取得
             let nowFolder = folders.find(
                 folder => folder.id === nowDuring.folder_id
