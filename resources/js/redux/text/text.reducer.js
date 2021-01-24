@@ -3,7 +3,8 @@ import TextActionTypes from "./text.types";
 
 const INITIAL_STATE = {
     texts: [],
-    isFetching: false
+    isFetching: false,
+    creating_text: ""
 };
 
 const textReducer = (state = INITIAL_STATE, action) => {
@@ -30,6 +31,18 @@ const textReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 isFetching: true
+            };
+
+        case TextActionTypes.CREATING_TEXT:
+            return {
+                ...state,
+                creating_text: action.payload.creating_text
+            };
+
+        case TextActionTypes.CLEAR_CREATING_TEXT:
+            return {
+                ...state,
+                creating_text: ""
             };
 
         default:

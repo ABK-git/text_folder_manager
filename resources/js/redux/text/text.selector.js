@@ -16,3 +16,9 @@ export const selectIsTextLoading = createSelector(
     [selectText],
     text => text.isFetching
 );
+
+//作りかけの文章を取り出す
+export const selectCreatingText = createSelector(
+    [selectText],
+    text => text.creating_text
+);

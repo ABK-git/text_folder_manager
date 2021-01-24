@@ -1,9 +1,9 @@
 import TextActionTypes from "./text.types";
 
 //Textの作成
-export const createText = (textCredentials) => ({
+export const createText = textCredentials => ({
     type: TextActionTypes.CREATE_TEXT,
-    payload: (textCredentials)
+    payload: textCredentials
 });
 
 //作成したTextをReduxに追加
@@ -17,13 +17,24 @@ export const setTexts = texts => ({
     type: TextActionTypes.SET_TEXTS,
     payload: texts
 });
-
+//Text失敗
 export const textFailure = () => ({
     type: TextActionTypes.TEXT_FAILURE
+});
+
+//Text作成時に入力した文章データを一時保存
+export const creatingText = textCredentials => ({
+    type: TextActionTypes.CREATING_TEXT,
+    payload: textCredentials
 });
 
 //ログイン時にユーザーのTextデータを取得する
 export const fetchTextsStart = user => ({
     type: TextActionTypes.FETCH_TEXTS_START,
     payload: { user }
+});
+
+//作成途中の文章を削除
+export const clearCreatingText = () => ({
+    type: TextActionTypes.CLEAR_CREATING_TEXT
 });

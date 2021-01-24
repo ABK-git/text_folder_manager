@@ -8,7 +8,7 @@ import {
     selectDuringFolder,
     selectMainDuringFolder
 } from "../../redux/folder/folder.selector";
-import { createText } from "../../redux/text/text.actions";
+import { clearCreatingText, createText } from "../../redux/text/text.actions";
 import { selectCurrentUser } from "../../redux/user/user.selector";
 //styles
 import {
@@ -29,7 +29,7 @@ import FormInput from "../../components/form-input/form-input.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
 import TextareaInput from "../../components/textarea-input/textarea-input.component";
 
-const TestPage = ({ main_folder, createText, user, during_folders }) => {
+const TestPage = ({ main_folder, createText, user, during_folders, clearCreatingText }) => {
     //locationを取得
     const location = useLocation();
     const history = useHistory();
@@ -106,6 +106,9 @@ const TestPage = ({ main_folder, createText, user, during_folders }) => {
         textCredentials.callback = callback;
         textCredentials.redirectPath = redirectPath;
 
+        //作成途中の文章をリセット
+        clearCreatingText();
+        //text作成
         createText(textCredentials);
     };
     //redirectファンクション生成
@@ -268,7 +271,8 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-    createText: textCredentials => dispatch(createText(textCredentials))
+    createText: textCredentials => dispatch(createText(textCredentials)),
+    clearCreatingText: () => dispatch(clearCreatingText())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TestPage);
