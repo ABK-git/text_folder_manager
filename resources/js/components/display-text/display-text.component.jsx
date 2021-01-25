@@ -40,7 +40,7 @@ const DisplayText = ({ text , user}) => {
         
         history.push({
             pathname: `/${user.displayName}/_text/${text.id}`,
-            state: text.content
+            state: {creating_text: text.content}
         });
         console.log("終了");
     };
