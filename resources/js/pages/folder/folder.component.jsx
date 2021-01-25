@@ -12,7 +12,7 @@ import { selectTexts } from "../../redux/text/text.selector.js";
 import { Background } from "../background.styles";
 //components
 import FolderAndTextButtons from "../../components/folder-and-text-buttons/folder-and-text-buttons.component";
-import DisplayDocument from "../../components/display-document/display-document.component";
+import DisplayDocumentContainer from "../../components/display-document/display-document.container";
 
 const Folder = ({ duringFolder, folders, texts }) => {
     const params = useParams();
@@ -55,7 +55,7 @@ const Folder = ({ duringFolder, folders, texts }) => {
                 haveFolders={folder}
                 haveTexts={text}
             />
-            <DisplayDocument
+            <DisplayDocumentContainer
                 documents={documents}
                 selectFolder={selectFolder}
             />

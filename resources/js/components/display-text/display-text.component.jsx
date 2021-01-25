@@ -1,22 +1,21 @@
 import React, { useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
 import {
     DisplayTextContainer,
     BackgroundImage,
     TextFooter,
     FooterForm
 } from "./display-text.styles";
-
 //component
-import CustomButton from "../../components/custom-button/custom-button.component";
+import CustomButton from "../custom-button/custom-button.component";
+//redux
 import { selectCurrentUser } from "../../redux/user/user.selector";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { updateTextName } from "../../redux/text/text.actions";
 
-const DisplayText = ({ text , user}) => {
+const DisplayText = ({ text, user, updateTextName}) => {
     const history = useHistory();
-    const location = useLocation();
 
     //名前編集フォームの表示・非表示
     const [isDisplay, setIsDisplay] = useState(false);
@@ -35,12 +34,10 @@ const DisplayText = ({ text , user}) => {
     };
 
     const handleClick = () => {
-        const path = location.pathname.slice(1).split("/");
-        console.log("handleClick");
-        
+
         history.push({
             pathname: `/${user.displayName}/_text/${text.id}`,
-            state: {creating_text: text.content}
+            state: { creating_text: text.content }
         });
         console.log("終了");
     };
@@ -52,14 +49,12 @@ const DisplayText = ({ text , user}) => {
         };
         console.log(textCredentials);
 
-        //updateFolder(folderCredentials);
+        updateTextName(textCredentials);
     };
 
     return (
         <DisplayTextContainer>
-            <BackgroundImage
-                onClick={handleClick}
-            />
+            <BackgroundImage onClick={handleClick} />
             <TextFooter
                 onMouseEnter={mouseEnterOrLeave}
                 onMouseLeave={mouseEnterOrLeave}
@@ -93,4 +88,8 @@ const mapStateToProps = createStructuredSelector({
     user: selectCurrentUser
 });
 
-export default connect(mapStateToProps)(DisplayText);
+const mapDispatchToProps = dispatch => ({
+    updateTextName: textCredentials => dispatch(updateTextName(textCredentials))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DisplayText);

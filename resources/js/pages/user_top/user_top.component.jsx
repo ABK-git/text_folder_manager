@@ -11,10 +11,9 @@ import { selectTexts } from "../../redux/text/text.selector";
 import { Background } from "../background.styles";
 //components
 import FolderAndTextButtons from "../../components/folder-and-text-buttons/folder-and-text-buttons.component";
-import DisplayDocument from "../../components/display-document/display-document.component";
+import DisplayDocumentContainer from "../../components/display-document/display-document.container";
 
 const UserTopPage = ({ duringFolder, folders, texts }) => {
-
     //中間テーブルとFolderの入れ物
     let during = null;
     let folder = new Array();
@@ -46,7 +45,7 @@ const UserTopPage = ({ duringFolder, folders, texts }) => {
                 haveFolders={folder}
                 haveTexts={text}
             />
-            <DisplayDocument documents={documents} />
+            <DisplayDocumentContainer documents={documents} />
         </Background>
     );
 };

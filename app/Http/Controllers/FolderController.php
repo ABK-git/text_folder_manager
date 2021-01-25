@@ -50,7 +50,7 @@ class FolderController extends Controller
 
     //Folderのタイトルを変更する
     public function updateTitle(Request $request){
-        //return Folder::where('id',$request->id)->update(['title' => $request->title]);
+        
         $folder = Folder::find($request->id);
         $folder->title = $request->title;
         $folder->save();

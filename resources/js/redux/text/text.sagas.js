@@ -1,6 +1,11 @@
 import axios from "axios";
 import { all, takeLatest, call, put } from "redux-saga/effects";
-import { addText, setTexts, textFailure } from "./text.actions";
+import {
+    addText,
+    setTexts,
+    textFailure,
+    setUpdateNameText
+} from "./text.actions";
 
 import TextActionTypes from "./text.types";
 
@@ -47,6 +52,29 @@ export function* onFetchTextsStart() {
     yield takeLatest(TextActionTypes.FETCH_TEXTS_START, fetchTextsAsync);
 }
 
+export function* updateTextName({ payload: textCredentials }) {
+    let text = null;
+    console.log("this is updateTextName");
+    console.log(textCredentials);
+
+    yield axios
+        .post("/api/text/update_name", textCredentials)
+        .then(response => (text = response.data));
+
+    //TextをReduxにセットする
+    if (text != null) {
+        yield put(setUpdateNameText(text));
+    }
+}
+
+export function* onUpdateTextName() {
+    yield takeLatest(TextActionTypes.UPDATE_TEXT_NAME, updateTextName);
+}
+
 export function* textSagas() {
-    yield all([call(onCreateText), call(onFetchTextsStart)]);
+    yield all([
+        call(onCreateText),
+        call(onFetchTextsStart),
+        call(onUpdateTextName)
+    ]);
 }
