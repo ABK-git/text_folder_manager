@@ -48,8 +48,9 @@ const TestPage = ({
 
     try {
         splitLine = location.state.creating_text.split("\n");
-    } catch {
+    } catch(e) {
         splitLine = location.state.split("\n");
+        console.log(e);
     }
 
     //{}で囲まれた文字列を取り出す正規表現
@@ -130,6 +131,7 @@ const TestPage = ({
     if (text_id != undefined) {
         selectText = texts.find(text => text.id == text_id);
     }
+    const {duringFolder} = location.state;
 
     return (
         <BasicBackgroundPaddingTop>
@@ -159,7 +161,7 @@ const TestPage = ({
             </IncludeButtons>
 
             {selectText ? <DisplayRootPassContainer selectText={selectText} /> : ""}
-
+            {duringFolder ? <DisplayRootPassContainer creatingDuringFolder={duringFolder}/> : ""}
             <IncludeTextAndForm>
                 <DisplayText style={{ width: isDisplay ? "60%" : "100%" }}>
                     {splitLine.map((line, index) => {

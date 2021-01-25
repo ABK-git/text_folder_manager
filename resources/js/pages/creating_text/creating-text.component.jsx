@@ -36,6 +36,9 @@ const CreatingText = ({ creatingText, creating }) => {
     const initialValues = {
         creating_text: creating
     };
+
+    const { duringFolder } = location.state;
+
     //送信処理
     const onSubmit = values => {
         //作成途中の文章を保存
@@ -43,13 +46,11 @@ const CreatingText = ({ creatingText, creating }) => {
         creatingText({ creating_text });
 
         //testページへ遷移
-        history.push({ pathname: `${location.pathname}/test`, state: values });
+        history.push({ pathname: `${location.pathname}/test`, state: {creating_text, duringFolder} });
     };
 
     //formikの作成
     const formik = useFormik({ initialValues, onSubmit });
-
-    const { duringFolder } = location.state;
 
     return (
         <BackgroundCenter>
