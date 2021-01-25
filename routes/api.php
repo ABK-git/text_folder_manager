@@ -43,5 +43,7 @@ Route::get('/folder/get_all/{id}', [FolderController::class, 'getAll']);
 
 //Textを登録
 Route::post("/text/create", [TextController::class, 'store']);
-//特定ユーザーのFolderをすべて取得
+//特定ユーザーのTextをすべて取得
 Route::get('/text/get_all/{id}', [TextController::class, 'getAll']);
+//Textの名前を編集
+Route::post('/text/update_name', [TextController::class, 'updateTitle']);

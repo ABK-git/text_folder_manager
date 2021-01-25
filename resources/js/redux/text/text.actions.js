@@ -38,3 +38,14 @@ export const fetchTextsStart = user => ({
 export const clearCreatingText = () => ({
     type: TextActionTypes.CLEAR_CREATING_TEXT
 });
+
+//Textの名前を変更
+export const updateTextName = textCredentials => ({
+    type: TextActionTypes.UPDATE_TEXT_NAME,
+    payload: textCredentials
+});
+//名前を変えたTextを保存する
+export const setUpdateNameText = text => ({
+    type: TextActionTypes.SET_UPDATE_TEXT_NAME,
+    payload: text
+});

@@ -1,4 +1,4 @@
-import { addNew } from "../folder/folder.utils";
+import { addNew, updateText } from "../text/text.utils";
 import TextActionTypes from "./text.types";
 
 const INITIAL_STATE = {
@@ -11,6 +11,7 @@ const textReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case TextActionTypes.FETCH_TEXTS_START:
         case TextActionTypes.CREATE_TEXT:
+        case TextActionTypes.UPDATE_TEXT_NAME:
             return {
                 ...state,
                 isFetching: true
@@ -43,6 +44,13 @@ const textReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 creating_text: ""
+            };
+
+        case TextActionTypes.SET_UPDATE_TEXT_NAME:
+            return {
+                ...state,
+                isFetching: false,
+                texts: updateText(state.texts, action.payload)
             };
 
         default:

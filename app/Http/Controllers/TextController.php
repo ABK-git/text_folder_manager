@@ -22,4 +22,14 @@ class TextController extends Controller
     {
         return Text::where("user_id",$id)->get();
     }
+
+    //Textのタイトルを変更する
+    public function updateTitle(Request $request){
+        
+        $text = Text::find($request->id);
+        $text->title = $request->title;
+        $text->save();
+
+        return $text;
+    }
 }
