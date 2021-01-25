@@ -44,14 +44,7 @@ const TestPage = ({
     const history = useHistory();
 
     //行ごとに分割する
-    let splitLine = [];
-
-    try {
-        splitLine = location.state.creating_text.split("\n");
-    } catch(e) {
-        splitLine = location.state.split("\n");
-        console.log(e);
-    }
+    let splitLine = location.state.creating_text.split("\n");
 
     //{}で囲まれた文字列を取り出す正規表現
     const regExp = /(?<!\\){(.*?)(?<!\\)}/g;
@@ -126,12 +119,13 @@ const TestPage = ({
         history.push(redirectPath);
     };
 
+    //階層へのリンク表示関連
     let selectText = null;
     const { text_id } = useParams();
     if (text_id != undefined) {
         selectText = texts.find(text => text.id == text_id);
     }
-    const {duringFolder} = location.state;
+    const { duringFolder } = location.state;
 
     return (
         <BasicBackgroundPaddingTop>
@@ -160,8 +154,17 @@ const TestPage = ({
                 </DisplayFormContainer>
             </IncludeButtons>
 
-            {selectText ? <DisplayRootPassContainer selectText={selectText} /> : ""}
-            {duringFolder ? <DisplayRootPassContainer creatingDuringFolder={duringFolder}/> : ""}
+            {selectText ? (
+                <DisplayRootPassContainer selectText={selectText} />
+            ) : (
+                ""
+            )}
+            {duringFolder ? (
+                <DisplayRootPassContainer creatingDuringFolder={duringFolder} />
+            ) : (
+                ""
+            )}
+
             <IncludeTextAndForm>
                 <DisplayText style={{ width: isDisplay ? "60%" : "100%" }}>
                     {splitLine.map((line, index) => {
