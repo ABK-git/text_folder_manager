@@ -16,6 +16,8 @@ import { connect } from "react-redux";
 import { selectCreatingText } from "../../redux/text/text.selector";
 import { creatingText } from "../../redux/text/text.actions";
 import { createStructuredSelector } from "reselect";
+//component
+import DisplayRootPassContainer from "../../components/display-root-pass/display-root-pass.container";
 
 const CreatingText = ({ creatingText, creating }) => {
     //入力フォームの表示・非表示
@@ -39,13 +41,15 @@ const CreatingText = ({ creatingText, creating }) => {
         //作成途中の文章を保存
         const { creating_text } = values;
         creatingText({ creating_text });
-        
+
         //testページへ遷移
         history.push({ pathname: `${location.pathname}/test`, state: values });
     };
 
     //formikの作成
     const formik = useFormik({ initialValues, onSubmit });
+
+    const { duringFolder } = location.state;
 
     return (
         <BackgroundCenter>
@@ -63,6 +67,8 @@ const CreatingText = ({ creatingText, creating }) => {
                         文章を入力してください
                     </TitleMessage>
                 )}
+
+                {duringFolder ? <DisplayRootPassContainer creatingDuringFolder={duringFolder}/> : ""}
 
                 <CreateTextForm
                     name="creating_text"

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 import { NorthWest } from "styled-icons/material";
 import {
@@ -16,7 +16,8 @@ const DisplayRootPass = ({
     duringFolder,
     folders,
     user,
-    selectText
+    selectText,
+    creatingDuringFolder
 }) => {
     //folderの格納場所
     const rootFolders = new Array();
@@ -45,9 +46,11 @@ const DisplayRootPass = ({
         );
         console.log("selectDuring");
         console.log(nowDuring);
+    } else if(creatingDuringFolder != undefined){
+        nowDuring = creatingDuringFolder;
     }
 
-    if (selectText != undefined || selectFolder != undefined) {
+    if (selectText != undefined || selectFolder != undefined || creatingDuringFolder != undefined) {
         while (nowDuring.main_or_sub == false) {
             console.log("whileない");
             console.log(folders);
@@ -81,6 +84,9 @@ const DisplayRootPass = ({
         }
     }
 
+    const params = useParams();
+    const {text_name} = params;
+
     return (
         <RootPassContainer>
             {newRootFolders.map((newRootFolder, index) => {
@@ -97,6 +103,7 @@ const DisplayRootPass = ({
             })}
             {selectFolder ? <span>/{selectFolder.title}</span> : ""}
             {selectText ? <span>/{selectText.title}</span> : ""}
+            {text_name && creatingDuringFolder ? <span>/{text_name}</span> : ""}
         </RootPassContainer>
     );
 };
