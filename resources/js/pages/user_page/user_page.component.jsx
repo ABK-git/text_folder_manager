@@ -37,7 +37,7 @@ const UserPage = ({ user, fetchFoldersStart, fetchTextsStart, match }) => {
 
             <Route
                 exact
-                path={`${match.path}/_folder/:folder_name`}
+                path={`${match.path}/_folder/:folder_id`}
                 component={FolderContainer}
             />
             <Route

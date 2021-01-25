@@ -1,5 +1,4 @@
 import React from "react";
-import { useHistory, useLocation } from "react-router-dom";
 //redux
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -15,11 +14,6 @@ import FolderAndTextButtons from "../../components/folder-and-text-buttons/folde
 import DisplayDocument from "../../components/display-document/display-document.component";
 
 const UserTopPage = ({ duringFolder, folders, texts }) => {
-    const location = useLocation();
-    const history = useHistory();
-
-    //LocationからURLを取得する
-    const path = location.pathname.slice(1).split("/");
 
     //中間テーブルとFolderの入れ物
     let during = null;
@@ -27,28 +21,23 @@ const UserTopPage = ({ duringFolder, folders, texts }) => {
     let text = new Array();
 
     let documents = new Array();
-    try {
-        //直下のFolder・Textと中間テーブルを取得
-        during = duringFolder.find(value => value.main_or_sub == true);
-        folder = folders.filter(value => {
-            return value.during_id === during.id;
-        });
-        text = texts.filter(value => {
-            return value.during_id === during.id;
-        });
-        //folderとtextをまとめる
-        documents = folder.concat(text).sort((a,b) => {
-            if(a.updated_at < b.updated_at){
-                return 1;
-            }else{
-                return -1;
-            }
-        });
-        
-    } catch (e) {
-        //後でエラーページを作って移動させる(エラーページにはホーム直下{"/"}につなげるボタンを作る)
-        history.push(`/${path[0]}`);
-    }
+
+    //直下のFolder・Textと中間テーブルを取得
+    during = duringFolder.find(value => value.main_or_sub == true);
+    folder = folders.filter(value => {
+        return value.during_id === during.id;
+    });
+    text = texts.filter(value => {
+        return value.during_id === during.id;
+    });
+    //folderとtextをまとめる
+    documents = folder.concat(text).sort((a, b) => {
+        if (a.updated_at < b.updated_at) {
+            return 1;
+        } else {
+            return -1;
+        }
+    });
 
     return (
         <Background>
