@@ -5,7 +5,8 @@ import { useFormik } from "formik";
 import {
     TitleMessage,
     CreateTextForm,
-    CreateTextFormContainer
+    CreateTextFormContainer,
+    ButtonsContainer
 } from "./creating-text.styles";
 //背景
 import { BackgroundCenter } from "../background.styles";
@@ -14,12 +15,12 @@ import CustomButton from "../../components/custom-button/custom-button.component
 import { connect } from "react-redux";
 //redux
 import { selectCreatingText } from "../../redux/text/text.selector";
-import { creatingText } from "../../redux/text/text.actions";
+import { clearCreatingText, creatingText } from "../../redux/text/text.actions";
 import { createStructuredSelector } from "reselect";
 //component
 import DisplayRootPassContainer from "../../components/display-root-pass/display-root-pass.container";
 
-const CreatingText = ({ creatingText, creating }) => {
+const CreatingText = ({ creatingText, creating, clearCreatingText }) => {
     //入力フォームの表示・非表示
     const [isDisplay, setIsDisplay] = useState(false);
     //フォームの表示・非表示
@@ -46,7 +47,16 @@ const CreatingText = ({ creatingText, creating }) => {
         creatingText({ creating_text });
 
         //testページへ遷移
-        history.push({ pathname: `${location.pathname}/test`, state: {creating_text, duringFolder} });
+        history.push({
+            pathname: `${location.pathname}/test`,
+            state: { creating_text, duringFolder }
+        });
+    };
+
+    //CLEARボタンの処理
+    const handleClear = () => {
+        formik.setFieldValue("creating_text","");
+        clearCreatingText();
     };
 
     //formikの作成
@@ -56,20 +66,31 @@ const CreatingText = ({ creatingText, creating }) => {
         <BackgroundCenter>
             <CreateTextFormContainer onSubmit={formik.handleSubmit}>
                 {isDisplay ? (
-                    <CustomButton
-                        type="submit"
-                        onMouseLeave={onMouseEnterOrLeave}
-                        design="creatingPageButton"
-                    >
-                        文章完成!
-                    </CustomButton>
+                    <ButtonsContainer onMouseLeave={onMouseEnterOrLeave}>
+                        <CustomButton type="submit" design="creatingPageButton">
+                            TEST
+                        </CustomButton>
+                        <CustomButton
+                            type="button"
+                            design="creatingPageButton"
+                            onClick={handleClear}
+                        >
+                            CLEAR
+                        </CustomButton>
+                    </ButtonsContainer>
                 ) : (
                     <TitleMessage onMouseEnter={onMouseEnterOrLeave}>
                         文章を入力してください
                     </TitleMessage>
                 )}
 
-                {duringFolder ? <DisplayRootPassContainer creatingDuringFolder={duringFolder}/> : ""}
+                {duringFolder ? (
+                    <DisplayRootPassContainer
+                        creatingDuringFolder={duringFolder}
+                    />
+                ) : (
+                    ""
+                )}
 
                 <CreateTextForm
                     name="creating_text"
@@ -87,7 +108,8 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-    creatingText: textCredentials => dispatch(creatingText(textCredentials))
+    creatingText: textCredentials => dispatch(creatingText(textCredentials)),
+    clearCreatingText: () => dispatch(clearCreatingText())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatingText);

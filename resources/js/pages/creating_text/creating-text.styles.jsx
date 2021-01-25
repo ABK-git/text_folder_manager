@@ -16,3 +16,9 @@ export const CreateTextFormContainer = styled.form`
     height: 100%;
     width: 100%;
 `;
+
+export const ButtonsContainer = styled.div`
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+`;
