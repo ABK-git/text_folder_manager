@@ -132,9 +132,9 @@ const TestPage = ({
             <IncludeButtons>
                 <ConfirmButtonContainer
                     style={{
-                        visibility: location.state.creating_text
-                            ? "visible"
-                            : "hidden"
+                        visibility: selectText
+                            ? "hidden"
+                            : "visible"
                     }}
                 >
                     <CustomButton onClick={handleConfirmText}>
@@ -252,6 +252,7 @@ const TestPage = ({
                         {Object.keys(changeValue).map((value, index) => (
                             <FormInput
                                 key={index}
+                                type="search"
                                 name={value}
                                 autoComplete="off"
                                 handleChange={handleChange}
