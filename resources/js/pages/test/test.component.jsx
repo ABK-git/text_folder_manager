@@ -10,6 +10,7 @@ import {
 } from "../../redux/folder/folder.selector";
 import { clearCreatingText, createText } from "../../redux/text/text.actions";
 import { selectCurrentUser } from "../../redux/user/user.selector";
+import { selectTexts } from "../../redux/text/text.selector";
 //styles
 import {
     ChangeString,
@@ -22,14 +23,22 @@ import {
     DisplayFormContainer,
     NoMarginSpan,
     BetweenTextareaToForm
-} from "./test.component.styles";
+} from "./test.styles";
 import { BasicBackgroundPaddingTop } from "../background.styles";
 //component
 import FormInput from "../../components/form-input/form-input.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
 import TextareaInput from "../../components/textarea-input/textarea-input.component";
+import DisplayRootPassContainer from "../../components/display-root-pass/display-root-pass.container";
 
-const TestPage = ({ main_folder, createText, user, during_folders, clearCreatingText }) => {
+const TestPage = ({
+    main_folder,
+    createText,
+    user,
+    during_folders,
+    clearCreatingText,
+    texts
+}) => {
     //locationを取得
     const location = useLocation();
     const history = useHistory();
@@ -116,6 +125,12 @@ const TestPage = ({ main_folder, createText, user, during_folders, clearCreating
         history.push(redirectPath);
     };
 
+    let selectText = null;
+    const { text_id } = useParams();
+    if (text_id != undefined) {
+        selectText = texts.find(text => text.id == text_id);
+    }
+
     return (
         <BasicBackgroundPaddingTop>
             <IncludeButtons>
@@ -142,6 +157,8 @@ const TestPage = ({ main_folder, createText, user, during_folders, clearCreating
                     )}
                 </DisplayFormContainer>
             </IncludeButtons>
+
+            {selectText ? <DisplayRootPassContainer selectText={selectText} /> : ""}
 
             <IncludeTextAndForm>
                 <DisplayText style={{ width: isDisplay ? "60%" : "100%" }}>
@@ -267,7 +284,8 @@ const TestPage = ({ main_folder, createText, user, during_folders, clearCreating
 const mapStateToProps = createStructuredSelector({
     main_folder: selectMainDuringFolder,
     during_folders: selectDuringFolder,
-    user: selectCurrentUser
+    user: selectCurrentUser,
+    texts: selectTexts
 });
 
 const mapDispatchToProps = dispatch => ({
