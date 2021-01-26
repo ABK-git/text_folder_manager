@@ -9,10 +9,11 @@ import {
     DisplayFolderContainer,
     BackgroundImage,
     FolderFooter,
-    FooterForm
+    FooterForm,
+    DisplayFolderButton,
+    DisplayFolderButtonsContainer,
+    UpdateNameButton
 } from "./display-folder.styles";
-
-import CustomButton from "../../components/custom-button/custom-button.component";
 
 const DisplayFolder = ({ folder, updateFolder, user }) => {
     const history = useHistory();
@@ -52,6 +53,12 @@ const DisplayFolder = ({ folder, updateFolder, user }) => {
                     history.push(`/${user.displayName}/_folder/${folder.id}`);
                 }}
             />
+
+            <DisplayFolderButtonsContainer>
+                <DisplayFolderButton>OPEN</DisplayFolderButton>
+                <DisplayFolderButton>DELETE</DisplayFolderButton>
+            </DisplayFolderButtonsContainer>
+
             <FolderFooter
                 onMouseEnter={mouseEnterOrLeave}
                 onMouseLeave={mouseEnterOrLeave}
@@ -69,9 +76,9 @@ const DisplayFolder = ({ folder, updateFolder, user }) => {
                         name="name"
                     />
                     {folder.title !== newName.name ? (
-                        <CustomButton type="submit" design="updateFolderName">
+                        <UpdateNameButton type="submit" design="updateFolderName">
                             変更
-                        </CustomButton>
+                        </UpdateNameButton>
                     ) : (
                         ""
                     )}
