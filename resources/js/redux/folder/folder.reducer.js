@@ -1,5 +1,10 @@
 import FolderActionTypes from "./folder.types";
-import { addNew, updateFolder, disableFolder } from "./folder.utils";
+import {
+    addNew,
+    updateFolder,
+    disableFolder,
+    disableDuringFolder
+} from "./folder.utils";
 
 const INITIAL_STATE = {
     folders: [],
@@ -20,8 +25,6 @@ const folderReducer = (state = INITIAL_STATE, action) => {
         case FolderActionTypes.SET_DURING_FOLDER:
             return {
                 ...state,
-                //この時点でFolderの読み込みが終わっていないのでコメントアウト
-                //isFetching: false,
                 duringFolder: action.payload
             };
         case FolderActionTypes.SET_FOLDER:
@@ -60,11 +63,15 @@ const folderReducer = (state = INITIAL_STATE, action) => {
                 isFetching: false
             };
         case FolderActionTypes.DISABLE_FOLDER:
-            return{
+            return {
                 ...state,
                 isFetching: false,
-                folders: disableFolder(state.folders, action.payload)
-            }
+                folders: disableFolder(state.folders, action.payload),
+                duringFolder: disableDuringFolder(
+                    state.duringFolder,
+                    action.payload
+                )
+            };
         default:
             return state;
     }

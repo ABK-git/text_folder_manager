@@ -20,3 +20,13 @@ export const disableFolder = (folders, disableFolder) => {
     });
     return newArray;
 };
+
+export const disableDuringFolder = (duringFolders, disableFolder) => {
+    const { id } = disableFolder;
+    const newArray = duringFolders.filter(duringFolder => {
+        if (duringFolder.folder_id !== id) {
+            return duringFolder;
+        }
+    });
+    return newArray;
+};
