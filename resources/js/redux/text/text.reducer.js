@@ -1,4 +1,4 @@
-import { addNew, updateText } from "../text/text.utils";
+import { addNew, updateText, disableText } from "../text/text.utils";
 import TextActionTypes from "./text.types";
 
 const INITIAL_STATE = {
@@ -12,6 +12,7 @@ const textReducer = (state = INITIAL_STATE, action) => {
         case TextActionTypes.FETCH_TEXTS_START:
         case TextActionTypes.CREATE_TEXT:
         case TextActionTypes.UPDATE_TEXT_NAME:
+        case TextActionTypes.DELETE_TEXT:
             return {
                 ...state,
                 isFetching: true
@@ -52,6 +53,13 @@ const textReducer = (state = INITIAL_STATE, action) => {
                 isFetching: false,
                 texts: updateText(state.texts, action.payload)
             };
+
+        case TextActionTypes.DISABLE_DELETE_TEXT:
+            return {
+                ...state,
+                isFetching: false,
+                texts: disableText(state.texts, action.payload)
+            }
 
         default:
             return state;

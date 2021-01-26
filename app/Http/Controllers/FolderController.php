@@ -13,13 +13,12 @@ class FolderController extends Controller
     //Folderを登録する
     public function store(Request $request)
     {
-
         $folder = null;
         $duringFolder = null;
 
         DB::beginTransaction();
 
-        try{
+        try {
             //Folderを作成
             $folder = Folder::create([
             'title' => $request->folder_name,
@@ -34,7 +33,7 @@ class FolderController extends Controller
             ]);
             //処理を確定
             DB::commit();
-        }catch(Exception $e){
+        } catch (Exception $e) {
             //処理を取り消す
             DB::rollBack();
         }
@@ -45,12 +44,12 @@ class FolderController extends Controller
     //Folderをすべて取得する
     public function getAll($id)
     {
-        return Folder::where("user_id",$id)->get();
+        return Folder::where("user_id", $id)->get();
     }
 
     //Folderのタイトルを変更する
-    public function updateTitle(Request $request){
-        
+    public function updateTitle(Request $request)
+    {
         $folder = Folder::find($request->id);
         $folder->title = $request->title;
         $folder->save();
@@ -61,7 +60,6 @@ class FolderController extends Controller
     //Folderを削除する
     public function destroy($id)
     {
-        return Folder::destroy($id);
+        Folder::destroy($id);
     }
-
 }

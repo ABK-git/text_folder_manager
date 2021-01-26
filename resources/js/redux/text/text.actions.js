@@ -49,3 +49,14 @@ export const setUpdateNameText = text => ({
     type: TextActionTypes.SET_UPDATE_TEXT_NAME,
     payload: text
 });
+
+//Textを消去
+export const deleteText = text => ({
+    type: TextActionTypes.DELETE_TEXT,
+    payload: text
+});
+//削除したTextをReduxから取り除く
+export const disableDeleteText = text => ({
+    type: TextActionTypes.DISABLE_DELETE_TEXT,
+    payload: text
+});

@@ -32,4 +32,10 @@ class TextController extends Controller
 
         return $text;
     }
+
+    //Textを削除する
+    public function destroy($id)
+    {
+        return Text::destroy($id);
+    }
 }

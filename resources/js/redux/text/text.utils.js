@@ -13,3 +13,13 @@ export const updateText = (texts, newText) => {
 
     return newArray;
 };
+
+export const disableText = (texts, disableText) => {
+    const { id } = disableText;
+    const newArray = texts.filter(text => {
+        if (text.id !== id) {
+            return text;
+        }
+    });
+    return newArray;
+};
