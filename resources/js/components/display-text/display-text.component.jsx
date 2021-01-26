@@ -4,7 +4,10 @@ import {
     DisplayTextContainer,
     BackgroundImage,
     TextFooter,
-    FooterForm
+    FooterForm,
+    DisplayTextButtonsContainer,
+    DisplayTextButton, 
+    UpdateNameButton
 } from "./display-text.styles";
 //component
 import CustomButton from "../custom-button/custom-button.component";
@@ -14,7 +17,7 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { updateTextName } from "../../redux/text/text.actions";
 
-const DisplayText = ({ text, user, updateTextName}) => {
+const DisplayText = ({ text, user, updateTextName }) => {
     const history = useHistory();
 
     //名前編集フォームの表示・非表示
@@ -34,7 +37,6 @@ const DisplayText = ({ text, user, updateTextName}) => {
     };
 
     const handleClick = () => {
-
         history.push({
             pathname: `/${user.displayName}/_text/${text.id}`,
             state: { creating_text: text.content }
@@ -55,6 +57,11 @@ const DisplayText = ({ text, user, updateTextName}) => {
     return (
         <DisplayTextContainer>
             <BackgroundImage onClick={handleClick} />
+            <DisplayTextButtonsContainer>
+                <DisplayTextButton>OPEN</DisplayTextButton>
+                <DisplayTextButton>UPDATE</DisplayTextButton>
+                <DisplayTextButton>DELETE</DisplayTextButton>
+            </DisplayTextButtonsContainer>
             <TextFooter
                 onMouseEnter={mouseEnterOrLeave}
                 onMouseLeave={mouseEnterOrLeave}
@@ -72,9 +79,9 @@ const DisplayText = ({ text, user, updateTextName}) => {
                         name="name"
                     />
                     {text.title !== newName.name ? (
-                        <CustomButton type="submit" design="updateFolderName">
+                        <UpdateNameButton type="submit" design="updateFolderName">
                             変更
-                        </CustomButton>
+                        </UpdateNameButton>
                     ) : (
                         ""
                     )}
