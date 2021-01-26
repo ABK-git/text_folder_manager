@@ -36,10 +36,12 @@ export const DisplayFolderButton = styled(CustomButton)`
     align-items: center;
 `;
 export const DisplayFolderButtonsContainer = styled.div`
-    height: 90%;
     width: 100%;
     position: absolute;
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const BackgroundImage = styled.div`
