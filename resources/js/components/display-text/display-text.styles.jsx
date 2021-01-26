@@ -30,16 +30,18 @@ export const DisplayTextButton = styled(CustomButton)`
     width: 70%;
     display: none;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 5px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 `;
 export const DisplayTextButtonsContainer = styled.div`
-    height: 90%;
     width: 100%;
     position: absolute;
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const BackgroundImage = styled.div`
@@ -54,7 +56,6 @@ export const BackgroundImage = styled.div`
 export const TextFooter = styled.div`
     width: 100%;
     height: 10%;
-
     font-size: 16px;
     font-weight: bold;
 `;

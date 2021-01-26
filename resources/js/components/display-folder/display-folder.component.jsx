@@ -44,18 +44,16 @@ const DisplayFolder = ({ folder, updateFolder, user }) => {
         setIsDisplay(!isDisplay);
     };
 
+    const handleClickOpenFolder = () => {
+        history.push(`/${user.displayName}/_folder/${folder.id}`);
+    };
+
     return (
         <DisplayFolderContainer>
-            <BackgroundImage
-                onClick={() => {
-                    console.log("background");
-
-                    history.push(`/${user.displayName}/_folder/${folder.id}`);
-                }}
-            />
+            <BackgroundImage onClick={handleClickOpenFolder} />
 
             <DisplayFolderButtonsContainer>
-                <DisplayFolderButton>OPEN</DisplayFolderButton>
+                <DisplayFolderButton onClick={handleClickOpenFolder}>OPEN</DisplayFolderButton>
                 <DisplayFolderButton>DELETE</DisplayFolderButton>
             </DisplayFolderButtonsContainer>
 
@@ -76,7 +74,10 @@ const DisplayFolder = ({ folder, updateFolder, user }) => {
                         name="name"
                     />
                     {folder.title !== newName.name ? (
-                        <UpdateNameButton type="submit" design="updateFolderName">
+                        <UpdateNameButton
+                            type="submit"
+                            design="updateFolderName"
+                        >
                             変更
                         </UpdateNameButton>
                     ) : (

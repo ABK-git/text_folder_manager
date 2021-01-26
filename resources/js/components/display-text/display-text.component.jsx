@@ -6,7 +6,7 @@ import {
     TextFooter,
     FooterForm,
     DisplayTextButtonsContainer,
-    DisplayTextButton, 
+    DisplayTextButton,
     UpdateNameButton
 } from "./display-text.styles";
 //component
@@ -36,7 +36,7 @@ const DisplayText = ({ text, user, updateTextName }) => {
         setNewName({ ...newName, [name]: value });
     };
 
-    const handleClick = () => {
+    const handleClickOpenText = () => {
         history.push({
             pathname: `/${user.displayName}/_text/${text.id}`,
             state: { creating_text: text.content }
@@ -56,9 +56,11 @@ const DisplayText = ({ text, user, updateTextName }) => {
 
     return (
         <DisplayTextContainer>
-            <BackgroundImage onClick={handleClick} />
+            <BackgroundImage onClick={handleClickOpenText} />
             <DisplayTextButtonsContainer>
-                <DisplayTextButton>OPEN</DisplayTextButton>
+                <DisplayTextButton onClick={handleClickOpenText}>
+                    OPEN
+                </DisplayTextButton>
                 <DisplayTextButton>UPDATE</DisplayTextButton>
                 <DisplayTextButton>DELETE</DisplayTextButton>
             </DisplayTextButtonsContainer>
@@ -79,7 +81,10 @@ const DisplayText = ({ text, user, updateTextName }) => {
                         name="name"
                     />
                     {text.title !== newName.name ? (
-                        <UpdateNameButton type="submit" design="updateFolderName">
+                        <UpdateNameButton
+                            type="submit"
+                            design="updateFolderName"
+                        >
                             変更
                         </UpdateNameButton>
                     ) : (
