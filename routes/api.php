@@ -49,5 +49,7 @@ Route::post("/text/create", [TextController::class, 'store']);
 Route::get('/text/get_all/{id}', [TextController::class, 'getAll']);
 //Textの名前を編集
 Route::post('/text/update_name', [TextController::class, 'updateTitle']);
+//Textの中身を編集
+Route::post("/text/update", [TextController::class, 'update']);
 //Textの削除
 Route::delete('/text/destroy/{id}',[TextController::class, 'destroy']);

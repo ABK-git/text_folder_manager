@@ -14,6 +14,7 @@ import { BackgroundCenter } from "../background.styles";
 import CustomButton from "../../components/custom-button/custom-button.component";
 import { connect } from "react-redux";
 //redux
+import { selectDuringFolder } from "../../redux/folder/folder.selector";
 import { selectCreatingText } from "../../redux/text/text.selector";
 import { clearCreatingText, creatingText } from "../../redux/text/text.actions";
 import { createStructuredSelector } from "reselect";
@@ -21,7 +22,12 @@ import { createStructuredSelector } from "reselect";
 import DisplayRootPassContainer from "../../components/display-root-pass/display-root-pass.container";
 import ErrorMessagesContainer from "../../components/form-input/error-messages.container";
 
-const CreatingText = ({ creatingText, creating, clearCreatingText }) => {
+const CreatingText = ({
+    creatingText,
+    creating,
+    clearCreatingText,
+    duringFolders
+}) => {
     //入力フォームの表示・非表示
     const [isDisplay, setIsDisplay] = useState(false);
     //フォームの表示・非表示
@@ -49,9 +55,22 @@ const CreatingText = ({ creatingText, creating, clearCreatingText }) => {
 
         return errors;
     };
-    
+
     //中間テーブルを取得
-    const { duringFolder } = location.state;
+    let { duringFolder } = location.state;
+
+    /**
+     * 以下update時の処理
+     */
+    const text = location.state.text;
+    if (text != undefined) {
+        //初期値を変更
+        initialValues.creating_text = text.content;
+        //textの中間テーブルを取得
+        duringFolder = duringFolders.find(
+            during => text.during_id === during.id
+        );
+    }
 
     //送信処理
     const onSubmit = values => {
@@ -59,11 +78,19 @@ const CreatingText = ({ creatingText, creating, clearCreatingText }) => {
         const { creating_text } = values;
         creatingText({ creating_text });
 
-        //testページへ遷移
-        history.push({
-            pathname: `${location.pathname}/test`,
-            state: { creating_text, duringFolder }
-        });
+        if (text != undefined) {
+            //testページへ遷移(UPDATE)
+            history.push({
+                pathname: `${location.pathname}/test`,
+                state: { creating_text, duringFolder, update_text: text }
+            });
+        } else {
+            //testページへ遷移(CREATE)
+            history.push({
+                pathname: `${location.pathname}/test`,
+                state: { creating_text, duringFolder }
+            });
+        }
     };
 
     //CLEARボタンの処理
@@ -120,7 +147,8 @@ const CreatingText = ({ creatingText, creating, clearCreatingText }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-    creating: selectCreatingText
+    creating: selectCreatingText,
+    duringFolders: selectDuringFolder
 });
 
 const mapDispatchToProps = dispatch => ({

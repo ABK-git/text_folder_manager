@@ -44,8 +44,13 @@ export const updateTextName = textCredentials => ({
     type: TextActionTypes.UPDATE_TEXT_NAME,
     payload: textCredentials
 });
+//Textの文章を変更
+export const updateText = update_text => ({
+    type: TextActionTypes.UPDATE_TEXT,
+    payload: update_text
+});
 //名前を変えたTextを保存する
-export const setUpdateNameText = text => ({
+export const setUpdateText = text => ({
     type: TextActionTypes.SET_UPDATE_TEXT_NAME,
     payload: text
 });

@@ -4,7 +4,7 @@ import {
     addText,
     setTexts,
     textFailure,
-    setUpdateNameText,
+    setUpdateText,
     disableDeleteText
 } from "./text.actions";
 
@@ -64,7 +64,7 @@ export function* updateTextName({ payload: textCredentials }) {
 
     //TextをReduxにセットする
     if (text != null) {
-        yield put(setUpdateNameText(text));
+        yield put(setUpdateText(text));
     }
 }
 
@@ -88,11 +88,38 @@ export function* onDeleteText() {
     yield takeLatest(TextActionTypes.DELETE_TEXT, deleteText);
 }
 
+export function* updateText({ payload: update_text }) {
+    console.log("this os updateText");
+    console.log(update_text);
+
+    let text = null;
+
+    yield axios
+        .post("/api/text/update", update_text)
+        .then(response => (text = response.data));
+
+    if (text != null) {
+        yield put(setUpdateText(text));
+    } else {
+        //一時的に失敗
+        yield put(textFailure());
+    }
+
+    //画面遷移
+    const { callback, redirectPath } = update_text;
+    yield callback(redirectPath);
+}
+
+export function* onUpdateText() {
+    yield takeLatest(TextActionTypes.UPDATE_TEXT, updateText);
+}
+
 export function* textSagas() {
     yield all([
         call(onCreateText),
         call(onFetchTextsStart),
         call(onUpdateTextName),
-        call(onDeleteText)
+        call(onDeleteText),
+        call(onUpdateText)
     ]);
 }
