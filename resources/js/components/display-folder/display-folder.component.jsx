@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../redux/user/user.selector";
-import { updateFolder } from "../../redux/folder/folder.actions.js";
+import {
+    updateFolder,
+    deleteFolder
+} from "../../redux/folder/folder.actions.js";
 
 import {
     DisplayFolderContainer,
@@ -15,7 +18,7 @@ import {
     UpdateNameButton
 } from "./display-folder.styles";
 
-const DisplayFolder = ({ folder, updateFolder, user }) => {
+const DisplayFolder = ({ folder, updateFolder, user, deleteFolder }) => {
     const history = useHistory();
 
     //名前編集フォームの表示・非表示
@@ -43,9 +46,13 @@ const DisplayFolder = ({ folder, updateFolder, user }) => {
     const mouseEnterOrLeave = () => {
         setIsDisplay(!isDisplay);
     };
-
+    //Folderを開く
     const handleClickOpenFolder = () => {
         history.push(`/${user.displayName}/_folder/${folder.id}`);
+    };
+    //Folderを消去する
+    const handleClickDeleteFolder = () => {
+        deleteFolder(folder);
     };
 
     return (
@@ -53,8 +60,12 @@ const DisplayFolder = ({ folder, updateFolder, user }) => {
             <BackgroundImage onClick={handleClickOpenFolder} />
 
             <DisplayFolderButtonsContainer>
-                <DisplayFolderButton onClick={handleClickOpenFolder}>OPEN</DisplayFolderButton>
-                <DisplayFolderButton>DELETE</DisplayFolderButton>
+                <DisplayFolderButton onClick={handleClickOpenFolder}>
+                    OPEN
+                </DisplayFolderButton>
+                <DisplayFolderButton onClick={handleClickDeleteFolder}>
+                    DELETE
+                </DisplayFolderButton>
             </DisplayFolderButtonsContainer>
 
             <FolderFooter
@@ -94,7 +105,9 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-    updateFolder: folderCredentials => dispatch(updateFolder(folderCredentials))
+    updateFolder: folderCredentials =>
+        dispatch(updateFolder(folderCredentials)),
+    deleteFolder: folder => dispatch(deleteFolder(folder))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DisplayFolder);

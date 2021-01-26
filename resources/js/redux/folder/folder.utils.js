@@ -11,3 +11,12 @@ export const updateFolder = (folders, newFolder) => {
 
     return newArray;
 };
+export const disableFolder = (folders, disableFolder) => {
+    const { id } = disableFolder;
+    const newArray = folders.filter(folder => {
+        if (folder.id !== id) {
+            return folder;
+        }
+    });
+    return newArray;
+};
