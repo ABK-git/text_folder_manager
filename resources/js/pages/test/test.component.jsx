@@ -89,57 +89,42 @@ const TestPage = ({
     //textの内容を確定する
     const params = useParams();
     const handleConfirmText = () => {
+        //作成途中の文章をリセット
+        clearCreatingText();
+        //遷移パスを生成
+        let redirectPath = "";
+        if (duringFolder.main_or_sub == true) {
+            redirectPath = `/${user.displayName}`;
+        } else {
+            redirectPath = `/${user.displayName}/_folder/${duringFolder.folder_id}`;
+        }
+
         //UPDATEだった場合
         if (update_text != undefined) {
             console.log("in update");
             //textのcontentを入力した内容に書き換える
             update_text.content = creating_text;
 
-            //遷移パスを生成
-            let redirectPath = "";
-            if (duringFolder.main_or_sub == true) {
-                redirectPath = `/${user.displayName}`;
-            } else {
-                redirectPath = `/${user.displayName}/_folder/${duringFolder.folder_id}`;
-            }
-
             //callbackとredirectPathを追加
             update_text.callback = callback;
             update_text.redirectPath = redirectPath;
 
-            //作成途中の文章をリセット
-            clearCreatingText();
             updateText(update_text);
         } else {
             //CREATEの場合
-            const { duringFolder_id, text_name } = params;
+            const { text_name } = params;
             //text用のオブジェクト作成
             const textCredentials = {
                 title: text_name,
                 content: creating_text,
                 user_id: user.id,
-                during_id: duringFolder_id
+                during_id: duringFolder.id
             };
-            //遷移パスを生成
-            let redirectPath = "";
-            redirectPath = `/${user.displayName}`;
-            //直下のtextだった場合
-            if (duringFolder_id === undefined) {
-                textCredentials.during_id = main_folder.id;
-            } else {
-                const during_folder = during_folders.find(
-                    during_folder => during_folder.id === duringFolder_id
-                );
 
-                //属するfolderのidを取得する
-                redirectPath = `/${user.displayName}/_folder/${during_folder.folder_id}`;
-            }
             //画面遷移用の構成を入れる
             textCredentials.callback = callback;
             textCredentials.redirectPath = redirectPath;
 
-            //作成途中の文章をリセット
-            clearCreatingText();
             //text作成
             createText(textCredentials);
         }
