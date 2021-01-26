@@ -32,6 +32,15 @@ class TextController extends Controller
 
         return $text;
     }
+    //Textの中身を変更する
+    public function update(Request $request){
+        $text = Text::find($request->id);
+
+        $text->content = $request->content;
+        $text->save();
+
+        return $text;
+    }
 
     //Textを削除する
     public function destroy($id)

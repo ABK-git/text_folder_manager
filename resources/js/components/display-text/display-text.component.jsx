@@ -46,6 +46,13 @@ const DisplayText = ({ text, user, updateTextName, deleteText }) => {
         deleteText(text);
     };
 
+    const handleClickUpdateText = () => {
+        history.push({
+            pathname: `/${user.displayName}/creating/${text.title}`,
+            state: { text }
+        });
+    };
+
     const handleSubmit = () => {
         const textCredentials = {
             id: text.id,
@@ -63,7 +70,9 @@ const DisplayText = ({ text, user, updateTextName, deleteText }) => {
                 <DisplayTextButton onClick={handleClickOpenText}>
                     OPEN
                 </DisplayTextButton>
-                <DisplayTextButton>UPDATE</DisplayTextButton>
+                <DisplayTextButton onClick={handleClickUpdateText}>
+                    UPDATE
+                </DisplayTextButton>
                 <DisplayTextButton onClick={handleClickDeleteText}>
                     DELETE
                 </DisplayTextButton>

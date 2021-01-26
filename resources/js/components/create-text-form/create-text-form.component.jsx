@@ -38,7 +38,7 @@ const CreateTextForm = ({user, duringFolder}) => {
 
         if (path.length === 1) {
             //ユーザー直下の場合
-            history.push({pathname:`${user.displayName}/creating/${values.text_name}`, state: {duringFolder}});
+            history.push({pathname:`/${user.displayName}/creating/${values.text_name}`, state: {duringFolder}});
         } else {
             //フォルダー下の場合
             history.push({pathname: `/${user.displayName}/${duringFolder.id}/creating/${values.text_name}` ,state: {duringFolder}});

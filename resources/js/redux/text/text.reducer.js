@@ -11,6 +11,7 @@ const textReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case TextActionTypes.FETCH_TEXTS_START:
         case TextActionTypes.CREATE_TEXT:
+        case TextActionTypes.UPDATE_TEXT:
         case TextActionTypes.UPDATE_TEXT_NAME:
         case TextActionTypes.DELETE_TEXT:
             return {
