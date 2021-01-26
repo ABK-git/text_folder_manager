@@ -4,7 +4,8 @@ import {
     addText,
     setTexts,
     textFailure,
-    setUpdateNameText
+    setUpdateNameText,
+    disableDeleteText
 } from "./text.actions";
 
 import TextActionTypes from "./text.types";
@@ -71,10 +72,27 @@ export function* onUpdateTextName() {
     yield takeLatest(TextActionTypes.UPDATE_TEXT_NAME, updateTextName);
 }
 
+export function* deleteText({ payload: text }) {
+    const { id } = text;
+
+    axios.delete(`/api/text/destroy/${id}`).catch(() => (id = null));
+
+    if (id != null) {
+        yield put(disableDeleteText(text));
+    } else {
+        yield put(textFailure());
+    }
+}
+
+export function* onDeleteText() {
+    yield takeLatest(TextActionTypes.DELETE_TEXT, deleteText);
+}
+
 export function* textSagas() {
     yield all([
         call(onCreateText),
         call(onFetchTextsStart),
-        call(onUpdateTextName)
+        call(onUpdateTextName),
+        call(onDeleteText)
     ]);
 }

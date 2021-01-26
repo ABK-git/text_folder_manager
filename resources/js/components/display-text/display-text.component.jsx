@@ -9,15 +9,13 @@ import {
     DisplayTextButton,
     UpdateNameButton
 } from "./display-text.styles";
-//component
-import CustomButton from "../custom-button/custom-button.component";
 //redux
 import { selectCurrentUser } from "../../redux/user/user.selector";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { updateTextName } from "../../redux/text/text.actions";
+import { deleteText, updateTextName } from "../../redux/text/text.actions";
 
-const DisplayText = ({ text, user, updateTextName }) => {
+const DisplayText = ({ text, user, updateTextName, deleteText }) => {
     const history = useHistory();
 
     //名前編集フォームの表示・非表示
@@ -44,6 +42,10 @@ const DisplayText = ({ text, user, updateTextName }) => {
         console.log("終了");
     };
 
+    const handleClickDeleteText = () => {
+        deleteText(text);
+    };
+
     const handleSubmit = () => {
         const textCredentials = {
             id: text.id,
@@ -62,7 +64,9 @@ const DisplayText = ({ text, user, updateTextName }) => {
                     OPEN
                 </DisplayTextButton>
                 <DisplayTextButton>UPDATE</DisplayTextButton>
-                <DisplayTextButton>DELETE</DisplayTextButton>
+                <DisplayTextButton onClick={handleClickDeleteText}>
+                    DELETE
+                </DisplayTextButton>
             </DisplayTextButtonsContainer>
             <TextFooter
                 onMouseEnter={mouseEnterOrLeave}
@@ -101,7 +105,9 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-    updateTextName: textCredentials => dispatch(updateTextName(textCredentials))
+    updateTextName: textCredentials =>
+        dispatch(updateTextName(textCredentials)),
+    deleteText: text => dispatch(deleteText(text))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DisplayText);
