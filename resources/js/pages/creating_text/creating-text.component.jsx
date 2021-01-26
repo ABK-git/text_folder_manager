@@ -19,6 +19,7 @@ import { clearCreatingText, creatingText } from "../../redux/text/text.actions";
 import { createStructuredSelector } from "reselect";
 //component
 import DisplayRootPassContainer from "../../components/display-root-pass/display-root-pass.container";
+import ErrorMessagesContainer from "../../components/form-input/error-messages.container";
 
 const CreatingText = ({ creatingText, creating, clearCreatingText }) => {
     //入力フォームの表示・非表示
@@ -38,6 +39,18 @@ const CreatingText = ({ creatingText, creating, clearCreatingText }) => {
         creating_text: creating
     };
 
+    //validate処理
+    const validate = values => {
+        const errors = {};
+
+        if (!values.creating_text) {
+            errors.creating_text = "文章が入力されていません。";
+        }
+
+        return errors;
+    };
+    
+    //中間テーブルを取得
     const { duringFolder } = location.state;
 
     //送信処理
@@ -55,12 +68,12 @@ const CreatingText = ({ creatingText, creating, clearCreatingText }) => {
 
     //CLEARボタンの処理
     const handleClear = () => {
-        formik.setFieldValue("creating_text","");
+        formik.setFieldValue("creating_text", "");
         clearCreatingText();
     };
 
     //formikの作成
-    const formik = useFormik({ initialValues, onSubmit });
+    const formik = useFormik({ initialValues, onSubmit, validate });
 
     return (
         <BackgroundCenter>
@@ -83,6 +96,9 @@ const CreatingText = ({ creatingText, creating, clearCreatingText }) => {
                         文章を入力してください
                     </TitleMessage>
                 )}
+                <ErrorMessagesContainer
+                    errorMessage={formik.errors.creating_text}
+                />
 
                 {duringFolder ? (
                     <DisplayRootPassContainer
