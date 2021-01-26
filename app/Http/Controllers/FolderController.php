@@ -58,4 +58,10 @@ class FolderController extends Controller
         return $folder;
     }
 
+    //Folderを削除する
+    public function destroy($id)
+    {
+        return Folder::destroy($id);
+    }
+
 }

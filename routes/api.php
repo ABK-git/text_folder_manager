@@ -40,6 +40,8 @@ Route::post('/folder/create', [FolderController::class, 'store']);
 Route::post('/folder/update', [FolderController::class, 'updateTitle']);
 //特定ユーザーのFolderをすべて取得
 Route::get('/folder/get_all/{id}', [FolderController::class, 'getAll']);
+//Folderの削除
+Route::delete('/folder/destroy/{id}',[FolderController::class, 'destroy']);
 
 //Textを登録
 Route::post("/text/create", [TextController::class, 'store']);

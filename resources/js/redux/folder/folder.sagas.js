@@ -1,6 +1,14 @@
 import axios from "axios";
 import { all, takeLatest, call, put } from "redux-saga/effects";
-import { addDuringFolder, addFolder, setDuringFolder, setFolder, setUpdateFolder } from "./folder.actions";
+import {
+    addDuringFolder,
+    addFolder,
+    folderFailure,
+    setDuringFolder,
+    setFolder,
+    setUpdateFolder,
+    disableDeleteFolder
+} from "./folder.actions";
 import FolderActionTypes from "./folder.types";
 
 export function* createDuringFolder({ payload: { folderCredentials } }) {
@@ -46,7 +54,7 @@ export function* fetchFoldersAsync({ payload: { user } }) {
         .get(`/api/folder/get_all/${id}`)
         .then(response => (folders = response.data));
     //FolderをReduxにセットする
-    if(folders !== null){
+    if (folders !== null) {
         yield put(setFolder(folders));
     }
 }
@@ -63,12 +71,10 @@ export function* createFolder({ payload: folderCredentials }) {
     console.log(folderCredentials);
 
     //FolderとFolderの中間テーブルを作成
-    yield axios
-        .post("/api/folder/create", folderCredentials)
-        .then(response => {
-            folder = response.data[0];
-            duringFolder = response.data[1];
-        });
+    yield axios.post("/api/folder/create", folderCredentials).then(response => {
+        folder = response.data[0];
+        duringFolder = response.data[1];
+    });
     //エラー時の処理も実装する予定
     if (folder !== null && duringFolder !== null) {
         //新しく作成した中間テーブルを追加
@@ -82,19 +88,34 @@ export function* onCreateFolder() {
     yield takeLatest(FolderActionTypes.CREATE_FOLDER, createFolder);
 }
 
-export function* updateFolder({ payload: folderCredentials }){
+export function* updateFolder({ payload: folderCredentials }) {
     let folder = null;
     console.log("this is update");
-    yield axios.post("/api/folder/update", folderCredentials)
-    .then(response => {
+    yield axios.post("/api/folder/update", folderCredentials).then(response => {
         folder = response.data;
-    })
+    });
     console.log(folder);
     yield put(setUpdateFolder(folder));
 }
 
-export function* onUpdateFolder(){
+export function* onUpdateFolder() {
     yield takeLatest(FolderActionTypes.UPDATE_FOLDER, updateFolder);
+}
+
+export function* deleteFolder({ payload: folder }) {
+    const { id } = folder;
+
+    axios.delete(`/api/folder/destroy/${id}`).catch(() => (id = null));
+
+    if (id != null) {
+        yield put(disableDeleteFolder(folder));
+    } else {
+        yield put(folderFailure());
+    }
+}
+
+export function* onDeleteFolder() {
+    yield takeLatest(FolderActionTypes.DELETE_FOLDER, deleteFolder);
 }
 
 export function* folderSagas() {
@@ -102,6 +123,7 @@ export function* folderSagas() {
         call(onCreateFolder),
         call(onCreateDuringFolder),
         call(fetchFoldersStart),
-        call(onUpdateFolder)
+        call(onUpdateFolder),
+        call(onDeleteFolder)
     ]);
 }

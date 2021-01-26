@@ -21,6 +21,7 @@ export const addFolder = folder => ({
     type: FolderActionTypes.ADD_FOLDER,
     payload: folder
 });
+
 //Folderの名前を変更
 export const updateFolder = folderCredentials => ({
     type: FolderActionTypes.UPDATE_FOLDER,
@@ -29,6 +30,17 @@ export const updateFolder = folderCredentials => ({
 //Folderの変更をReduxに反映させる
 export const setUpdateFolder = folder => ({
     type: FolderActionTypes.SET_UPDATE_FOLDER,
+    payload: folder
+});
+
+//Folderを消去
+export const deleteFolder = folder => ({
+    type: FolderActionTypes.DELETE_FOLDER,
+    payload: folder
+});
+//削除したFolderをReduxから取り除く
+export const disableDeleteFolder = folder => ({
+    type: FolderActionTypes.DISABLE_FOLDER,
     payload: folder
 });
 
@@ -52,4 +64,9 @@ export const fetchFoldersStart = user => ({
 //ログアウト時にstateを空にする
 export const folderClear = () => ({
     type: FolderActionTypes.FOLDER_CLEAR
+});
+
+//Folderのデータベースアクセス失敗
+export const folderFailure = () => ({
+    type: FolderActionTypes.FOLDER_FAILURE
 });
