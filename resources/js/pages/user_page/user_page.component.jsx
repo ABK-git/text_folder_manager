@@ -28,10 +28,7 @@ const UserPage = ({ user, fetchFoldersStart, fetchTextsStart, match }) => {
             />
             <Route
                 exact
-                path={[
-                    `${match.path}/creating/:text_name`,
-                    `${match.path}/:folder_title/creating/:text_name`
-                ]}
+                path={`${match.path}/creating/:text_name`}
                 component={CreatingText}
             />
 
@@ -44,8 +41,7 @@ const UserPage = ({ user, fetchFoldersStart, fetchTextsStart, match }) => {
                 exact
                 path={[
                     `${match.path}/creating/:text_name/test`,
-                    `${match.path}/:duringFolder_id/creating/:text_name/test`,
-                    `${match.path}/_text/:text_id`,
+                    `${match.path}/_text/:text_id`
                 ]}
                 component={TestContainer}
             />

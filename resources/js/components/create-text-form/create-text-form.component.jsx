@@ -15,7 +15,7 @@ import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../redux/user/user.selector";
 import { connect } from "react-redux";
 
-const CreateTextForm = ({user, duringFolder}) => {
+const CreateTextForm = ({ user, duringFolder }) => {
     //入力フォームの表示・非表示
     const [isDisplay, setIsDisplay] = useState(false);
     //フォームの表示・非表示
@@ -34,15 +34,11 @@ const CreateTextForm = ({user, duringFolder}) => {
 
     //submit処理
     const onSubmit = values => {
-        const path = location.pathname.slice(1).split("/");
-
-        if (path.length === 1) {
-            //ユーザー直下の場合
-            history.push({pathname:`/${user.displayName}/creating/${values.text_name}`, state: {duringFolder}});
-        } else {
-            //フォルダー下の場合
-            history.push({pathname: `/${user.displayName}/${duringFolder.id}/creating/${values.text_name}` ,state: {duringFolder}});
-        }
+        //ユーザー直下の場合
+        history.push({
+            pathname: `/${user.displayName}/creating/${values.text_name}`,
+            state: { duringFolder }
+        });
     };
 
     const validate = values => {
