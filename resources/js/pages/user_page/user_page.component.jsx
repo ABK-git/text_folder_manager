@@ -12,6 +12,7 @@ import CreatingText from "../creating_text/creating-text.component";
 import FolderContainer from "../folder/folder.container";
 import UserTopContainer from "../user_top/user_top.container";
 import TestContainer from "../test/test.container";
+import ReadMe from "../read-me/read-me.component";
 
 const UserPage = ({ user, fetchFoldersStart, fetchTextsStart, match }) => {
     useEffect(() => {
@@ -45,6 +46,7 @@ const UserPage = ({ user, fetchFoldersStart, fetchTextsStart, match }) => {
                 ]}
                 component={TestContainer}
             />
+            <Route exact path={`${match.path}/read_me`} component={ReadMe}/>
         </div>
     );
 };

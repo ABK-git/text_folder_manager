@@ -3,6 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { folderClear } from "../../redux/folder/folder.actions";
+import { textClear } from "../../redux/text/text.actions";
 import { signOut } from "../../redux/user/user.actions";
 import { selectCurrentUser } from "../../redux/user/user.selector";
 //css
@@ -14,10 +15,11 @@ import {
     HeaderContents
 } from "./header.styles";
 
-const Header = ({ user, signOut, folderClear }) => {
+const Header = ({ user, signOut, folderClear, textClear }) => {
     const handleClick = () => {
         signOut();
         folderClear();
+        textClear();
     };
 
     return (
@@ -26,6 +28,9 @@ const Header = ({ user, signOut, folderClear }) => {
                 <HeaderContents>
                     <LogoToHomeContainer to={`/${user.displayName}`} />
                     <OptionsContainer>
+                        <OptionLink to={`/${user.displayName}/read_me`}>
+                            ReadMe
+                        </OptionLink>
                         <OptionLink to="/" onClick={handleClick}>
                             SIGN OUT
                         </OptionLink>
@@ -43,7 +48,8 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
     signOut: () => dispatch(signOut()),
-    folderClear: () => dispatch(folderClear())
+    folderClear: () => dispatch(folderClear()),
+    textClear: () => dispatch(textClear())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
