@@ -16,8 +16,10 @@ import ReadMe from "../read-me/read-me.component";
 
 const UserPage = ({ user, fetchFoldersStart, fetchTextsStart, match }) => {
     useEffect(() => {
-        fetchFoldersStart(user);
-        fetchTextsStart(user);
+        if (user) {
+            fetchFoldersStart(user);
+            fetchTextsStart(user);
+        }
     }, [fetchFoldersStart]);
 
     return (
@@ -46,7 +48,7 @@ const UserPage = ({ user, fetchFoldersStart, fetchTextsStart, match }) => {
                 ]}
                 component={TestContainer}
             />
-            <Route exact path={`${match.path}/read_me`} component={ReadMe}/>
+            <Route exact path={`${match.path}/read_me`} component={ReadMe} />
         </div>
     );
 };
