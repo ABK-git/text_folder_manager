@@ -30,7 +30,7 @@ export const DisplayFolderButton = styled(CustomButton)`
     width: 70%;
     display: none;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 5px;
     flex-direction: column;
     justify-content: center;
     align-items: center;

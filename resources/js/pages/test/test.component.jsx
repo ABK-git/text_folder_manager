@@ -149,17 +149,17 @@ const TestPage = ({
                         visibility: selectText ? "hidden" : "visible"
                     }}
                 >
-                    <CustomButton onClick={handleConfirmText}>
+                    <CustomButton onClick={handleConfirmText} design="toNext">
                         確定
                     </CustomButton>
                 </ConfirmButtonContainer>
                 <DisplayFormContainer>
                     {isDisplay ? (
-                        <CustomButton onClick={handleClickDisplay}>
+                        <CustomButton onClick={handleClickDisplay} design="displaySwitch">
                             非表示
                         </CustomButton>
                     ) : (
-                        <CustomButton onClick={handleClickDisplay}>
+                        <CustomButton onClick={handleClickDisplay} design="displaySwitch">
                             表示
                         </CustomButton>
                     )}

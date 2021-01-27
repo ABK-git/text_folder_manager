@@ -104,12 +104,12 @@ const CreatingText = ({
             <CreateTextFormContainer onSubmit={formik.handleSubmit}>
                 {isDisplay ? (
                     <ButtonsContainer onMouseLeave={onMouseEnterOrLeave}>
-                        <CustomButton type="submit" design="creatingPageButton">
+                        <CustomButton type="submit" design="toNext">
                             TEST
                         </CustomButton>
                         <CustomButton
                             type="button"
-                            design="creatingPageButton"
+                            design="toBack"
                             onClick={handleClear}
                         >
                             CLEAR

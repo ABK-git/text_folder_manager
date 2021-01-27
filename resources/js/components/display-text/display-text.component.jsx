@@ -67,13 +67,22 @@ const DisplayText = ({ text, user, updateTextName, deleteText }) => {
         <DisplayTextContainer>
             <BackgroundImage onClick={handleClickOpenText} />
             <DisplayTextButtonsContainer>
-                <DisplayTextButton onClick={handleClickOpenText}>
+                <DisplayTextButton
+                    onClick={handleClickOpenText}
+                    design="displaySwitchInDocument"
+                >
                     OPEN
                 </DisplayTextButton>
-                <DisplayTextButton onClick={handleClickUpdateText}>
+                <DisplayTextButton
+                    onClick={handleClickUpdateText}
+                    design="displaySwitchInDocument"
+                >
                     UPDATE
                 </DisplayTextButton>
-                <DisplayTextButton onClick={handleClickDeleteText}>
+                <DisplayTextButton
+                    onClick={handleClickDeleteText}
+                    design="displaySwitchInDocument"
+                >
                     DELETE
                 </DisplayTextButton>
             </DisplayTextButtonsContainer>

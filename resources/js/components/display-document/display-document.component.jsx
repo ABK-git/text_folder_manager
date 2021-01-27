@@ -48,13 +48,13 @@ const DisplayDocument = ({ documents, selectFolder }) => {
     return (
         <BackgroundCenter>
             <DisplaySwitchButtons>
-                <CustomButton onClick={displayOnlyFolder} disabled={disableText}>
+                <CustomButton onClick={displayOnlyFolder} disabled={disableText} design="displaySwitchInDocument">
                     only Folder
                 </CustomButton>
-                <CustomButton onClick={displayBoth} disabled={both}>
+                <CustomButton onClick={displayBoth} disabled={both} design="displaySwitchInDocument">
                     Both
                 </CustomButton>
-                <CustomButton onClick={displayOnlyText} disabled={disableFolder}>
+                <CustomButton onClick={displayOnlyText} disabled={disableFolder} design="displaySwitchInDocument">
                     only Text
                 </CustomButton>
             </DisplaySwitchButtons>
