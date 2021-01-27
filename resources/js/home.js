@@ -12,11 +12,11 @@ import SignOutRoute from "./route/sign-out-root.component";
 const Home = () => {
     return (
         <div>
-            <Header />
+            <Header/>
             <Switch>
                 <SignOutRoute exact path="/" component={SignInAndSignUpContainer} />
-                <Route path="/:user_name" component={UserPage}/>
                 <Route path="/read_me" component={ReadMe}/>
+                <Route path="/:user_name" component={UserPage}/>
             </Switch>
         </div>
     );

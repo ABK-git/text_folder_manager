@@ -3,17 +3,11 @@ import { connect } from "react-redux";
 import { Redirect, Route, useLocation } from "react-router-dom";
 import { selectCurrentUser } from "../redux/user/user.selector";
 import { createStructuredSelector } from "reselect";
-import { errorClear } from "../redux/error/error.actions";
 
 //ログイン時ホームにリダイレクトするRoute
-const PrivateUserRoot = ({
-    component: Component,
-    user,
-    errorClear,
-    ...rest
-}) => {
+const PrivateUserRoot = ({ component: Component, user, ...rest }) => {
     const location = useLocation();
-    
+
     return (
         <Route
             {...rest}
@@ -33,8 +27,4 @@ const mapStateToProps = createStructuredSelector({
     user: selectCurrentUser
 });
 
-const mapDispatchToProps = dispatch => ({
-    errorClear: () => dispatch(errorClear())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(PrivateUserRoot);
+export default connect(mapStateToProps)(PrivateUserRoot);

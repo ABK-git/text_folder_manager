@@ -60,6 +60,7 @@ const SignIn = ({ signInForm, signInStart, errors }) => {
                 <FormInput
                     type="password"
                     name="password"
+                    autoComplete="on"
                     value={password}
                     handleChange={handleChange}
                     label="パスワード"

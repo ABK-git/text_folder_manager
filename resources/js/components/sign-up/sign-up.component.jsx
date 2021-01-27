@@ -75,6 +75,7 @@ const SignUp = ({ signUpForm, signUpStart, errors }) => {
                 <FormInput
                     type="password"
                     name="password"
+                    autoComplete="on"
                     value={password}
                     handleChange={handleChange}
                     label="パスワード"
@@ -85,6 +86,7 @@ const SignUp = ({ signUpForm, signUpStart, errors }) => {
                     type="password"
                     name="password_confirmation"
                     value={password_confirmation}
+                    autoComplete="on"
                     handleChange={handleChange}
                     label="確認パスワード"
                     required
