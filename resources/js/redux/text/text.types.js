@@ -12,6 +12,7 @@ const TextActionTypes = {
     SET_UPDATE_TEXT_NAME: "SET_UPDATE_TEXT_NAME",
     DELETE_TEXT: "DELETE_TEXT",
     DISABLE_DELETE_TEXT: "DISABLE_DELETE_TEXT",
+    TEXT_CLEAR: "TEXT_CLEAR"
 };
 
 export default TextActionTypes;

@@ -65,3 +65,8 @@ export const disableDeleteText = text => ({
     type: TextActionTypes.DISABLE_DELETE_TEXT,
     payload: text
 });
+
+//textをclear
+export const textClear = () => ({
+    type: TextActionTypes.TEXT_CLEAR
+});

@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import Header from "./components/header/header.component";
 //Page
 import UserPage from "./pages/user_page/user_page.component";
+import ReadMe from "./pages/read-me/read-me.component";
 import SignInAndSignUpContainer from "./pages/sign_in_and_sign_up/sign_in_and_sign_up.container";
 //Root
 import SignOutRoute from "./route/sign-out-root.component";
@@ -15,6 +16,7 @@ const Home = () => {
             <Switch>
                 <SignOutRoute exact path="/" component={SignInAndSignUpContainer} />
                 <Route path="/:user_name" component={UserPage}/>
+                <Route path="/read_me" component={ReadMe}/>
             </Switch>
         </div>
     );

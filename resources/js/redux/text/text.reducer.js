@@ -60,7 +60,14 @@ const textReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 isFetching: false,
                 texts: disableText(state.texts, action.payload)
-            }
+            };
+
+        case TextActionTypes.TEXT_CLEAR:
+            return {
+                texts: [],
+                isFetching: false,
+                creating_text: ""
+            };
 
         default:
             return state;
