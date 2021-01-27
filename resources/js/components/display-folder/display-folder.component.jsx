@@ -60,10 +60,16 @@ const DisplayFolder = ({ folder, updateFolder, user, deleteFolder }) => {
             <BackgroundImage onClick={handleClickOpenFolder} />
 
             <DisplayFolderButtonsContainer>
-                <DisplayFolderButton onClick={handleClickOpenFolder}>
+                <DisplayFolderButton
+                    onClick={handleClickOpenFolder}
+                    design="displaySwitchInDocument"
+                >
                     OPEN
                 </DisplayFolderButton>
-                <DisplayFolderButton onClick={handleClickDeleteFolder}>
+                <DisplayFolderButton
+                    onClick={handleClickDeleteFolder}
+                    design="displaySwitchInDocument"
+                >
                     DELETE
                 </DisplayFolderButton>
             </DisplayFolderButtonsContainer>

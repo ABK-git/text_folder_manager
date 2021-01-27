@@ -38,8 +38,59 @@ const updateFolderName = css`
     }
 `;
 
+const toNext = css`
+    border: none;
+    font-weight: bolder;
+    border-radius: 10px;
+    background-color: #c31afa;
+
+    &:hover {
+        opacity: 0.5;
+    }
+`;
+
+const toBack = css`
+    border: none;
+    font-weight: bolder;
+    border-radius: 10px;
+    background-color: #32f067;
+
+    &:hover {
+        opacity: 0.5;
+    }
+`;
+
+const displaySwitch = css`
+    border: none;
+    font-weight: bolder;
+    border-radius: 10px;
+    background-color: #f7f7f7;
+    color: #0a010a;
+
+    &:hover {
+        opacity: 0.5;
+        background-color: #0a010a;
+        color: #f7f7f7;
+    }
+`;
+
+const displaySwitchInDocument = css`
+    font-weight: bolder;
+    background-color: #f7f7f7;
+    color: #0a010a;
+    border-radius: 10px;
+
+    &:hover {
+        opacity: 0.5;
+        background-color: #0a010a;
+        color: #f7f7f7;
+        border-color: #F0402C;
+        border-width: medium;
+    }
+`;
+
 const creatingPageButton = css`
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 `;
 
 const getButtonStyles = props => {
@@ -61,6 +112,18 @@ const getButtonStyles = props => {
 
         case "creatingPageButton":
             return creatingPageButton;
+
+        case "toBack":
+            return toBack;
+
+        case "toNext":
+            return toNext;
+
+        case "displaySwitch":
+            return displaySwitch;
+
+        case "displaySwitchInDocument":
+            return displaySwitchInDocument;
 
         default:
             return "";
