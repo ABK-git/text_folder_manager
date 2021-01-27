@@ -78,19 +78,16 @@ const CreatingText = ({
         const { creating_text } = values;
         creatingText({ creating_text });
 
+        const credentials = {creating_text, duringFolder};
+
         if (text != undefined) {
-            //testページへ遷移(UPDATE)
-            history.push({
-                pathname: `${location.pathname}/test`,
-                state: { creating_text, duringFolder, update_text: text }
-            });
-        } else {
-            //testページへ遷移(CREATE)
-            history.push({
-                pathname: `${location.pathname}/test`,
-                state: { creating_text, duringFolder }
-            });
-        }
+            credentials.update_text = text;
+        } 
+        //testページへ遷移(CREATE)
+        history.push({
+            pathname: `${location.pathname}/test`,
+            state: credentials
+        });
     };
 
     //CLEARボタンの処理
