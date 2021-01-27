@@ -8,6 +8,7 @@ import ReadMe from "./pages/read-me/read-me.component";
 import SignInAndSignUpContainer from "./pages/sign_in_and_sign_up/sign_in_and_sign_up.container";
 //Root
 import SignOutRoute from "./route/sign-out-root.component";
+import ReadMeRoute from "./route/read_me_route.component";
 
 const Home = () => {
     return (
@@ -15,7 +16,7 @@ const Home = () => {
             <Header/>
             <Switch>
                 <SignOutRoute exact path="/" component={SignInAndSignUpContainer} />
-                <Route path="/read_me" component={ReadMe}/>
+                <ReadMeRoute path="/read_me" component={ReadMe}/>
                 <Route path="/:user_name" component={UserPage}/>
             </Switch>
         </div>
